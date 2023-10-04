@@ -12,6 +12,7 @@ A novice in the .NET industry with 5 years of experience.
 | [Fast.Web](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/frontend) |  |
 
 ## Branch Descriptions
+
 | Branch   | Details    | Version   | Environment   | Recommendations |
 | ------- | ------- | ------- | ------- | ----------------------------------------------------------------------------- |
 | master  | Main branch   | Stable version | Production environment | If you need to fork or make modifications on this version, please pull the code from the master branch |
@@ -49,6 +50,7 @@ WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, IN CONNECTION WITH THE SOFTWARE 
 | 小方 | 全栈 | 1.8K仔 | Accepting your own mediocrity and ordinaryness is a required course for growth <br> The life you envy is the hardship you have not endured <br> When your ability cannot support your ambition, you need to calm down and work hard study | 
 
 ## Disclaimer
+
     Do not use this for projects that violate the laws of our country.
 
 ## Additional Information
