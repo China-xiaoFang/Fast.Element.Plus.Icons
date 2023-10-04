@@ -23,7 +23,7 @@
     // 版权信息
     "CRCode": "Copyright © {0} Created by Fast.NET",
     // 版权Url
-    "CRUrl": "https://gitee.com/Net-18K/fast.net"
+    "CRUrl": "https://gitee.com/Net-18K/Fast.NET"
   },
   "SpecificationDocumentSettings": {
     "DocumentTitle": "Fast",
@@ -33,13 +33,13 @@
       {
         "Group": "Default",
         "Title": "Fast.NET通用权限管理平台",
-        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/>作者By 1.8K 仔<br/><a href='https://gitee.com/Net-18K/fast.net'>https://gitee.com/Net-18K/fast.net</a>",
+        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/>作者By 1.8K 仔<br/><a href='https://gitee.com/Net-18K/Fast.NET'>https://gitee.com/Net-18K/Fast.NET</a>",
         "Version": "1.0.0"
       },
       {
         "Group": "Web",
         "Title": "Fast.NET.Web API",
-        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/>作者By 1.8K 仔<br/><a href='https://gitee.com/Net-18K/fast.net'>https://gitee.com/Net-18K/fast.net</a>",
+        "Description": "前后端分离架构，开箱即用，紧随前沿技术。<br/>作者By 1.8K 仔<br/><a href='https://gitee.com/Net-18K/Fast.NET'>https://gitee.com/Net-18K/Fast.NET</a>",
         "Version": "1.0.0"
       }
     ]

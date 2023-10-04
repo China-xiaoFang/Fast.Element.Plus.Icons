@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Threading.Channels;
-using Fast.EventBus.Sources;
-using Fast.EventBus.Storers;
+using Fast.EventBus;
 using Fast.Serialization.Extensions;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;

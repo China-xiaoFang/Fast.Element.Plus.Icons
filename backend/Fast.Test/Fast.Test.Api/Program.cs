@@ -1,10 +1,9 @@
-using Fast.Cache.Extensions;
-using Fast.Core.Extensions;
 using Fast.CorsAccessor.Extensions;
 using Fast.DataValidation.Extensions;
 using Fast.DynamicApplication.Extensions;
 using Fast.Exception.Extensions;
 using Fast.Logging.Extensions;
+using Fast.NET.Core.Extensions;
 using Fast.SpecificationDocument.Extensions;
 using Fast.Test.Api;
 using Fast.UnifyResult.Extensions;
@@ -27,8 +26,6 @@ builder.Services.AddFriendlyException();
 builder.Services.AddUnifyResult<RESTfulResultProvider>();
 
 builder.Services.AddSpecificationDocuments();
-
-builder.Services.AddCache();
 
 //builder.Services.AddSqlSugar();
 

@@ -60,7 +60,7 @@
             <param name="routeKey">路由键</param>
             <param name="capacity">存储器最多能够处理多少消息，超过该容量进入等待写入</param>
         </member>
-        <member name="M:Fast.Test.Api.EventSubscriber.RabbitMQEventSourceStorer.WriteAsync(Fast.EventBus.Sources.IEventSource,System.Threading.CancellationToken)">
+        <member name="M:Fast.Test.Api.EventSubscriber.RabbitMQEventSourceStorer.WriteAsync(Fast.EventBus.IEventSource,System.Threading.CancellationToken)">
             <summary>
             将事件源写入存储器
             </summary>

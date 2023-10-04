@@ -1,5 +1,5 @@
-﻿using Fast.EventBus.Contexts;
-using Fast.EventBus.Policies;
+﻿using Fast.EventBus;
+using Fast.EventBus.Contexts;
 
 namespace Fast.Test.Api.EventSubscriber;
 
