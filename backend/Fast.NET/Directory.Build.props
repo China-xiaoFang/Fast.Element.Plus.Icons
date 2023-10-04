@@ -9,7 +9,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageOutputPath>$(SolutionDir)..\..\nupkgs</PackageOutputPath>
-		<Version>3.0.5</Version>
+		<Version>3.0.6</Version>
 		<PackageVersion>$(Version)</PackageVersion>
 		<Authors>1.8K仔</Authors>
 		<Description>一个快速构建项目的 .NET 框架。</Description>
@@ -19,7 +19,7 @@
 		<PackageProjectUrl>https://18kboy.icu</PackageProjectUrl>
 		<PackageIcon>Fast.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://gitee.com/Net-18K/fast.net</RepositoryUrl>
+		<RepositoryUrl>https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET</RepositoryUrl>
 		<RepositoryType>Gitee</RepositoryType>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
@@ -35,7 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="$(SolutionDir)..\..\README.md" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)..\..\LICENSE" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)..\..\Fast.png" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)Directory.Build.props" Pack="true" PackagePath="\" />

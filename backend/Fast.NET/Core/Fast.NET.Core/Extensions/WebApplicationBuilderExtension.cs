@@ -57,7 +57,7 @@ public static class WebApplicationBuilderExtension
         ");
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(@"
-        Gitee：https://gitee.com/Net-18K/fast.net
+        Gitee：https://gitee.com/Net-18K/Fast.NET
         ");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(@"
