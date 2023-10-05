@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>Fast.Admin 应用系统服务模块库。</Description>
+	</PropertyGroup>
+
+</Project>
