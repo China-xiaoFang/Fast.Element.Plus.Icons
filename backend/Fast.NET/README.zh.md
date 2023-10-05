@@ -33,7 +33,7 @@
 
 正是因为这些 .NET 大佬，才有了 [Fast.NET](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET) 的诞生。
 
-此处要特别感谢 [Furion](https://gitee.com/dotnetchina/Furion) 的作者 [百小僧](https://gitee.com/monksoul) 和其开发团队【百签科技（广东）有限公司】。
+此处要特别感谢 [Furion](https://gitee.com/dotnetchina/Furion) 的作者 [百小僧](https://gitee.com/monksoul)。
 
 [Fast.NET](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET) 框架底层部分核心代码都是由 [Furion](https://gitee.com/dotnetchina/Furion) 提供，借鉴或引用了 [Furion v4](https://gitee.com/dotnetchina/Furion) 的部分源码，也征得了作者 [百小僧](https://gitee.com/monksoul) 的同意授权。
 

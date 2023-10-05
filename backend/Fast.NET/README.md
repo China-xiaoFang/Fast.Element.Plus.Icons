@@ -33,9 +33,9 @@ I would like to express my sincere thanks to the boss of the .NET open source fr
 
 It is precisely because of these .NET big guys that [Fast.NET](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET) was born.
 
-Special thanks to [Furion](https://gitee.com/dotnetchina/Furion) author [Bai Xiaoseng](https://gitee.com/monksoul) and his development team [Baishan Technology (Guangdong) Co., Ltd. company】.
+Special thanks to [Furion](https://gitee.com/dotnetchina/Furion) author [MonkSoul](https://gitee.com/monksoul).
 
-[Fast.NET](https://gitee.com/Net-18K/Fast.NET) The underlying core code of the framework is provided by [Furion](https://gitee.com/dotnetchina/Furion), learn from or Part of the source code of [Furion v4](https://gitee.com/dotnetchina/Furion) is quoted, and the consent and authorization of the author [Bai Xiaoseng](https://gitee.com/monksoul) is also obtained.
+[Fast.NET](https://gitee.com/Net-18K/Fast.NET) The underlying core code of the framework is provided by [Furion](https://gitee.com/dotnetchina/Furion), learn from or Part of the source code of [Furion v4](https://gitee.com/dotnetchina/Furion) is quoted, and the consent and authorization of the author [MonkSoul](https://gitee.com/monksoul) is also obtained.
 
 **Continue to gather the strengths of hundreds of experts to improve and enrich the infrastructure of this framework, adding a choice to the .NET ecosystem!**
 
