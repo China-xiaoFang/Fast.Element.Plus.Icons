@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System;
 using System.Text.RegularExpressions;
 
 namespace Fast.IaaS.Extensions;
@@ -22,20 +23,32 @@ namespace Fast.IaaS.Extensions;
 public static class ValidateExtension
 {
     /// <summary>
-    /// 检查 Object 是否为 NULL
+    /// 判断 string 是否为 Null
     /// </summary>
-    /// <param name="value"><see cref="object"/></param>
+    /// <param name="value"><see cref="string"/>字符串</param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsEmpty(this object value)
+    public static bool IsEmpty(this string value)
     {
         return value == null || string.IsNullOrEmpty(value.ParseToString());
     }
 
     /// <summary>
-    /// 检查 Object 或者 集合 是否为 NULL 或者 空集合
+    /// 判断 Enum 是否为 Null
     /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsEmpty<TEnum>(this TEnum? value) where TEnum : struct, Enum
+    {
+        return !value.HasValue || !Enum.IsDefined((typeof(TEnum)), value);
+    }
+
+    /// <summary>
+    /// 判断 泛型 是否为 Null
+    /// </summary>
+    /// <remarks>支持 IList，IEnumerable 类型，所以性能很低</remarks>
     /// <typeparam name="T"></typeparam>
-    /// <param name="value"><see cref="object"/></param>
+    /// <param name="value"></param>
     /// <returns><see cref="bool"/></returns>
     public static bool IsEmpty<T>(this T value)
     {
@@ -44,24 +57,20 @@ public static class ValidateExtension
             return true;
         }
 
-        if (string.IsNullOrEmpty(value.ParseToString()))
+        if (typeof(T).IsValueType)
+        {
+            // 值类型
+            return EqualityComparer<T>.Default.Equals(value, default);
+        }
+
+        // 判断是否为默认值或空集合
+        if (value.Equals(default(T)))
         {
             return true;
         }
 
-        var type = typeof(T);
-
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
-        {
-            if (!(value is IList<object> list) || list.Count == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        if (value is IEnumerable<T> collection && !collection.Any())
+        // 判断集合类型
+        if (value is IEnumerable<T> enumerable && !enumerable.Any())
         {
             return true;
         }
@@ -70,36 +79,258 @@ public static class ValidateExtension
     }
 
     /// <summary>
-    /// 检查 Object 是否为 NULL 或者 0
+    /// 判断 Enum 是否为 Null 或者 0
     /// </summary>
-    /// <param name="value"><see cref="object"/></param>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="value"><see cref="TEnum"/>枚举值</param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsNullOrZero(this object value)
+    public static bool IsNullOrZero<TEnum>(this TEnum? value) where TEnum : struct, Enum
     {
-        if (value == null)
+        // 判断是否为空
+        if (!value.HasValue || !Enum.IsDefined((typeof(TEnum)), value))
         {
             return true;
         }
 
-        // 判断是否为枚举类型
-        if (value.GetType().IsEnum)
-        {
-            return value.ParseToLong() == 0;
-        }
-
-        return value.ParseToString().Trim() == "0";
+        // 这里全部转为 Long 类型处理，避免 Int 长度过短，导致报错
+        return value.ParseToLong() == 0;
     }
 
     /// <summary>
-    /// 判断集合是否为空
+    /// 判断 Enum 是否为 Null 或者 0
     /// </summary>
-    /// <typeparam name="T">对象类型</typeparam>
-    /// <param name="collection"><see cref="ICollection{T}"/></param>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="value"><see cref="TEnum"/>枚举值</param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsNullOrEmpty<T>(this ICollection<T>? collection)
+    public static bool IsNullOrZero<TEnum>(this TEnum value) where TEnum : struct, Enum
     {
-        return collection is null || collection.Count == 0;
+        // 判断是否为空
+        if (!Enum.IsDefined((typeof(TEnum)), value))
+        {
+            return true;
+        }
+
+        // 这里全部转为 Long 类型处理，避免 Int 长度过短，导致报错
+        return value.ParseToLong() == 0;
     }
+
+    /// <summary>
+    /// 判断 byte 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="int"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this byte? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// 判断 int 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="int"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this int? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// 判断 double 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="double"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this double? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// 判断 decimal 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="decimal"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this decimal? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// 判断 float 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="decimal"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this float? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// 判断 long 是否为 Null 或者 0
+    /// </summary>
+    /// <param name="value"><see cref="long"/>值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsNullOrZero(this long? value)
+    {
+        return value switch
+        {
+            null => true,
+            0 => true,
+            _ => false
+        };
+    }
+
+    ///// <summary>
+    ///// 检查 Object 是否为 NULL 或者 0
+    ///// </summary>
+    ///// <param name="value"></param>
+    ///// <returns></returns>
+    //public static bool IsNullOrZero(this object value)
+    //{
+    //    if (value == null)
+    //    {
+    //        return true;
+    //    }
+
+    //    // 判断是否为枚举类型
+    //    if (value.GetType().IsEnum)
+    //    {
+    //        return value.ParseToLong() == 0;
+    //    }
+
+    //    return value.ParseToString().Trim() == "0";
+    //}
+
+    ///// <summary>
+    ///// 判断 int 是否为 Null 或者 0
+    ///// </summary>
+    ///// <param name="value"><see cref="int"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == 0 to check.")]
+    //public static bool IsNullOrZero(this int value)
+    //{
+    //    return value switch
+    //    {
+    //        0 => true,
+    //        _ => false
+    //    };
+    //}
+
+    ///// <summary>
+    ///// 判断 long 是否为 Null 或者 0
+    ///// </summary>
+    ///// <param name="value"><see cref="long"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == 0 to check.")]
+    //public static bool IsNullOrZero(this long value)
+    //{
+    //    return value switch
+    //    {
+    //        0 => true,
+    //        _ => false
+    //    };
+    //}
+
+    ///// <summary>
+    ///// 判断 bool 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="bool"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this bool? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 int 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="int"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this int? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 double 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="double"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this double? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 decimal 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="decimal"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this decimal? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 float 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="float"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this float? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 long 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="long"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this long? value)
+    //{
+    //    return value == null;
+    //}
+
+    ///// <summary>
+    ///// 判断 DateTime 是否为 Null
+    ///// </summary>
+    ///// <param name="value"><see cref="DateTime"/>值</param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("Method to be deprecated, use value == null to check.")]
+    //public static bool IsEmpty(this DateTime? value)
+    //{
+    //    return value == null;
+    //}
 
     #region 验证输入字符串为数字(带小数)
 

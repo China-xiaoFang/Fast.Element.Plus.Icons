@@ -225,7 +225,7 @@ public static class DateTimeExtension
         try
         {
             // 当地时区
-            return timeStamps.IsNullOrZero() ? DateTime.MinValue : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
         }
         catch
         {
@@ -244,7 +244,7 @@ public static class DateTimeExtension
         try
         {
             // 当地时区
-            return timeStamps.IsNullOrZero()
+            return timeStamps == 0
                 ? defaultValue.GetValueOrDefault()
                 : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
         }
@@ -264,7 +264,7 @@ public static class DateTimeExtension
         try
         {
             // 当地时区
-            return timeStamps.IsNullOrZero() ? DateTime.MinValue : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
         }
         catch
         {
@@ -283,7 +283,7 @@ public static class DateTimeExtension
         try
         {
             // 当地时区
-            return timeStamps.IsNullOrZero()
+            return timeStamps == 0
                 ? defaultValue.GetValueOrDefault()
                 : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
         }

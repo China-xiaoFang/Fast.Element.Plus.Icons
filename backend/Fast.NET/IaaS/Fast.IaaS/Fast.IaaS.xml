@@ -1296,34 +1296,86 @@
             验证拓展类
             </summary>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty(System.String)">
             <summary>
-            检查 Object 是否为 NULL
+            判断 string 是否为 Null
             </summary>
-            <param name="value"><see cref="T:System.Object"/></param>
+            <param name="value"><see cref="T:System.String"/>字符串</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(System.Nullable{``0})">
+            <summary>
+            判断 Enum 是否为 Null
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"><see cref="!:TEnum"/>枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(``0)">
             <summary>
-            检查 Object 或者 集合 是否为 NULL 或者 空集合
+            判断 泛型 是否为 Null
             </summary>
+            <remarks>支持 IList，IEnumerable 类型，所以性能很低</remarks>
             <typeparam name="T"></typeparam>
-            <param name="value"><see cref="T:System.Object"/></param>
+            <param name="value"></param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(System.Nullable{``0})">
             <summary>
-            检查 Object 是否为 NULL 或者 0
+            判断 Enum 是否为 Null 或者 0
             </summary>
-            <param name="value"><see cref="T:System.Object"/></param>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"><see cref="!:TEnum"/>枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrEmpty``1(System.Collections.Generic.ICollection{``0})">
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(``0)">
             <summary>
-            判断集合是否为空
+            判断 Enum 是否为 Null 或者 0
             </summary>
-            <typeparam name="T">对象类型</typeparam>
-            <param name="collection"><see cref="T:System.Collections.Generic.ICollection`1"/></param>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Byte})">
+            <summary>
+            判断 byte 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/>值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Int32})">
+            <summary>
+            判断 int 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/>值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Double})">
+            <summary>
+            判断 double 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Double"/>值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Decimal})">
+            <summary>
+            判断 decimal 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/>值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Single})">
+            <summary>
+            判断 float 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/>值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Int64})">
+            <summary>
+            判断 long 是否为 Null 或者 0
+            </summary>
+            <param name="value"><see cref="T:System.Int64"/>值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNumber(System.String)">
