@@ -23,22 +23,46 @@ namespace Fast.IaaS.Extensions;
 public static class EnumExtension
 {
     /// <summary>
-    /// 获取枚举的Description
+    /// 获取枚举值的描述
     /// </summary>
-    /// <param name="value"><see cref="object"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string GetEnumDescription(this object value)
+    /// <remarks>需要有 [Description] 特性，否则返回的是枚举值的Name</remarks>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="value">枚举值</param>
+    /// <returns><see cref="string"/>枚举的 [Description] 特性描述</returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    /// <exception cref="ArgumentException">The parameter is not an enum type.</exception>
+    public static string GetDescription<TEnum>(this TEnum value) where TEnum : struct, Enum
     {
-        // 空检查
-        ArgumentNullException.ThrowIfNull(value);
+        return GetDescription(value, typeof(TEnum));
+    }
 
-        // 获取枚举类型
-        var enumType = value.GetType();
+    /// <summary>
+    /// 获取枚举值的描述
+    /// </summary>
+    /// <remarks>需要有 [Description] 特性，否则返回的是枚举值的Name</remarks>
+    /// <param name="value"><see cref="Enum"/>枚举值</param>
+    /// <param name="enumType"><see cref="Type"/>枚举类型</param>
+    /// <returns><see cref="string"/>枚举的 [Description] 特性描述</returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    /// <exception cref="ArgumentException">The parameter is not an enum type.</exception>
+    public static string GetDescription(this Enum value, Type enumType)
+    {
+        // 判断是否有效
+        if (!Enum.IsDefined(enumType, value))
+        {
+            throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+        }
+
+        // 判断是否为默认值
+        if (value.Equals(Enum.ToObject(enumType, 0)))
+        {
+            throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+        }
 
         // 检查是否是枚举类型
         if (!enumType.IsEnum)
         {
-            throw new ArgumentException("The parameter is not an enumeration type.", nameof(value));
+            throw new ArgumentException("The parameter is not an enum type.", nameof(value));
         }
 
         // 获取枚举名称
@@ -60,17 +84,33 @@ public static class EnumExtension
     /// <summary>
     /// 将枚举转成枚举信息集合
     /// </summary>
-    /// <param name="type"><see cref="Type"/></param>
+    /// <param name="enumType"><see cref="Type"/>枚举值类型</param>
     /// <returns><see cref="List{EnumEntity}"/></returns>
-    public static List<EnumEntity> EnumToList(this Type type)
+    /// <exception cref="ArgumentException">类型不是一个枚举类型</exception>
+    public static List<EnumEntity<int>> EnumToList(this Type enumType)
     {
-        if (!type.IsEnum)
-            throw new ArgumentException("Type '" + type.Name + "' is not an enum.");
-        var arr = Enum.GetNames(type);
-        return arr.Select(sl =>
+        return enumType.EnumToList<int>();
+    }
+
+    /// <summary>
+    /// 将枚举转成枚举信息集合
+    /// </summary>
+    /// <typeparam name="TProperty"></typeparam>
+    /// <param name="enumType"><see cref="Type"/>枚举值类型</param>
+    /// <returns><see cref="List{EnumEntity}"/></returns>
+    /// <exception cref="ArgumentException">类型不是一个枚举类型</exception>
+    public static List<EnumEntity<TProperty>> EnumToList<TProperty>(this Type enumType) where TProperty : struct, IComparable, IConvertible, IFormattable
+    {
+        if (!enumType.IsEnum)
+            throw new ArgumentException("Type '" + enumType.Name + "' is not an enum.", nameof(enumType));
+
+        var propertyType = typeof(TProperty);
+
+        return Enum.GetValues(enumType).Cast<Enum>().Select(enumValue => new EnumEntity<TProperty>
         {
-            var item = Enum.Parse(type, sl);
-            return new EnumEntity {Name = item.ParseToString(), Describe = item.GetEnumDescription(), Value = item.ParseToInt()};
+            Name = enumValue.ToString(),
+            Describe = enumValue.GetDescription(enumType),
+            Value = (TProperty) Convert.ChangeType(enumValue, propertyType)
         }).ToList();
     }
 }
@@ -78,7 +118,8 @@ public static class EnumExtension
 /// <summary>
 /// 枚举的Entity类
 /// </summary>
-public class EnumEntity
+/// <typeparam name="TProperty">Value属性类型</typeparam>
+public class EnumEntity<TProperty> where TProperty : struct, IComparable, IConvertible,IFormattable
 {
     /// <summary>  
     /// 枚举的描述  
@@ -93,5 +134,5 @@ public class EnumEntity
     /// <summary>  
     /// 枚举对象的值  
     /// </summary>  
-    public int Value { set; get; }
+    public TProperty Value { set; get; }
 }

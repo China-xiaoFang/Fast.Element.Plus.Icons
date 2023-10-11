@@ -270,8 +270,8 @@ public class Cache : ICache
     public string GetAndSet(string key, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -290,8 +290,8 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -311,8 +311,8 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -332,8 +332,8 @@ public class Cache : ICache
     public async Task<T> GetAndSetAsync<T>(string key, Func<Task<T>> func)
     {
         var result = await RedisHelper.GetAsync<T>(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -353,8 +353,8 @@ public class Cache : ICache
     public string GetAndSet(string key, int expireSeconds, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -374,8 +374,8 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, int expireSeconds, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -396,8 +396,8 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, int expireSeconds, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -418,8 +418,8 @@ public class Cache : ICache
     public async Task<T> GetAndSetAsync<T>(string key, int expireSeconds, Func<Task<T>> func)
     {
         var result = await RedisHelper.GetAsync<T>(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -439,8 +439,8 @@ public class Cache : ICache
     public string GetAndSet(string key, TimeSpan expireTimeSpan, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -460,8 +460,8 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, TimeSpan expireTimeSpan, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -482,8 +482,8 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, TimeSpan expireTimeSpan, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-
-        if (IsEmpty(result))
+        
+        if (result.IsEmpty())
         {
             result = func.Invoke();
 
@@ -505,7 +505,7 @@ public class Cache : ICache
     {
         var result = await RedisHelper.GetAsync<T>(key);
 
-        if (IsEmpty(result))
+        if (result.IsEmpty())
         {
             result = await func.Invoke();
 
@@ -513,60 +513,5 @@ public class Cache : ICache
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// 将object转换为string，若转换失败，则返回""。不抛出异常。  
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    string ParseToString(object obj)
-    {
-        try
-        {
-            return obj == null ? string.Empty : obj.ToString();
-        }
-        catch
-        {
-            return string.Empty;
-        }
-    }
-
-    /// <summary>
-    /// 检查 Object 或者 集合 是否为 NULL 或者 空集合
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    bool IsEmpty<T>(T value)
-    {
-        if (value == null)
-        {
-            return true;
-        }
-
-        if (string.IsNullOrEmpty(ParseToString(value)))
-        {
-            return true;
-        }
-
-        var type = typeof(T);
-
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
-        {
-            if (!(value is IList<object> list) || list.Count == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        if (value is IEnumerable<T> collection && !collection.Any())
-        {
-            return true;
-        }
-
-        return false;
     }
 }

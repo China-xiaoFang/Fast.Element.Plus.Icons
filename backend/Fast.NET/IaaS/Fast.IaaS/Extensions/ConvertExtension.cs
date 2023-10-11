@@ -25,52 +25,94 @@ public static class ConvertExtension
     #region 转换为long
 
     /// <summary>
-    /// 将object转换为long，若转换失败，则返回0。不抛出异常。  
+    /// 将 String 类型 转换为 Long 类型
     /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public static long ParseToLong(this object obj)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="long"/>异常默认值，默认为 0L</param>
+    /// <returns><see cref="long"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static long ParseToLong(this string value, bool isThrow = true, long defaultValue = 0L)
     {
-        try
+        if (isThrow)
         {
-            return Convert.ToInt64(obj);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
+
+            return long.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
-            try
-            {
-                return long.Parse(obj.ToString() ?? string.Empty);
-            }
-            catch
-            {
-                return 0L;
-            }
+            return defaultValue;
         }
+
+        if (long.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        return defaultValue;
     }
 
     /// <summary>
-    /// 将object转换为long，若转换失败，则返回指定值。不抛出异常。  
+    /// 将 Enum 类型 转换为 Long 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static long ParseToLong(this string str, long defaultValue)
+    /// <param name="value"><see cref="string"/>枚举值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="long"/>异常默认值，默认为 0L</param>
+    /// <returns><see cref="long"/></returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    public static long ParseToLong<TEnum>(this TEnum value, bool isThrow = true, long defaultValue = 0L)
+        where TEnum : struct, Enum
     {
-        try
+        if (isThrow)
         {
-            return Convert.ToInt64(str);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+            }
+
+            return Convert.ToInt64(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
-            try
-            {
-                return long.Parse(str ?? string.Empty);
-            }
-            catch
-            {
-                return 0L;
-            }
+            return defaultValue;
         }
+
+        return Convert.ToInt64(value);
+    }
+
+    /// <summary>
+    /// 将 可空的Enum 类型 转换为 Long 类型
+    /// </summary>
+    /// <param name="value"><see cref="string"/>枚举值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="long"/>异常默认值，默认为 0L</param>
+    /// <returns><see cref="long"/></returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    public static long ParseToLong<TEnum>(this TEnum? value, bool isThrow = true, long defaultValue = 0L)
+        where TEnum : struct, Enum
+    {
+        if (isThrow)
+        {
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+            }
+
+            return Convert.ToInt64(value);
+        }
+
+        if (value.IsEmpty())
+        {
+            return defaultValue;
+        }
+
+        return Convert.ToInt64(value);
     }
 
     #endregion
@@ -78,44 +120,92 @@ public static class ConvertExtension
     #region 转换为int
 
     /// <summary>
-    /// 将object转换为int，若转换失败，则返回0。不抛出异常。  
+    /// 将 String 类型 转换为 Int 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static int ParseToInt(this object str)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="int"/>异常默认值，默认为 0</param>
+    /// <returns><see cref="int"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static int ParseToInt(this string value, bool isThrow = true, int defaultValue = 0)
     {
-        try
+        if (isThrow)
         {
-            return Convert.ToInt32(str);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
+
+            return int.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
-            return 0;
+            return defaultValue;
         }
+
+        if (int.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        return defaultValue;
     }
 
     /// <summary>
-    /// 将object转换为int，若转换失败，则返回指定值。不抛出异常。 
-    /// null返回默认值
+    /// 将 Enum 类型 转换为 Int 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static int ParseToInt(this object str, int defaultValue)
+    /// <param name="value"><see cref="string"/>枚举值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="int"/>异常默认值，默认为 0</param>
+    /// <returns><see cref="int"/></returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    public static int ParseToInt<TEnum>(this TEnum value, bool isThrow = true, int defaultValue = 0) where TEnum : struct, Enum
     {
-        if (str == null)
+        if (isThrow)
+        {
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+            }
+
+            return Convert.ToInt32(value);
+        }
+
+        if (value.IsEmpty())
         {
             return defaultValue;
         }
 
-        try
+        return Convert.ToInt32(value);
+    }
+
+    /// <summary>
+    /// 将 可空的Enum 类型 转换为 Int 类型
+    /// </summary>
+    /// <param name="value"><see cref="string"/>枚举值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="int"/>异常默认值，默认为 0</param>
+    /// <returns><see cref="int"/></returns>
+    /// <exception cref="ArgumentNullException">传入的枚举值为空</exception>
+    public static int ParseToInt<TEnum>(this TEnum? value, bool isThrow = true, int defaultValue = 0) where TEnum : struct, Enum
+    {
+        if (isThrow)
         {
-            return Convert.ToInt32(str);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+            }
+
+            return Convert.ToInt32(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
             return defaultValue;
         }
+
+        return Convert.ToInt32(value);
     }
 
     #endregion
@@ -123,77 +213,73 @@ public static class ConvertExtension
     #region 转换为short
 
     /// <summary>
-    /// 将object转换为short，若转换失败，则返回0。不抛出异常。  
+    /// 将 String 类型 转换为 Short 类型
     /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public static short ParseToShort(this object obj)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="short"/>异常默认值，默认为 0</param>
+    /// <returns><see cref="short"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static short ParseToShort(this string value, bool isThrow = true, short defaultValue = 0)
     {
-        try
+        if (isThrow)
         {
-            return short.Parse(obj.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return 0;
-        }
-    }
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
 
-    /// <summary>
-    /// 将object转换为short，若转换失败，则返回指定值。不抛出异常。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static short ParseToShort(this object str, short defaultValue)
-    {
-        try
-        {
-            return short.Parse(str.ToString() ?? string.Empty);
+            return short.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
             return defaultValue;
         }
+
+        if (short.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        return defaultValue;
     }
 
     #endregion
 
-    #region 转换为demical
+    #region 转换为decimal
 
     /// <summary>
-    /// 将object转换为demical，若转换失败，则返回指定值。不抛出异常。  
+    /// 将 String 类型 转换为 Decimal 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static decimal ParseToDecimal(this object str, decimal defaultValue)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="decimal"/>异常默认值，默认为 0M</param>
+    /// <returns><see cref="decimal"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static decimal ParseToDecimal(this string value, bool isThrow = true, decimal defaultValue = 0M)
     {
-        try
+        if (isThrow)
         {
-            return decimal.Parse(str.ToString() ?? string.Empty);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
+
+            return decimal.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
         {
             return defaultValue;
         }
-    }
 
-    /// <summary>
-    /// 将object转换为demical，若转换失败，则返回0。不抛出异常。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static decimal ParseToDecimal(this object str)
-    {
-        try
+        if (decimal.TryParse(value, out var result))
         {
-            return decimal.Parse(str.ToString() ?? string.Empty);
+            return result;
         }
-        catch
-        {
-            return 0;
-        }
+
+        return defaultValue;
     }
 
     #endregion
@@ -201,38 +287,36 @@ public static class ConvertExtension
     #region 转化为bool
 
     /// <summary>
-    /// 将object转换为bool，若转换失败，则返回false。不抛出异常。  
+    /// 将 String 类型 转换为 Bool 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static bool ParseToBool(this object str)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="bool"/>异常默认值，默认为 false</param>
+    /// <returns><see cref="bool"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static bool ParseToBool(this string value, bool isThrow = true, bool defaultValue = false)
     {
-        try
+        if (isThrow)
         {
-            return bool.Parse(str.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return false;
-        }
-    }
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
 
-    /// <summary>
-    /// 将object转换为bool，若转换失败，则返回指定值。不抛出异常。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="result"></param>
-    /// <returns></returns>
-    public static bool ParseToBool(this object str, bool result)
-    {
-        try
-        {
-            return bool.Parse(str.ToString() ?? string.Empty);
+            return bool.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
+        {
+            return defaultValue;
+        }
+
+        if (bool.TryParse(value, out var result))
         {
             return result;
         }
+
+        return defaultValue;
     }
 
     #endregion
@@ -240,38 +324,73 @@ public static class ConvertExtension
     #region 转换为float
 
     /// <summary>
-    /// 将object转换为float，若转换失败，则返回0。不抛出异常。  
+    /// 将 String 类型 转换为 Float 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static float ParseToFloat(this object str)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="float"/>异常默认值，默认为 0F</param>
+    /// <returns><see cref="float"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static float ParseToFloat(this string value, bool isThrow = true, float defaultValue = 0F)
     {
-        try
+        if (isThrow)
         {
-            return float.Parse(str.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return 0;
-        }
-    }
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
 
-    /// <summary>
-    /// 将object转换为float，若转换失败，则返回指定值。不抛出异常。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="result"></param>
-    /// <returns></returns>
-    public static float ParseToFloat(this object str, float result)
-    {
-        try
-        {
-            return float.Parse(str.ToString() ?? string.Empty);
+            return float.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
+        {
+            return defaultValue;
+        }
+
+        if (float.TryParse(value, out var result))
         {
             return result;
         }
+
+        return defaultValue;
+    }
+
+    #endregion
+
+    #region 转换为double
+
+    /// <summary>
+    /// 将 String 类型 转换为 Float 类型
+    /// </summary>
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="double"/>异常默认值，默认为 0D</param>
+    /// <returns><see cref="double"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static double ParseToDouble(this string value, bool isThrow = true, double defaultValue = 0D)
+    {
+        if (isThrow)
+        {
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
+
+            return double.Parse(value);
+        }
+
+        if (value.IsEmpty())
+        {
+            return defaultValue;
+        }
+
+        if (double.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        return defaultValue;
     }
 
     #endregion
@@ -279,20 +398,46 @@ public static class ConvertExtension
     #region 转换为Guid
 
     /// <summary>
-    /// 将string转换为Guid，若转换失败，则返回Guid.Empty。不抛出异常。  
+    /// 将 String 类型 转换为 Guid 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static Guid ParseToGuid(this string str)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="Guid"/>异常默认值，默认为 Guid.Empty</param>
+    /// <returns><see cref="Guid"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static Guid ParseToGuid(this string value, bool isThrow = true, Guid? defaultValue = null)
     {
-        try
+        if (isThrow)
         {
-            return new Guid(str);
+            if (value.IsEmpty())
+            {
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
+            }
+
+            return Guid.Parse(value);
         }
-        catch
+
+        if (value.IsEmpty())
+        {
+            if (defaultValue == null)
+            {
+                return Guid.Empty;
+            }
+
+            return defaultValue.Value;
+        }
+
+        if (Guid.TryParse(value, out var result))
+        {
+            return result;
+        }
+
+        if (defaultValue == null)
         {
             return Guid.Empty;
         }
+
+        return defaultValue.Value;
     }
 
     #endregion
@@ -300,88 +445,161 @@ public static class ConvertExtension
     #region 转换为DateTime
 
     /// <summary>
-    /// 将string转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
+    /// 将 String 类型 转换为 DateTime 类型
     /// </summary>
-    /// <param name="str"></param>
-    /// <returns></returns>
-    public static DateTime ParseToDateTime(this string str)
+    /// <param name="value"><see cref="string"/>值</param>
+    /// <param name="isThrow"><see cref="bool"/>是否抛出异常，默认为 true</param>
+    /// <param name="defaultValue"><see cref="DateTime"/>异常默认值，默认为 DateTime.MinValue</param>
+    /// <returns><see cref="DateTime"/></returns>
+    /// <exception cref="ArgumentNullException">传入的值为空或者空字符串</exception>
+    public static DateTime ParseToDateTime(this string value, bool isThrow = true, DateTime defaultValue = default)
     {
-        try
+        if (isThrow)
         {
-            if (string.IsNullOrWhiteSpace(str))
+            if (value.IsEmpty())
             {
-                return DateTime.MinValue;
+                throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
             }
 
-            if (str.Contains("-") || str.Contains("/"))
+            if (value.Contains("-") || value.Contains("/"))
             {
-                return DateTime.Parse(str);
+                return DateTime.Parse(value);
             }
 
-            var length = str.Length;
-            return length switch
+            switch (value.Length)
             {
-                4 => DateTime.ParseExact(str, "yyyy", CultureInfo.CurrentCulture),
-                6 => DateTime.ParseExact(str, "yyyyMM", CultureInfo.CurrentCulture),
-                8 => DateTime.ParseExact(str, "yyyyMMdd", CultureInfo.CurrentCulture),
-                10 => DateTime.ParseExact(str, "yyyyMMddHH", CultureInfo.CurrentCulture),
-                12 => DateTime.ParseExact(str, "yyyyMMddHHmm", CultureInfo.CurrentCulture),
-                // ReSharper disable once StringLiteralTypo
-                14 => DateTime.ParseExact(str, "yyyyMMddHHmmss", CultureInfo.CurrentCulture),
-                // ReSharper disable once StringLiteralTypo
-                _ => DateTime.ParseExact(str, "yyyyMMddHHmmss", CultureInfo.CurrentCulture)
-            };
-        }
-        catch
-        {
-            return DateTime.MinValue;
-        }
-    }
+                case 4:
+                {
+                    var result = DateTime.ParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None);
 
-    /// <summary>
-    /// 将string转换为DateTime，若转换失败，则返回默认值。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static DateTime ParseToDateTime(this string str, DateTime? defaultValue)
-    {
-        try
+                    result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                    return result;
+                }
+                case 6:
+                {
+                    var result = DateTime.ParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                    return result;
+                }
+                case 8:
+                {
+                    var result = DateTime.ParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                    return result;
+                }
+                case 10:
+                {
+                    var result = DateTime.ParseExact(value, "yyyyMMddHH", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, 0, 0);
+                    return result;
+                }
+                case 12:
+                {
+                    var result = DateTime.ParseExact(value, "yyyyMMddHHmm", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, result.Minute, 0);
+                    return result;
+                }
+                // ReSharper disable once RedundantCaseLabel
+                case 14:
+                default:
+                {
+                    var result = DateTime.ParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    return result;
+                }
+            }
+        }
+
+        if (value.IsEmpty())
         {
-            if (string.IsNullOrWhiteSpace(str))
+            return defaultValue;
+        }
+
+        if (value.Contains("-") || value.Contains("/"))
+        {
+            if (DateTime.TryParse(value, out var result))
             {
-                return defaultValue.GetValueOrDefault();
+                return result;
+            }
+        }
+
+        switch (value.Length)
+        {
+            case 4:
+            {
+                if (DateTime.TryParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None, out var result))
+                {
+                    result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                    return result;
+                }
             }
 
-            if (str.Contains("-") || str.Contains("/"))
+                break;
+            case 6:
             {
-                return DateTime.Parse(str);
+                if (DateTime.TryParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None, out var result))
+                {
+                    result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                    return result;
+                }
             }
 
-            var length = str.Length;
-            return length switch
+                break;
+            case 8:
             {
-                4 => DateTime.ParseExact(str, "yyyy", CultureInfo.CurrentCulture),
-                6 => DateTime.ParseExact(str, "yyyyMM", CultureInfo.CurrentCulture),
-                8 => DateTime.ParseExact(str, "yyyyMMdd", CultureInfo.CurrentCulture),
-                10 => DateTime.ParseExact(str, "yyyyMMddHH", CultureInfo.CurrentCulture),
-                12 => DateTime.ParseExact(str, "yyyyMMddHHmm", CultureInfo.CurrentCulture),
-                // ReSharper disable once StringLiteralTypo
-                14 => DateTime.ParseExact(str, "yyyyMMddHHmmss", CultureInfo.CurrentCulture),
-                // ReSharper disable once StringLiteralTypo
-                _ => DateTime.ParseExact(str, "yyyyMMddHHmmss", CultureInfo.CurrentCulture)
-            };
+                if (DateTime.TryParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None, out var result))
+                {
+                    result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                    return result;
+                }
+            }
+
+                break;
+            case 10:
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMddHH", CultureInfo.CurrentCulture, DateTimeStyles.None, out var result))
+                {
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, 0, 0);
+                    return result;
+                }
+            }
+
+                break;
+            case 12:
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMddHHmm", CultureInfo.CurrentCulture, DateTimeStyles.None,
+                        out var result))
+                {
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, result.Minute, 0);
+                    return result;
+                }
+            }
+
+                break;
+            // ReSharper disable once RedundantCaseLabel
+            case 14:
+            default:
+            {
+                if (DateTime.TryParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None,
+                        out var result))
+                {
+                    return result;
+                }
+            }
+                break;
         }
-        catch
-        {
-            return defaultValue.GetValueOrDefault();
-        }
+
+        return defaultValue;
     }
 
     /// <summary>
     /// 将 DateTimeOffset 转换成本地 DateTime
     /// </summary>
-    /// <param name="dateTime"></param>
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
     /// <returns></returns>
     public static DateTime ParseToDateTime(this DateTimeOffset dateTime)
     {
@@ -395,7 +613,7 @@ public static class ConvertExtension
     /// <summary>
     /// 将 DateTimeOffset? 转换成本地 DateTime?
     /// </summary>
-    /// <param name="dateTime"></param>
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
     /// <returns></returns>
     public static DateTime? ParseToDateTime(this DateTimeOffset? dateTime)
     {
@@ -405,7 +623,7 @@ public static class ConvertExtension
     /// <summary>
     /// 将 DateTime 转换成 DateTimeOffset
     /// </summary>
-    /// <param name="dateTime"></param>
+    /// <param name="dateTime"><see cref="DateTime"/></param>
     /// <returns></returns>
     public static DateTimeOffset ParseToDateTimeOffset(this DateTime dateTime)
     {
@@ -415,7 +633,7 @@ public static class ConvertExtension
     /// <summary>
     /// 将 DateTime? 转换成 DateTimeOffset?
     /// </summary>
-    /// <param name="dateTime"></param>
+    /// <param name="dateTime"><see cref="DateTime"/></param>
     /// <returns></returns>
     public static DateTimeOffset? ParseToDateTimeOffset(this DateTime? dateTime)
     {
@@ -424,85 +642,17 @@ public static class ConvertExtension
 
     #endregion
 
-    #region 转换为string
+    #region 转换为ToUnixTime
 
     /// <summary>
-    /// 将object转换为string，若转换失败，则返回""。不抛出异常。  
+    /// 将 DateTime 转为 UnixTime
     /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public static string ParseToString(this object obj)
+    /// <param name="dateTime"><see cref="DateTime"/></param>
+    /// <returns><see cref="long"/></returns>
+    public static long ParseToUnixTime(this DateTime dateTime)
     {
-        try
-        {
-            return obj == null ? string.Empty : obj.ToString();
-        }
-        catch
-        {
-            return string.Empty;
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public static string ParseToStrings<T>(this object obj)
-    {
-        try
-        {
-            if (obj is IEnumerable<T> list)
-            {
-                return string.Join(",", list);
-            }
-
-            return obj.ToString();
-        }
-        catch
-        {
-            return string.Empty;
-        }
-    }
-
-    #endregion
-
-    #region 转换为double
-
-    /// <summary>
-    /// 将object转换为double，若转换失败，则返回0。不抛出异常。  
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
-    public static double ParseToDouble(this object obj)
-    {
-        try
-        {
-            return double.Parse(obj.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return 0;
-        }
-    }
-
-    /// <summary>
-    /// 将object转换为double，若转换失败，则返回指定值。不抛出异常。  
-    /// </summary>
-    /// <param name="str"></param>
-    /// <param name="defaultValue"></param>
-    /// <returns></returns>
-    public static double ParseToDouble(this object str, double defaultValue)
-    {
-        try
-        {
-            return double.Parse(str.ToString() ?? string.Empty);
-        }
-        catch
-        {
-            return defaultValue;
-        }
+        var startTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        return (long) Math.Round((dateTime - startTime).TotalMilliseconds, MidpointRounding.AwayFromZero);
     }
 
     #endregion
@@ -518,16 +668,6 @@ public static class ConvertExtension
     public static IEnumerable<TResult> CastSuper<TResult>(this IEnumerable source)
     {
         return from object item in source select (TResult) Convert.ChangeType(item, typeof(TResult));
-    }
-
-    #endregion
-
-    #region 转换为ToUnixTime
-
-    public static long ParseToUnixTime(this DateTime nowTime)
-    {
-        var startTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-        return (long) Math.Round((nowTime - startTime).TotalMilliseconds, MidpointRounding.AwayFromZero);
     }
 
     #endregion

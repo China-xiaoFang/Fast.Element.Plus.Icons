@@ -278,6 +278,19 @@
             <param name="connectionString"><see cref="T:System.String"/>连接字符串，如若不传，需要配置在 JSON文件 “RedisConnectionString” 节点中</param>
             <returns></returns>
         </member>
+        <member name="T:Fast.Cache.Extensions.ValidateExtension">
+            <summary>
+            验证拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.Cache.Extensions.ValidateExtension.IsEmpty``1(``0)">
+            <summary>
+            检查 Object 或者 集合 是否为 NULL 或者 空集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.Cache.Realize.Cache">
             <summary>
             缓存实现
@@ -537,21 +550,6 @@
             <param name="key"></param>
             <param name="expireTimeSpan"></param>
             <param name="func"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.Cache.Realize.Cache.ParseToString(System.Object)">
-            <summary>
-            将object转换为string，若转换失败，则返回""。不抛出异常。  
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.Cache.Realize.Cache.IsEmpty``1(``0)">
-            <summary>
-            检查 Object 或者 集合 是否为 NULL 或者 空集合
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="value"></param>
             <returns></returns>
         </member>
     </members>

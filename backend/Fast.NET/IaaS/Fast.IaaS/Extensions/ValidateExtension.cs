@@ -29,7 +29,30 @@ public static class ValidateExtension
     /// <returns><see cref="bool"/></returns>
     public static bool IsEmpty(this string value)
     {
-        return value == null || string.IsNullOrEmpty(value.ParseToString());
+        return value == null || string.IsNullOrEmpty(value);
+    }
+
+    /// <summary>
+    /// 判断 Enum 是否为 Null
+    /// </summary>
+    /// <typeparam name="TEnum"></typeparam>
+    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsEmpty<TEnum>(this TEnum value) where TEnum : struct, Enum
+    {
+        // 判断是否有效
+        if (!Enum.IsDefined(typeof(TEnum), value))
+        {
+            return true;
+        }
+
+        // 判断是否为默认值
+        if (EqualityComparer<TEnum>.Default.Equals(value, default))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -40,42 +63,13 @@ public static class ValidateExtension
     /// <returns><see cref="bool"/></returns>
     public static bool IsEmpty<TEnum>(this TEnum? value) where TEnum : struct, Enum
     {
-        return !value.HasValue || !Enum.IsDefined((typeof(TEnum)), value);
-    }
-
-    /// <summary>
-    /// 判断 泛型 是否为 Null
-    /// </summary>
-    /// <remarks>支持 IList，IEnumerable 类型，所以性能很低</remarks>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <returns><see cref="bool"/></returns>
-    public static bool IsEmpty<T>(this T value)
-    {
-        if (value == null)
+        // 判断是否为空
+        if (!value.HasValue)
         {
             return true;
         }
 
-        if (typeof(T).IsValueType)
-        {
-            // 值类型
-            return EqualityComparer<T>.Default.Equals(value, default);
-        }
-
-        // 判断是否为默认值或空集合
-        if (value.Equals(default(T)))
-        {
-            return true;
-        }
-
-        // 判断集合类型
-        if (value is IEnumerable<T> enumerable && !enumerable.Any())
-        {
-            return true;
-        }
-
-        return false;
+        return value.Value.IsEmpty();
     }
 
     /// <summary>
@@ -84,10 +78,10 @@ public static class ValidateExtension
     /// <typeparam name="TEnum"></typeparam>
     /// <param name="value"><see cref="TEnum"/>枚举值</param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsNullOrZero<TEnum>(this TEnum? value) where TEnum : struct, Enum
+    public static bool IsNullOrZero<TEnum>(this TEnum value) where TEnum : struct, Enum
     {
         // 判断是否为空
-        if (!value.HasValue || !Enum.IsDefined((typeof(TEnum)), value))
+        if (value.IsEmpty())
         {
             return true;
         }
@@ -102,10 +96,10 @@ public static class ValidateExtension
     /// <typeparam name="TEnum"></typeparam>
     /// <param name="value"><see cref="TEnum"/>枚举值</param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsNullOrZero<TEnum>(this TEnum value) where TEnum : struct, Enum
+    public static bool IsNullOrZero<TEnum>(this TEnum? value) where TEnum : struct, Enum
     {
         // 判断是否为空
-        if (!Enum.IsDefined((typeof(TEnum)), value))
+        if (value.IsEmpty())
         {
             return true;
         }
@@ -203,6 +197,42 @@ public static class ValidateExtension
             _ => false
         };
     }
+
+    ///// <summary>
+    ///// 判断 泛型 是否为 Null
+    ///// </summary>
+    ///// <remarks>支持 IList，IEnumerable 类型，所以性能很低</remarks>
+    ///// <typeparam name="T"></typeparam>
+    ///// <param name="value"></param>
+    ///// <returns><see cref="bool"/></returns>
+    //[Obsolete("This method is deprecated.")]
+    //public static bool IsEmpty<T>(this T value)
+    //{
+    //    if (value == null)
+    //    {
+    //        return true;
+    //    }
+
+    //    if (typeof(T).IsValueType)
+    //    {
+    //        // 值类型
+    //        return EqualityComparer<T>.Default.Equals(value, default);
+    //    }
+
+    //    // 判断是否为默认值或空集合
+    //    if (value.Equals(default(T)))
+    //    {
+    //        return true;
+    //    }
+
+    //    // 判断集合类型
+    //    if (value is IEnumerable<T> enumerable && !enumerable.Any())
+    //    {
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 
     ///// <summary>
     ///// 检查 Object 是否为 NULL 或者 0
@@ -641,76 +671,59 @@ public static class ValidateExtension
     /// <param name="str">输入字符</param>
     /// <returns>返回一个bool类型的值</returns>
     /// <remarks>
-    /// 可判断格式如下（其中-可替换为/，不影响验证)
-    /// YYYY | YYYY-MM | YYYY-MM-DD | YYYY-MM-DD HH:MM:SS | YYYY-MM-DD HH:MM:SS.FFF
+    /// 可判断格式如下（其中-可替换为/，不影响验证):
+    /// YYYY | YYYY-MM | YYYYMM | YYYY-MM-DD | YYYYMMDD | YYYY-MM-DD HH:MM:SS | YYYY-MM-DD HH:MM:SS.FFF
     /// </remarks>
     public static bool IsDateTime(this string str)
     {
+        // 检查输入是否为空
         if (null == str)
         {
             return false;
         }
 
+        // 定义一个正则表达式，用于验证日期格式
         const string regexDate =
-            @"[1-2]{1}[0-9]{3}((-|\/|\.){1}(([0]?[1-9]{1})|(1[0-2]{1}))((-|\/|\.){1}((([0]?[1-9]{1})|([1-2]{1}[0-9]{1})|(3[0-1]{1})))( (([0-1]{1}[0-9]{1})|2[0-3]{1}):([0-5]{1}[0-9]{1}):([0-5]{1}[0-9]{1})(\.[0-9]{3})?)?)?)?$";
+            @"[1-2]{1}[0-9]{3}((-|\/|\.){1}(([0]?[1-9]{1})|(1[0-2]{1}))((-|\/|\.){1}((([0]?[1-9]{1})|([1-2]{1}[0-9]{1})|(3[0-1]{1}))(( ([0-1]{1}[0-9]{1})|2[0-3]{1}):([0-5]{1}[0-9]{1}):([0-5]{1}[0-9]{1})(\.[0-9]{3})?)?)?)?)?$";
+
+        // 使用正则表达式来验证输入字符串是否符合日期格式
         if (!Regex.IsMatch(str, regexDate))
             return false;
-        //以下各月份日期验证，保证验证的完整性
-        int indexY;
-        int indexM;
-        int indexD;
-        if (-1 != (indexY = str.IndexOf("-", StringComparison.Ordinal)))
-        {
-            indexM = str.IndexOf("-", indexY + 1, StringComparison.Ordinal);
-            indexD = str.IndexOf(":", StringComparison.Ordinal);
-        }
-        else
-        {
-            indexY = str.IndexOf("/", StringComparison.Ordinal);
-            indexM = str.IndexOf("/", indexY + 1, StringComparison.Ordinal);
-            indexD = str.IndexOf(":", StringComparison.Ordinal);
-        }
 
-        //不包含日期部分，直接返回true
-        if (-1 == indexM)
+        // 移除所有非数字字符，只保留数字部分
+        var cleanStr = new string(str.Where(char.IsDigit).ToArray());
+
+        // 检查日期长度
+        if (cleanStr.Length is 4 or 6 or 8)
+        {
+            // 提取年份部分
+            var year = int.Parse(cleanStr[..4]);
+
+            // 如果字符串长度大于等于6，提取月份部分
+            if (cleanStr.Length >= 6)
+            {
+                var month = int.Parse(cleanStr.Substring(4, 2));
+
+                // 验证月份是否在合法范围内
+                if (month is < 1 or > 12)
+                    return false;
+
+                // 如果字符串长度为8，提取日部分
+                if (cleanStr.Length == 8)
+                {
+                    var day = int.Parse(cleanStr.Substring(6, 2));
+
+                    // 验证日是否在合法范围内，考虑月份的天数
+                    if (day < 1 || day > DateTime.DaysInMonth(year, month))
+                        return false;
+                }
+            }
+
+            // 符合日期格式的条件
             return true;
-        if (-1 == indexD)
-        {
-            indexD = str.Length + 3;
         }
 
-        var iYear = Convert.ToInt32(str.Substring(0, indexY));
-        var iMonth = Convert.ToInt32(str.Substring(indexY + 1, indexM - indexY - 1));
-        var iDate = Convert.ToInt32(str.Substring(indexM + 1, indexD - indexM - 4));
-        //判断月份日期
-        if ((iMonth < 8 && 1 == iMonth % 2) || (iMonth > 8 && 0 == iMonth % 2))
-        {
-            if (iDate < 32)
-                return true;
-        }
-        else
-        {
-            if (iMonth != 2)
-            {
-                if (iDate < 31)
-                    return true;
-            }
-            else
-            {
-                //闰年
-                if ((0 == iYear % 400) || (0 == iYear % 4 && 0 < iYear % 100))
-                {
-                    if (iDate < 30)
-                        return true;
-                }
-                else
-                {
-                    if (iDate < 29)
-                        return true;
-                }
-            }
-        }
-
+        // 如果不符合任何日期格式，返回false
         return false;
     }
 

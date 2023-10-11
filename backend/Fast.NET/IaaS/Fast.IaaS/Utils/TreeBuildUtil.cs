@@ -19,8 +19,8 @@ namespace Fast.IaaS.Utils;
 /// <summary>
 /// 树基类
 /// </summary>
-/// <typeparam name="TProperty"></typeparam>
-public interface ITreeNode<out TProperty> where TProperty : struct, IComparable, IConvertible
+/// <typeparam name="TProperty">Id属性类型</typeparam>
+public interface ITreeNode<out TProperty> where TProperty : struct, IComparable, IConvertible, IFormattable
 {
     /// <summary>
     /// 获取节点id
@@ -50,10 +50,10 @@ public interface ITreeNode<out TProperty> where TProperty : struct, IComparable,
 /// <summary>
 /// 递归工具类，用于遍历有父子关系的节点，例如菜单树，字典树等等
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
-/// <typeparam name="TProperty"></typeparam>
+/// <typeparam name="TEntity">模型</typeparam>
+/// <typeparam name="TProperty">Id属性类型</typeparam>
 public class TreeBuildUtil<TEntity, TProperty> where TEntity : ITreeNode<TProperty>
-    where TProperty : struct, IComparable, IConvertible
+    where TProperty : struct, IComparable, IConvertible, IFormattable
 {
     /// <summary>
     /// 顶级节点的父节点Id(默认0)

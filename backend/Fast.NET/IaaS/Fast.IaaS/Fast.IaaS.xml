@@ -291,176 +291,170 @@
             <see cref="T:System.Convert"/> 转换拓展类
             </summary>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToLong(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToLong(System.String,System.Boolean,System.Int64)">
             <summary>
-            将object转换为long，若转换失败，则返回0。不抛出异常。  
+            将 String 类型 转换为 Long 类型
             </summary>
-            <param name="obj"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int64"/>异常默认值，默认为 0L</param>
+            <returns><see cref="T:System.Int64"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToLong(System.String,System.Int64)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToLong``1(``0,System.Boolean,System.Int64)">
             <summary>
-            将object转换为long，若转换失败，则返回指定值。不抛出异常。  
+            将 Enum 类型 转换为 Long 类型
             </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>枚举值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int64"/>异常默认值，默认为 0L</param>
+            <returns><see cref="T:System.Int64"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToInt(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToLong``1(System.Nullable{``0},System.Boolean,System.Int64)">
             <summary>
-            将object转换为int，若转换失败，则返回0。不抛出异常。  
+            将 可空的Enum 类型 转换为 Long 类型
             </summary>
-            <param name="str"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>枚举值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int64"/>异常默认值，默认为 0L</param>
+            <returns><see cref="T:System.Int64"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToInt(System.Object,System.Int32)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToInt(System.String,System.Boolean,System.Int32)">
             <summary>
-            将object转换为int，若转换失败，则返回指定值。不抛出异常。 
-            null返回默认值
+            将 String 类型 转换为 Int 类型
             </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int32"/>异常默认值，默认为 0</param>
+            <returns><see cref="T:System.Int32"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToShort(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToInt``1(``0,System.Boolean,System.Int32)">
             <summary>
-            将object转换为short，若转换失败，则返回0。不抛出异常。  
+            将 Enum 类型 转换为 Int 类型
             </summary>
-            <param name="obj"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>枚举值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int32"/>异常默认值，默认为 0</param>
+            <returns><see cref="T:System.Int32"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToShort(System.Object,System.Int16)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToInt``1(System.Nullable{``0},System.Boolean,System.Int32)">
             <summary>
-            将object转换为short，若转换失败，则返回指定值。不抛出异常。  
+            将 可空的Enum 类型 转换为 Int 类型
             </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>枚举值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int32"/>异常默认值，默认为 0</param>
+            <returns><see cref="T:System.Int32"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDecimal(System.Object,System.Decimal)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToShort(System.String,System.Boolean,System.Int16)">
             <summary>
-            将object转换为demical，若转换失败，则返回指定值。不抛出异常。  
+            将 String 类型 转换为 Short 类型
             </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Int16"/>异常默认值，默认为 0</param>
+            <returns><see cref="T:System.Int16"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDecimal(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDecimal(System.String,System.Boolean,System.Decimal)">
             <summary>
-            将object转换为demical，若转换失败，则返回0。不抛出异常。  
+            将 String 类型 转换为 Decimal 类型
             </summary>
-            <param name="str"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Decimal"/>异常默认值，默认为 0M</param>
+            <returns><see cref="T:System.Decimal"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToBool(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToBool(System.String,System.Boolean,System.Boolean)">
             <summary>
-            将object转换为bool，若转换失败，则返回false。不抛出异常。  
+            将 String 类型 转换为 Bool 类型
             </summary>
-            <param name="str"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Boolean"/>异常默认值，默认为 false</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToBool(System.Object,System.Boolean)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToFloat(System.String,System.Boolean,System.Single)">
             <summary>
-            将object转换为bool，若转换失败，则返回指定值。不抛出异常。  
+            将 String 类型 转换为 Float 类型
             </summary>
-            <param name="str"></param>
-            <param name="result"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Single"/>异常默认值，默认为 0F</param>
+            <returns><see cref="T:System.Single"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToFloat(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDouble(System.String,System.Boolean,System.Double)">
             <summary>
-            将object转换为float，若转换失败，则返回0。不抛出异常。  
+            将 String 类型 转换为 Float 类型
             </summary>
-            <param name="str"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Double"/>异常默认值，默认为 0D</param>
+            <returns><see cref="T:System.Double"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToFloat(System.Object,System.Single)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToGuid(System.String,System.Boolean,System.Nullable{System.Guid})">
             <summary>
-            将object转换为float，若转换失败，则返回指定值。不抛出异常。  
+            将 String 类型 转换为 Guid 类型
             </summary>
-            <param name="str"></param>
-            <param name="result"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.Guid"/>异常默认值，默认为 Guid.Empty</param>
+            <returns><see cref="T:System.Guid"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToGuid(System.String)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTime(System.String,System.Boolean,System.DateTime)">
             <summary>
-            将string转换为Guid，若转换失败，则返回Guid.Empty。不抛出异常。  
+            将 String 类型 转换为 DateTime 类型
             </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTime(System.String)">
-            <summary>
-            将string转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTime(System.String,System.Nullable{System.DateTime})">
-            <summary>
-            将string转换为DateTime，若转换失败，则返回默认值。  
-            </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="value"><see cref="T:System.String"/>值</param>
+            <param name="isThrow"><see cref="T:System.Boolean"/>是否抛出异常，默认为 true</param>
+            <param name="defaultValue"><see cref="T:System.DateTime"/>异常默认值，默认为 DateTime.MinValue</param>
+            <returns><see cref="T:System.DateTime"/></returns>
+            <exception cref="T:System.ArgumentNullException">传入的值为空或者空字符串</exception>
         </member>
         <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTime(System.DateTimeOffset)">
             <summary>
             将 DateTimeOffset 转换成本地 DateTime
             </summary>
-            <param name="dateTime"></param>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
             <returns></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTime(System.Nullable{System.DateTimeOffset})">
             <summary>
             将 DateTimeOffset? 转换成本地 DateTime?
             </summary>
-            <param name="dateTime"></param>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
             <returns></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTimeOffset(System.DateTime)">
             <summary>
             将 DateTime 转换成 DateTimeOffset
             </summary>
-            <param name="dateTime"></param>
+            <param name="dateTime"><see cref="T:System.DateTime"/></param>
             <returns></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDateTimeOffset(System.Nullable{System.DateTime})">
             <summary>
             将 DateTime? 转换成 DateTimeOffset?
             </summary>
-            <param name="dateTime"></param>
+            <param name="dateTime"><see cref="T:System.DateTime"/></param>
             <returns></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToString(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToUnixTime(System.DateTime)">
             <summary>
-            将object转换为string，若转换失败，则返回""。不抛出异常。  
+            将 DateTime 转为 UnixTime
             </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToStrings``1(System.Object)">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDouble(System.Object)">
-            <summary>
-            将object转换为double，若转换失败，则返回0。不抛出异常。  
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ConvertExtension.ParseToDouble(System.Object,System.Double)">
-            <summary>
-            将object转换为double，若转换失败，则返回指定值。不抛出异常。  
-            </summary>
-            <param name="str"></param>
-            <param name="defaultValue"></param>
-            <returns></returns>
+            <param name="dateTime"><see cref="T:System.DateTime"/></param>
+            <returns><see cref="T:System.Int64"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ConvertExtension.CastSuper``1(System.Collections.IEnumerable)">
             <summary>
@@ -469,6 +463,27 @@
             <typeparam name="TResult"></typeparam>
             <param name="source"></param>
             <returns></returns>
+        </member>
+        <member name="T:Fast.IaaS.Extensions.DataTableExtension">
+            <summary>
+            <see cref="T:System.Data.DataTable"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.DataTableExtension.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转换为DataTable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"><see cref="T:System.Collections.Generic.IEnumerable`1"/></param>
+            <returns><see cref="T:System.Data.DataTable"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.DataTableExtension.ToList``1(System.Data.DataTable)">
+            <summary>
+            DataTable To List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataTable"><see cref="T:System.Data.DataTable"/></param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
         <member name="T:Fast.IaaS.Extensions.DateTimeExtension">
             <summary>
@@ -654,51 +669,109 @@
             <param name="num2"><see cref="T:System.Decimal"/></param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.DecimalExtension.GetDecimal(System.Decimal)">
+        <member name="M:Fast.IaaS.Extensions.DecimalExtension.GetDecimal(System.Decimal,System.Nullable{System.Int32})">
             <summary>
             获取 decimal，小数点后面有几位就保留几位
             </summary>
             <param name="data"><see cref="T:System.Decimal"/></param>
+            <param name="places"><see cref="T:System.Int32"/>要保留的小数据，不传默认有几位就保留几位</param>
             <returns><see cref="T:System.Decimal"/></returns>
+        </member>
+        <member name="T:Fast.IaaS.Extensions.DynamicExtension">
+            <summary>
+            dynamic 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.DynamicExtension.HasProperty(System.Object,System.String)">
+            <summary>
+            检查动态对象是否包含指定属性的方法
+            </summary>
+            <param name="obj"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
         </member>
         <member name="T:Fast.IaaS.Extensions.EnumExtension">
             <summary>
             <see cref="T:System.Enum"/> 拓展类
             </summary>
         </member>
-        <member name="M:Fast.IaaS.Extensions.EnumExtension.GetEnumDescription(System.Object)">
+        <member name="M:Fast.IaaS.Extensions.EnumExtension.GetDescription``1(``0)">
             <summary>
-            获取枚举的Description
+            获取枚举值的描述
             </summary>
-            <param name="value"><see cref="T:System.Object"/></param>
-            <returns><see cref="T:System.String"/></returns>
+            <remarks>需要有 [Description] 特性，否则返回的是枚举值的Name</remarks>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value">枚举值</param>
+            <returns><see cref="T:System.String"/>枚举的 [Description] 特性描述</returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
+            <exception cref="T:System.ArgumentException">The parameter is not an enum type.</exception>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.EnumExtension.GetDescription(System.Enum,System.Type)">
+            <summary>
+            获取枚举值的描述
+            </summary>
+            <remarks>需要有 [Description] 特性，否则返回的是枚举值的Name</remarks>
+            <param name="value"><see cref="T:System.Enum"/>枚举值</param>
+            <param name="enumType"><see cref="T:System.Type"/>枚举类型</param>
+            <returns><see cref="T:System.String"/>枚举的 [Description] 特性描述</returns>
+            <exception cref="T:System.ArgumentNullException">传入的枚举值为空</exception>
+            <exception cref="T:System.ArgumentException">The parameter is not an enum type.</exception>
         </member>
         <member name="M:Fast.IaaS.Extensions.EnumExtension.EnumToList(System.Type)">
             <summary>
             将枚举转成枚举信息集合
             </summary>
-            <param name="type"><see cref="T:System.Type"/></param>
+            <param name="enumType"><see cref="T:System.Type"/>枚举值类型</param>
             <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+            <exception cref="T:System.ArgumentException">类型不是一个枚举类型</exception>
         </member>
-        <member name="T:Fast.IaaS.Extensions.EnumEntity">
+        <member name="M:Fast.IaaS.Extensions.EnumExtension.EnumToList``1(System.Type)">
+            <summary>
+            将枚举转成枚举信息集合
+            </summary>
+            <typeparam name="TProperty"></typeparam>
+            <param name="enumType"><see cref="T:System.Type"/>枚举值类型</param>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+            <exception cref="T:System.ArgumentException">类型不是一个枚举类型</exception>
+        </member>
+        <member name="T:Fast.IaaS.Extensions.EnumEntity`1">
             <summary>
             枚举的Entity类
             </summary>
+            <typeparam name="TProperty">Value属性类型</typeparam>
         </member>
-        <member name="P:Fast.IaaS.Extensions.EnumEntity.Describe">
+        <member name="P:Fast.IaaS.Extensions.EnumEntity`1.Describe">
             <summary>  
             枚举的描述  
             </summary>  
         </member>
-        <member name="P:Fast.IaaS.Extensions.EnumEntity.Name">
+        <member name="P:Fast.IaaS.Extensions.EnumEntity`1.Name">
             <summary>  
             枚举名称  
             </summary>  
         </member>
-        <member name="P:Fast.IaaS.Extensions.EnumEntity.Value">
+        <member name="P:Fast.IaaS.Extensions.EnumEntity`1.Value">
             <summary>  
             枚举对象的值  
             </summary>  
+        </member>
+        <member name="T:Fast.IaaS.Extensions.FileExtension">
+            <summary>
+            <see cref="T:System.IO.File"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.FileExtension.CopyFile(System.String,System.String)">
+            <summary>
+            复制文件
+            </summary>
+            <param name="fromPath"><see cref="T:System.String"/>来源文件路径</param>
+            <param name="toPath"><see cref="T:System.String"/>复制的文件路径</param>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.FileExtension.TryCreateDirectory(System.String)">
+            <summary>
+            尝试创建文件夹
+            </summary>
+            <param name="path"><see cref="T:System.String"/>路径</param>
         </member>
         <member name="T:Fast.IaaS.Extensions.GroupByExtension">
             <summary>
@@ -950,6 +1023,25 @@
             <param name="memberExpression"><see cref="T:System.Linq.Expressions.MemberExpression"/></param>
             <returns><see cref="T:System.String"/></returns>
             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Fast.IaaS.Extensions.MethodInfoExtension">
+            <summary>
+            <see cref="T:System.Reflection.MethodInfo"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.MethodInfoExtension.IsMethodAsync(System.Reflection.MethodInfo)">
+            <summary>
+            是否为异步方法
+            </summary>
+            <param name="methodInfo"><see cref="T:System.Reflection.MemberInfo"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.MethodInfoExtension.GetMethodParameterCount(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法参数数量
+            </summary>
+            <param name="methodInfo"><see cref="T:System.Reflection.MemberInfo"/></param>
+            <returns><see cref="T:System.Int32"/></returns>
         </member>
         <member name="T:Fast.IaaS.Extensions.ObjectExtension">
             <summary>
@@ -1303,6 +1395,14 @@
             <param name="value"><see cref="T:System.String"/>字符串</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(``0)">
+            <summary>
+            判断 Enum 是否为 Null
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(System.Nullable{``0})">
             <summary>
             判断 Enum 是否为 Null
@@ -1311,16 +1411,7 @@
             <param name="value"><see cref="!:TEnum"/>枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(``0)">
-            <summary>
-            判断 泛型 是否为 Null
-            </summary>
-            <remarks>支持 IList，IEnumerable 类型，所以性能很低</remarks>
-            <typeparam name="T"></typeparam>
-            <param name="value"></param>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(System.Nullable{``0})">
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(``0)">
             <summary>
             判断 Enum 是否为 Null 或者 0
             </summary>
@@ -1328,7 +1419,7 @@
             <param name="value"><see cref="!:TEnum"/>枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(``0)">
+        <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(System.Nullable{``0})">
             <summary>
             判断 Enum 是否为 Null 或者 0
             </summary>
@@ -1512,8 +1603,8 @@
             <param name="str">输入字符</param>
             <returns>返回一个bool类型的值</returns>
             <remarks>
-            可判断格式如下（其中-可替换为/，不影响验证)
-            YYYY | YYYY-MM | YYYY-MM-DD | YYYY-MM-DD HH:MM:SS | YYYY-MM-DD HH:MM:SS.FFF
+            可判断格式如下（其中-可替换为/，不影响验证):
+            YYYY | YYYY-MM | YYYYMM | YYYY-MM-DD | YYYYMMDD | YYYY-MM-DD HH:MM:SS | YYYY-MM-DD HH:MM:SS.FFF
             </remarks>
         </member>
         <member name="T:Fast.IaaS.GlobalConstant">
@@ -1603,7 +1694,7 @@
             <summary>
             树基类
             </summary>
-            <typeparam name="TProperty"></typeparam>
+            <typeparam name="TProperty">Id属性类型</typeparam>
         </member>
         <member name="M:Fast.IaaS.Utils.ITreeNode`1.GetId">
             <summary>
@@ -1633,8 +1724,8 @@
             <summary>
             递归工具类，用于遍历有父子关系的节点，例如菜单树，字典树等等
             </summary>
-            <typeparam name="TEntity"></typeparam>
-            <typeparam name="TProperty"></typeparam>
+            <typeparam name="TEntity">模型</typeparam>
+            <typeparam name="TProperty">Id属性类型</typeparam>
         </member>
         <member name="F:Fast.IaaS.Utils.TreeBuildUtil`2._rootParentId">
             <summary>
