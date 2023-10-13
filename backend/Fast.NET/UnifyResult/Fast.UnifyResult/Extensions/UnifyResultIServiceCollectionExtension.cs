@@ -47,10 +47,8 @@ public static class UnifyResultIServiceCollectionExtension
     public static IServiceCollection AddUnifyResult<TUnifyResultProvider>(this IServiceCollection services)
         where TUnifyResultProvider : class, IUnifyResultProvider
     {
-        var providerType = typeof(TUnifyResultProvider);
-
         // 添加规范化提供器
-        services.TryAddSingleton(providerType, providerType);
+        services.TryAddSingleton(typeof(IUnifyResultProvider), typeof(TUnifyResultProvider));
 
         // 添加成功规范化结果筛选器
         services.Configure<MvcOptions>(options => { options.Filters.Add<SucceededUnifyResultFilter>(); });
