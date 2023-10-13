@@ -47,23 +47,23 @@ public static class EnumExtension
     /// <exception cref="ArgumentException">The parameter is not an enum type.</exception>
     public static string GetDescription(this Enum value, Type enumType)
     {
+        // 检查是否是枚举类型
+        if (!enumType.IsEnum)
+        {
+            throw new ArgumentException("The parameter is not an enum type.", nameof(value));
+        }
+
         // 判断是否有效
         if (!Enum.IsDefined(enumType, value))
         {
             throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
         }
 
-        // 判断是否为默认值
-        if (value.Equals(Enum.ToObject(enumType, 0)))
-        {
-            throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
-        }
-
-        // 检查是否是枚举类型
-        if (!enumType.IsEnum)
-        {
-            throw new ArgumentException("The parameter is not an enum type.", nameof(value));
-        }
+        //// 判断是否为默认值
+        //if (value.Equals(Enum.ToObject(enumType, 0)))
+        //{
+        //    throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
+        //}
 
         // 获取枚举名称
         var enumName = Enum.GetName(enumType, value);
