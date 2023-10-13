@@ -26,7 +26,7 @@ public static class Base64Extension
 
     public const string RandomStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    private static string GetRandomStr(string randomStr = RandomStr, int randomPrefixStrLength = RandomPrefixStrLength)
+    public static string GetRandomStr(string randomStr = RandomStr, int randomPrefixStrLength = RandomPrefixStrLength)
     {
         // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=
         var result = "";

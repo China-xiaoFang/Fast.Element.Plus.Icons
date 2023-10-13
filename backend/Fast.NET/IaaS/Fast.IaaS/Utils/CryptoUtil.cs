@@ -131,7 +131,7 @@ public static class CryptoUtil
     /// </summary>
     /// <param name="content">要加密的字符串。</param>
     /// <returns>加密后的字符串。</returns>
-    public static string MD5Encrypt(this string content)
+    public static string MD5Encrypt(string content)
     {
         // 创建 MD5 实例
         using var mi = MD5.Create();
@@ -152,6 +152,46 @@ public static class CryptoUtil
 
         // 返回加密后的字符串
         return sb.ToString();
+    }
+
+    #endregion
+
+    #region SHA1
+
+    /// <summary>
+    /// 得到文件SHA1
+    /// </summary>
+    /// <param name="filePath"><see cref="string"/>文件路径</param>
+    /// <returns><see cref="string"/></returns>
+    public static string GetFileSHA1(string filePath)
+    {
+        var strResult = "";
+        var strHashData = "";
+        FileStream oFileStream = null;
+        var osha1 = SHA1.Create();
+        oFileStream = new FileStream(filePath.Replace("\"", ""), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        var arrBytHashValue = osha1.ComputeHash(oFileStream);
+        oFileStream.Close();
+        //由以连字符分隔的十六进制对构成的String，其中每一对表示value 中对应的元素；例如“F-2C-4A”
+        strHashData = BitConverter.ToString(arrBytHashValue);
+        //替换-
+        strHashData = strHashData.Replace("-", "");
+        strResult = strHashData.ToLower();
+        return strResult;
+    }
+
+    /// <summary>
+    /// SHA1加密
+    /// </summary>
+    /// <param name="str"><see cref="string"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string SHAEncrypt(string str)
+    {
+        var sha1 = SHA1.Create();
+        var inputStrBytes = Encoding.UTF8.GetBytes(str);
+        var outputBytes = sha1.ComputeHash(inputStrBytes);
+        sha1.Clear();
+        return BitConverter.ToString(outputBytes).Replace("-", "");
     }
 
     #endregion

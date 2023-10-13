@@ -38,7 +38,7 @@ public interface ITreeNode<out TProperty> where TProperty : struct, IComparable,
     /// 获取排序字段
     /// </summary>
     /// <returns></returns>
-    int Sort();
+    TProperty Sort();
 
     /// <summary>
     /// 设置Children

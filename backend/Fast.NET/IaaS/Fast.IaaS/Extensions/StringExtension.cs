@@ -253,4 +253,38 @@ public static class StringExtension
     {
         return string.IsNullOrEmpty(str) ? "" : HttpUtility.UrlDecode(str, Encoding.UTF8);
     }
+
+    /// <summary>
+    /// 获取 Sql Server NVarchar 最大字节长度
+    /// </summary>
+    /// <param name="str"><see cref="string"/></param>
+    /// <param name="maxLen"><see cref="int"/>最大长度</param>
+    /// <param name="ellipsis"><see cref="bool"/></param>
+    /// <returns></returns>
+    public static string GetNVarcharMaxLen(this string str, int maxLen, bool ellipsis = false)
+    {
+        // NVARCHAR 每个字符占用2个字节
+        var maxByteLen = maxLen * 2;
+        var byteLen = Encoding.Unicode.GetBytes(str).Length;
+
+        if (byteLen <= maxLen)
+        {
+            // 长度符合
+            return str;
+        }
+
+        // 判断是否需要省略号
+        int maxCharLen;
+        if (ellipsis)
+        {
+            // 考虑省略号的字节长度为6
+            maxCharLen = (maxByteLen - 6) / 2;
+        }
+        else
+        {
+            maxCharLen = maxByteLen;
+        }
+
+        return str.GetSubStringWithEllipsis(maxCharLen, ellipsis);
+    }
 }
