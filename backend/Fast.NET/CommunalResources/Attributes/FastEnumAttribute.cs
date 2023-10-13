@@ -13,12 +13,15 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 #nullable enable
-namespace Fast.NET.Core.Attributes;
+
+// ReSharper disable once CheckNamespace
+
+namespace Fast.NET;
 
 /// <summary>
-/// 枚举特性
-/// 用于区分是否可以写入枚举字典的特性
+/// <see cref="FastEnumAttribute"/> 枚举特性
 /// </summary>
+/// <remarks>用于区分是否可以写入枚举字典的特性</remarks>
 [AttributeUsage(AttributeTargets.Enum)]
 public class FastEnumAttribute : Attribute
 {

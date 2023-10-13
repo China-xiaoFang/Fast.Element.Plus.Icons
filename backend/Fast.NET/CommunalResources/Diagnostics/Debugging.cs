@@ -14,10 +14,12 @@
 
 using System.Diagnostics;
 
-namespace Fast.IaaS.Diagnostics;
+// ReSharper disable once CheckNamespace
+
+namespace Fast.NET;
 
 /// <summary>
-/// 向事件管理器中输出事件信息
+/// <see cref="Debugging"/> 向事件管理器中输出事件信息
 /// </summary>
 public static class Debugging
 {

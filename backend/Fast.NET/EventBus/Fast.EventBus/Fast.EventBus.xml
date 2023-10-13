@@ -4,6 +4,248 @@
         <name>Fast.EventBus</name>
     </assembly>
     <members>
+        <member name="T:Fast.NET.FastEnumAttribute">
+            <summary>
+            <see cref="T:Fast.NET.FastEnumAttribute"/> 枚举特性
+            </summary>
+            <remarks>用于区分是否可以写入枚举字典的特性</remarks>
+        </member>
+        <member name="P:Fast.NET.FastEnumAttribute.ChName">
+            <summary>
+            中文名称
+            </summary>
+        </member>
+        <member name="P:Fast.NET.FastEnumAttribute.EnName">
+            <summary>
+            英文名称
+            </summary>
+        </member>
+        <member name="P:Fast.NET.FastEnumAttribute.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:Fast.NET.SuppressSnifferAttribute">
+            <summary>
+            <see cref="T:Fast.NET.SuppressSnifferAttribute"/> 不被扫描和发现的特性
+            </summary>
+            <remarks>用于程序集扫描类型或方法时候</remarks>
+        </member>
+        <member name="T:Fast.NET.Debugging">
+            <summary>
+            <see cref="T:Fast.NET.Debugging"/> 向事件管理器中输出事件信息
+            </summary>
+        </member>
+        <member name="M:Fast.NET.Debugging.WriteLine(System.Int32,System.String)">
+            <summary>
+            输出一行事件信息
+            </summary>
+            <param name="level">
+            <para>信息级别</para>
+            <list type="number">
+            <item>
+            <description>跟踪</description>
+            </item>
+            <item>
+            <description>信息</description>
+            </item>
+            <item>
+            <description>警告</description>
+            </item>
+            <item>
+            <description>错误</description>
+            </item>
+            <item>
+            <description>文件</description>
+            </item>
+            <item>
+            <description>提示</description>
+            </item>
+            <item>
+            <description>搜索</description>
+            </item>
+            <item>
+            <description>时钟</description>
+            </item>
+            </list>
+            </param>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.WriteLine(System.Int32,System.String,System.Object[])">
+            <summary>
+            输出一行事件信息
+            </summary>
+            <param name="level">
+            <para>信息级别</para>
+            <list type="number">
+            <item>
+            <description>跟踪</description>
+            </item>
+            <item>
+            <description>信息</description>
+            </item>
+            <item>
+            <description>警告</description>
+            </item>
+            <item>
+            <description>错误</description>
+            </item>
+            <item>
+            <description>文件</description>
+            </item>
+            <item>
+            <description>提示</description>
+            </item>
+            <item>
+            <description>搜索</description>
+            </item>
+            <item>
+            <description>时钟</description>
+            </item>
+            </list>
+            </param>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Trace(System.String)">
+            <summary>
+            输出跟踪级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Trace(System.String,System.Object[])">
+            <summary>
+            输出跟踪级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Info(System.String)">
+            <summary>
+            输出信息级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Info(System.String,System.Object[])">
+            <summary>
+            输出信息级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Warn(System.String)">
+            <summary>
+            输出警告级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Warn(System.String,System.Object[])">
+            <summary>
+            输出警告级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Error(System.String)">
+            <summary>
+            输出错误级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Error(System.String,System.Object[])">
+            <summary>
+            输出错误级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.File(System.String)">
+            <summary>
+            输出文件级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.File(System.String,System.Object[])">
+            <summary>
+            输出文件级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Tip(System.String)">
+            <summary>
+            输出提示级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Tip(System.String,System.Object[])">
+            <summary>
+            输出提示级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Search(System.String)">
+            <summary>
+            输出搜索级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Search(System.String,System.Object[])">
+            <summary>
+            输出搜索级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Clock(System.String)">
+            <summary>
+            输出时钟级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.Clock(System.String,System.Object[])">
+            <summary>
+            输出时钟级别事件信息
+            </summary>
+            <param name="message">事件信息</param>
+            <param name="args">格式化参数</param>
+        </member>
+        <member name="M:Fast.NET.Debugging.GetLevelEmoji(System.Int32)">
+            <summary>
+            获取信息级别对应的 emoji
+            </summary>
+            <param name="level">
+            <para>信息级别</para>
+            <list type="number">
+            <item>
+            <description>跟踪</description>
+            </item>
+            <item>
+            <description>信息</description>
+            </item>
+            <item>
+            <description>警告</description>
+            </item>
+            <item>
+            <description>错误</description>
+            </item>
+            <item>
+            <description>文件</description>
+            </item>
+            <item>
+            <description>提示</description>
+            </item>
+            <item>
+            <description>搜索</description>
+            </item>
+            <item>
+            <description>时钟</description>
+            </item>
+            </list>
+            </param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
         <member name="T:Fast.EventBus.EventSubscribeAttribute">
             <summary>
             事件处理程序特性
