@@ -56,8 +56,7 @@ internal static class InternalMethodInfoExtension
     /// <param name="method"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
-    internal static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit)
-        where TAttribute : Attribute
+    internal static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit) where TAttribute : Attribute
     {
         // 获取方法所在类型
         var declaringType = method.DeclaringType;

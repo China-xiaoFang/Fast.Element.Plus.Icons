@@ -17,33 +17,37 @@
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="ExceptionMetadata"/> 异常元数据
+/// <see cref="DateTimeOffset"/> DateTimeOffset 拓展类
 /// </summary>
-[SuppressSniffer]
-public sealed class ExceptionMetadata
+internal static class DateTimeOffsetExtension
 {
     /// <summary>
-    /// 状态码
+    /// 将 DateTimeOffset 转换成本地 DateTime
     /// </summary>
-    public int StatusCode { get; internal set; }
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    internal static DateTime ConvertToDateTime(this DateTimeOffset dateTime)
+    {
+        if (dateTime.Offset.Equals(TimeSpan.Zero))
+        {
+            return dateTime.UtcDateTime;
+        }
+
+        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
+        {
+            return dateTime.ToLocalTime().DateTime;
+        }
+
+        return dateTime.DateTime;
+    }
 
     /// <summary>
-    /// 错误码
+    /// 将 DateTimeOffset? 转换成本地 DateTime?
     /// </summary>
-    public object ErrorCode { get; internal set; }
-
-    /// <summary>
-    /// 错误码（没被复写过的 ErrorCode ）
-    /// </summary>
-    public object OriginErrorCode { get; internal set; }
-
-    /// <summary>
-    /// 错误对象（信息）
-    /// </summary>
-    public object Errors { get; internal set; }
-
-    /// <summary>
-    /// 额外数据
-    /// </summary>
-    public object Data { get; internal set; }
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    internal static DateTime? ConvertToDateTime(this DateTimeOffset? dateTime)
+    {
+        return dateTime?.ConvertToDateTime();
+    }
 }
