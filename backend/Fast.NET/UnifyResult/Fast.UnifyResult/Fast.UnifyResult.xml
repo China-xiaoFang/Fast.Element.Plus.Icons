@@ -406,6 +406,25 @@
             额外数据
             </summary>
         </member>
+        <member name="T:Fast.NET.DateTimeOffsetExtension">
+            <summary>
+            <see cref="T:System.DateTimeOffset"/> DateTimeOffset 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.DateTimeOffsetExtension.ConvertToDateTime(System.DateTimeOffset)">
+            <summary>
+            将 DateTimeOffset 转换成本地 DateTime
+            </summary>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
+            <returns><see cref="T:System.DateTime"/></returns>
+        </member>
+        <member name="M:Fast.NET.DateTimeOffsetExtension.ConvertToDateTime(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            将 DateTimeOffset? 转换成本地 DateTime?
+            </summary>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
+            <returns><see cref="T:System.DateTime"/></returns>
+        </member>
         <member name="T:Fast.NET.InternalHttpContextExtension">
             <summary>
             <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部 HttpContext 拓展类
@@ -733,22 +752,22 @@
             <param name="next"></param>
             <returns></returns>
         </member>
-        <member name="T:Fast.UnifyResult.Internal.UnifyMetadata">
+        <member name="T:Fast.UnifyResult.Metadatas.UnifyMetadata">
             <summary>
-            <see cref="T:Fast.UnifyResult.Internal.UnifyMetadata"/> 规范化元数据
+            <see cref="T:Fast.UnifyResult.Metadatas.UnifyMetadata"/> 规范化元数据
             </summary>
         </member>
-        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ProviderName">
+        <member name="P:Fast.UnifyResult.Metadatas.UnifyMetadata.ProviderName">
             <summary>
             提供器名称
             </summary>
         </member>
-        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ProviderType">
+        <member name="P:Fast.UnifyResult.Metadatas.UnifyMetadata.ProviderType">
             <summary>
             提供器类型
             </summary>
         </member>
-        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ResultType">
+        <member name="P:Fast.UnifyResult.Metadatas.UnifyMetadata.ResultType">
             <summary>
             统一的结果类型
             </summary>
