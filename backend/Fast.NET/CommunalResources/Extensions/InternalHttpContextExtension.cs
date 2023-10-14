@@ -12,15 +12,34 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Microsoft.AspNetCore.Http;
+
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="SuppressSnifferAttribute"/> 不被扫描和发现的特性
+/// <see cref="HttpContext"/> 内部 HttpContext 拓展类
 /// </summary>
-/// <remarks>用于程序集扫描类型或方法时候</remarks>
-[SuppressSniffer,
- AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct)]
-public class SuppressSnifferAttribute : Attribute
+internal static class InternalHttpContextExtension
 {
+    /// <summary>
+    /// 判断是否是 WebSocket 请求
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns><see cref="bool"/></returns>
+    internal static bool IsWebSocketRequest(this HttpContext httpContext)
+    {
+        return httpContext.WebSockets.IsWebSocketRequest || httpContext.Request.Path == "/ws";
+    }
+
+    /// <summary>
+    /// 获取 Action 特性
+    /// </summary>
+    /// <typeparam name="TAttribute"></typeparam>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns><see cref="TAttribute"/></returns>
+    internal static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
+    {
+        return httpContext.GetEndpoint()?.Metadata?.GetMetadata<TAttribute>();
+    }
 }

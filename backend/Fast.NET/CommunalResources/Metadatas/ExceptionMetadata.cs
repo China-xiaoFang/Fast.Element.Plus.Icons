@@ -16,11 +16,33 @@
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="SuppressSnifferAttribute"/> 不被扫描和发现的特性
+/// <see cref="ExceptionMetadata"/> 异常元数据
 /// </summary>
-/// <remarks>用于程序集扫描类型或方法时候</remarks>
-[SuppressSniffer,
- AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct)]
-public class SuppressSnifferAttribute : Attribute
+[SuppressSniffer]
+public sealed class ExceptionMetadata
 {
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    public int StatusCode { get; internal set; }
+
+    /// <summary>
+    /// 错误码
+    /// </summary>
+    public object ErrorCode { get; internal set; }
+
+    /// <summary>
+    /// 错误码（没被复写过的 ErrorCode ）
+    /// </summary>
+    public object OriginErrorCode { get; internal set; }
+
+    /// <summary>
+    /// 错误对象（信息）
+    /// </summary>
+    public object Errors { get; internal set; }
+
+    /// <summary>
+    /// 额外数据
+    /// </summary>
+    public object Data { get; internal set; }
 }

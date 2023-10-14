@@ -12,54 +12,39 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-#nullable enable
-
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="FastEnumAttribute"/> 枚举特性
+/// <see cref="Type"/> 内部 Type 拓展类
 /// </summary>
-/// <remarks>用于区分是否可以写入枚举字典的特性</remarks>
-[AttributeUsage(AttributeTargets.Enum)]
-public class FastEnumAttribute : Attribute
+internal static class InternalTypeInfoExtension
 {
     /// <summary>
-    /// 中文名称
+    /// 判断类型是否实现某个泛型
     /// </summary>
-    public string? ChName { get; set; }
-
-    /// <summary>
-    /// 英文名称
-    /// </summary>
-    public string? EnName { get; set; }
-
-    /// <summary>
-    /// 备注
-    /// </summary>
-    public string? Remark { get; set; }
-
-    public FastEnumAttribute()
+    /// <param name="type"><see cref="Type"/> 类型</param>
+    /// <param name="generic"><see cref="Type"/>泛型类型</param>
+    /// <returns>bool</returns>
+    internal static bool HasImplementedRawGeneric(this Type type, Type generic)
     {
-    }
+        // 检查接口类型
+        var isTheRawGenericType = type.GetInterfaces().Any(IsTheRawGenericType);
+        if (isTheRawGenericType)
+            return true;
 
-    public FastEnumAttribute(string? chName, string? enName, string? remark)
-    {
-        ChName = chName;
-        EnName = enName;
-        Remark = remark;
-    }
+        // 检查类型
+        while (type != null && type != typeof(object))
+        {
+            isTheRawGenericType = IsTheRawGenericType(type);
+            if (isTheRawGenericType)
+                return true;
+            type = type.BaseType;
+        }
 
-    public FastEnumAttribute(string? chName, string? enName)
-    {
-        ChName = chName;
-        EnName = enName;
-        Remark = chName;
-    }
+        return false;
 
-    public FastEnumAttribute(string? chName)
-    {
-        ChName = chName;
-        Remark = chName;
+        // 判断逻辑
+        bool IsTheRawGenericType(Type t) => generic == (t.IsGenericType ? t.GetGenericTypeDefinition() : t);
     }
 }
