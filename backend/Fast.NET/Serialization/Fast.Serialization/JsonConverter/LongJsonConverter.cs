@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
-/// Long 类型Json返回处理
+/// <see cref="LongJsonConverter"/> Long 类型Json返回处理
 /// </summary>
 public class LongJsonConverter : JsonConverter<long>
 {
@@ -44,7 +44,7 @@ public class LongJsonConverter : JsonConverter<long>
 }
 
 /// <summary>
-/// Long? 类型Json返回处理
+/// <see cref="NullableLongJsonConverter"/> Long? 类型Json返回处理
 /// </summary>
 public class NullableLongJsonConverter : JsonConverter<long?>
 {

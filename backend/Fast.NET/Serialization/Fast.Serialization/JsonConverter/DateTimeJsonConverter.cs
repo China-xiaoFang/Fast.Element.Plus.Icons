@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
-/// DateTime 类型序列化
+/// <see cref="DateTimeJsonConverter"/> DateTime 类型Json返回处理
 /// </summary>
 public class DateTimeJsonConverter : JsonConverter<DateTime>
 {
@@ -59,7 +59,7 @@ public class DateTimeJsonConverter : JsonConverter<DateTime>
 }
 
 /// <summary>
-/// DateTime? 类型序列化
+/// <see cref="NullableDateTimeJsonConverter"/> DateTime? 类型Json返回处理
 /// </summary>
 public class NullableDateTimeJsonConverter : JsonConverter<DateTime?>
 {

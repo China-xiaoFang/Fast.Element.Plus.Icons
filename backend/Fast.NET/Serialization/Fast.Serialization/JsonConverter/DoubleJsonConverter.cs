@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
-/// double 类型Json返回处理
+/// <see cref="DoubleJsonConverter"/> double 类型Json返回处理
 /// </summary>
 public class DoubleJsonConverter : JsonConverter<double>
 {
@@ -59,7 +59,7 @@ public class DoubleJsonConverter : JsonConverter<double>
 }
 
 /// <summary>
-/// double? 类型Json返回处理
+/// <see cref="NullableDoubleJsonConverter"/> double? 类型Json返回处理
 /// </summary>
 public class NullableDoubleJsonConverter : JsonConverter<double?>
 {

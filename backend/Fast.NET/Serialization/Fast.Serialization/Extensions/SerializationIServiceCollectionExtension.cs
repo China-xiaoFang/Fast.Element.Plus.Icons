@@ -29,17 +29,19 @@ public static class SerializationIServiceCollectionExtension
     /// <summary>
     /// 添加JSON序列化配置
     /// </summary>
-    /// <param name="services"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddJsonOptions(this IServiceCollection services)
+    /// <param name="services"><see cref="IServiceCollection"/></param>
+    /// <param name="dateTimeFormat"><see cref="string"/> DateTime 和 DateTimeOffset 格式化字符串，默认 "yyyy-MM-dd HH:mm:ss"</param>
+    /// <returns><see cref="IServiceCollection"/></returns>
+    public static IServiceCollection AddJsonOptions(this IServiceCollection services,
+        string dateTimeFormat = "yyyy-MM-dd HH:mm:ss")
     {
         services.Configure<JsonOptions>(options =>
         {
-            options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
-            options.JsonSerializerOptions.Converters.Add(new NullableDateTimeJsonConverter());
-            options.JsonSerializerOptions.Converters.Add(new DateTimeOffsetJsonConverter());
-            options.JsonSerializerOptions.Converters.Add(new NullableDateTimeOffsetJsonConverter());
-            // Configuring too long integer types to return to the front end can cause a loss of precision.
+            options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter(dateTimeFormat));
+            options.JsonSerializerOptions.Converters.Add(new NullableDateTimeJsonConverter(dateTimeFormat));
+            options.JsonSerializerOptions.Converters.Add(new DateTimeOffsetJsonConverter(dateTimeFormat));
+            options.JsonSerializerOptions.Converters.Add(new NullableDateTimeOffsetJsonConverter(dateTimeFormat));
+            // 解决 long 类型返回前端可能会导致精度丢失的问题
             options.JsonSerializerOptions.Converters.Add(new LongJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new NullableLongJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new IntJsonConverter());
@@ -48,9 +50,9 @@ public static class SerializationIServiceCollectionExtension
             options.JsonSerializerOptions.Converters.Add(new NullableDecimalJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new DoubleJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new NullableDoubleJsonConverter());
-            // Ignore circular references only .NET 6 support.
+            // 忽略只有在 .NET 6 才会存在的循环引用问题
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-            // JSON garbled code problem.
+            // 解决 JSON 乱码问题
             options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
         });
 

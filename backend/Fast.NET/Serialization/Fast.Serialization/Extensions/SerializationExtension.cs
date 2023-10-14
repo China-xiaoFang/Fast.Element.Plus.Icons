@@ -12,12 +12,13 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Collections;
 using System.Text.Json;
 
 namespace Fast.Serialization.Extensions;
 
 /// <summary>
-/// Json 扩展
+/// <see cref="SerializationExtension"/> 序列化拓展类
 /// </summary>
 public static class SerializationExtension
 {
@@ -25,8 +26,8 @@ public static class SerializationExtension
     /// JSON 字符串转 Object
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="json"></param>
-    /// <returns></returns>
+    /// <param name="json"><see cref="string"/> 需要序列化的 JSON 字符串</param>
+    /// <returns><see cref="T"/></returns>
     public static T ToObject<T>(this string json)
     {
         json = json.Replace("&nbsp;", "");
@@ -36,9 +37,9 @@ public static class SerializationExtension
     /// <summary>
     /// JSON 字符串转 Object
     /// </summary>
-    /// <param name="json"></param>
-    /// <param name="type"></param>
-    /// <returns></returns>
+    /// <param name="json"><see cref="string"/> 需要序列化的 JSON 字符串</param>
+    /// <param name="type"><see cref="Type"/> 需要序列化成的类型</param>
+    /// <returns><see cref="object"/> 序列化后的对象</returns>
     public static object ToObject(this string json, Type type)
     {
         json = json.Replace("&nbsp;", "");
@@ -48,8 +49,8 @@ public static class SerializationExtension
     /// <summary>
     /// Object 转 JSON字符串
     /// </summary>
-    /// <param name="obj"></param>
-    /// <returns></returns>
+    /// <param name="obj"><see cref="object"/> 需要反序列化的对象</param>
+    /// <returns><see cref="string"/> 反序列化后的 JSON 字符串</returns>
     public static string ToJsonString(this object obj)
     {
         return JsonSerializer.Serialize(obj);
@@ -59,8 +60,8 @@ public static class SerializationExtension
     /// Dictionary 字符串转 Object
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="dictionary"></param>
-    /// <returns></returns>
+    /// <param name="dictionary"><see cref="IDictionary"/> 需要序列化的字典</param>
+    /// <returns><see cref="T"/></returns>
     public static T ToObject<T>(this IDictionary<string, object> dictionary)
     {
         return dictionary.ToJsonString().ToObject<T>();
@@ -69,11 +70,10 @@ public static class SerializationExtension
     /// <summary>
     /// Dictionary 字符串转 Object
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="dictionary"></param>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    public static object ToObject<T>(this IDictionary<string, object> dictionary, Type type)
+    /// <param name="dictionary"><see cref="IDictionary"/> 需要序列化的字典</param>
+    /// <param name="type"><see cref="Type"/> 需要序列化成的类型</param>
+    /// <returns><see cref="object"/> 序列化后的对象</returns>
+    public static object ToObject(this IDictionary<string, object> dictionary, Type type)
     {
         return dictionary.ToJsonString().ToObject(type);
     }
@@ -81,9 +81,10 @@ public static class SerializationExtension
     /// <summary>
     /// 深度拷贝
     /// </summary>
+    /// <remarks>此方法是通过将对象序列化成 JSON 字符串，再将 JSON 字符串反序列化成对象，所以性能不是很高，如果介意，请慎用</remarks>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source"></param>
-    /// <returns></returns>
+    /// <param name="source"><see cref="T"/> 需要拷贝的对象</param>
+    /// <returns><see cref="T"/></returns>
     public static T DeepCopy<T>(this T source)
     {
         return ReferenceEquals(source, null) ? default : JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(source));

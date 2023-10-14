@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
-/// int 类型Json返回处理
+/// <see cref="IntJsonConverter"/> int 类型Json返回处理
 /// </summary>
 public class IntJsonConverter : JsonConverter<int>
 {
@@ -44,7 +44,7 @@ public class IntJsonConverter : JsonConverter<int>
 }
 
 /// <summary>
-/// int? 类型Json返回处理
+/// <see cref="NullableIntJsonConverter"/> int? 类型Json返回处理
 /// </summary>
 public class NullableIntJsonConverter : JsonConverter<int?>
 {

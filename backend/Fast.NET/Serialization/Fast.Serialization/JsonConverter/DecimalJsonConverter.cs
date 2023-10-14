@@ -18,7 +18,7 @@ using System.Text.Json.Serialization;
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
-/// decimal 类型Json返回处理
+/// <see cref="DecimalJsonConverter"/> decimal 类型Json返回处理
 /// </summary>
 public class DecimalJsonConverter : JsonConverter<decimal>
 {
@@ -59,7 +59,7 @@ public class DecimalJsonConverter : JsonConverter<decimal>
 }
 
 /// <summary>
-/// decimal? 类型Json返回处理
+/// <see cref="NullableDecimalJsonConverter"/> decimal? 类型Json返回处理
 /// </summary>
 public class NullableDecimalJsonConverter : JsonConverter<decimal?>
 {

@@ -14,38 +14,12 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Fast.NET;
 
 namespace Fast.Serialization.JsonConverter;
 
-internal static class DateTimeOffsetExtension
-{
-    /// <summary>
-    /// 将 DateTimeOffset 转换成本地 DateTime
-    /// </summary>
-    /// <param name="dateTime"></param>
-    /// <returns></returns>
-    public static DateTime ConvertToDateTime(this DateTimeOffset dateTime)
-    {
-        if (dateTime.Offset.Equals(TimeSpan.Zero))
-            return dateTime.UtcDateTime;
-        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
-            return dateTime.ToLocalTime().DateTime;
-        return dateTime.DateTime;
-    }
-
-    /// <summary>
-    /// 将 DateTimeOffset? 转换成本地 DateTime?
-    /// </summary>
-    /// <param name="dateTime"></param>
-    /// <returns></returns>
-    public static DateTime? ConvertToDateTime(this DateTimeOffset? dateTime)
-    {
-        return dateTime.HasValue ? dateTime.Value.ConvertToDateTime() : null;
-    }
-}
-
 /// <summary>
-/// DateTimeOffset 序列化处理
+/// <see cref="DateTimeOffsetJsonConverter"/> DateTimeOffset 类型Json返回处理
 /// </summary>
 public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 {
@@ -104,7 +78,7 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 }
 
 /// <summary>
-/// DateTimeOffset? 序列化处理
+/// <see cref="NullableDateTimeOffsetJsonConverter"/> DateTimeOffset? 类型Json返回处理
 /// </summary>
 public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?>
 {
