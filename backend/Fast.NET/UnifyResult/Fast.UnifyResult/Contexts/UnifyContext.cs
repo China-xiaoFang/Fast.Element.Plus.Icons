@@ -16,7 +16,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using Fast.NET;
 using Fast.UnifyResult.Attributes;
-using Fast.UnifyResult.Internal;
+using Fast.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
