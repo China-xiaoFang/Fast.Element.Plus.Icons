@@ -14,20 +14,40 @@
 
 // ReSharper disable once CheckNamespace
 
-namespace Fast.IaaS;
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="GlobalConstant"/> 常用常量
+/// <see cref="Convert"/> 内部转换拓展类
 /// </summary>
-public class GlobalConstant
+internal static class InternalConvertExtension
 {
     /// <summary>
-    /// 默认DateTime
+    /// 将 DateTimeOffset 转换成本地 DateTime
     /// </summary>
-    public static DateTime DefaultTime => TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    internal static DateTime ParseToDateTime(this DateTimeOffset dateTime)
+    {
+        if (dateTime.Offset.Equals(TimeSpan.Zero))
+        {
+            return dateTime.UtcDateTime;
+        }
+
+        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
+        {
+            return dateTime.ToLocalTime().DateTime;
+        }
+
+        return dateTime.DateTime;
+    }
 
     /// <summary>
-    /// 时间戳
+    /// 将 DateTimeOffset? 转换成本地 DateTime?
     /// </summary>
-    public static long TimeStamp => Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
+    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    internal static DateTime? ParseToDateTime(this DateTimeOffset? dateTime)
+    {
+        return dateTime?.ParseToDateTime();
+    }
 }

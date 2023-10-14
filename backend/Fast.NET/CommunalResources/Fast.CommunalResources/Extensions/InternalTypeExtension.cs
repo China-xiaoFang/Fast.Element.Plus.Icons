@@ -17,16 +17,16 @@
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="Type"/> 内部 Type 拓展类
+/// <see cref="Type"/> 内部拓展类
 /// </summary>
-internal static class InternalTypeInfoExtension
+internal static class InternalTypeExtension
 {
     /// <summary>
     /// 判断类型是否实现某个泛型
     /// </summary>
     /// <param name="type"><see cref="Type"/> 类型</param>
     /// <param name="generic"><see cref="Type"/>泛型类型</param>
-    /// <returns>bool</returns>
+    /// <returns><see cref="bool"/></returns>
     internal static bool HasImplementedRawGeneric(this Type type, Type generic)
     {
         // 检查接口类型

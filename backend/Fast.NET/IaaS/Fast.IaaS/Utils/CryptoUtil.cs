@@ -18,7 +18,7 @@ using System.Text;
 namespace Fast.IaaS.Utils;
 
 /// <summary>
-/// 加密解密工具类
+/// <see cref="CryptoUtil"/> 加密解密工具类
 /// </summary>
 public static class CryptoUtil
 {
@@ -157,28 +157,6 @@ public static class CryptoUtil
     #endregion
 
     #region SHA1
-
-    /// <summary>
-    /// 得到文件SHA1
-    /// </summary>
-    /// <param name="filePath"><see cref="string"/>文件路径</param>
-    /// <returns><see cref="string"/></returns>
-    public static string GetFileSHA1(string filePath)
-    {
-        var strResult = "";
-        var strHashData = "";
-        FileStream oFileStream = null;
-        var osha1 = SHA1.Create();
-        oFileStream = new FileStream(filePath.Replace("\"", ""), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        var arrBytHashValue = osha1.ComputeHash(oFileStream);
-        oFileStream.Close();
-        //由以连字符分隔的十六进制对构成的String，其中每一对表示value 中对应的元素；例如“F-2C-4A”
-        strHashData = BitConverter.ToString(arrBytHashValue);
-        //替换-
-        strHashData = strHashData.Replace("-", "");
-        strResult = strHashData.ToLower();
-        return strResult;
-    }
 
     /// <summary>
     /// SHA1加密

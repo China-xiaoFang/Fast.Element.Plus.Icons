@@ -17,15 +17,15 @@ using System.Security.Cryptography;
 namespace Fast.IaaS.Utils;
 
 /// <summary>
-/// 文件工具类
+/// <see cref="FileUtil"/> 文件工具类
 /// </summary>
 public static class FileUtil
 {
     /// <summary>
     /// 获取文件的 SHA1 哈希值。
     /// </summary>
-    /// <param name="filePath">文件的完整路径。</param>
-    /// <returns>由小写字母组成的 SHA1 哈希值字符串。</returns>
+    /// <param name="filePath"><see cref="string"/> 文件的完整路径。</param>
+    /// <returns><see cref="string"/> 由小写字母组成的 SHA1 哈希值字符串。</returns>
     public static string GetFileSHA1(string filePath)
     {
         var strResult = "";
@@ -51,5 +51,36 @@ public static class FileUtil
         // 转换为小写字母形式，作为最终的哈希值结果
         strResult = strHashData.ToLower();
         return strResult;
+    }
+
+    /// <summary>
+    /// 复制文件
+    /// </summary>
+    /// <param name="fromPath"><see cref="string"/>来源文件路径</param>
+    /// <param name="toPath"><see cref="string"/>复制的文件路径</param>
+    public static void CopyFile(string fromPath, string toPath)
+    {
+        if (!File.Exists(fromPath))
+        {
+            throw new FileNotFoundException("源文件不存在！");
+        }
+
+        // 创建目标文件夹（如果不存在）
+        var destinationDirectory = Path.GetDirectoryName(toPath);
+        Directory.CreateDirectory(destinationDirectory);
+
+        // 复制文件
+        File.Copy(fromPath, toPath, true);
+    }
+
+    /// <summary>
+    /// 尝试创建文件夹
+    /// </summary>
+    /// <param name="path"><see cref="string"/>路径</param>
+    public static void TryCreateDirectory(string path)
+    {
+        // 创建目标文件夹（如果不存在）
+        var destinationDirectory = Path.GetDirectoryName(path);
+        Directory.CreateDirectory(destinationDirectory);
     }
 }

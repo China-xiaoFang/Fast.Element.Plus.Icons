@@ -19,7 +19,7 @@ using System.Runtime.CompilerServices;
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="MethodInfo"/> 内部 MethodInfo 拓展类
+/// <see cref="MethodInfo"/> 内部拓展类
 /// </summary>
 internal static class InternalMethodInfoExtension
 {

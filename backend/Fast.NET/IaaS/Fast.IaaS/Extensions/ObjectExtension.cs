@@ -15,7 +15,6 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Fast.IaaS.Extensions;
 
@@ -157,106 +156,6 @@ public static class ObjectExtension
 
         count = -1;
         return false;
-    }
-
-    /// <summary>
-    /// 判断是否是富基元类型
-    /// </summary>
-    /// <param name="type"><see cref="Type"/></param>
-    /// <returns><see cref="bool"/></returns>
-    public static bool IsRichPrimitive(this Type type)
-    {
-        // 处理元组类型
-        if (type.IsValueTuple())
-            return false;
-
-        // 处理数组类型，基元数组类型也可以是基元类型
-        if (type.IsArray)
-            return type.GetElementType().IsRichPrimitive();
-
-        // 基元类型或值类型或字符串类型
-        if (type.IsPrimitive || type.IsValueType || type == typeof(string))
-            return true;
-
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            return type.GenericTypeArguments[0].IsRichPrimitive();
-
-        return false;
-    }
-
-    /// <summary>
-    /// 判断是否是元组类型
-    /// </summary>
-    /// <param name="type"><see cref="Type"/></param>
-    /// <returns><see cref="bool"/></returns>
-    public static bool IsValueTuple(this Type type)
-    {
-        return type.Namespace == "System" && type.Name.Contains("ValueTuple`");
-    }
-
-    /// <summary>
-    /// 获取字段特性
-    /// </summary>
-    /// <param name="field"><see cref="FieldInfo"/></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetDescriptionValue<T>(this FieldInfo field) where T : Attribute
-    {
-        // 获取字段的指定特性，不包含继承中的特性
-        var customAttributes = field.GetCustomAttributes(typeof(T), false);
-
-        // 如果没有数据返回null
-        return customAttributes.Length > 0 ? (T) customAttributes[0] : null;
-    }
-
-    /// <summary>
-    /// 判断方法是否是异步
-    /// </summary>
-    /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <returns><see cref="bool"/></returns>
-    public static bool IsAsync(this MethodInfo method)
-    {
-        return method.GetCustomAttribute<AsyncMethodBuilderAttribute>() != null ||
-               method.ReturnType.ToString().StartsWith(typeof(Task).FullName);
-    }
-
-    /// <summary>
-    /// 获取方法真实返回类型
-    /// </summary>
-    /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <returns><see cref="Type"/></returns>
-    public static Type GetRealReturnType(this MethodInfo method)
-    {
-        // 判断是否是异步方法
-        var isAsyncMethod = method.IsAsync();
-
-        // 获取类型返回值并处理 Task 和 Task<T> 类型返回值
-        var returnType = method.ReturnType;
-        return isAsyncMethod ? (returnType.GenericTypeArguments.FirstOrDefault() ?? typeof(void)) : returnType;
-    }
-
-    /// <summary>
-    /// 查找方法指定特性，如果没找到则继续查找声明类
-    /// </summary>
-    /// <typeparam name="TAttribute"></typeparam>
-    /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <param name="inherit"></param>
-    /// <returns></returns>
-    public static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit) where TAttribute : Attribute
-    {
-        // 获取方法所在类型
-        var declaringType = method.DeclaringType;
-
-        var attributeType = typeof(TAttribute);
-
-        // 判断方法是否定义指定特性，如果没有再查找声明类
-        var foundAttribute = method.IsDefined(attributeType, inherit)
-            ? method.GetCustomAttribute<TAttribute>(inherit)
-            : (declaringType != null && declaringType.IsDefined(attributeType, inherit)
-                ? declaringType.GetCustomAttribute<TAttribute>(inherit)
-                : default);
-
-        return foundAttribute;
     }
 
     /// <summary>

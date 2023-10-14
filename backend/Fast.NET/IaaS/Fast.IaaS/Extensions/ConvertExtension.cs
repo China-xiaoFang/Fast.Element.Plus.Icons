@@ -14,6 +14,7 @@
 
 using System.Collections;
 using System.Globalization;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
@@ -603,11 +604,7 @@ public static class ConvertExtension
     /// <returns></returns>
     public static DateTime ParseToDateTime(this DateTimeOffset dateTime)
     {
-        if (dateTime.Offset.Equals(TimeSpan.Zero))
-            return dateTime.UtcDateTime;
-        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
-            return dateTime.ToLocalTime().DateTime;
-        return dateTime.DateTime;
+        return InternalConvertExtension.ParseToDateTime(dateTime);
     }
 
     /// <summary>
@@ -617,7 +614,7 @@ public static class ConvertExtension
     /// <returns></returns>
     public static DateTime? ParseToDateTime(this DateTimeOffset? dateTime)
     {
-        return dateTime?.ParseToDateTime();
+        return InternalConvertExtension.ParseToDateTime(dateTime);
     }
 
     /// <summary>
@@ -638,6 +635,84 @@ public static class ConvertExtension
     public static DateTimeOffset? ParseToDateTimeOffset(this DateTime? dateTime)
     {
         return dateTime?.ParseToDateTimeOffset();
+    }
+
+    /// <summary>
+    /// 将毫秒时间戳转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
+    /// </summary>
+    /// <param name="timeStamps"><see cref="long"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    public static DateTime ParseToDateTime_Milliseconds(this long timeStamps)
+    {
+        try
+        {
+            // 当地时区
+            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+        }
+        catch
+        {
+            return DateTime.MinValue;
+        }
+    }
+
+    /// <summary>
+    /// 将毫秒时间戳转换为DateTime，若转换失败，则返回默认值。
+    /// </summary>
+    /// <param name="timeStamps"><see cref="long"/></param>
+    /// <param name="defaultValue"></param>
+    /// <returns><see cref="DateTime"/></returns>
+    public static DateTime ParseToDateTime_Milliseconds(this long timeStamps, DateTime? defaultValue)
+    {
+        try
+        {
+            // 当地时区
+            return timeStamps == 0
+                ? defaultValue.GetValueOrDefault()
+                : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+        }
+        catch
+        {
+            return defaultValue.GetValueOrDefault();
+        }
+    }
+
+    /// <summary>
+    /// 将秒时间戳转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
+    /// </summary>
+    /// <param name="timeStamps"><see cref="long"/></param>
+    /// <returns><see cref="DateTime"/></returns>
+    public static DateTime ParseToDateTime_Seconds(this long timeStamps)
+    {
+        try
+        {
+            // 当地时区
+            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+        }
+        catch
+        {
+            return DateTime.MinValue;
+        }
+    }
+
+    /// <summary>
+    /// 将秒时间戳转换为DateTime，若转换失败，则返回默认值。
+    /// </summary>
+    /// <param name="timeStamps"><see cref="long"/></param>
+    /// <param name="defaultValue"></param>
+    /// <returns><see cref="DateTime"/></returns>
+    public static DateTime ParseToDateTime_Seconds(this long timeStamps, DateTime? defaultValue)
+    {
+        try
+        {
+            // 当地时区
+            return timeStamps == 0
+                ? defaultValue.GetValueOrDefault()
+                : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+        }
+        catch
+        {
+            return defaultValue.GetValueOrDefault();
+        }
     }
 
     #endregion

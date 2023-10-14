@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Http;
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="HttpContext"/> 内部 HttpContext 拓展类
+/// <see cref="HttpContext"/> 内部拓展类
 /// </summary>
 internal static class InternalHttpContextExtension
 {

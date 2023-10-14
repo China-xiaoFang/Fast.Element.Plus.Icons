@@ -15,19 +15,22 @@
 namespace Fast.IaaS.Utils;
 
 /// <summary>
-/// Guid 工具类
+/// <see cref="GuidUtil"/> Guid 工具类
 /// </summary>
 public static class GuidUtil
 {
     /// <summary>
     /// 生成一个Guid
-    /// N ece4f4a60b764339b94a07c84e338a27
-    /// D 5bf99df1-dc49-4023-a34a-7bd80a42d6bb
-    /// B {2280f8d7-fd18-4c72-a9ab-405de3fcfbc9}
-    /// P (25e6e09f-fb66-4cab-b4cd-bfb429566549)
+    /// <remarks>
+    /// <para>只支持 N D B P</para>
+    /// <para>N ece4f4a60b764339b94a07c84e338a27</para>
+    /// <para>D 5bf99df1-dc49-4023-a34a-7bd80a42d6bb</para>
+    /// <para>B 2280f8d7-fd18-4c72-a9ab-405de3fcfbc9</para>
+    /// <para>P 25e6e09f-fb66-4cab-b4cd-bfb429566549</para>
+    /// </remarks>
     /// </summary>
-    /// <param name="format"></param>
-    /// <returns></returns>
+    /// <param name="format"><see cref="string"/>格式化方式</param>
+    /// <returns><see cref="string"/></returns>
     public static string GetGuid(string format = "N")
     {
         return Guid.NewGuid().ToString(format);
@@ -36,7 +39,7 @@ public static class GuidUtil
     /// <summary>
     /// 生成一个短的Guid
     /// </summary>
-    /// <returns></returns>
+    /// <returns><see cref="string"/></returns>
     public static string GetShortGuid()
     {
         var i = Guid.NewGuid().ToByteArray().Aggregate<byte, long>(1, (current, b) => current * (b + 1));

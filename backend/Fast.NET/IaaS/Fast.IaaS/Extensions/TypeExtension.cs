@@ -12,6 +12,8 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+#nullable enable
+using Fast.NET;
 using System.Collections;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -24,6 +26,52 @@ namespace Fast.IaaS.Extensions;
 /// </summary>
 public static class TypeExtension
 {
+    /// <summary>
+    /// 判断类型是否实现某个泛型
+    /// </summary>
+    /// <param name="type"><see cref="Type"/> 类型</param>
+    /// <param name="generic"><see cref="Type"/>泛型类型</param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool HasImplementedRawGeneric(this Type type, Type generic)
+    {
+        return InternalTypeExtension.HasImplementedRawGeneric(type, generic);
+    }
+
+    /// <summary>
+    /// 判断是否是富基元类型
+    /// </summary>
+    /// <param name="type"><see cref="Type"/></param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsRichPrimitive(this Type type)
+    {
+        // 处理元组类型
+        if (type.IsValueTuple())
+            return false;
+
+        // 处理数组类型，基元数组类型也可以是基元类型
+        if (type.IsArray)
+            return type.GetElementType()?.IsRichPrimitive() == true;
+
+        // 基元类型或值类型或字符串类型
+        if (type.IsPrimitive || type.IsValueType || type == typeof(string))
+            return true;
+
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            return type.GenericTypeArguments[0].IsRichPrimitive();
+
+        return false;
+    }
+
+    /// <summary>
+    /// 判断是否是元组类型
+    /// </summary>
+    /// <param name="type"><see cref="Type"/></param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsValueTuple(this Type type)
+    {
+        return type.Namespace == "System" && type.Name.Contains("ValueTuple`");
+    }
+
     /// <summary>
     /// 检查类型是否是静态类型
     /// </summary>
@@ -435,7 +483,7 @@ public static class TypeExtension
     /// <param name="type">类类型</param>
     /// <param name="inherit">是否继承查找</param>
     /// <returns>特性对象</returns>
-    public static TAttribute GetTypeAttribute<TAttribute>(this Type type, bool inherit = false) where TAttribute : Attribute
+    public static TAttribute? GetTypeAttribute<TAttribute>(this Type type, bool inherit = false) where TAttribute : Attribute
     {
         // 空检查
         if (type == null)
@@ -445,33 +493,5 @@ public static class TypeExtension
 
         // 检查特性并获取特性对象
         return type.IsDefined(typeof(TAttribute), inherit) ? type.GetCustomAttribute<TAttribute>(inherit) : default;
-    }
-
-    /// <summary>
-    /// 判断类型是否实现某个泛型
-    /// </summary>
-    /// <param name="type">类型</param>
-    /// <param name="generic">泛型类型</param>
-    /// <returns>bool</returns>
-    public static bool HasImplementedRawGeneric(this Type type, Type generic)
-    {
-        // 检查接口类型
-        var isTheRawGenericType = type.GetInterfaces().Any(IsTheRawGenericType);
-        if (isTheRawGenericType)
-            return true;
-
-        // 检查类型
-        while (type != null && type != typeof(object))
-        {
-            isTheRawGenericType = IsTheRawGenericType(type);
-            if (isTheRawGenericType)
-                return true;
-            type = type.BaseType;
-        }
-
-        return false;
-
-        // 判断逻辑
-        bool IsTheRawGenericType(Type type) => generic == (type.IsGenericType ? type.GetGenericTypeDefinition() : type);
     }
 }

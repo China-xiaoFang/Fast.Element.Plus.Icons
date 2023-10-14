@@ -15,6 +15,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Fast.NET;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
@@ -26,6 +27,16 @@ namespace Fast.IaaS.Extensions;
 public static class HttpContextExtension
 {
     /// <summary>
+    /// 判断是否是 WebSocket 请求
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns><see cref="bool"/></returns>
+    public static bool IsWebSocketRequest(this HttpContext httpContext)
+    {
+        return InternalHttpContextExtension.IsWebSocketRequest(httpContext);
+    }
+
+    /// <summary>
     /// 获取 Action 特性
     /// </summary>
     /// <typeparam name="TAttribute"></typeparam>
@@ -33,7 +44,7 @@ public static class HttpContextExtension
     /// <returns><see cref="TAttribute"/></returns>
     public static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
     {
-        return httpContext.GetEndpoint()?.Metadata?.GetMetadata<TAttribute>();
+        return InternalHttpContextExtension.GetMetadata<TAttribute>(httpContext);
     }
 
     /// <summary>
@@ -83,28 +94,18 @@ public static class HttpContextExtension
     /// <summary>
     /// 读取 Body 内容
     /// </summary>
-    /// <param name="request"><see cref="HttpRequest"/></param>
+    /// <param name="httpRequest"><see cref="HttpRequest"/></param>
     /// <remarks>需先在 Startup 的 Configure 中注册 app.EnableBuffering()</remarks>
     /// <returns><see cref="string"/></returns>
-    public static async Task<string> ReadBodyContentAsync(this HttpRequest request)
+    public static async Task<string> ReadBodyContentAsync(this HttpRequest httpRequest)
     {
-        request.Body.Seek(0, SeekOrigin.Begin);
+        httpRequest.Body.Seek(0, SeekOrigin.Begin);
 
-        using var reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, true);
+        using var reader = new StreamReader(httpRequest.Body, Encoding.UTF8, true, 1024, true);
         var body = await reader.ReadToEndAsync();
 
-        request.Body.Seek(0, SeekOrigin.Begin);
+        httpRequest.Body.Seek(0, SeekOrigin.Begin);
         return body;
-    }
-
-    /// <summary>
-    /// 判断是否是 WebSocket 请求
-    /// </summary>
-    /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <returns><see cref="bool"/></returns>
-    public static bool IsWebSocketRequest(this HttpContext httpContext)
-    {
-        return httpContext.WebSockets.IsWebSocketRequest || httpContext.Request.Path == "/ws";
     }
 
     /// <summary>

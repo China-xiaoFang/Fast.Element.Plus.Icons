@@ -13,45 +13,28 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Text;
+using Fast.IaaS.Utils;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
-/// Base64 拓展类
+/// <see cref="Base64Extension"/> Base64 拓展类
 /// </summary>
 public static class Base64Extension
 {
-    // 随机字符长度
+    /// <summary>
+    /// 随机字符长度
+    /// </summary>
     public const int RandomPrefixStrLength = 6;
 
-    public const string RandomStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    public static string GetRandomStr(string randomStr = RandomStr, int randomPrefixStrLength = RandomPrefixStrLength)
-    {
-        // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=
-        var result = "";
-        var random = new Random(Convert.ToInt32($"{DateTime.Now:HHmmssfff}"));
-
-        for (var i = 0; i < randomPrefixStrLength; i++)
-        {
-            var randomInt = random.Next(0, randomStr.Length);
-            var randomChar = randomStr[randomInt];
-            result += randomChar;
-        }
-
-        Thread.Sleep(1); // 休眠,以使随机数不重叠.
-
-        return result;
-    }
-
-    static readonly Encoding encoding = Encoding.UTF8;
+    private static readonly Encoding encoding = Encoding.UTF8;
 
     /// <summary>
-    /// 普通 字符串 转换为 base64 字符串
+    /// 普通 字符串 转换为 Base64 字符串
     /// </summary>
-    /// <param name="str">&lt;see cref="string"/&gt;</param>
-    /// <param name="randomPrefixStrLength"></param>
-    /// <returns><see cref="string"/></returns>
+    /// <param name="str"><see cref="string"/> 字符串</param>
+    /// <param name="randomPrefixStrLength"><see cref="int"/> 随机字符长度，默认6位</param>
+    /// <returns><see cref="string"/> 转换后的 Base64 字符串</returns>
     public static string ToBase64(this string str, int randomPrefixStrLength = RandomPrefixStrLength)
     {
         if (string.IsNullOrWhiteSpace(str))
@@ -61,7 +44,7 @@ public static class Base64Extension
 
         try
         {
-            var randomPrefixStr = GetRandomStr(RandomStr, randomPrefixStrLength);
+            var randomPrefixStr = VerificationUtil.GenStrVerCode(randomPrefixStrLength);
             var buffer = encoding.GetBytes(str);
             var base64Str = Convert.ToBase64String(buffer);
 
@@ -78,11 +61,11 @@ public static class Base64Extension
     }
 
     /// <summary>
-    /// base64 字符串 转换为 普通 字符串
+    /// Base64 字符串 转换为 普通 字符串
     /// </summary>
-    /// <param name="base64Str"><see cref="string"/></param>
-    /// <param name="randomPrefixStrLength"></param>
-    /// <returns><see cref="string"/></returns>
+    /// <param name="base64Str"><see cref="string"/> Base64 字符串</param>
+    /// <param name="randomPrefixStrLength"><see cref="int"/> 随机字符长度，默认6位</param>
+    /// <returns><see cref="string"/> 转换后的 字符串</returns>
     public static string Base64ToString(this string base64Str, int randomPrefixStrLength = RandomPrefixStrLength)
     {
         var result = base64Str.Trim();
@@ -108,61 +91,11 @@ public static class Base64Extension
         return result;
     }
 
-    public struct PwdDic
-    {
-        public string Version { get; set; }
-
-        public List<PwdDicItem> Item { get; set; }
-    }
-
-    public struct PwdDicItem
-    {
-        public int Index { get; set; }
-
-        public int RandomIndex { get; set; }
-    }
-
-    public static readonly PwdDic dic = new PwdDic
-    {
-        Version = "3",
-        Item = new List<PwdDicItem>
-        {
-            new PwdDicItem {Index = 950, RandomIndex = 188},
-            new PwdDicItem {Index = 900, RandomIndex = 201},
-            new PwdDicItem {Index = 800, RandomIndex = 225},
-            new PwdDicItem {Index = 700, RandomIndex = 255},
-            new PwdDicItem {Index = 600, RandomIndex = 268},
-            new PwdDicItem {Index = 500, RandomIndex = 277},
-            new PwdDicItem {Index = 400, RandomIndex = 288},
-            new PwdDicItem {Index = 330, RandomIndex = 327},
-            new PwdDicItem {Index = 300, RandomIndex = 180},
-            new PwdDicItem {Index = 200, RandomIndex = 178},
-            new PwdDicItem {Index = 100, RandomIndex = 124},
-            // 100 以内字典
-            new PwdDicItem {Index = 98, RandomIndex = 95},
-            new PwdDicItem {Index = 92, RandomIndex = 90},
-            new PwdDicItem {Index = 91, RandomIndex = 87},
-            new PwdDicItem {Index = 88, RandomIndex = 84},
-            new PwdDicItem {Index = 82, RandomIndex = 79},
-            new PwdDicItem {Index = 78, RandomIndex = 71},
-            new PwdDicItem {Index = 72, RandomIndex = 69},
-            new PwdDicItem {Index = 68, RandomIndex = 66},
-            new PwdDicItem {Index = 59, RandomIndex = 55},
-            new PwdDicItem {Index = 48, RandomIndex = 43},
-            new PwdDicItem {Index = 42, RandomIndex = 37},
-            new PwdDicItem {Index = 36, RandomIndex = 30},
-            new PwdDicItem {Index = 33, RandomIndex = 27},
-            new PwdDicItem {Index = 24, RandomIndex = 20},
-            new PwdDicItem {Index = 23, RandomIndex = 18},
-            new PwdDicItem {Index = 21, RandomIndex = 16},
-            new PwdDicItem {Index = 17, RandomIndex = 14},
-            new PwdDicItem {Index = 13, RandomIndex = 9},
-            new PwdDicItem {Index = 7, RandomIndex = 4},
-            new PwdDicItem {Index = 5, RandomIndex = 3},
-            new PwdDicItem {Index = 2, RandomIndex = 1},
-        }
-    };
-
+    /// <summary>
+    /// 添加随机字符串到 Base64 字符串
+    /// </summary>
+    /// <param name="base64Str"><see cref="string"/> Base64 字符串</param>
+    /// <returns></returns>
     private static string InsertRandomStrToBase64Str(string base64Str)
     {
         var strResult = $"{base64Str}";
@@ -179,6 +112,11 @@ public static class Base64Extension
         return strResult;
     }
 
+    /// <summary>
+    /// 删除 Base64 字符串中的随机数
+    /// </summary>
+    /// <param name="input"><see cref="string"/> Base64 字符串</param>
+    /// <returns></returns>
     private static string RemoveBase64StrRandomStr(string input)
     {
         var items = dic.Item.OrderBy(x => x.Index).ToList();
@@ -196,4 +134,59 @@ public static class Base64Extension
 
         return strResult;
     }
+
+    private struct PwdDic
+    {
+        public string Version { get; set; }
+
+        public List<PwdDicItem> Item { get; init; }
+    }
+
+    private struct PwdDicItem
+    {
+        public int Index { get; init; }
+
+        public int RandomIndex { get; init; }
+    }
+
+    private static readonly PwdDic dic = new()
+    {
+        Version = "3",
+        Item = new List<PwdDicItem>
+        {
+            new() {Index = 950, RandomIndex = 188},
+            new() {Index = 900, RandomIndex = 201},
+            new() {Index = 800, RandomIndex = 225},
+            new() {Index = 700, RandomIndex = 255},
+            new() {Index = 600, RandomIndex = 268},
+            new() {Index = 500, RandomIndex = 277},
+            new() {Index = 400, RandomIndex = 288},
+            new() {Index = 330, RandomIndex = 327},
+            new() {Index = 300, RandomIndex = 180},
+            new() {Index = 200, RandomIndex = 178},
+            new() {Index = 100, RandomIndex = 124},
+            // 100 以内字典
+            new() {Index = 98, RandomIndex = 95},
+            new() {Index = 92, RandomIndex = 90},
+            new() {Index = 91, RandomIndex = 87},
+            new() {Index = 88, RandomIndex = 84},
+            new() {Index = 82, RandomIndex = 79},
+            new() {Index = 78, RandomIndex = 71},
+            new() {Index = 72, RandomIndex = 69},
+            new() {Index = 68, RandomIndex = 66},
+            new() {Index = 59, RandomIndex = 55},
+            new() {Index = 48, RandomIndex = 43},
+            new() {Index = 42, RandomIndex = 37},
+            new() {Index = 36, RandomIndex = 30},
+            new() {Index = 33, RandomIndex = 27},
+            new() {Index = 24, RandomIndex = 20},
+            new() {Index = 23, RandomIndex = 18},
+            new() {Index = 21, RandomIndex = 16},
+            new() {Index = 17, RandomIndex = 14},
+            new() {Index = 13, RandomIndex = 9},
+            new() {Index = 7, RandomIndex = 4},
+            new() {Index = 5, RandomIndex = 3},
+            new() {Index = 2, RandomIndex = 1},
+        }
+    };
 }

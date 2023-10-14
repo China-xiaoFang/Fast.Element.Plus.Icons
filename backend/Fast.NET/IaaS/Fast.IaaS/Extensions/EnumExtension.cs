@@ -59,12 +59,6 @@ public static class EnumExtension
             throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
         }
 
-        //// 判断是否为默认值
-        //if (value.Equals(Enum.ToObject(enumType, 0)))
-        //{
-        //    throw new ArgumentNullException(nameof(value), "传入的枚举值为空");
-        //}
-
         // 获取枚举名称
         var enumName = Enum.GetName(enumType, value);
 

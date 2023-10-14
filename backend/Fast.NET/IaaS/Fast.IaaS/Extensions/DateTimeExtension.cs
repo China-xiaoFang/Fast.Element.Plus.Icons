@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Globalization;
+using Fast.IaaS.Utils;
 
 namespace Fast.IaaS.Extensions;
 
@@ -47,74 +48,13 @@ public static class DateTimeExtension
     }
 
     /// <summary>
-    /// 获取指定年月的第一天
-    /// </summary>
-    /// <param name="dateTime"><see cref="DateTime"/></param>
-    /// <param name="year"></param>
-    /// <param name="mon"></param>
-    /// <returns><see cref="string"/></returns>
-    public static DateTime GetCurMonthFirstDay(this DateTime dateTime, string year, string mon)
-    {
-        var AssemblyDate = Convert.ToDateTime(year + "-" + mon + "-" + "01"); // 组装当前指定月份
-        var result = AssemblyDate.AddDays(1 - AssemblyDate.Day); // 返回指定当前月份的第一天
-        return new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
-    }
-
-    /// <summary>
-    /// 获取指定年月的第一天
-    /// </summary>
-    /// <param name="dateTime"><see cref="DateTime"/></param>
-    /// <param name="year"></param>
-    /// <param name="mon"></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime GetCurMonthFirstDay(this DateTime dateTime, int year, int mon)
-    {
-        var AssemblyDate = Convert.ToDateTime(year + "-" + mon + "-" + "01"); // 组装当前指定月份
-        var result = AssemblyDate.AddDays(1 - AssemblyDate.Day); // 返回指定当前月份的第一天
-        return new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
-    }
-
-    /// <summary>
-    /// 获取指定年月的最后一天
-    /// </summary>
-    /// <param name="dateTime"><see cref="DateTime"/></param>
-    /// <param name="year"></param>
-    /// <param name="mon"></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime GetCurMonthLastDay(this DateTime dateTime, string year, string mon)
-    {
-        var AssemblyDate = Convert.ToDateTime(year + "-" + mon + "-" + "01"); // 组装当前指定月份
-        var result = AssemblyDate.AddDays(1 - AssemblyDate.Day).AddMonths(1).AddDays(-1); // 返回指定当前月份的最后一天
-        return new DateTime(result.Year, result.Month, result.Day, 23, 59, 59);
-    }
-
-    /// <summary>
-    /// 获取指定年月的最后一天
-    /// </summary>
-    /// <param name="dateTime"><see cref="DateTime"/></param>
-    /// <param name="year"></param>
-    /// <param name="mon"></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime GetCurMonthLastDay(this DateTime dateTime, int year, int mon)
-    {
-        var AssemblyDate = Convert.ToDateTime(year + "-" + mon + "-" + "01"); // 组装当前指定月份
-        var result = AssemblyDate.AddDays(1 - AssemblyDate.Day).AddMonths(1).AddDays(-1); // 返回指定当前月份的最后一天
-        return new DateTime(result.Year, result.Month, result.Day, 23, 59, 59);
-    }
-
-    /// <summary>
     /// 获取当前月的第一天
     /// </summary>
     /// <param name="dateTime"><see cref="DateTime"/></param>
     /// <returns><see cref="DateTime"/></returns>
     public static DateTime GetCurMonthFirstDay(this DateTime dateTime)
     {
-        // 第一种写法
-        //DateTime CurDate =Convert.ToDateTime(DateTime.Now.ToString());  // 组装当前指定月份
-        //return CurDate.AddDays(1 - CurDate.Day);  // 返回指定当前月份的第一天
-
-        // 第二种写法
-        return new DateTime(dateTime.Year, dateTime.Month, 1, 0, 0, 0); // 该方法可以指定，年、月、日
+        return DateTimeUtil.GetYearMonthFirstDay(dateTime.Year, dateTime.Month);
     }
 
     /// <summary>
@@ -124,9 +64,7 @@ public static class DateTimeExtension
     /// <returns><see cref="DateTime"/></returns>
     public static DateTime GetCurMonthLastDay(this DateTime dateTime)
     {
-        var CurDate = Convert.ToDateTime(dateTime.ToString(CultureInfo.InvariantCulture)); // 组装当前指定月份
-        var result = CurDate.AddDays(1 - CurDate.Day).AddMonths(1).AddDays(-1); // 返回指定当前月份的最后一天
-        return new DateTime(result.Year, result.Month, result.Day, 23, 59, 59);
+        return DateTimeUtil.GetYearMonthLastDay(dateTime.Year, dateTime.Month);
     }
 
     /// <summary>
@@ -137,7 +75,7 @@ public static class DateTimeExtension
     public static DateTime GetUpMonthFirstDay(this DateTime dateTime)
     {
         var nowDate = dateTime.AddMonths(-1);
-        return new DateTime(nowDate.Year, nowDate.Month, 1, 0, 0, 0); // 该方法可以指定，年、月、日
+        return new DateTime(nowDate.Year, nowDate.Month, 01, 00, 00, 00); // 该方法可以指定，年、月、日
     }
 
     /// <summary>
@@ -147,9 +85,8 @@ public static class DateTimeExtension
     /// <returns><see cref="DateTime"/></returns>
     public static DateTime GetUpMonthLastDay(this DateTime dateTime)
     {
-        var CurDate = Convert.ToDateTime(dateTime.ToString(CultureInfo.InvariantCulture)); // 组装当前指定月份
-        var result = CurDate.AddDays(1 - CurDate.Day).AddDays(-1); // 返回指定上月份的最后一天
-        return new DateTime(result.Year, result.Month, result.Day, 23, 59, 59);
+        var internalDate = new DateTime(dateTime.Year, dateTime.Month, 01, 23, 59, 59);
+        return internalDate.AddMonths(-1);
     }
 
     /// <summary>
@@ -196,101 +133,9 @@ public static class DateTimeExtension
     /// <returns>(<see cref="DateTime"/>, <see cref="DateTime"/>)</returns>
     public static (DateTime startTime, DateTime lastTime) GetUpDay(this DateTime dateTime)
     {
-        var dt = dateTime.AddDays(-1);
-        return (new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0), new DateTime(dt.Year, dt.Month, dt.Day, 23, 59, 59));
-    }
-
-    /// <summary>
-    /// 计算两个时间的差
-    /// </summary>
-    /// <param name="dateTime"><see cref="DateTime"/></param>
-    /// <param name="startTime"></param>
-    /// <param name="lastTime"></param>
-    /// <returns><see cref="int"/></returns>
-    public static int DateDiff(this DateTime dateTime, DateTime startTime, DateTime lastTime)
-    {
-        var start = Convert.ToDateTime(startTime.ToShortDateString());
-        var end = Convert.ToDateTime(lastTime.ToShortDateString());
-        var sp = end.Subtract(start);
-        return sp.Days;
-    }
-
-    /// <summary>
-    /// 将毫秒时间戳转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
-    /// </summary>
-    /// <param name="timeStamps"><see cref="long"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime ToDateTime_Milliseconds(this long timeStamps)
-    {
-        try
-        {
-            // 当地时区
-            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
-        }
-        catch
-        {
-            return DateTime.MinValue;
-        }
-    }
-
-    /// <summary>
-    /// 将毫秒时间戳转换为DateTime，若转换失败，则返回默认值。
-    /// </summary>
-    /// <param name="timeStamps"><see cref="long"/></param>
-    /// <param name="defaultValue"></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime ToDateTime_Milliseconds(this long timeStamps, DateTime? defaultValue)
-    {
-        try
-        {
-            // 当地时区
-            return timeStamps == 0
-                ? defaultValue.GetValueOrDefault()
-                : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
-        }
-        catch
-        {
-            return defaultValue.GetValueOrDefault();
-        }
-    }
-
-    /// <summary>
-    /// 将秒时间戳转换为DateTime，若转换失败，则返回日期最小值。不抛出异常。  
-    /// </summary>
-    /// <param name="timeStamps"><see cref="long"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime ToDateTime_Seconds(this long timeStamps)
-    {
-        try
-        {
-            // 当地时区
-            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
-        }
-        catch
-        {
-            return DateTime.MinValue;
-        }
-    }
-
-    /// <summary>
-    /// 将秒时间戳转换为DateTime，若转换失败，则返回默认值。
-    /// </summary>
-    /// <param name="timeStamps"><see cref="long"/></param>
-    /// <param name="defaultValue"></param>
-    /// <returns><see cref="DateTime"/></returns>
-    public static DateTime ToDateTime_Seconds(this long timeStamps, DateTime? defaultValue)
-    {
-        try
-        {
-            // 当地时区
-            return timeStamps == 0
-                ? defaultValue.GetValueOrDefault()
-                : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
-        }
-        catch
-        {
-            return defaultValue.GetValueOrDefault();
-        }
+        var internalDate = dateTime.AddDays(-1);
+        return (new DateTime(internalDate.Year, internalDate.Month, internalDate.Day, 0, 0, 0),
+            new DateTime(internalDate.Year, internalDate.Month, internalDate.Day, 23, 59, 59));
     }
 
     /// <summary>

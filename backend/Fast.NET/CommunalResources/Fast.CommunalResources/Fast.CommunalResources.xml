@@ -31,6 +31,21 @@
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>
+        <member name="T:Fast.NET.GlobalConstant">
+            <summary>
+            <see cref="T:Fast.NET.GlobalConstant"/> 常用常量
+            </summary>
+        </member>
+        <member name="P:Fast.NET.GlobalConstant.DefaultTime">
+            <summary>
+            默认DateTime
+            </summary>
+        </member>
+        <member name="P:Fast.NET.GlobalConstant.TimeStamp">
+            <summary>
+            时间戳
+            </summary>
+        </member>
         <member name="T:Fast.NET.ExceptorContext">
             <summary>
             <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文

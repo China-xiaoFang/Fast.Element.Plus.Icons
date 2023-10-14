@@ -72,7 +72,7 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
     public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
     {
         // 判断是否序列化成当地时间
-        var formatDateTime = Localized ? value.ConvertToDateTime() : value;
+        var formatDateTime = Localized ? value.ParseToDateTime() : value;
         writer.WriteStringValue(formatDateTime.ToString(Format));
     }
 }
@@ -135,7 +135,7 @@ public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?
         else
         {
             // 判断是否序列化成当地时间
-            var formatDateTime = Localized ? value.ConvertToDateTime() : value;
+            var formatDateTime = Localized ? value.ParseToDateTime() : value;
             writer.WriteStringValue(formatDateTime.Value.ToString(Format));
         }
     }

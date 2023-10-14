@@ -12,30 +12,27 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Reflection;
+
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
-/// <see cref="DynamicExtension"/> dynamic 拓展类
+/// <see cref="FieldInfo"/> 拓展类
 /// </summary>
-public static class DynamicExtension
+public static class FieldInfoExtension
 {
     /// <summary>
-    /// 检查动态对象是否包含指定属性的方法
+    /// 获取字段特性
     /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="propertyName"></param>
+    /// <param name="field"><see cref="FieldInfo"/></param>
+    /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static bool HasProperty(dynamic obj, string propertyName)
+    public static T GetDescriptionValue<T>(this FieldInfo field) where T : Attribute
     {
-        try
-        {
-            Type type = obj.GetType();
-            var propertyInfo = type.GetProperty(propertyName);
-            return propertyInfo != null;
-        }
-        catch
-        {
-            return false;
-        }
+        // 获取字段的指定特性，不包含继承中的特性
+        var customAttributes = field.GetCustomAttributes(typeof(T), false);
+
+        // 如果没有数据返回null
+        return customAttributes.Length > 0 ? (T) customAttributes[0] : null;
     }
 }

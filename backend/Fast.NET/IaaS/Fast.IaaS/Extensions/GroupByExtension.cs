@@ -17,7 +17,7 @@ using System.Linq.Expressions;
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
-/// GroupBy 拓展类
+/// <see cref="EnumExtension"/> GroupBy 拓展类
 /// </summary>
 public static class GroupByExtension
 {

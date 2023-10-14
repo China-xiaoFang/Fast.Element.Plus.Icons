@@ -17,7 +17,7 @@ using System.Collections;
 namespace Fast.IaaS.Utils;
 
 /// <summary>
-/// 树基类
+/// <see cref="ITreeNode{TProperty}"/> 树基类
 /// </summary>
 /// <typeparam name="TProperty">Id属性类型</typeparam>
 public interface ITreeNode<out TProperty> where TProperty : struct, IComparable, IConvertible, IFormattable
@@ -48,7 +48,7 @@ public interface ITreeNode<out TProperty> where TProperty : struct, IComparable,
 }
 
 /// <summary>
-/// 递归工具类，用于遍历有父子关系的节点，例如菜单树，字典树等等
+/// <see cref="TreeBuildUtil{TEntity, TProperty}"/> 递归工具类，用于遍历有父子关系的节点，例如菜单树，字典树等等
 /// </summary>
 /// <typeparam name="TEntity">模型</typeparam>
 /// <typeparam name="TProperty">Id属性类型</typeparam>

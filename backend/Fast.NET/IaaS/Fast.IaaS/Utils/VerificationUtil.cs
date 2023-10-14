@@ -17,11 +17,13 @@ using System.Text;
 namespace Fast.IaaS.Utils;
 
 /// <summary>
-/// 验证工具类
+/// <see cref="VerificationUtil"/> 验证工具类
 /// </summary>
 public static class VerificationUtil
 {
-    //自定义进制所用的编码，大小写和数字(初始62位)，但去掉7位相似：O/o/0,I/i/1/l，去掉一个补位：A;最终只留(26+26+10)-(7+1)=54位
+    /// <summary>
+    /// 自定义进制所用的编码，大小写和数字(初始62位)，但去掉7位相似：O/o/0,I/i/1/l，去掉一个补位：A;最终只留(26+26+10)-(7+1)=54位
+    /// </summary>
     private static readonly char[] BASE =
     {
         '8', 'S', '2', 'H', 'b', 'V', 'c', 'E', 'Z', 'g', 'X', 'h', '9', 'z', 'y', 'C', 'x', '7', 'P', 'p', '5', 'K', 'B',
@@ -29,14 +31,20 @@ public static class VerificationUtil
         'm', 'T', 'N', 'w', '6', 'v', 'j', 'k',
     };
 
-    //A补位字符，不能与自定义重复
+    /// <summary>
+    /// A补位字符，不能与自定义重复
+    /// </summary>
     private static readonly char SUFFIX_CHAR = 'A';
 
-    //进制长度
+    /// <summary>
+    /// 进制长度
+    /// </summary>
     private static readonly int BIN_LEN = BASE.Length;
 
-    //生成邀请码最小长度
-    private static readonly int CODE_LEN = 6;
+    /// <summary>
+    /// 生成邀请码最小长度
+    /// </summary>
+    private const int CODE_LEN = 6;
 
     /// <summary>
     /// ID转换为邀请码
@@ -221,12 +229,35 @@ public static class VerificationUtil
     }
 
     /// <summary>
-    /// 得到验证码
+    /// 生成数字验证码
     /// </summary>
-    /// <param name="len"></param>
-    /// <returns></returns>
-    public static int GetVerCode(int len = 6)
+    /// <param name="len"><see cref="int"/> 验证码长度，默认6位</param>
+    /// <returns><see cref="string"/></returns>
+    public static string GenNumVerCode(int len = CODE_LEN)
     {
-        return new Random().Next((int) Math.Pow(10, len - 1), (int) Math.Pow(10, len) - 1);
+        return $"{new Random().Next((int) Math.Pow(10, len - 1), (int) Math.Pow(10, len) - 1)}";
+    }
+
+    /// <summary>
+    /// 生成字符串验证码
+    /// </summary>
+    /// <param name="len"><see cref="int"/> 验证码长度，默认6位</param>
+    /// <returns><see cref="string"/></returns>
+    public static string GenStrVerCode(int len = CODE_LEN)
+    {
+        var result = "";
+        var random = new Random(Convert.ToInt32($"{DateTime.Now:HHmmssfff}"));
+
+        for (var i = 0; i < len; i++)
+        {
+            var randomInt = random.Next(0, BIN_LEN);
+            var randomChar = BASE[randomInt];
+            result += randomChar;
+        }
+
+        // 休眠,以使随机数不重叠.
+        Thread.Sleep(1);
+
+        return result;
     }
 }

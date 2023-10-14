@@ -17,37 +17,17 @@
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="DateTimeOffset"/> DateTimeOffset 拓展类
+/// <see cref="GlobalConstant"/> 常用常量
 /// </summary>
-internal static class DateTimeOffsetExtension
+public class GlobalConstant
 {
     /// <summary>
-    /// 将 DateTimeOffset 转换成本地 DateTime
+    /// 默认DateTime
     /// </summary>
-    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    internal static DateTime ConvertToDateTime(this DateTimeOffset dateTime)
-    {
-        if (dateTime.Offset.Equals(TimeSpan.Zero))
-        {
-            return dateTime.UtcDateTime;
-        }
-
-        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
-        {
-            return dateTime.ToLocalTime().DateTime;
-        }
-
-        return dateTime.DateTime;
-    }
+    public static DateTime DefaultTime => TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
 
     /// <summary>
-    /// 将 DateTimeOffset? 转换成本地 DateTime?
+    /// 时间戳
     /// </summary>
-    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    internal static DateTime? ConvertToDateTime(this DateTimeOffset? dateTime)
-    {
-        return dateTime?.ConvertToDateTime();
-    }
+    public static long TimeStamp => Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
 }

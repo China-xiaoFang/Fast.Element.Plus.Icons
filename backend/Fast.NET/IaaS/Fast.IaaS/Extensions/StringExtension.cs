@@ -143,37 +143,6 @@ public static class StringExtension
     }
 
     /// <summary>
-    /// Unicode编码
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string EnUnicode(this string str)
-    {
-        var strResult = new StringBuilder();
-        if (string.IsNullOrEmpty(str))
-            return strResult.ToString();
-        foreach (var c in str)
-        {
-            strResult.Append("\\u");
-            strResult.Append(((int) c).ToString("x"));
-        }
-
-        return strResult.ToString();
-    }
-
-    /// <summary>
-    /// Unicode解码
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string DeUnicode(this string str)
-    {
-        //最直接的方法Regex.Unescape(str);
-        var reg = new Regex(@"(?i)\\[uU]([0-9a-f]{4})");
-        return reg.Replace(str, m => ((char) Convert.ToInt32(m.Groups[1].Value, 16)).ToString());
-    }
-
-    /// <summary>
     /// 将字符串转化为固定长度左对齐，右补空格
     /// </summary>
     /// <param name="strTemp"><see cref="string"/></param>
@@ -195,7 +164,7 @@ public static class StringExtension
     /// </summary>
     /// <param name="length"></param>
     /// <returns></returns>
-    static string GenerateSpaceString(int length)
+    private static string GenerateSpaceString(int length)
     {
         var strReturn = string.Empty;
 
@@ -232,26 +201,6 @@ public static class StringExtension
         }
 
         return value;
-    }
-
-    /// <summary>
-    /// 将一个字符串 URL 编码
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string UrlEncode(this string str)
-    {
-        return string.IsNullOrEmpty(str) ? "" : HttpUtility.UrlEncode(str, Encoding.UTF8);
-    }
-
-    /// <summary>
-    /// 将一个Url 编码 转为字符串
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string UrlDecode(this string str)
-    {
-        return string.IsNullOrEmpty(str) ? "" : HttpUtility.UrlDecode(str, Encoding.UTF8);
     }
 
     /// <summary>

@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
@@ -22,13 +23,35 @@ namespace Fast.IaaS.Extensions;
 public static class MethodInfoExtension
 {
     /// <summary>
-    /// 是否为异步方法
+    /// 判断方法是否是异步
     /// </summary>
     /// <param name="methodInfo"><see cref="MemberInfo"/></param>
     /// <returns><see cref="bool"/></returns>
-    public static bool IsMethodAsync(this MethodInfo methodInfo)
+    public static bool IsAsync(this MethodInfo methodInfo)
     {
-        return typeof(Task).IsAssignableFrom(methodInfo.ReturnType);
+        return InternalMethodInfoExtension.IsAsync(methodInfo);
+    }
+
+    /// <summary>
+    /// 获取方法真实返回类型
+    /// </summary>
+    /// <param name="methodInfo"><see cref="MethodInfo"/></param>
+    /// <returns><see cref="Type"/></returns>
+    public static Type GetRealReturnType(this MethodInfo methodInfo)
+    {
+        return InternalMethodInfoExtension.GetRealReturnType(methodInfo);
+    }
+
+    /// <summary>
+    /// 查找方法指定特性，如果没找到则继续查找声明类
+    /// </summary>
+    /// <typeparam name="TAttribute"></typeparam>
+    /// <param name="methodInfo"></param>
+    /// <param name="inherit"></param>
+    /// <returns></returns>
+    public static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo methodInfo, bool inherit) where TAttribute : Attribute
+    {
+        return InternalMethodInfoExtension.GetFoundAttribute<TAttribute>(methodInfo, inherit);
     }
 
     /// <summary>
