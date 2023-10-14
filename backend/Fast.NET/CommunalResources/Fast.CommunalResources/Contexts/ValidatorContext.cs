@@ -12,15 +12,14 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="ValidatorContext"/> 验证上下文
 /// </summary>
@@ -60,9 +59,9 @@ internal static class ValidatorContext
             }
 
             message = JsonSerializer.Serialize(validationResults,
-                new JsonSerializerOptions {Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true});
-            firstErrorMessage = ((Dictionary<string, string[]>) validationResults).First().Value[0];
-            firstErrorProperty = ((Dictionary<string, string[]>) validationResults).First().Key;
+                new JsonSerializerOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true });
+            firstErrorMessage = ((Dictionary<string, string[]>)validationResults).First().Value[0];
+            firstErrorProperty = ((Dictionary<string, string[]>)validationResults).First().Key;
         }
         // 其他类型
         else

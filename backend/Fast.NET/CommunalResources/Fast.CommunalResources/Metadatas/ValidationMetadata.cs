@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="ValidationMetadata"/> 验证信息元数据
 /// </summary>

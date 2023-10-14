@@ -16,59 +16,56 @@ using Microsoft.AspNetCore.Http;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
-/// <see cref="AppException"/> 应用程序异常类
+/// <see cref="UserFriendlyException"/> 用户友好异常
 /// </summary>
-public class AppException : Exception
+public class UserFriendlyException : Exception
 {
     /// <summary>
-    /// <inheritdoc cref="AppException" />
+    /// <inheritdoc cref="UserFriendlyException" />
     /// </summary>
-    public AppException() : base("Internal Server Error.")
+    public UserFriendlyException() : base("Bad Request")
     {
-        ErrorCode = StatusCodes.Status500InternalServerError;
+        ErrorCode = StatusCodes.Status400BadRequest;
     }
 
     /// <summary>
-    /// <inheritdoc cref="AppException" />
+    /// <inheritdoc cref="UserFriendlyException" />
     /// </summary>
     /// <param name="message">异常信息</param>
-    public AppException(string message) : base(message ?? "Internal Server Error.")
+    public UserFriendlyException(string message) : base(message ?? "Bad Request")
     {
         ErrorMessage = message;
-        ErrorCode = StatusCodes.Status500InternalServerError;
     }
 
     /// <summary>
-    /// <inheritdoc cref="AppException" />
+    /// <inheritdoc cref="UserFriendlyException" />
     /// </summary>
     /// <param name="message">异常信息</param>
     /// <param name="errorCode">错误编码</param>
-    public AppException(string message, object errorCode) : base(message ?? "Internal Server Error.")
+    public UserFriendlyException(string message, object errorCode) : base(message ?? "Bad Request")
     {
         ErrorMessage = message;
         ErrorCode = errorCode;
     }
 
     /// <summary>
-    /// <inheritdoc cref="AppException" />
+    /// <inheritdoc cref="UserFriendlyException" />
     /// </summary>
     /// <param name="message">异常信息</param>
     /// <param name="innerException">内部异常</param>
-    public AppException(string message, Exception innerException) : base(message ?? "Internal Server Error.", innerException)
+    public UserFriendlyException(string message, Exception innerException) : base(message ?? "Bad Request", innerException)
     {
         ErrorMessage = message;
-        ErrorCode = StatusCodes.Status500InternalServerError;
     }
 
     /// <summary>
-    /// <inheritdoc cref="AppException" />
+    /// <inheritdoc cref="UserFriendlyException" />
     /// </summary>
     /// <param name="message">异常信息</param>
     /// <param name="errorCode">错误编码</param>
     /// <param name="innerException">内部异常</param>
-    public AppException(string message, object errorCode, Exception innerException) : base(message ?? "Internal Server Error.",
+    public UserFriendlyException(string message, object errorCode, Exception innerException) : base(message ?? "Bad Request",
         innerException)
     {
         ErrorMessage = message;

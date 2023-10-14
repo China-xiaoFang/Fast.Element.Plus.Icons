@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>Fast.NET 框架公共资源模块库。</Description>
+		<!-- 阻止生成 Nuget 包 -->
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- 阻止拷贝全局的 README.MD 文件 -->
+		<None Remove="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- 更改公共资源文件夹共享到每个类库的 CommunalResources 文件夹，将其放在根目录 -->
+		<Compile Include="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" Pack="true" PackagePath="\" Link="\%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+</Project>

@@ -48,7 +48,14 @@
 
 	<ItemGroup>
 		<!-- 将公共资源文件夹共享到每个类库的 CommunalResources 文件夹下面 -->
-		<Compile Include="$(SolutionDir)CommunalResources\**\*.cs" Pack="true" PackagePath="\" Link="CommunalResources\%(RecursiveDir)%(Filename)%(Extension)" />
+		<Compile Include="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" Pack="true" PackagePath="\" Link="CommunalResources\%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- 阻止共享 bin 文件夹 -->
+		<Compile Remove="$(SolutionDir)CommunalResources\Fast.CommunalResources\bin\**" />
+		<!-- 阻止共享 obj 文件夹 -->
+		<Compile Remove="$(SolutionDir)CommunalResources\Fast.CommunalResources\obj\**" />
 	</ItemGroup>
 
 </Project>
