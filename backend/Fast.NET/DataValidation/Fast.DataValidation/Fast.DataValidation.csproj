@@ -4,8 +4,4 @@
 		<Description>Fast.NET 框架数据验证模块库。</Description>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-
 </Project>
