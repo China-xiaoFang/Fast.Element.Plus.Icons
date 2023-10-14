@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<Description>Fast.NET 框架User-Agent解析模块库。</Description>
-	</PropertyGroup>
-
-</Project>
