@@ -421,19 +421,19 @@
             额外数据
             </summary>
         </member>
-        <member name="T:Fast.NET.DateTimeOffsetExtension">
+        <member name="T:Fast.NET.InternalConvertExtension">
             <summary>
-            <see cref="T:System.DateTimeOffset"/> DateTimeOffset 拓展类
+            <see cref="T:System.Convert"/> 内部转换拓展类
             </summary>
         </member>
-        <member name="M:Fast.NET.DateTimeOffsetExtension.ConvertToDateTime(System.DateTimeOffset)">
+        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.DateTimeOffset)">
             <summary>
             将 DateTimeOffset 转换成本地 DateTime
             </summary>
             <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
             <returns><see cref="T:System.DateTime"/></returns>
         </member>
-        <member name="M:Fast.NET.DateTimeOffsetExtension.ConvertToDateTime(System.Nullable{System.DateTimeOffset})">
+        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.Nullable{System.DateTimeOffset})">
             <summary>
             将 DateTimeOffset? 转换成本地 DateTime?
             </summary>
@@ -442,7 +442,7 @@
         </member>
         <member name="T:Fast.NET.InternalHttpContextExtension">
             <summary>
-            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部 HttpContext 拓展类
+            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部拓展类
             </summary>
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
@@ -462,7 +462,7 @@
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
-            <see cref="T:System.Reflection.MethodInfo"/> 内部 MethodInfo 拓展类
+            <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
             </summary>
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
@@ -488,18 +488,18 @@
             <param name="inherit"></param>
             <returns></returns>
         </member>
-        <member name="T:Fast.NET.InternalTypeInfoExtension">
+        <member name="T:Fast.NET.InternalTypeExtension">
             <summary>
-            <see cref="T:System.Type"/> 内部 Type 拓展类
+            <see cref="T:System.Type"/> 内部拓展类
             </summary>
         </member>
-        <member name="M:Fast.NET.InternalTypeInfoExtension.HasImplementedRawGeneric(System.Type,System.Type)">
+        <member name="M:Fast.NET.InternalTypeExtension.HasImplementedRawGeneric(System.Type,System.Type)">
             <summary>
             判断类型是否实现某个泛型
             </summary>
             <param name="type"><see cref="T:System.Type"/> 类型</param>
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
-            <returns>bool</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.NET.ExceptionMetadata">
             <summary>
