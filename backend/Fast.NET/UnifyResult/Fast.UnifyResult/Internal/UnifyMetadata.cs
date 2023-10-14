@@ -12,27 +12,25 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
-
-namespace Fast.UnifyResult.Attributes;
+namespace Fast.UnifyResult.Internal;
 
 /// <summary>
-/// <see cref="UnifyModelAttribute"/> 规范化模型特性
+/// <see cref="UnifyMetadata"/> 规范化元数据
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
-public class UnifyModelAttribute : Attribute
+internal sealed class UnifyMetadata
 {
     /// <summary>
-    /// 规范化模型
+    /// 提供器名称
     /// </summary>
-    /// <param name="modelType"></param>
-    public UnifyModelAttribute(Type modelType)
-    {
-        ModelType = modelType;
-    }
+    public string ProviderName { get; set; }
 
     /// <summary>
-    /// 模型类型（泛型）
+    /// 提供器类型
     /// </summary>
-    public Type ModelType { get; set; }
+    public Type ProviderType { get; set; }
+
+    /// <summary>
+    /// 统一的结果类型
+    /// </summary>
+    public Type ResultType { get; set; }
 }

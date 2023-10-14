@@ -31,6 +31,30 @@
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>
+        <member name="T:Fast.NET.ExceptorContext">
+            <summary>
+            <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ExceptorContext.GetExceptionMetadata(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取异常元数据
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
+            <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
+        </member>
+        <member name="T:Fast.NET.ValidatorContext">
+            <summary>
+            <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ValidatorContext.GetValidationMetadata(System.Object)">
+            <summary>
+            获取验证错误信息
+            </summary>
+            <param name="errors"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
+        </member>
         <member name="T:Fast.NET.Debugging">
             <summary>
             <see cref="T:Fast.NET.Debugging"/> 向事件管理器中输出事件信息
@@ -246,6 +270,284 @@
             </param>
             <returns><see cref="T:System.String"/></returns>
         </member>
+        <member name="T:Fast.NET.AppException">
+            <summary>
+            <see cref="T:Fast.NET.AppException"/> 应用程序异常类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Object)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Object,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="P:Fast.NET.AppException.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.ErrorMessage">
+            <summary>
+            错误消息（支持 Object 对象）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.ValidationException">
+            <summary>
+            是否是数据验证异常
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.UserFriendlyException">
+            <summary>
+            <see cref="T:Fast.NET.UserFriendlyException"/> 用户友好异常
+            </summary>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Object)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Object,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ErrorMessage">
+            <summary>
+            错误消息（支持 Object 对象）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ValidationException">
+            <summary>
+            是否是数据验证异常
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.InternalHttpContextExtension">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部 HttpContext 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            判断是否是 WebSocket 请求
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="!:TAttribute"/></returns>
+        </member>
+        <member name="T:Fast.NET.InternalMethodInfoExtension">
+            <summary>
+            <see cref="T:System.Reflection.MethodInfo"/> 内部 MethodInfo 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
+            <summary>
+            判断方法是否是异步
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法真实返回类型
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Type"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
+            <summary>
+            查找方法指定特性，如果没找到则继续查找声明类
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="method"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.NET.InternalTypeInfoExtension">
+            <summary>
+            <see cref="T:System.Type"/> 内部 Type 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalTypeInfoExtension.HasImplementedRawGeneric(System.Type,System.Type)">
+            <summary>
+            判断类型是否实现某个泛型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> 类型</param>
+            <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:Fast.NET.ExceptionMetadata">
+            <summary>
+            <see cref="T:Fast.NET.ExceptionMetadata"/> 异常元数据
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.Errors">
+            <summary>
+            错误对象（信息）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.ValidationMetadata">
+            <summary>
+            <see cref="T:Fast.NET.ValidationMetadata"/> 验证信息元数据
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ValidationResult">
+            <summary>
+            验证结果
+            </summary>
+            <remarks>返回字典或字符串类型</remarks>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.Message">
+            <summary>
+            异常消息
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ModelState">
+            <summary>
+            验证状态
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.FirstErrorProperty">
+            <summary>
+            首个错误属性
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.FirstErrorMessage">
+            <summary>
+            首个错误消息
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
         <member name="T:Fast.UnifyResult.Attributes.NonUnifyAttribute">
             <summary>
             <see cref="T:Fast.UnifyResult.Attributes.NonUnifyAttribute"/> 禁止规范化处理
@@ -253,7 +555,7 @@
         </member>
         <member name="T:Fast.UnifyResult.Attributes.UnifyModelAttribute">
             <summary>
-            规范化模型特性
+            <see cref="T:Fast.UnifyResult.Attributes.UnifyModelAttribute"/> 规范化模型特性
             </summary>
         </member>
         <member name="M:Fast.UnifyResult.Attributes.UnifyModelAttribute.#ctor(System.Type)">
@@ -266,6 +568,96 @@
             <summary>
             模型类型（泛型）
             </summary>
+        </member>
+        <member name="T:Fast.UnifyResult.Attributes.UnifyProviderAttribute">
+            <summary>
+            <see cref="T:Fast.UnifyResult.Attributes.UnifyProviderAttribute"/> 规范化提供器特性
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyResult.Attributes.UnifyProviderAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyResult.Attributes.UnifyProviderAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Fast.UnifyResult.Attributes.UnifyProviderAttribute.Name">
+            <summary>
+            提供器名称
+            </summary>
+        </member>
+        <member name="T:Fast.UnifyResult.Contexts.UnifyContext">
+            <summary>
+            <see cref="T:Fast.UnifyResult.Contexts.UnifyContext"/> 规范化结果上下文
+            </summary>
+        </member>
+        <member name="F:Fast.UnifyResult.Contexts.UnifyContext.UnifyProviders">
+            <summary>
+            规范化结果提供器
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.SetResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32,System.Int32[],System.Int32[][])">
+            <summary>
+            设置响应状态码
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <param name="return200StatusCodes"><see cref="T:System.Array"/> 设置返回 200 状态码列表。只支持 400+(404除外) 状态码</param>
+            <param name="adaptStatusCodes"><see cref="T:System.Array"/> 适配（篡改）状态码。只支持 400+(404除外) 状态码</param>
+            <remarks>
+            示例：
+                return200StatusCodes = [401, 403]
+                adaptStatusCodes = [[401, 200], [403, 200]]
+            </remarks>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.CheckSucceededNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,Fast.UnifyResult.IUnifyResultProvider@,System.Boolean)">
+            <summary>
+            检查请求成功是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="unifyResult"><see cref="T:Fast.UnifyResult.IUnifyResultProvider"/></param>
+            <param name="isWebRequest"><see cref="T:System.Boolean"/></param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.CheckFailedNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,Fast.UnifyResult.IUnifyResultProvider@)">
+            <summary>
+            检查请求失败（验证失败、抛异常）是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="unifyResult"><see cref="T:Fast.UnifyResult.IUnifyResultProvider"/></param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.CheckStatusCodeNonUnify(Microsoft.AspNetCore.Http.HttpContext,Fast.UnifyResult.IUnifyResultProvider@)">
+            <summary>
+            检查短路状态码（>=400）是否进行规范化处理
+            </summary>
+            <param name="httpContext"></param>
+            <param name="unifyResult"></param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.CheckValidResult(Microsoft.AspNetCore.Mvc.IActionResult,System.Object@)">
+            <summary>
+            检查是否是有效的结果（可进行规范化的结果）
+            </summary>
+            <param name="result"><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.UnifyResult.Contexts.UnifyContext.GetMethodUnityMetadata(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法规范化元数据
+            </summary>
+            <remarks>如果追求性能，这里理应缓存起来，避免每次请求去检测</remarks>
+            <param name="method"></param>
+            <returns></returns>
         </member>
         <member name="T:Fast.UnifyResult.Extensions.UnifyResultIApplicationBuilderExtension">
             <summary>
@@ -281,7 +673,7 @@
         </member>
         <member name="T:Fast.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension">
             <summary>
-            规范化服务拓展类
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 规范化服务拓展类
             </summary>
         </member>
         <member name="M:Fast.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
@@ -300,9 +692,27 @@
             <param name="services"></param>
             <returns></returns>
         </member>
+        <member name="M:Fast.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.String)">
+            <summary>
+            添加规范化结果服务
+            </summary>
+            <typeparam name="TUnifyResultProvider"></typeparam>
+            <param name="mvcBuilder"></param>
+            <param name="providerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加规范化结果服务
+            </summary>
+            <typeparam name="TUnifyResultProvider"></typeparam>
+            <param name="services"></param>
+            <param name="providerName"></param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.UnifyResult.Filters.SucceededUnifyResultFilter">
             <summary>
-            规范化结构（请求成功）过滤器
+            <see cref="T:Fast.UnifyResult.Filters.SucceededUnifyResultFilter"/> 规范化结构（请求成功）过滤器
             </summary>
         </member>
         <member name="F:Fast.UnifyResult.Filters.SucceededUnifyResultFilter.FilterOrder">
@@ -323,9 +733,29 @@
             <param name="next"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.UnifyResult.Internal.UnifyMetadata">
+            <summary>
+            <see cref="T:Fast.UnifyResult.Internal.UnifyMetadata"/> 规范化元数据
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ProviderName">
+            <summary>
+            提供器名称
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ProviderType">
+            <summary>
+            提供器类型
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyResult.Internal.UnifyMetadata.ResultType">
+            <summary>
+            统一的结果类型
+            </summary>
+        </member>
         <member name="T:Fast.UnifyResult.Middlewares.UnifyResultStatusCodesMiddleware">
             <summary>
-            状态码中间件
+            <see cref="T:Fast.UnifyResult.Middlewares.UnifyResultStatusCodesMiddleware"/> 状态码中间件
             </summary>
         </member>
         <member name="F:Fast.UnifyResult.Middlewares.UnifyResultStatusCodesMiddleware._next">
@@ -351,12 +781,12 @@
             <see cref="T:Fast.UnifyResult.IUnifyResultProvider"/> 规范化结果提供器
             </summary>
         </member>
-        <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,System.Int32)">
+        <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,Fast.NET.ExceptionMetadata)">
             <summary>
             异常返回值
             </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ExceptionContext"/></param>
-            <param name="statusCode"></param>
+            <param name="context"><see cref="T:Fast.NET.ExceptorContext"/></param>
+            <param name="metadata"><see cref="T:Fast.NET.ExceptionMetadata"/> 异常元数据</param>
             <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Object)">
@@ -367,12 +797,12 @@
             <param name="data"></param>
             <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.Object)">
+        <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Fast.NET.ValidationMetadata)">
             <summary>
             验证失败返回值
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext"/></param>
-            <param name="message"></param>
+            <param name="metadata"><see cref="T:Fast.NET.ValidationMetadata"/> 验证信息元数据</param>
             <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:Fast.UnifyResult.IUnifyResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32)">
@@ -380,7 +810,7 @@
             拦截返回状态码
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="statusCode"></param>
+            <param name="statusCode"><see cref="T:System.Int32"/> 状态码</param>
             <returns></returns>
         </member>
     </members>

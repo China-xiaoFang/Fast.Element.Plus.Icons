@@ -12,14 +12,16 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
+using Fast.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.UnifyResult.Middlewares;
 
 /// <summary>
-/// 状态码中间件
+/// <see cref="UnifyResultStatusCodesMiddleware"/> 状态码中间件
 /// </summary>
+[SuppressSniffer]
 internal class UnifyResultStatusCodesMiddleware
 {
     /// <summary>
@@ -46,28 +48,28 @@ internal class UnifyResultStatusCodesMiddleware
         await _next(context);
 
         // 只有请求错误（短路状态码）和非 WebSocket 才支持规范化处理
-        if ((context.WebSockets.IsWebSocketRequest || context.Request.Path == "/ws") || context.Response.StatusCode < 400 ||
-            context.Response.StatusCode == 404)
-            return;
-
-        // 获取规范化处理器
-        var unifyResult = context.RequestServices.GetService<IUnifyResultProvider>();
-
-        // 如果为空，则不走下面的逻辑
-        if (unifyResult == null)
-            return;
-
-        // 处理规范化结果
-        // 解决刷新 Token 时间和 Token 时间相近问题
-        if (context.Response.StatusCode == StatusCodes.Status401Unauthorized &&
-            context.Response.Headers.ContainsKey("access-token") && context.Response.Headers.ContainsKey("x-access-token"))
+        if (context.IsWebSocketRequest() || context.Response.StatusCode < 400 || context.Response.StatusCode == 404)
         {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            return;
         }
 
-        // 如果 Response 已经完成输出，则禁止写入
-        if (context.Response.HasStarted)
-            return;
-        await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
+        // 处理规范化结果
+        if (!UnifyContext.CheckStatusCodeNonUnify(context, out var unifyResult))
+        {
+            // 解决刷新 Token 和 Token 时间相近问题
+            if (context.Response.StatusCode == StatusCodes.Status401Unauthorized &&
+                context.Response.Headers.ContainsKey("access-token") && context.Response.Headers.ContainsKey("x-access-token"))
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            }
+
+            // 如果 Response 已经完成输出，则禁止写入
+            if (context.Response.HasStarted)
+            {
+                return;
+            }
+
+            await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
+        }
     }
 }

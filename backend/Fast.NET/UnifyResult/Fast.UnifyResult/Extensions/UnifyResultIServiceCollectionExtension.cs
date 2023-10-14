@@ -12,7 +12,11 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Reflection;
+using Fast.UnifyResult.Attributes;
+using Fast.UnifyResult.Contexts;
 using Fast.UnifyResult.Filters;
+using Fast.UnifyResult.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,7 +24,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace Fast.UnifyResult.Extensions;
 
 /// <summary>
-/// 规范化服务拓展类
+/// <see cref="IServiceCollection"/> 规范化服务拓展类
 /// </summary>
 public static class UnifyResultIServiceCollectionExtension
 {
@@ -33,7 +37,7 @@ public static class UnifyResultIServiceCollectionExtension
     public static IMvcBuilder AddUnifyResult<TUnifyResultProvider>(this IMvcBuilder mvcBuilder)
         where TUnifyResultProvider : class, IUnifyResultProvider
     {
-        mvcBuilder.Services.AddUnifyResult<TUnifyResultProvider>();
+        mvcBuilder.AddUnifyResult<TUnifyResultProvider>(string.Empty);
 
         return mvcBuilder;
     }
@@ -47,8 +51,60 @@ public static class UnifyResultIServiceCollectionExtension
     public static IServiceCollection AddUnifyResult<TUnifyResultProvider>(this IServiceCollection services)
         where TUnifyResultProvider : class, IUnifyResultProvider
     {
+        services.AddUnifyResult<TUnifyResultProvider>(string.Empty);
+
+        return services;
+    }
+
+    /// <summary>
+    /// 添加规范化结果服务
+    /// </summary>
+    /// <typeparam name="TUnifyResultProvider"></typeparam>
+    /// <param name="mvcBuilder"></param>
+    /// <param name="providerName"></param>
+    /// <returns></returns>
+    public static IMvcBuilder AddUnifyResult<TUnifyResultProvider>(this IMvcBuilder mvcBuilder, string providerName)
+        where TUnifyResultProvider : class, IUnifyResultProvider
+    {
+        mvcBuilder.Services.AddUnifyResult<TUnifyResultProvider>(providerName);
+
+        return mvcBuilder;
+    }
+
+    /// <summary>
+    /// 添加规范化结果服务
+    /// </summary>
+    /// <typeparam name="TUnifyResultProvider"></typeparam>
+    /// <param name="services"></param>
+    /// <param name="providerName"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddUnifyResult<TUnifyResultProvider>(this IServiceCollection services, string providerName)
+        where TUnifyResultProvider : class, IUnifyResultProvider
+    {
+        providerName ??= string.Empty;
+
+        var providerType = typeof(TUnifyResultProvider);
+
+        // 获取规范化提供器模型，不能为空
+        var unifyModelAttribute = providerType.GetCustomAttribute<UnifyModelAttribute>();
+
+        if (unifyModelAttribute == null)
+        {
+            throw new ArgumentNullException(nameof(UnifyModelAttribute),
+                "The normalization model feature is empty, make sure that the normalization provider has the [UnifyModelAttribute] feature");
+        }
+
+        // 创建规范化元数据
+        var metadata = new UnifyMetadata
+        {
+            ProviderName = providerName, ProviderType = providerType, ResultType = unifyModelAttribute.ModelType
+        };
+
+        // 添加或替换规范化配置
+        UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata, (_, _) => metadata);
+
         // 添加规范化提供器
-        services.TryAddSingleton(typeof(IUnifyResultProvider), typeof(TUnifyResultProvider));
+        services.TryAddSingleton(typeof(IUnifyResultProvider), providerType);
 
         // 添加成功规范化结果筛选器
         services.Configure<MvcOptions>(options => { options.Filters.Add<SucceededUnifyResultFilter>(); });

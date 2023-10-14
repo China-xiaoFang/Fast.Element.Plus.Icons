@@ -17,22 +17,29 @@ using Fast.NET;
 namespace Fast.UnifyResult.Attributes;
 
 /// <summary>
-/// <see cref="UnifyModelAttribute"/> 规范化模型特性
+/// <see cref="UnifyProviderAttribute"/> 规范化提供器特性
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
-public class UnifyModelAttribute : Attribute
+[SuppressSniffer, AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public sealed class UnifyProviderAttribute : Attribute
 {
     /// <summary>
-    /// 规范化模型
+    /// 构造函数
     /// </summary>
-    /// <param name="modelType"></param>
-    public UnifyModelAttribute(Type modelType)
+    public UnifyProviderAttribute() : this(string.Empty)
     {
-        ModelType = modelType;
     }
 
     /// <summary>
-    /// 模型类型（泛型）
+    /// 构造函数
     /// </summary>
-    public Type ModelType { get; set; }
+    /// <param name="name"></param>
+    public UnifyProviderAttribute(string name)
+    {
+        Name = name;
+    }
+
+    /// <summary>
+    /// 提供器名称
+    /// </summary>
+    public string Name { get; set; }
 }

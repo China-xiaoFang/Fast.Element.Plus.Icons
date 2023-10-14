@@ -12,17 +12,18 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
+using Fast.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.UnifyResult.Filters;
 
 /// <summary>
-/// 规范化结构（请求成功）过滤器
+/// <see cref="SucceededUnifyResultFilter"/> 规范化结构（请求成功）过滤器
 /// </summary>
 internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
 {
@@ -48,38 +49,38 @@ internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
         var actionExecutedContext = await next();
 
         // 排除 WebSocket 请求处理
-        if (context.HttpContext.WebSockets.IsWebSocketRequest || context.HttpContext.Request.Path == "/ws")
-            return;
-
-        // 获取规范化处理器
-        var unifyResult = context.HttpContext.RequestServices.GetService<IUnifyResultProvider>();
-
-        // 如果为空，则不走下面的逻辑
-        if (unifyResult == null)
+        if (actionExecutedContext.HttpContext.IsWebSocketRequest())
             return;
 
         // 处理已经含有状态码结果的 Result
-        if (actionExecutedContext.Result is IStatusCodeActionResult statusCodeResult && statusCodeResult.StatusCode != null)
+        if (actionExecutedContext.Result is IStatusCodeActionResult statusCodeActionResult &&
+            statusCodeActionResult.StatusCode != null)
         {
             // 小于 200 或者 大于 299 都不是成功值，直接跳过
-            if (statusCodeResult.StatusCode.Value < 200 || statusCodeResult.StatusCode.Value > 299)
+            if (statusCodeActionResult.StatusCode.Value < 200 || statusCodeActionResult.StatusCode.Value > 299)
             {
                 // 处理规范化结果
-                var httpContext = context.HttpContext;
-                var statusCode = statusCodeResult.StatusCode.Value;
-
-                // 解决刷新 Token 时间和 Token 时间相近问题
-                if (statusCodeResult.StatusCode.Value == StatusCodes.Status401Unauthorized &&
-                    httpContext.Response.Headers.ContainsKey("access-token") &&
-                    httpContext.Response.Headers.ContainsKey("x-access-token"))
+                if (!UnifyContext.CheckStatusCodeNonUnify(context.HttpContext, out var failUnifyResult))
                 {
-                    httpContext.Response.StatusCode = statusCode = StatusCodes.Status403Forbidden;
-                }
+                    var httpContext = context.HttpContext;
+                    var statusCode = statusCodeActionResult.StatusCode.Value;
 
-                // 如果 Response 已经完成输出，则禁止写入
-                if (httpContext.Response.HasStarted)
-                    return;
-                await unifyResult.OnResponseStatusCodes(httpContext, statusCode);
+                    // 解决刷新 Token 时间和 Token 时间相近问题
+                    if (statusCodeActionResult.StatusCode.Value == StatusCodes.Status401Unauthorized &&
+                        httpContext.Request.Headers.ContainsKey("access-token") &&
+                        httpContext.Request.Headers.ContainsKey("x-access-token"))
+                    {
+                        httpContext.Response.StatusCode = statusCode = StatusCodes.Status403Forbidden;
+                    }
+
+                    // 如果 Response 已经完成输出，则禁止写入
+                    if (httpContext.Response.HasStarted)
+                    {
+                        return;
+                    }
+
+                    await failUnifyResult.OnResponseStatusCodes(httpContext, statusCode);
+                }
 
                 return;
             }
@@ -87,60 +88,47 @@ internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
 
         // 如果出现异常，则不会进入该过滤器
         if (actionExecutedContext.Exception != null)
+        {
             return;
+        }
+
+        // 获取控制器信息
+        var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+
+        // 判断是否跳过规范化处理
+        if (UnifyContext.CheckSucceededNonUnify(context.HttpContext, controllerActionDescriptor!.MethodInfo, out var unifyResult))
+        {
+            return;
+        }
 
         // 处理 BadRequestObjectResult 类型规范化处理
         if (actionExecutedContext.Result is BadRequestObjectResult badRequestObjectResult)
         {
-            var result = unifyResult.OnValidateFailed(context, badRequestObjectResult.Value);
+            // 解析验证消息
+            var validationMetadata = ValidatorContext.GetValidationMetadata(badRequestObjectResult.Value);
+
+            var result = unifyResult.OnValidateFailed(context, validationMetadata);
+
             if (result != null)
+            {
                 actionExecutedContext.Result = result;
+            }
         }
         else
         {
             IActionResult result = default;
 
-            // 排除以下结果，跳过规范化处理
-            var isDataResult = actionExecutedContext.Result switch
+            // 检查是否是有效的结果（可进行规范化的结果）
+            if (UnifyContext.CheckValidResult(actionExecutedContext.Result, out var data))
             {
-                ViewResult => false,
-                PartialViewResult => false,
-                FileResult => false,
-                ChallengeResult => false,
-                SignInResult => false,
-                SignOutResult => false,
-                RedirectToPageResult => false,
-                RedirectToRouteResult => false,
-                RedirectResult => false,
-                RedirectToActionResult => false,
-                LocalRedirectResult => false,
-                ForbidResult => false,
-                ViewComponentResult => false,
-                PageResult => false,
-                NotFoundResult => false,
-                NotFoundObjectResult => false,
-                _ => true,
-            };
-
-            // 目前支持返回值 ActionResult
-            if (isDataResult)
-            {
-                var data = actionExecutedContext.Result switch
-                {
-                    // 处理内容结果
-                    ContentResult content => content.Content,
-                    // 处理对象结果
-                    ObjectResult obj => obj.Value,
-                    // 处理 JSON 对象
-                    JsonResult json => json.Value,
-                    _ => null,
-                };
                 result = unifyResult.OnSucceeded(actionExecutedContext, data);
             }
 
             // 如果是不能规范化的结果类型，则跳过
             if (result == null)
+            {
                 return;
+            }
 
             actionExecutedContext.Result = result;
         }

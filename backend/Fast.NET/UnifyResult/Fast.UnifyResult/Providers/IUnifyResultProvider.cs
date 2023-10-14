@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -27,10 +28,10 @@ public interface IUnifyResultProvider
     /// <summary>
     /// 异常返回值
     /// </summary>
-    /// <param name="context"><see cref="ExceptionContext"/></param>
-    /// <param name="statusCode"></param>
+    /// <param name="context"><see cref="ExceptorContext"/></param>
+    /// <param name="metadata"><see cref="ExceptionMetadata"/> 异常元数据</param>
     /// <returns><see cref="IActionResult"/></returns>
-    IActionResult OnException(ExceptionContext context, int statusCode);
+    IActionResult OnException(ExceptionContext context, ExceptionMetadata metadata);
 
     /// <summary>
     /// 成功返回值
@@ -44,15 +45,15 @@ public interface IUnifyResultProvider
     /// 验证失败返回值
     /// </summary>
     /// <param name="context"><see cref="ActionExecutingContext"/></param>
-    /// <param name="message"></param>
+    /// <param name="metadata"><see cref="ValidationMetadata"/> 验证信息元数据</param>
     /// <returns><see cref="IActionResult"/></returns>
-    IActionResult OnValidateFailed(ActionExecutingContext context, object message);
+    IActionResult OnValidateFailed(ActionExecutingContext context, ValidationMetadata metadata);
 
     /// <summary>
     /// 拦截返回状态码
     /// </summary>
     /// <param name="context"><see cref="HttpContext"/></param>
-    /// <param name="statusCode"></param>
+    /// <param name="statusCode"><see cref="int"/> 状态码</param>
     /// <returns></returns>
     Task OnResponseStatusCodes(HttpContext context, int statusCode);
 }
