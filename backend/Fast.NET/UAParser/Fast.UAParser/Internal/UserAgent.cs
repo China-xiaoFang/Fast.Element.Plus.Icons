@@ -12,12 +12,22 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+using Fast.UAParser.UAParser;
 
-/// <summary>Represents a user agent, commonly a browser</summary>
+namespace Fast.UAParser.Internal;
+
+/// <summary>
+/// <see cref="UserAgent"/> 用户代理设备浏览器信息
+/// </summary>
 public sealed class UserAgent
 {
-    /// <summary>Construct a UserAgent instance</summary>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="family">UserAgent的型号</param>
+    /// <param name="major">UserAgent的主要版本</param>
+    /// <param name="minor">UserAgent的次要版本</param>
+    /// <param name="patch">UserAgent的补丁版本</param>
     public UserAgent(string family, string major, string minor, string patch)
     {
         Family = family;
@@ -26,19 +36,29 @@ public sealed class UserAgent
         Patch = patch;
     }
 
-    /// <summary>The family of user agent</summary>
+    /// <summary>
+    /// UserAgent的型号
+    /// </summary>
     public string Family { get; }
 
-    /// <summary>Major version of the user agent, if available</summary>
+    /// <summary>
+    /// UserAgent的主要版本，如果有的话
+    /// </summary>
     public string Major { get; }
 
-    /// <summary>Minor version of the user agent, if available</summary>
+    /// <summary>
+    /// UserAgent的次要版本，如果有的话
+    /// </summary>
     public string Minor { get; }
 
-    /// <summary>Patch version of the user agent, if available</summary>
+    /// <summary>
+    /// UserAgent的补丁版本，如果有的话
+    /// </summary>
     public string Patch { get; }
 
-    /// <summary>The user agent as a readbale string</summary>
+    /// <summary>
+    /// UserAgent的可读描述
+    /// </summary>
     /// <returns></returns>
     public override string ToString()
     {

@@ -14,6 +14,8 @@
 
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Fast.UAParser.Extensions;
+using Fast.UAParser.Internal;
 using Fast.UAParser.UAParser;
 
 // ReSharper disable once CheckNamespace

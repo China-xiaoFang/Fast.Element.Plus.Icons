@@ -12,33 +12,42 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+using Fast.UAParser.Providers;
+
+namespace Fast.UAParser.Internal;
 
 /// <summary>
-/// Represents the user agent client information resulting from parsing
-/// a user agent string
+/// <see cref="ClientInfo"/> 用户代理客户端信息
 /// </summary>
 public class ClientInfo : IUAParserOutput
 {
-    /// <summary>The user agent string, the input for the UAParser</summary>
+    /// <summary>
+    /// 用户代理字符串，作为 UAParser 的输入
+    /// </summary>
     public string String { get; }
 
-    /// <summary>The OS parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的操作系统信息
+    /// </summary>
     public OS OS { get; }
 
-    /// <summary>The Device parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的设备信息
+    /// </summary>
     public Device Device { get; }
 
-    /// <summary>The User Agent parsed from the user agent string</summary>
-    [Obsolete("Mirrors the value of the UA property. Will be removed in future versions")]
-    public UserAgent UserAgent => UA;
-
-    /// <summary>The User Agent parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的浏览器信息
+    /// </summary>
     public UserAgent UA { get; }
 
     /// <summary>
-    /// Constructs an instance of the ClientInfo with results of the user agent string parsing
+    ///  使用用户代理字符串解析结果构造 ClientInfo 的实例
     /// </summary>
+    /// <param name="inputString">用户代理字符串</param>
+    /// <param name="os">操作系统信息</param>
+    /// <param name="device">设备信息</param>
+    /// <param name="userAgent">浏览器信息</param>
     public ClientInfo(string inputString, OS os, Device device, UserAgent userAgent)
     {
         String = inputString;
@@ -48,8 +57,8 @@ public class ClientInfo : IUAParserOutput
     }
 
     /// <summary>
-    /// A readable description of the user agent client information
+    /// 用户代理客户端信息的可读描述
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => string.Format("{0} {1} {2}", OS, Device, UA);
+    public override string ToString() => $"{OS} {Device} {UA}";
 }

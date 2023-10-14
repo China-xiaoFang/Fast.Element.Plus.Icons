@@ -12,14 +12,23 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+using Fast.UAParser.UAParser;
+
+namespace Fast.UAParser.Internal;
 
 /// <summary>
-/// Represents the operating system the user agent runs on
+/// <see cref="OS"/> 用户代理操作系统信息
 /// </summary>
 public sealed class OS
 {
-    /// <summary>Constructs an OS instance</summary>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="family">操作系统的型号</param>
+    /// <param name="major">操作系统的主要版本</param>
+    /// <param name="minor">操作系统的次要版本</param>
+    /// <param name="patch">操作系统的补丁版本</param>
+    /// <param name="patchMinor">操作系统的次要补丁版本</param>
     public OS(string family, string major, string minor, string patch, string patchMinor)
     {
         Family = family;
@@ -29,22 +38,34 @@ public sealed class OS
         PatchMinor = patchMinor;
     }
 
-    /// <summary>The familiy of the OS</summary>
+    /// <summary>
+    /// 操作系统的型号
+    /// </summary>
     public string Family { get; }
 
-    /// <summary>The major version of the OS, if available</summary>
+    /// <summary>
+    /// 操作系统的主要版本，如果有的话
+    /// </summary>
     public string Major { get; }
 
-    /// <summary>The minor version of the OS, if available</summary>
+    /// <summary>
+    /// 操作系统的次要版本，如果有的话
+    /// </summary>
     public string Minor { get; }
 
-    /// <summary>The patch version of the OS, if available</summary>
+    /// <summary>
+    /// 操作系统的补丁版本，如果有的话
+    /// </summary>
     public string Patch { get; }
 
-    /// <summary>The minor patch version of the OS, if available</summary>
+    /// <summary>
+    /// 操作系统的次要补丁版本，如果有的话
+    /// </summary>
     public string PatchMinor { get; }
 
-    /// <summary>A readable description of the OS</summary>
+    /// <summary>
+    /// 操作系统的可读描述
+    /// </summary>
     /// <returns></returns>
     public override string ToString()
     {

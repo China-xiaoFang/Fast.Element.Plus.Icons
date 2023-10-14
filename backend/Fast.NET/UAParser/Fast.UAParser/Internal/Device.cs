@@ -12,14 +12,19 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+namespace Fast.UAParser.Internal;
 
 /// <summary>
-/// Represents the physical device the user agent is using
+/// <see cref="Device"/> 用户代理设备信息
 /// </summary>
 public sealed class Device
 {
-    /// <summary>Constructs a Device instance</summary>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="family">设备的型号</param>
+    /// <param name="brand">设备的品牌</param>
+    /// <param name="model">设备的型号</param>
     public Device(string family, string brand, string model)
     {
         Family = family.Trim();
@@ -31,19 +36,28 @@ public sealed class Device
     }
 
     /// <summary>
-    /// Returns true if the device is likely to be a spider or a bot device
+    /// 如果设备很可能是爬虫或机器人设备，则返回 true
     /// </summary>
     public bool IsSpider => "Spider".Equals(Family, StringComparison.OrdinalIgnoreCase);
 
-    /// <summary>The brand of the device</summary>
+    /// <summary>
+    /// 设备的品牌
+    /// </summary>
     public string Brand { get; }
 
-    /// <summary>The family of the device, if available</summary>
+    /// <summary>
+    /// 设备的型号，如果有的话
+    /// </summary>
     public string Family { get; }
 
-    /// <summary>The model of the device, if available</summary>
+    /// <summary>
+    /// 设备的型号，如果有的话
+    /// </summary>
     public string Model { get; }
 
-    /// <summary>A readable description of the device</summary>
+    /// <summary>
+    /// 设备的可读描述
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() => Family;
 }

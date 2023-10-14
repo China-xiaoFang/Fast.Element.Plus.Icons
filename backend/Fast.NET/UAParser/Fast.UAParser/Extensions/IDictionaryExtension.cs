@@ -12,15 +12,28 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+using System.Collections;
 
-internal static class DictionaryExtension
+namespace Fast.UAParser.Extensions;
+
+/// <summary>
+/// <see cref="IDictionary"/> 字典拓展类
+/// </summary>
+internal static class IDictionaryExtension
 {
+    /// <summary>
+    /// 查找字典中 Key 的 Value
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="dictionary"><see cref="IDictionary"/></param>
+    /// <param name="key"><see cref="TKey"/></param>
+    /// <returns><see cref="TValue"/></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static TValue Find<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
     {
         if (dictionary == null)
             throw new ArgumentNullException(nameof(dictionary));
-        TValue obj;
-        return !dictionary.TryGetValue(key, out obj) ? default : obj;
+        return !dictionary.TryGetValue(key, out var obj) ? default : obj;
     }
 }

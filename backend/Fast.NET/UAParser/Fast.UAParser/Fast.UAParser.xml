@@ -31,6 +31,30 @@
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>
+        <member name="T:Fast.NET.ExceptorContext">
+            <summary>
+            <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ExceptorContext.GetExceptionMetadata(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取异常元数据
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
+            <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
+        </member>
+        <member name="T:Fast.NET.ValidatorContext">
+            <summary>
+            <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ValidatorContext.GetValidationMetadata(System.Object)">
+            <summary>
+            获取验证错误信息
+            </summary>
+            <param name="errors"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
+        </member>
         <member name="T:Fast.NET.Debugging">
             <summary>
             <see cref="T:Fast.NET.Debugging"/> 向事件管理器中输出事件信息
@@ -246,80 +270,489 @@
             </param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="T:Fast.UAParser.UAParser.ClientInfo">
+        <member name="T:Fast.NET.AppException">
             <summary>
-            Represents the user agent client information resulting from parsing
-            a user agent string
+            <see cref="T:Fast.NET.AppException"/> 应用程序异常类
             </summary>
         </member>
-        <member name="P:Fast.UAParser.UAParser.ClientInfo.String">
-            <summary>The user agent string, the input for the UAParser</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.ClientInfo.OS">
-            <summary>The OS parsed from the user agent string</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.ClientInfo.Device">
-            <summary>The Device parsed from the user agent string</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.ClientInfo.UserAgent">
-            <summary>The User Agent parsed from the user agent string</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.ClientInfo.UA">
-            <summary>The User Agent parsed from the user agent string</summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.ClientInfo.#ctor(System.String,Fast.UAParser.UAParser.OS,Fast.UAParser.UAParser.Device,Fast.UAParser.UAParser.UserAgent)">
+        <member name="M:Fast.NET.AppException.#ctor">
             <summary>
-            Constructs an instance of the ClientInfo with results of the user agent string parsing
+            <inheritdoc cref="T:Fast.NET.AppException" />
             </summary>
         </member>
-        <member name="M:Fast.UAParser.UAParser.ClientInfo.ToString">
+        <member name="M:Fast.NET.AppException.#ctor(System.String)">
             <summary>
-            A readable description of the user agent client information
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Object)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:Fast.NET.AppException.#ctor(System.String,System.Object,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.AppException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="P:Fast.NET.AppException.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.ErrorMessage">
+            <summary>
+            错误消息（支持 Object 对象）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.ValidationException">
+            <summary>
+            是否是数据验证异常
+            </summary>
+        </member>
+        <member name="P:Fast.NET.AppException.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.UserFriendlyException">
+            <summary>
+            <see cref="T:Fast.NET.UserFriendlyException"/> 用户友好异常
+            </summary>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Object)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="M:Fast.NET.UserFriendlyException.#ctor(System.String,System.Object,System.Exception)">
+            <summary>
+            <inheritdoc cref="T:Fast.NET.UserFriendlyException" />
+            </summary>
+            <param name="message">异常信息</param>
+            <param name="errorCode">错误编码</param>
+            <param name="innerException">内部异常</param>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ErrorMessage">
+            <summary>
+            错误消息（支持 Object 对象）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.ValidationException">
+            <summary>
+            是否是数据验证异常
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UserFriendlyException.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.InternalHttpContextExtension">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部 HttpContext 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            判断是否是 WebSocket 请求
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="!:TAttribute"/></returns>
+        </member>
+        <member name="T:Fast.NET.InternalMethodInfoExtension">
+            <summary>
+            <see cref="T:System.Reflection.MethodInfo"/> 内部 MethodInfo 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
+            <summary>
+            判断方法是否是异步
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法真实返回类型
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Type"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
+            <summary>
+            查找方法指定特性，如果没找到则继续查找声明类
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="method"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.NET.InternalTypeInfoExtension">
+            <summary>
+            <see cref="T:System.Type"/> 内部 Type 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalTypeInfoExtension.HasImplementedRawGeneric(System.Type,System.Type)">
+            <summary>
+            判断类型是否实现某个泛型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> 类型</param>
+            <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:Fast.NET.ExceptionMetadata">
+            <summary>
+            <see cref="T:Fast.NET.ExceptionMetadata"/> 异常元数据
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.Errors">
+            <summary>
+            错误对象（信息）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ExceptionMetadata.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.NET.ValidationMetadata">
+            <summary>
+            <see cref="T:Fast.NET.ValidationMetadata"/> 验证信息元数据
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ValidationResult">
+            <summary>
+            验证结果
+            </summary>
+            <remarks>返回字典或字符串类型</remarks>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.Message">
+            <summary>
+            异常消息
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ModelState">
+            <summary>
+            验证状态
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.OriginErrorCode">
+            <summary>
+            错误码（没被复写过的 ErrorCode ）
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.FirstErrorProperty">
+            <summary>
+            首个错误属性
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.FirstErrorMessage">
+            <summary>
+            首个错误消息
+            </summary>
+        </member>
+        <member name="P:Fast.NET.ValidationMetadata.Data">
+            <summary>
+            额外数据
+            </summary>
+        </member>
+        <member name="T:Fast.UAParser.Extensions.IDictionaryExtension">
+            <summary>
+            <see cref="T:System.Collections.IDictionary"/> 字典拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Extensions.IDictionaryExtension.Find``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+            <summary>
+            查找字典中 Key 的 Value
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dictionary"><see cref="T:System.Collections.IDictionary"/></param>
+            <param name="key"><see cref="!:TKey"/></param>
+            <returns><see cref="!:TValue"/></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Fast.UAParser.Internal.ClientInfo">
+            <summary>
+            <see cref="T:Fast.UAParser.Internal.ClientInfo"/> 用户代理客户端信息
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.ClientInfo.String">
+            <summary>
+            用户代理字符串，作为 UAParser 的输入
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.ClientInfo.OS">
+            <summary>
+            从用户代理字符串解析得到的操作系统信息
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.ClientInfo.Device">
+            <summary>
+            从用户代理字符串解析得到的设备信息
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.ClientInfo.UA">
+            <summary>
+            从用户代理字符串解析得到的浏览器信息
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Internal.ClientInfo.#ctor(System.String,Fast.UAParser.Internal.OS,Fast.UAParser.Internal.Device,Fast.UAParser.Internal.UserAgent)">
+            <summary>
+             使用用户代理字符串解析结果构造 ClientInfo 的实例
+            </summary>
+            <param name="inputString">用户代理字符串</param>
+            <param name="os">操作系统信息</param>
+            <param name="device">设备信息</param>
+            <param name="userAgent">浏览器信息</param>
+        </member>
+        <member name="M:Fast.UAParser.Internal.ClientInfo.ToString">
+            <summary>
+            用户代理客户端信息的可读描述
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Fast.UAParser.UAParser.Device">
+        <member name="T:Fast.UAParser.Internal.Device">
             <summary>
-            Represents the physical device the user agent is using
+            <see cref="T:Fast.UAParser.Internal.Device"/> 用户代理设备信息
             </summary>
         </member>
-        <member name="M:Fast.UAParser.UAParser.Device.#ctor(System.String,System.String,System.String)">
-            <summary>Constructs a Device instance</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.Device.IsSpider">
+        <member name="M:Fast.UAParser.Internal.Device.#ctor(System.String,System.String,System.String)">
             <summary>
-            Returns true if the device is likely to be a spider or a bot device
+            
+            </summary>
+            <param name="family">设备的型号</param>
+            <param name="brand">设备的品牌</param>
+            <param name="model">设备的型号</param>
+        </member>
+        <member name="P:Fast.UAParser.Internal.Device.IsSpider">
+            <summary>
+            如果设备很可能是爬虫或机器人设备，则返回 true
             </summary>
         </member>
-        <member name="P:Fast.UAParser.UAParser.Device.Brand">
-            <summary>The brand of the device</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.Device.Family">
-            <summary>The family of the device, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.Device.Model">
-            <summary>The model of the device, if available</summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.Device.ToString">
-            <summary>A readable description of the device</summary>
-        </member>
-        <member name="T:Fast.UAParser.UAParser.IUAParserOutput">
+        <member name="P:Fast.UAParser.Internal.Device.Brand">
             <summary>
-            Representing the parse results. Structure of this class aligns with the
-            ua-parser-output WebIDL structure defined in this document: https://github.com/ua-parser/uap-core/blob/master/docs/specification.md
+            设备的品牌
             </summary>
         </member>
-        <member name="P:Fast.UAParser.UAParser.IUAParserOutput.String">
-            <summary>The user agent string, the input for the UAParser</summary>
+        <member name="P:Fast.UAParser.Internal.Device.Family">
+            <summary>
+            设备的型号，如果有的话
+            </summary>
         </member>
-        <member name="P:Fast.UAParser.UAParser.IUAParserOutput.OS">
-            <summary>The OS parsed from the user agent string</summary>
+        <member name="P:Fast.UAParser.Internal.Device.Model">
+            <summary>
+            设备的型号，如果有的话
+            </summary>
         </member>
-        <member name="P:Fast.UAParser.UAParser.IUAParserOutput.Device">
-            <summary>The Device parsed from the user agent string</summary>
+        <member name="M:Fast.UAParser.Internal.Device.ToString">
+            <summary>
+            设备的可读描述
+            </summary>
+            <returns></returns>
         </member>
-        <member name="P:Fast.UAParser.UAParser.IUAParserOutput.UA">
-            <summary>The User Agent parsed from the user agent string</summary>
+        <member name="T:Fast.UAParser.Internal.OS">
+            <summary>
+            <see cref="T:Fast.UAParser.Internal.OS"/> 用户代理操作系统信息
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Internal.OS.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="family">操作系统的型号</param>
+            <param name="major">操作系统的主要版本</param>
+            <param name="minor">操作系统的次要版本</param>
+            <param name="patch">操作系统的补丁版本</param>
+            <param name="patchMinor">操作系统的次要补丁版本</param>
+        </member>
+        <member name="P:Fast.UAParser.Internal.OS.Family">
+            <summary>
+            操作系统的型号
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.OS.Major">
+            <summary>
+            操作系统的主要版本，如果有的话
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.OS.Minor">
+            <summary>
+            操作系统的次要版本，如果有的话
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.OS.Patch">
+            <summary>
+            操作系统的补丁版本，如果有的话
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.OS.PatchMinor">
+            <summary>
+            操作系统的次要补丁版本，如果有的话
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Internal.OS.ToString">
+            <summary>
+            操作系统的可读描述
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UAParser.Internal.UserAgent">
+            <summary>
+            <see cref="T:Fast.UAParser.Internal.UserAgent"/> 用户代理设备浏览器信息
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Internal.UserAgent.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="family">UserAgent的型号</param>
+            <param name="major">UserAgent的主要版本</param>
+            <param name="minor">UserAgent的次要版本</param>
+            <param name="patch">UserAgent的补丁版本</param>
+        </member>
+        <member name="P:Fast.UAParser.Internal.UserAgent.Family">
+            <summary>
+            UserAgent的型号
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.UserAgent.Major">
+            <summary>
+            UserAgent的主要版本，如果有的话
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.UserAgent.Minor">
+            <summary>
+            UserAgent的次要版本，如果有的话
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Internal.UserAgent.Patch">
+            <summary>
+            UserAgent的补丁版本，如果有的话
+            </summary>
+        </member>
+        <member name="M:Fast.UAParser.Internal.UserAgent.ToString">
+            <summary>
+            UserAgent的可读描述
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UAParser.Providers.IUAParserOutput">
+            <summary>
+            <see cref="T:Fast.UAParser.Providers.IUAParserOutput"/> UA解析输出
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Providers.IUAParserOutput.String">
+            <summary>
+            用户代理字符串，作为 UAParser 的输入
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Providers.IUAParserOutput.OS">
+            <summary>
+            从用户代理字符串解析得到的操作系统信息
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Providers.IUAParserOutput.Device">
+            <summary>
+            从用户代理字符串解析得到的设备信息
+            </summary>
+        </member>
+        <member name="P:Fast.UAParser.Providers.IUAParserOutput.UA">
+            <summary>
+            从用户代理字符串解析得到的浏览器信息
+            </summary>
         </member>
         <member name="T:Fast.UAParser.UAParser.MinimalYamlParser">
             <summary>
@@ -327,33 +760,6 @@
             dependency on large Yaml parsing lib. Note that a unittest ensures compatibility
             by ensuring regexes and properties are read similar to using the full yaml lib
             </summary>
-        </member>
-        <member name="T:Fast.UAParser.UAParser.OS">
-            <summary>
-            Represents the operating system the user agent runs on
-            </summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.OS.#ctor(System.String,System.String,System.String,System.String,System.String)">
-            <summary>Constructs an OS instance</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.OS.Family">
-            <summary>The familiy of the OS</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.OS.Major">
-            <summary>The major version of the OS, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.OS.Minor">
-            <summary>The minor version of the OS, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.OS.Patch">
-            <summary>The patch version of the OS, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.OS.PatchMinor">
-            <summary>The minor patch version of the OS, if available</summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.OS.ToString">
-            <summary>A readable description of the OS</summary>
-            <returns></returns>
         </member>
         <member name="T:Fast.UAParser.UAParser.ParserOptions">
             <summary>Options available for the parser</summary>
@@ -370,28 +776,6 @@
             serving as a fail safe for potential infinite backtracking. The default is
             set to Regex.InfiniteMatchTimeout
             </summary>
-        </member>
-        <member name="T:Fast.UAParser.UAParser.UserAgent">
-            <summary>Represents a user agent, commonly a browser</summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.UserAgent.#ctor(System.String,System.String,System.String,System.String)">
-            <summary>Construct a UserAgent instance</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.UserAgent.Family">
-            <summary>The family of user agent</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.UserAgent.Major">
-            <summary>Major version of the user agent, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.UserAgent.Minor">
-            <summary>Minor version of the user agent, if available</summary>
-        </member>
-        <member name="P:Fast.UAParser.UAParser.UserAgent.Patch">
-            <summary>Patch version of the user agent, if available</summary>
-        </member>
-        <member name="M:Fast.UAParser.UAParser.UserAgent.ToString">
-            <summary>The user agent as a readbale string</summary>
-            <returns></returns>
         </member>
         <member name="T:Fast.UAParser.Parser">
             <summary>Represents a parser of a user agent string</summary>

@@ -12,23 +12,32 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UAParser.UAParser;
+using Fast.UAParser.Internal;
+
+namespace Fast.UAParser.Providers;
 
 /// <summary>
-/// Representing the parse results. Structure of this class aligns with the
-/// ua-parser-output WebIDL structure defined in this document: https://github.com/ua-parser/uap-core/blob/master/docs/specification.md
+/// <see cref="IUAParserOutput"/> UA解析输出
 /// </summary>
 public interface IUAParserOutput
 {
-    /// <summary>The user agent string, the input for the UAParser</summary>
+    /// <summary>
+    /// 用户代理字符串，作为 UAParser 的输入
+    /// </summary>
     string String { get; }
 
-    /// <summary>The OS parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的操作系统信息
+    /// </summary>
     OS OS { get; }
 
-    /// <summary>The Device parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的设备信息
+    /// </summary>
     Device Device { get; }
 
-    /// <summary>The User Agent parsed from the user agent string</summary>
+    /// <summary>
+    /// 从用户代理字符串解析得到的浏览器信息
+    /// </summary>
     UserAgent UA { get; }
 }
