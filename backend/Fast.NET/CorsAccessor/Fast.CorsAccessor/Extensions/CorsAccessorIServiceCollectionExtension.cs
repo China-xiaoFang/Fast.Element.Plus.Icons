@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.CorsAccessor.Internal;
 using Fast.CorsAccessor.Options;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -20,21 +21,31 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Fast.CorsAccessor.Extensions;
 
 /// <summary>
-/// 跨域访问服务拓展类
+/// <see cref="IServiceCollection"/> 跨域访问服务拓展类
 /// </summary>
 public static class CorsAccessorIServiceCollectionExtension
 {
     /// <summary>
     /// 配置跨域
     /// </summary>
-    /// <param name="services">服务集合</param>
-    /// <param name="configuration"></param>
+    /// <param name="services"><see cref="IServiceCollection"/> 服务集合</param>
+    /// <param name="configuration"><see cref="IConfiguration"/> 配置项，建议通过框架自带的 App.Configuration 传入，否则会在内部自动解析 IConfiguration 性能会很低</param>
     /// <param name="corsOptionsHandler"></param>
     /// <param name="corsPolicyBuilderHandler"></param>
     /// <returns>服务集合</returns>
-    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration,
+    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration = null,
         Action<CorsOptions> corsOptionsHandler = default, Action<CorsPolicyBuilder> corsPolicyBuilderHandler = default)
     {
+        // 处理 IConfiguration
+        if (configuration == null)
+        {
+            // 构建新的服务对象
+            var serviceProvider = services.BuildServiceProvider();
+            configuration = serviceProvider.GetService<IConfiguration>();
+            // 释放服务对象
+            serviceProvider.Dispose();
+        }
+
         // 获取跨域配置选项
         var corsAccessorSettings = configuration.GetSection("CorsAccessorSettings").Get<CorsAccessorSettingsOptions>();
 
@@ -51,7 +62,7 @@ public static class CorsAccessorIServiceCollectionExtension
             options.AddPolicy(corsAccessorSettings.PolicyName, builder =>
             {
                 // 设置跨域策略
-                corsAccessorSettings.SetCorsPolicy(builder, corsAccessorSettings);
+                Penetrates.SetCorsPolicy(builder, corsAccessorSettings);
 
                 // 添加自定义配置
                 corsPolicyBuilderHandler?.Invoke(builder);

@@ -21,16 +21,16 @@ using Microsoft.Extensions.Options;
 namespace Fast.CorsAccessor.Extensions;
 
 /// <summary>
-/// 跨域中间件拓展
+/// <see cref="IApplicationBuilder"/> 跨域中间件拓展类
 /// </summary>
 public static class CorsAccessorIApplicationBuilderExtension
 {
     /// <summary>
     /// 添加跨域中间件
     /// </summary>
-    /// <param name="app"></param>
+    /// <param name="app"><see cref="IApplicationBuilder"/></param>
     /// <param name="corsPolicyBuilderHandler"></param>
-    /// <returns></returns>
+    /// <returns><see cref="IApplicationBuilder"/></returns>
     public static IApplicationBuilder UseCorsAccessor(this IApplicationBuilder app,
         Action<CorsPolicyBuilder> corsPolicyBuilderHandler = default)
     {
