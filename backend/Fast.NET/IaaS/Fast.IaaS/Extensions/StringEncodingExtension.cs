@@ -16,12 +16,14 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="StringEncodingExtension"/> 字符串编码拓展类
 /// </summary>
+[SuppressSniffer]
 public static class StringEncodingExtension
 {
     #region ASCII

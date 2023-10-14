@@ -14,12 +14,14 @@
 
 using System.Text;
 using Fast.IaaS.Utils;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="Base64Extension"/> Base64 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class Base64Extension
 {
     /// <summary>
@@ -77,7 +79,7 @@ public static class Base64Extension
             }
 
             base64Str = base64Str?.Trim();
-            var input = base64Str?.Substring(randomPrefixStrLength);
+            var input = base64Str?[randomPrefixStrLength..];
 
             input = randomPrefixStrLength == 0 ? input : RemoveBase64StrRandomStr(input);
             var buffer = Convert.FromBase64String(input);
@@ -142,7 +144,7 @@ public static class Base64Extension
         public List<PwdDicItem> Item { get; init; }
     }
 
-    private struct PwdDicItem
+    private readonly struct PwdDicItem
     {
         public int Index { get; init; }
 

@@ -13,12 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Security.Cryptography;
+using Fast.NET;
 
 namespace Fast.IaaS.Utils;
 
 /// <summary>
 /// <see cref="FileUtil"/> 文件工具类
 /// </summary>
+[SuppressSniffer]
 public static class FileUtil
 {
     /// <summary>
@@ -28,15 +30,11 @@ public static class FileUtil
     /// <returns><see cref="string"/> 由小写字母组成的 SHA1 哈希值字符串。</returns>
     public static string GetFileSHA1(string filePath)
     {
-        var strResult = "";
-        var strHashData = "";
-        FileStream oFileStream = null;
-
         // 创建 SHA1 实例
         var osha1 = SHA1.Create();
 
         // 打开文件流，读取文件内容
-        oFileStream = new FileStream(filePath.Replace("\"", ""), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        var oFileStream = new FileStream(filePath.Replace("\"", ""), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 
         // 计算文件的 SHA1 哈希值
         var arrBytHashValue = osha1.ComputeHash(oFileStream);
@@ -45,11 +43,11 @@ public static class FileUtil
         oFileStream.Close();
 
         // 将哈希值转换为十六进制字符串，并去掉连字符（“-”）
-        strHashData = BitConverter.ToString(arrBytHashValue);
+        var strHashData = BitConverter.ToString(arrBytHashValue);
         strHashData = strHashData.Replace("-", "");
 
         // 转换为小写字母形式，作为最终的哈希值结果
-        strResult = strHashData.ToLower();
+        var strResult = strHashData.ToLower();
         return strResult;
     }
 

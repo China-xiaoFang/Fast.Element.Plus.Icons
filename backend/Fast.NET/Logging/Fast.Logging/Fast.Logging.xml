@@ -458,7 +458,7 @@
             </summary>
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="!:TAttribute"/></returns>
+            <returns></returns>
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
@@ -581,6 +581,43 @@
             <summary>
             额外数据
             </summary>
+        </member>
+        <member name="T:Fast.CommunalResources.Extensions.ExceptionExtension">
+            <summary>
+            <see cref="T:System.Exception"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.AppException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.AppException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.UserFriendlyException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.UserFriendlyException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
         </member>
         <member name="T:Fast.Logging.Extensions.ILoggerExtension">
             <summary>

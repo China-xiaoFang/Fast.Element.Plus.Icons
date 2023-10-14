@@ -21,7 +21,7 @@ namespace Fast.NET;
 /// <see cref="FastEnumAttribute"/> 枚举特性
 /// </summary>
 /// <remarks>用于区分是否可以写入枚举字典的特性</remarks>
-[AttributeUsage(AttributeTargets.Enum)]
+[SuppressSniffer, AttributeUsage(AttributeTargets.Enum)]
 public class FastEnumAttribute : Attribute
 {
     /// <summary>

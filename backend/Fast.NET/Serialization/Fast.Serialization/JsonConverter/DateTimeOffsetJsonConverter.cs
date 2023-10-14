@@ -21,6 +21,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="DateTimeOffsetJsonConverter"/> DateTimeOffset 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 {
     /// <summary>
@@ -55,7 +56,7 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
         Localized = outputToLocalDateTime;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="DateTimeOffset"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>
@@ -80,6 +81,7 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 /// <summary>
 /// <see cref="NullableDateTimeOffsetJsonConverter"/> DateTimeOffset? 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?>
 {
     /// <summary>
@@ -114,7 +116,7 @@ public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?
         Localized = outputToLocalDateTime;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="DateTimeOffset"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>

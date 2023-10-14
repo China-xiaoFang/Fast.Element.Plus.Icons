@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
+using Fast.NET;
 using Fast.UnifyResult.Attributes;
 using Fast.UnifyResult.Contexts;
 using Fast.UnifyResult.Filters;
@@ -26,6 +27,7 @@ namespace Fast.UnifyResult.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 规范化服务拓展类
 /// </summary>
+[SuppressSniffer]
 public static class UnifyResultIServiceCollectionExtension
 {
     /// <summary>
@@ -86,13 +88,9 @@ public static class UnifyResultIServiceCollectionExtension
         var providerType = typeof(TUnifyResultProvider);
 
         // 获取规范化提供器模型，不能为空
-        var unifyModelAttribute = providerType.GetCustomAttribute<UnifyModelAttribute>();
-
-        if (unifyModelAttribute == null)
-        {
-            throw new ArgumentNullException(nameof(UnifyModelAttribute),
-                "The normalization model feature is empty, make sure that the normalization provider has the [UnifyModelAttribute] feature");
-        }
+        var unifyModelAttribute = providerType.GetCustomAttribute<UnifyModelAttribute>() ??
+                                  throw new ArgumentNullException(nameof(UnifyModelAttribute),
+                                      "The normalization model feature is empty, make sure that the normalization provider has the [UnifyModelAttribute] feature");
 
         // 创建规范化元数据
         var metadata = new UnifyMetadata

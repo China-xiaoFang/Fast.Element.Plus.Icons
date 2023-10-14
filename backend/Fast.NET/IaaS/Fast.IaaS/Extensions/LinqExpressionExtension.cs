@@ -14,12 +14,14 @@
 
 #nullable enable
 using System.Linq.Expressions;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="Expression"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class LinqExpressionExtension
 {
     /// <summary>

@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- 阻止将公共资源文件夹共享到每个类库的 CommunalResources 文件夹下面 -->
+		<!-- 阻止将公共资源文件夹共享到当前类库的 CommunalResources 文件夹下面 -->
 		<Compile Remove="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" />
 	</ItemGroup>
 

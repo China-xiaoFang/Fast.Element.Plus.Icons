@@ -14,15 +14,17 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Fast.NET;
 
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
 /// <see cref="LongJsonConverter"/> Long 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class LongJsonConverter : JsonConverter<long>
 {
-    /// <summary>Reads and converts the JSON to type long.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="long"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>
@@ -46,9 +48,10 @@ public class LongJsonConverter : JsonConverter<long>
 /// <summary>
 /// <see cref="NullableLongJsonConverter"/> Long? 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class NullableLongJsonConverter : JsonConverter<long?>
 {
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="long"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>

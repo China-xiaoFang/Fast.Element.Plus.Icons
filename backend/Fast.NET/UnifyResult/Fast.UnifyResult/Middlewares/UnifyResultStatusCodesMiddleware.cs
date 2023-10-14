@@ -21,7 +21,6 @@ namespace Fast.UnifyResult.Middlewares;
 /// <summary>
 /// <see cref="UnifyResultStatusCodesMiddleware"/> 状态码中间件
 /// </summary>
-[SuppressSniffer]
 internal class UnifyResultStatusCodesMiddleware
 {
     /// <summary>

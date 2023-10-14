@@ -49,7 +49,7 @@ internal static class ValidateExtension
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
         {
-            if (!(value is IList<object> list) || list.Count == 0)
+            if (value is not IList<object> list || list.Count == 0)
             {
                 return true;
             }

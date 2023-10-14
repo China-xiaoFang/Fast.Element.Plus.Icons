@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.Cache.Extensions;
@@ -19,6 +20,7 @@ namespace Fast.Cache.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class CacheIServiceCollectionExtension
 {
     /// <summary>

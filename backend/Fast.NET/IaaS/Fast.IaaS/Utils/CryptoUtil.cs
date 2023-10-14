@@ -14,12 +14,14 @@
 
 using System.Security.Cryptography;
 using System.Text;
+using Fast.NET;
 
 namespace Fast.IaaS.Utils;
 
 /// <summary>
 /// <see cref="CryptoUtil"/> 加密解密工具类
 /// </summary>
+[SuppressSniffer]
 public static class CryptoUtil
 {
     #region AES

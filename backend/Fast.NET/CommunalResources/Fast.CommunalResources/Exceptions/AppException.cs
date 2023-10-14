@@ -20,7 +20,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="AppException"/> 应用程序异常类
 /// </summary>
-public class AppException : Exception
+public class AppException : System.Exception
 {
     /// <summary>
     /// <inheritdoc cref="AppException" />
@@ -56,7 +56,7 @@ public class AppException : Exception
     /// </summary>
     /// <param name="message">异常信息</param>
     /// <param name="innerException">内部异常</param>
-    public AppException(string message, Exception innerException) : base(message ?? "Internal Server Error.", innerException)
+    public AppException(string message, System.Exception innerException) : base(message ?? "Internal Server Error.", innerException)
     {
         ErrorMessage = message;
         ErrorCode = StatusCodes.Status500InternalServerError;
@@ -68,7 +68,7 @@ public class AppException : Exception
     /// <param name="message">异常信息</param>
     /// <param name="errorCode">错误编码</param>
     /// <param name="innerException">内部异常</param>
-    public AppException(string message, object errorCode, Exception innerException) : base(message ?? "Internal Server Error.",
+    public AppException(string message, object errorCode, System.Exception innerException) : base(message ?? "Internal Server Error.",
         innerException)
     {
         ErrorMessage = message;

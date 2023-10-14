@@ -14,12 +14,14 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Fast.NET;
 
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
 /// <see cref="DoubleJsonConverter"/> double 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class DoubleJsonConverter : JsonConverter<double>
 {
     /// <summary>
@@ -37,7 +39,7 @@ public class DoubleJsonConverter : JsonConverter<double>
         Places = places;
     }
 
-    /// <summary>Reads and converts the JSON to type double.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="double"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>
@@ -61,6 +63,7 @@ public class DoubleJsonConverter : JsonConverter<double>
 /// <summary>
 /// <see cref="NullableDoubleJsonConverter"/> double? 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class NullableDoubleJsonConverter : JsonConverter<double?>
 {
     /// <summary>
@@ -78,7 +81,7 @@ public class NullableDoubleJsonConverter : JsonConverter<double?>
         Places = places;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="double"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>

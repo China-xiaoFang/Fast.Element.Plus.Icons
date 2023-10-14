@@ -13,12 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Xml;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="IDictionary{TKey,TValue}"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class IDictionaryExtension
 {
     /// <summary>

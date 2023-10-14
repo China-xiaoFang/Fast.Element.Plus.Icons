@@ -24,6 +24,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="HttpContext"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class HttpContextExtension
 {
     /// <summary>
@@ -41,7 +42,7 @@ public static class HttpContextExtension
     /// </summary>
     /// <typeparam name="TAttribute"></typeparam>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <returns><see cref="TAttribute"/></returns>
+    /// <returns></returns>
     public static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
     {
         return InternalHttpContextExtension.GetMetadata<TAttribute>(httpContext);

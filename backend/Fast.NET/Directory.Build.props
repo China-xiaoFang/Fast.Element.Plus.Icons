@@ -31,12 +31,14 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
+	<!-- NU1803 是为了解决使用 Http 源的Nuget包导致的警告 -->
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591;NU1803</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<NoWarn>1701;1702;1591</NoWarn>
+		<NoWarn>1701;1702;1591;NU1803</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

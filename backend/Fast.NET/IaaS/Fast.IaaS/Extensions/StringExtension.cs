@@ -14,12 +14,14 @@
 
 using System.Text;
 using System.Text.RegularExpressions;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="string"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class StringExtension
 {
     /// <summary>
@@ -153,7 +155,7 @@ public static class StringExtension
         var iLength = byteStr.Length;
         var iNeed = length - iLength;
         var spaceLen = Encoding.Default.GetBytes(" "); //一个空格的长度
-        iNeed = iNeed / spaceLen.Length;
+        iNeed /= spaceLen.Length;
         var spaceString = GenerateSpaceString(iNeed);
         return strTemp + spaceString;
     }

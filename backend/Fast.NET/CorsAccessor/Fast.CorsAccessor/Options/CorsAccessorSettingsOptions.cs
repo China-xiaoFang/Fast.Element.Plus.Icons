@@ -71,9 +71,7 @@ public sealed class CorsAccessorSettingsOptions
     /// <summary>
     /// 后期配置
     /// </summary>
-    /// <param name="options"></param>
-    /// <param name="configuration"></param>
-    public void PostConfigure(CorsAccessorSettingsOptions options, IConfiguration configuration)
+    public void PostConfigure()
     {
         PolicyName ??= "App.Cors.Policy";
         WithOrigins ??= Array.Empty<string>();

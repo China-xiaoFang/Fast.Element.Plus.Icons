@@ -24,6 +24,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Type"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class TypeExtension
 {
     /// <summary>

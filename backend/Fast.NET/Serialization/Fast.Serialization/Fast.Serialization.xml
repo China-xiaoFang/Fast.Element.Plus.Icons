@@ -458,7 +458,7 @@
             </summary>
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="!:TAttribute"/></returns>
+            <returns></returns>
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
@@ -582,6 +582,43 @@
             额外数据
             </summary>
         </member>
+        <member name="T:Fast.CommunalResources.Extensions.ExceptionExtension">
+            <summary>
+            <see cref="T:System.Exception"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.AppException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.AppException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.UserFriendlyException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.UserFriendlyException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
         <member name="T:Fast.Serialization.Extensions.SerializationExtension">
             <summary>
             <see cref="T:Fast.Serialization.Extensions.SerializationExtension"/> 序列化拓展类
@@ -593,7 +630,7 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="json"><see cref="T:System.String"/> 需要序列化的 JSON 字符串</param>
-            <returns><see cref="!:T"/></returns>
+            <returns></returns>
         </member>
         <member name="M:Fast.Serialization.Extensions.SerializationExtension.ToObject(System.String,System.Type)">
             <summary>
@@ -616,7 +653,7 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="dictionary"><see cref="T:System.Collections.IDictionary"/> 需要序列化的字典</param>
-            <returns><see cref="!:T"/></returns>
+            <returns></returns>
         </member>
         <member name="M:Fast.Serialization.Extensions.SerializationExtension.ToObject(System.Collections.Generic.IDictionary{System.String,System.Object},System.Type)">
             <summary>
@@ -632,8 +669,8 @@
             </summary>
             <remarks>此方法是通过将对象序列化成 JSON 字符串，再将 JSON 字符串反序列化成对象，所以性能不是很高，如果介意，请慎用</remarks>
             <typeparam name="T"></typeparam>
-            <param name="source"><see cref="!:T"/> 需要拷贝的对象</param>
-            <returns><see cref="!:T"/></returns>
+            <param name="source">需要拷贝的对象</param>
+            <returns></returns>
         </member>
         <member name="T:Fast.Serialization.Extensions.SerializationIServiceCollectionExtension">
             <summary>
@@ -660,7 +697,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.DateJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -684,7 +721,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableDateJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -708,7 +745,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.DateTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -732,7 +769,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableDateTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -768,7 +805,7 @@
             <param name="outputToLocalDateTime"></param>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.DateTimeOffsetJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTimeOffset"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -804,7 +841,7 @@
             <param name="outputToLocalDateTime"></param>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableDateTimeOffsetJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTimeOffset"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -827,7 +864,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.DecimalJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type decimal.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Decimal"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -850,7 +887,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableDecimalJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Decimal"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -873,7 +910,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.DoubleJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type double.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Double"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -896,7 +933,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableDoubleJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Double"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -914,7 +951,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.IntJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type int.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Int32"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -932,7 +969,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableIntJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Int32"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -950,7 +987,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.LongJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type long.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Int64"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -968,7 +1005,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableLongJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.Int64"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -992,7 +1029,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.TimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>
@@ -1016,7 +1053,7 @@
             </summary>
         </member>
         <member name="M:Fast.Serialization.JsonConverter.NullableTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+            <summary>Reads and converts the JSON to type <see cref="T:System.DateTime"/>.</summary>
             <param name="reader">The reader.</param>
             <param name="typeToConvert">The type to convert.</param>
             <param name="options">An object that specifies serialization options to use.</param>

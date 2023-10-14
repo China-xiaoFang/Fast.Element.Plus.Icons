@@ -458,7 +458,7 @@
             </summary>
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="!:TAttribute"/></returns>
+            <returns></returns>
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
@@ -581,6 +581,43 @@
             <summary>
             额外数据
             </summary>
+        </member>
+        <member name="T:Fast.CommunalResources.Extensions.ExceptionExtension">
+            <summary>
+            <see cref="T:System.Exception"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.AppException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.AppException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.UserFriendlyException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
+        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.UserFriendlyException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
         </member>
         <member name="T:Fast.IaaS.Extensions.AssemblyExtension">
             <summary>
@@ -1118,7 +1155,7 @@
             </summary>
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="!:TAttribute"/></returns>
+            <returns></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.GetControllerActionDescriptor(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -1711,7 +1748,7 @@
         </member>
         <member name="T:Fast.IaaS.Extensions.ValidateExtension">
             <summary>
-            验证拓展类
+            <see cref="T:Fast.IaaS.Extensions.ValidateExtension"/> 验证拓展类
             </summary>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty(System.String)">
@@ -1726,7 +1763,7 @@
             判断 Enum 是否为 Null
             </summary>
             <typeparam name="TEnum"></typeparam>
-            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <param name="value">枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsEmpty``1(System.Nullable{``0})">
@@ -1734,7 +1771,7 @@
             判断 Enum 是否为 Null
             </summary>
             <typeparam name="TEnum"></typeparam>
-            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <param name="value">枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(``0)">
@@ -1742,7 +1779,7 @@
             判断 Enum 是否为 Null 或者 0
             </summary>
             <typeparam name="TEnum"></typeparam>
-            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <param name="value">枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero``1(System.Nullable{``0})">
@@ -1750,7 +1787,7 @@
             判断 Enum 是否为 Null 或者 0
             </summary>
             <typeparam name="TEnum"></typeparam>
-            <param name="value"><see cref="!:TEnum"/>枚举值</param>
+            <param name="value">枚举值</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.ValidateExtension.IsNullOrZero(System.Nullable{System.Byte})">

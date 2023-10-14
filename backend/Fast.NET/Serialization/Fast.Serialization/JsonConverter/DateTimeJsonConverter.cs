@@ -14,12 +14,14 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Fast.NET;
 
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
 /// <see cref="DateTimeJsonConverter"/> DateTime 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class DateTimeJsonConverter : JsonConverter<DateTime>
 {
     /// <summary>
@@ -38,7 +40,7 @@ public class DateTimeJsonConverter : JsonConverter<DateTime>
         Format = format;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="DateTime"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>
@@ -61,6 +63,7 @@ public class DateTimeJsonConverter : JsonConverter<DateTime>
 /// <summary>
 /// <see cref="NullableDateTimeJsonConverter"/> DateTime? 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class NullableDateTimeJsonConverter : JsonConverter<DateTime?>
 {
     /// <summary>
@@ -79,7 +82,7 @@ public class NullableDateTimeJsonConverter : JsonConverter<DateTime?>
         Format = format;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="DateTime"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>

@@ -21,6 +21,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Convert"/> 转换拓展类
 /// </summary>
+[SuppressSniffer]
 public static class ConvertExtension
 {
     #region 转换为long

@@ -19,6 +19,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="GlobalConstant"/> 常用常量
 /// </summary>
+[SuppressSniffer]
 public class GlobalConstant
 {
     /// <summary>

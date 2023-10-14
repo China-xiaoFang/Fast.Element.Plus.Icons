@@ -14,6 +14,7 @@
 
 using CSRedis;
 using Fast.Cache.Extensions;
+using Fast.NET;
 using Microsoft.Extensions.Configuration;
 
 namespace Fast.Cache.Realize;
@@ -21,6 +22,7 @@ namespace Fast.Cache.Realize;
 /// <summary>
 /// 缓存实现
 /// </summary>
+[SuppressSniffer]
 public class Cache : ICache
 {
     /// <summary>

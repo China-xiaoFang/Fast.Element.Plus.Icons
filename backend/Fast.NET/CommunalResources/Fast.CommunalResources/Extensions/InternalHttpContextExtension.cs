@@ -37,7 +37,7 @@ internal static class InternalHttpContextExtension
     /// </summary>
     /// <typeparam name="TAttribute"></typeparam>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <returns><see cref="TAttribute"/></returns>
+    /// <returns></returns>
     internal static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
     {
         return httpContext.GetEndpoint()?.Metadata?.GetMetadata<TAttribute>();

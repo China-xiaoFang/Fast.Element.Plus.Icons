@@ -53,7 +53,7 @@ public static class CorsAccessorIServiceCollectionExtension
         var postConfigure = typeof(CorsAccessorSettingsOptions).GetMethod(nameof(CorsAccessorSettingsOptions.PostConfigure));
 
         corsAccessorSettings ??= Activator.CreateInstance<CorsAccessorSettingsOptions>();
-        postConfigure?.Invoke(corsAccessorSettings, new object[] {corsAccessorSettings, configuration});
+        postConfigure?.Invoke(corsAccessorSettings, null);
 
         // 添加跨域服务
         services.AddCors(options =>

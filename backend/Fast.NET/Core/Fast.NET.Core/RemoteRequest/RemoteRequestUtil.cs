@@ -90,7 +90,7 @@ public class DaySentenceEntity
     /// 分享图片
     /// </summary>
     [JsonPropertyName("fenxiang_img")]
-    public string shareImg { get; set; }
+    public string ShareImg { get; set; }
 
     /// <summary>
     /// 时间

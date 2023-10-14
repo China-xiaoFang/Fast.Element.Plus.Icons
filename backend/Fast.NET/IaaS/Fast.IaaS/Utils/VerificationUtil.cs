@@ -13,12 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Text;
+using Fast.NET;
 
 namespace Fast.IaaS.Utils;
 
 /// <summary>
 /// <see cref="VerificationUtil"/> 验证工具类
 /// </summary>
+[SuppressSniffer]
 public static class VerificationUtil
 {
     /// <summary>

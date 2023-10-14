@@ -14,12 +14,14 @@
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Fast.NET;
 
 namespace Fast.Serialization.JsonConverter;
 
 /// <summary>
 /// <see cref="DecimalJsonConverter"/> decimal 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class DecimalJsonConverter : JsonConverter<decimal>
 {
     /// <summary>
@@ -37,7 +39,7 @@ public class DecimalJsonConverter : JsonConverter<decimal>
         Places = places;
     }
 
-    /// <summary>Reads and converts the JSON to type decimal.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="decimal"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>
@@ -61,6 +63,7 @@ public class DecimalJsonConverter : JsonConverter<decimal>
 /// <summary>
 /// <see cref="NullableDecimalJsonConverter"/> decimal? 类型Json返回处理
 /// </summary>
+[SuppressSniffer]
 public class NullableDecimalJsonConverter : JsonConverter<decimal?>
 {
     /// <summary>
@@ -78,7 +81,7 @@ public class NullableDecimalJsonConverter : JsonConverter<decimal?>
         Places = places;
     }
 
-    /// <summary>Reads and converts the JSON to type <typeparamref name="T" />.</summary>
+    /// <summary>Reads and converts the JSON to type <see cref="decimal"/>.</summary>
     /// <param name="reader">The reader.</param>
     /// <param name="typeToConvert">The type to convert.</param>
     /// <param name="options">An object that specifies serialization options to use.</param>

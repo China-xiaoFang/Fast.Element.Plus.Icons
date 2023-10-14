@@ -13,12 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Text.RegularExpressions;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
-/// 验证拓展类
+/// <see cref="ValidateExtension"/> 验证拓展类
 /// </summary>
+[SuppressSniffer]
 public static class ValidateExtension
 {
     /// <summary>
@@ -35,7 +37,7 @@ public static class ValidateExtension
     /// 判断 Enum 是否为 Null
     /// </summary>
     /// <typeparam name="TEnum"></typeparam>
-    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <param name="value">枚举值</param>
     /// <returns><see cref="bool"/></returns>
     public static bool IsEmpty<TEnum>(this TEnum value) where TEnum : struct, Enum
     {
@@ -58,7 +60,7 @@ public static class ValidateExtension
     /// 判断 Enum 是否为 Null
     /// </summary>
     /// <typeparam name="TEnum"></typeparam>
-    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <param name="value">枚举值</param>
     /// <returns><see cref="bool"/></returns>
     public static bool IsEmpty<TEnum>(this TEnum? value) where TEnum : struct, Enum
     {
@@ -75,7 +77,7 @@ public static class ValidateExtension
     /// 判断 Enum 是否为 Null 或者 0
     /// </summary>
     /// <typeparam name="TEnum"></typeparam>
-    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <param name="value">枚举值</param>
     /// <returns><see cref="bool"/></returns>
     public static bool IsNullOrZero<TEnum>(this TEnum value) where TEnum : struct, Enum
     {
@@ -93,7 +95,7 @@ public static class ValidateExtension
     /// 判断 Enum 是否为 Null 或者 0
     /// </summary>
     /// <typeparam name="TEnum"></typeparam>
-    /// <param name="value"><see cref="TEnum"/>枚举值</param>
+    /// <param name="value">枚举值</param>
     /// <returns><see cref="bool"/></returns>
     public static bool IsNullOrZero<TEnum>(this TEnum? value) where TEnum : struct, Enum
     {
@@ -472,14 +474,14 @@ public static class ValidateExtension
     public static bool IsIdCard18(this string str)
     {
         if (long.TryParse(str.Remove(17), out var n) == false || n < Math.Pow(10, 16) ||
-            long.TryParse(str.Replace('x', '0').Replace('X', '0'), out n) == false)
+            long.TryParse(str.Replace('x', '0').Replace('X', '0'), out _) == false)
         {
             return false; //数字验证
         }
 
         const string address =
             "11x22x35x44x53x12x23x36x45x54x13x31x37x46x61x14x32x41x50x62x15x33x42x51x63x21x34x43x52x64x65x71x81x82x91";
-        if (address.IndexOf(str.Remove(2), StringComparison.Ordinal) == -1)
+        if (!address.Contains(str.Remove(2)))
         {
             return false; //省份验证
         }
@@ -517,7 +519,7 @@ public static class ValidateExtension
 
         const string address =
             "11x22x35x44x53x12x23x36x45x54x13x31x37x46x61x14x32x41x50x62x15x33x42x51x63x21x34x43x52x64x65x71x81x82x91";
-        if (address.IndexOf(str.Remove(2), StringComparison.Ordinal) == -1)
+        if (!address.Contains(str.Remove(2)))
         {
             return false; //省份验证
         }

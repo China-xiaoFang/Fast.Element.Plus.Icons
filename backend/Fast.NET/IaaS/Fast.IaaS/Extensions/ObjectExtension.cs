@@ -15,12 +15,14 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Reflection;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="object"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class ObjectExtension
 {
     /// <summary>

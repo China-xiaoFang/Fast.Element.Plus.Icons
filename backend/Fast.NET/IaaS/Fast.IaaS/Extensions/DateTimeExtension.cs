@@ -14,12 +14,14 @@
 
 using System.Globalization;
 using Fast.IaaS.Utils;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="DateTime"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class DateTimeExtension
 {
     /// <summary>
@@ -29,7 +31,7 @@ public static class DateTimeExtension
     /// <returns><see cref="string"/></returns>
     public static string GetSayHello(this DateTime dateTime)
     {
-        var hour = DateTime.Now.Hour;
+        var hour = dateTime.Hour;
         if (hour < 6)
             return "凌晨好！";
         if (hour < 9)

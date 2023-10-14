@@ -20,6 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="MethodInfo"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class MethodInfoExtension
 {
     /// <summary>

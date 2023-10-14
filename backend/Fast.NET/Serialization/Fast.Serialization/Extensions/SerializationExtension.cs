@@ -14,12 +14,14 @@
 
 using System.Collections;
 using System.Text.Json;
+using Fast.NET;
 
 namespace Fast.Serialization.Extensions;
 
 /// <summary>
 /// <see cref="SerializationExtension"/> 序列化拓展类
 /// </summary>
+[SuppressSniffer]
 public static class SerializationExtension
 {
     /// <summary>
@@ -27,7 +29,7 @@ public static class SerializationExtension
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="json"><see cref="string"/> 需要序列化的 JSON 字符串</param>
-    /// <returns><see cref="T"/></returns>
+    /// <returns></returns>
     public static T ToObject<T>(this string json)
     {
         json = json.Replace("&nbsp;", "");
@@ -61,7 +63,7 @@ public static class SerializationExtension
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="dictionary"><see cref="IDictionary"/> 需要序列化的字典</param>
-    /// <returns><see cref="T"/></returns>
+    /// <returns></returns>
     public static T ToObject<T>(this IDictionary<string, object> dictionary)
     {
         return dictionary.ToJsonString().ToObject<T>();
@@ -83,10 +85,10 @@ public static class SerializationExtension
     /// </summary>
     /// <remarks>此方法是通过将对象序列化成 JSON 字符串，再将 JSON 字符串反序列化成对象，所以性能不是很高，如果介意，请慎用</remarks>
     /// <typeparam name="T"></typeparam>
-    /// <param name="source"><see cref="T"/> 需要拷贝的对象</param>
-    /// <returns><see cref="T"/></returns>
+    /// <param name="source">需要拷贝的对象</param>
+    /// <returns></returns>
     public static T DeepCopy<T>(this T source)
     {
-        return ReferenceEquals(source, null) ? default : JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(source));
+        return source is null ? default : JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(source));
     }
 }

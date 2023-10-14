@@ -13,12 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Data;
+using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
 
 /// <summary>
 /// <see cref="DataTable"/> 拓展类
 /// </summary>
+[SuppressSniffer]
 public static class DataTableExtension
 {
     /// <summary>

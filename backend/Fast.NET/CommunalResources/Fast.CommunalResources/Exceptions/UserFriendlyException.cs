@@ -20,7 +20,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="UserFriendlyException"/> 用户友好异常
 /// </summary>
-public class UserFriendlyException : Exception
+public class UserFriendlyException : System.Exception
 {
     /// <summary>
     /// <inheritdoc cref="UserFriendlyException" />
@@ -55,7 +55,7 @@ public class UserFriendlyException : Exception
     /// </summary>
     /// <param name="message">异常信息</param>
     /// <param name="innerException">内部异常</param>
-    public UserFriendlyException(string message, Exception innerException) : base(message ?? "Bad Request", innerException)
+    public UserFriendlyException(string message, System.Exception innerException) : base(message ?? "Bad Request", innerException)
     {
         ErrorMessage = message;
     }
@@ -66,7 +66,7 @@ public class UserFriendlyException : Exception
     /// <param name="message">异常信息</param>
     /// <param name="errorCode">错误编码</param>
     /// <param name="innerException">内部异常</param>
-    public UserFriendlyException(string message, object errorCode, Exception innerException) : base(message ?? "Bad Request",
+    public UserFriendlyException(string message, object errorCode, System.Exception innerException) : base(message ?? "Bad Request",
         innerException)
     {
         ErrorMessage = message;

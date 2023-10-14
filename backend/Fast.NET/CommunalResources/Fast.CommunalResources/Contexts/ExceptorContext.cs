@@ -42,7 +42,7 @@ internal static class ExceptorContext
         // 判断是否友好异常
         var isUserFriendlyException = false;
 
-        Exception exception = default;
+        System.Exception exception = default;
 
         // 判断是否是 ExceptionContext
         if (context is ExceptionContext exceptionContext)
