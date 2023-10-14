@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="UserFriendlyException"/> 用户友好异常
 /// </summary>

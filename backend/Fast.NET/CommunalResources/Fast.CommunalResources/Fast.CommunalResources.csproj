@@ -12,8 +12,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<!-- 阻止将公共资源文件夹共享到每个类库的 CommunalResources 文件夹下面 -->
+		<Compile Remove="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<!-- 更改公共资源文件夹共享到每个类库的 CommunalResources 文件夹，将其放在根目录 -->
-		<Compile Include="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" Pack="true" PackagePath="\" Link="%(RecursiveDir)%(Filename)%(Extension)" Exclude="bin\**;obj\**" />
+		<Compile Include="$(SolutionDir)CommunalResources\Fast.CommunalResources\**\*.cs" Pack="true" PackagePath="\" Exclude="bin\**;obj\**" />
 	</ItemGroup>
 
 </Project>

@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="ExceptorContext"/> 异常上下文
 /// </summary>

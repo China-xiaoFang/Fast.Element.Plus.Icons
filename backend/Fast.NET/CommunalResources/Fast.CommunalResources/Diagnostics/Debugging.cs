@@ -16,6 +16,7 @@ using System.Diagnostics;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="Debugging"/> 向事件管理器中输出事件信息
 /// </summary>

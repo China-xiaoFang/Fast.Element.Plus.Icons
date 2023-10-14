@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="AppException"/> 应用程序异常类
 /// </summary>
