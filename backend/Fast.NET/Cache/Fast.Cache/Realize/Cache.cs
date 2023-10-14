@@ -270,7 +270,7 @@ public class Cache : ICache
     public string GetAndSet(string key, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();
@@ -290,7 +290,7 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-        
+
         if (result.IsEmpty())
         {
             result = await func.Invoke();
@@ -311,7 +311,7 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();
@@ -332,7 +332,7 @@ public class Cache : ICache
     public async Task<T> GetAndSetAsync<T>(string key, Func<Task<T>> func)
     {
         var result = await RedisHelper.GetAsync<T>(key);
-        
+
         if (result.IsEmpty())
         {
             result = await func.Invoke();
@@ -353,7 +353,7 @@ public class Cache : ICache
     public string GetAndSet(string key, int expireSeconds, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();
@@ -374,7 +374,7 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, int expireSeconds, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-        
+
         if (result.IsEmpty())
         {
             result = await func.Invoke();
@@ -396,7 +396,7 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, int expireSeconds, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();
@@ -418,7 +418,7 @@ public class Cache : ICache
     public async Task<T> GetAndSetAsync<T>(string key, int expireSeconds, Func<Task<T>> func)
     {
         var result = await RedisHelper.GetAsync<T>(key);
-        
+
         if (result.IsEmpty())
         {
             result = await func.Invoke();
@@ -439,7 +439,7 @@ public class Cache : ICache
     public string GetAndSet(string key, TimeSpan expireTimeSpan, Func<string> func)
     {
         var result = RedisHelper.Get(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();
@@ -460,7 +460,7 @@ public class Cache : ICache
     public async Task<string> GetAndSetAsync(string key, TimeSpan expireTimeSpan, Func<Task<string>> func)
     {
         var result = await RedisHelper.GetAsync(key);
-        
+
         if (result.IsEmpty())
         {
             result = await func.Invoke();
@@ -482,7 +482,7 @@ public class Cache : ICache
     public T GetAndSet<T>(string key, TimeSpan expireTimeSpan, Func<T> func)
     {
         var result = RedisHelper.Get<T>(key);
-        
+
         if (result.IsEmpty())
         {
             result = func.Invoke();

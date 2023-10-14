@@ -93,7 +93,8 @@ public static class EnumExtension
     /// <param name="enumType"><see cref="Type"/>枚举值类型</param>
     /// <returns><see cref="List{EnumEntity}"/></returns>
     /// <exception cref="ArgumentException">类型不是一个枚举类型</exception>
-    public static List<EnumEntity<TProperty>> EnumToList<TProperty>(this Type enumType) where TProperty : struct, IComparable, IConvertible, IFormattable
+    public static List<EnumEntity<TProperty>> EnumToList<TProperty>(this Type enumType)
+        where TProperty : struct, IComparable, IConvertible, IFormattable
     {
         if (!enumType.IsEnum)
             throw new ArgumentException("Type '" + enumType.Name + "' is not an enum.", nameof(enumType));
@@ -113,7 +114,7 @@ public static class EnumExtension
 /// 枚举的Entity类
 /// </summary>
 /// <typeparam name="TProperty">Value属性类型</typeparam>
-public class EnumEntity<TProperty> where TProperty : struct, IComparable, IConvertible,IFormattable
+public class EnumEntity<TProperty> where TProperty : struct, IComparable, IConvertible, IFormattable
 {
     /// <summary>  
     /// 枚举的描述  

@@ -666,9 +666,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0
-                ? defaultValue.GetValueOrDefault()
-                : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
         }
         catch
         {
@@ -705,9 +703,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0
-                ? defaultValue.GetValueOrDefault()
-                : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
         }
         catch
         {

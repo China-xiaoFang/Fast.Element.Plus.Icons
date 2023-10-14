@@ -48,15 +48,13 @@ public static class DecimalExtension
     /// <param name="data"><see cref="decimal"/></param>
     /// <param name="places"><see cref="int"/>要保留的小数据，不传默认有几位就保留几位</param>
     /// <returns><see cref="decimal"/></returns>
-    public static decimal GetDecimal(this decimal data,int? places = null)
+    public static decimal GetDecimal(this decimal data, int? places = null)
     {
         if (places == null)
         {
             return (decimal) (double) data;
         }
-        else
-        {
-            return decimal.Round(data, places.Value);
-        }
+
+        return decimal.Round(data, places.Value);
     }
 }
