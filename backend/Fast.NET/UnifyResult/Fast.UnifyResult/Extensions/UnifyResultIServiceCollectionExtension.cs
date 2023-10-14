@@ -16,7 +16,7 @@ using System.Reflection;
 using Fast.UnifyResult.Attributes;
 using Fast.UnifyResult.Contexts;
 using Fast.UnifyResult.Filters;
-using Fast.UnifyResult.Internal;
+using Fast.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
