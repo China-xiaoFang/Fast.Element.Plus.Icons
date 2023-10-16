@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>Fast.NET 框架公共资源模块库。</Description>
+		<!-- 阻止生成 Nuget 包 -->
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- 阻止拷贝全局的 README.MD 文件 -->
+		<None Remove="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- 阻止将内部资源文件夹共享到当前类库的 InternalResources 文件夹下面 -->
+		<Compile Remove="$(SolutionDir)Resources\Fast.InternalResources\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- 更改内部资源文件夹共享到每个类库的 InternalResources 文件夹，将其放在根目录 -->
+		<Compile Include="$(SolutionDir)Resources\Fast.InternalResources\**\*.cs" Pack="true" PackagePath="\" Exclude="bin\**;obj\**" />
+	</ItemGroup>
+</Project>

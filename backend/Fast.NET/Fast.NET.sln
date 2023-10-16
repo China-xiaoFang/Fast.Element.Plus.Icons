@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommunalResources", "CommunalResources", "{635A426C-ACF1-407E-8FC2-BD6B507B316B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{635A426C-ACF1-407E-8FC2-BD6B507B316B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.CommunalResources", "CommunalResources\Fast.CommunalResources\Fast.CommunalResources.csproj", "{364A7C8E-F644-452A-A797-43012E805255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.CommunalResources", "Resources\Fast.CommunalResources\Fast.CommunalResources.csproj", "{364A7C8E-F644-452A-A797-43012E805255}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IaaS", "IaaS", "{934603BB-5DD5-4A49-9A7E-51E2DA6C03B5}"
 EndProject

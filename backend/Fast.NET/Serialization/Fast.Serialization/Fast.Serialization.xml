@@ -4,6 +4,110 @@
         <name>Fast.Serialization</name>
     </assembly>
     <members>
+        <member name="T:Fast.NET.ExceptorContext">
+            <summary>
+            <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ExceptorContext.GetExceptionMetadata(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <summary>
+            获取异常元数据
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
+            <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
+        </member>
+        <member name="T:Fast.NET.ValidatorContext">
+            <summary>
+            <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ValidatorContext.GetValidationMetadata(System.Object)">
+            <summary>
+            获取验证错误信息
+            </summary>
+            <param name="errors"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
+        </member>
+        <member name="T:Fast.NET.InternalConvertExtension">
+            <summary>
+            <see cref="T:System.Convert"/> 内部转换拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.DateTimeOffset)">
+            <summary>
+            将 DateTimeOffset 转换成本地 DateTime
+            </summary>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
+            <returns><see cref="T:System.DateTime"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.Nullable{System.DateTimeOffset})">
+            <summary>
+            将 DateTimeOffset? 转换成本地 DateTime?
+            </summary>
+            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
+            <returns><see cref="T:System.DateTime"/></returns>
+        </member>
+        <member name="T:Fast.NET.InternalHttpContextExtension">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            判断是否是 WebSocket 请求
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.NET.InternalMethodInfoExtension">
+            <summary>
+            <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
+            <summary>
+            判断方法是否是异步
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法真实返回类型
+            </summary>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <returns><see cref="T:System.Type"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
+            <summary>
+            查找方法指定特性，如果没找到则继续查找声明类
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="method"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.NET.InternalTypeExtension">
+            <summary>
+            <see cref="T:System.Type"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.HasImplementedRawGeneric(System.Type,System.Type)">
+            <summary>
+            判断类型是否实现某个泛型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/> 类型</param>
+            <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
         <member name="T:Fast.NET.FastEnumAttribute">
             <summary>
             <see cref="T:Fast.NET.FastEnumAttribute"/> 枚举特性
@@ -45,30 +149,6 @@
             <summary>
             时间戳
             </summary>
-        </member>
-        <member name="T:Fast.NET.ExceptorContext">
-            <summary>
-            <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
-            </summary>
-        </member>
-        <member name="M:Fast.NET.ExceptorContext.GetExceptionMetadata(Microsoft.AspNetCore.Mvc.ActionContext)">
-            <summary>
-            获取异常元数据
-            </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
-            <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
-        </member>
-        <member name="T:Fast.NET.ValidatorContext">
-            <summary>
-            <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
-            </summary>
-        </member>
-        <member name="M:Fast.NET.ValidatorContext.GetValidationMetadata(System.Object)">
-            <summary>
-            获取验证错误信息
-            </summary>
-            <param name="errors"><see cref="T:System.Object"/></param>
-            <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
         </member>
         <member name="T:Fast.NET.Debugging">
             <summary>
@@ -420,86 +500,6 @@
             <summary>
             额外数据
             </summary>
-        </member>
-        <member name="T:Fast.NET.InternalConvertExtension">
-            <summary>
-            <see cref="T:System.Convert"/> 内部转换拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.DateTimeOffset)">
-            <summary>
-            将 DateTimeOffset 转换成本地 DateTime
-            </summary>
-            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
-            <returns><see cref="T:System.DateTime"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.Nullable{System.DateTimeOffset})">
-            <summary>
-            将 DateTimeOffset? 转换成本地 DateTime?
-            </summary>
-            <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
-            <returns><see cref="T:System.DateTime"/></returns>
-        </member>
-        <member name="T:Fast.NET.InternalHttpContextExtension">
-            <summary>
-            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            判断是否是 WebSocket 请求
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            获取 Action 特性
-            </summary>
-            <typeparam name="TAttribute"></typeparam>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns></returns>
-        </member>
-        <member name="T:Fast.NET.InternalMethodInfoExtension">
-            <summary>
-            <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
-            <summary>
-            判断方法是否是异步
-            </summary>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
-            <summary>
-            获取方法真实返回类型
-            </summary>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
-            <returns><see cref="T:System.Type"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
-            <summary>
-            查找方法指定特性，如果没找到则继续查找声明类
-            </summary>
-            <typeparam name="TAttribute"></typeparam>
-            <param name="method"></param>
-            <param name="inherit"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Fast.NET.InternalTypeExtension">
-            <summary>
-            <see cref="T:System.Type"/> 内部拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.NET.InternalTypeExtension.HasImplementedRawGeneric(System.Type,System.Type)">
-            <summary>
-            判断类型是否实现某个泛型
-            </summary>
-            <param name="type"><see cref="T:System.Type"/> 类型</param>
-            <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
-            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.NET.ExceptionMetadata">
             <summary>
