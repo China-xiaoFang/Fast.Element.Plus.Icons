@@ -12,7 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
+using Fast.NET;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,23 +20,38 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Fast.Mapster.Extensions;
 
 /// <summary>
-/// 对象映射拓展类
+/// <see cref="IServiceCollection"/> 对象映射拓展类
 /// </summary>
+[SuppressSniffer]
 public static class ObjectMapperExtension
 {
     /// <summary>
     /// 添加对象映射
     /// </summary>
-    /// <param name="services">服务集合</param>
-    /// <param name="assemblies">扫描的程序集</param>
-    /// <returns></returns>
-    public static IServiceCollection AddObjectMapper(this IServiceCollection services, params Assembly[] assemblies)
+    /// <param name="builder"><see cref="IMvcBuilder"/></param>
+    /// <returns><see cref="IMvcBuilder"/></returns>
+    public static IMvcBuilder AddObjectMapper(this IMvcBuilder builder)
+    {
+        builder.Services.AddObjectMapper();
+
+        return builder;
+    }
+
+    /// <summary>
+    /// 添加对象映射
+    /// </summary>
+    /// <param name="services"><see cref="IServiceCollection"/> 服务集合</param>
+    /// <returns><see cref="IServiceCollection"/></returns>
+    public static IServiceCollection AddObjectMapper(this IServiceCollection services)
     {
         // 获取全局映射配置
         var config = TypeAdapterConfig.GlobalSettings;
 
+        // 获取当前入口所有程序集
+        var assemblies = InternalAssemblyUtil.GetEntryAssembly().ToArray();
+
         // 扫描所有继承  IRegister 接口的对象映射配置
-        if (assemblies != null && assemblies.Length > 0)
+        if (assemblies.Length > 0)
             config.Scan(assemblies);
 
         // 配置默认全局映射（支持覆盖）

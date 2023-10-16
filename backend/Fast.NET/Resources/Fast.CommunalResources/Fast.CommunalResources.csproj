@@ -23,4 +23,8 @@
 		<Compile Include="$(SolutionDir)Resources\Fast.CommunalResources\**\*.cs" Pack="true" PackagePath="\" Exclude="bin\**;obj\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="Internal\Utils\InternalAssemblyUtil.cs" />
+	</ItemGroup>
+
 </Project>
