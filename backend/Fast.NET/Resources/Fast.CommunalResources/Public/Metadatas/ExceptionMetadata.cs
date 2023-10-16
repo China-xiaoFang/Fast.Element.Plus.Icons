@@ -25,25 +25,25 @@ public sealed class ExceptionMetadata
     /// <summary>
     /// 状态码
     /// </summary>
-    public int StatusCode { get; internal set; }
+    public int StatusCode { get; set; }
 
     /// <summary>
     /// 错误码
     /// </summary>
-    public object ErrorCode { get; internal set; }
+    public object ErrorCode { get; set; }
 
     /// <summary>
     /// 错误码（没被复写过的 ErrorCode ）
     /// </summary>
-    public object OriginErrorCode { get; internal set; }
+    public object OriginErrorCode { get; set; }
 
     /// <summary>
     /// 错误对象（信息）
     /// </summary>
-    public object Errors { get; internal set; }
+    public object Errors { get; set; }
 
     /// <summary>
     /// 额外数据
     /// </summary>
-    public object Data { get; internal set; }
+    public object Data { get; set; }
 }
