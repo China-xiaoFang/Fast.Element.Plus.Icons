@@ -108,6 +108,27 @@
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
+        <member name="T:Fast.NET.InternalAssemblyUtil">
+            <summary>
+            <see cref="T:System.Reflection.Assembly"/> 工具类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetEntryAssembly(System.Boolean)">
+            <summary>
+            获取入口程序集
+            </summary>
+            <param name="referenced"><see cref="T:System.Boolean"/> 是否包含引用的，默认为 true</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetAssemblyTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})">
+            <summary>
+            获取程序集中所有类型
+            </summary>
+            <remarks>这里默认获取所有 Public 声明的</remarks>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> 程序集</param>
+            <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.NET.FastEnumAttribute">
             <summary>
             <see cref="T:Fast.NET.FastEnumAttribute"/> 枚举特性
@@ -501,6 +522,43 @@
             额外数据
             </summary>
         </member>
+        <member name="T:Fast.NET.ExceptionExtension">
+            <summary>
+            <see cref="T:System.Exception"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.ExceptionExtension.StatusCode(Fast.NET.AppException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.NET.ExceptionExtension.WithData(Fast.NET.AppException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.AppException"/></returns>
+        </member>
+        <member name="M:Fast.NET.ExceptionExtension.StatusCode(Fast.NET.UserFriendlyException,System.Int32)">
+            <summary>
+            设置异常状态码
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
+        <member name="M:Fast.NET.ExceptionExtension.WithData(Fast.NET.UserFriendlyException,System.Object)">
+            <summary>
+            设置额外数据
+            </summary>
+            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
+        </member>
         <member name="T:Fast.NET.ExceptionMetadata">
             <summary>
             <see cref="T:Fast.NET.ExceptionMetadata"/> 异常元数据
@@ -581,43 +639,6 @@
             <summary>
             额外数据
             </summary>
-        </member>
-        <member name="T:Fast.CommunalResources.Extensions.ExceptionExtension">
-            <summary>
-            <see cref="T:System.Exception"/> 拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.AppException,System.Int32)">
-            <summary>
-            设置异常状态码
-            </summary>
-            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
-            <param name="statusCode"><see cref="T:System.Int32"/></param>
-            <returns><see cref="T:Fast.NET.AppException"/></returns>
-        </member>
-        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.AppException,System.Object)">
-            <summary>
-            设置额外数据
-            </summary>
-            <param name="exception"><see cref="T:Fast.NET.AppException"/></param>
-            <param name="data"><see cref="T:System.Object"/></param>
-            <returns><see cref="T:Fast.NET.AppException"/></returns>
-        </member>
-        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.StatusCode(Fast.NET.UserFriendlyException,System.Int32)">
-            <summary>
-            设置异常状态码
-            </summary>
-            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
-            <param name="statusCode"><see cref="T:System.Int32"/></param>
-            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
-        </member>
-        <member name="M:Fast.CommunalResources.Extensions.ExceptionExtension.WithData(Fast.NET.UserFriendlyException,System.Object)">
-            <summary>
-            设置额外数据
-            </summary>
-            <param name="exception"><see cref="T:Fast.NET.UserFriendlyException"/></param>
-            <param name="data"><see cref="T:System.Object"/></param>
-            <returns><see cref="T:Fast.NET.UserFriendlyException"/></returns>
         </member>
     </members>
 </doc>

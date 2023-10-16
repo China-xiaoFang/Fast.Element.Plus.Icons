@@ -108,18 +108,45 @@
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="T:Fast.Mapster.Extensions.ObjectMapperExtension">
+        <member name="T:Fast.NET.InternalAssemblyUtil">
             <summary>
-            对象映射拓展类
+            <see cref="T:System.Reflection.Assembly"/> 工具类
             </summary>
         </member>
-        <member name="M:Fast.Mapster.Extensions.ObjectMapperExtension.AddObjectMapper(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])">
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetEntryAssembly(System.Boolean)">
+            <summary>
+            获取入口程序集
+            </summary>
+            <param name="referenced"><see cref="T:System.Boolean"/> 是否包含引用的，默认为 true</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetAssemblyTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})">
+            <summary>
+            获取程序集中所有类型
+            </summary>
+            <remarks>这里默认获取所有 Public 声明的</remarks>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> 程序集</param>
+            <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Mapster.Extensions.ObjectMapperExtension">
+            <summary>
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 对象映射拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.Mapster.Extensions.ObjectMapperExtension.AddObjectMapper(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
             <summary>
             添加对象映射
             </summary>
-            <param name="services">服务集合</param>
-            <param name="assemblies">扫描的程序集</param>
-            <returns></returns>
+            <param name="builder"><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/></param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/></returns>
+        </member>
+        <member name="M:Fast.Mapster.Extensions.ObjectMapperExtension.AddObjectMapper(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加对象映射
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 服务集合</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
         </member>
     </members>
 </doc>

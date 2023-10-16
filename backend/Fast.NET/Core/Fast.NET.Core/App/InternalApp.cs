@@ -89,52 +89,14 @@ internal class InternalApp
         UnmanagedObjects = new ConcurrentBag<IDisposable>();
 
         // 加载程序集
-        Assemblies = GetAssemblies();
+        Assemblies = InternalAssemblyUtil.GetEntryAssembly();
+
+        var suppressSnifferAttributeType = typeof(SuppressSnifferAttribute);
 
         // 获取有效的类型集合
-        EffectiveTypes = Assemblies.SelectMany(GetTypes);
-    }
-
-    /// <summary>
-    /// 获取程序集
-    /// </summary>
-    /// <returns></returns>
-    static IEnumerable<Assembly> GetAssemblies()
-    {
-        // 获取入口程序集
-        var entryAssembly = Assembly.GetEntryAssembly();
-
-        // 获取入口程序集所引用的所有程序集
-        var referencedAssemblies = entryAssembly?.GetReferencedAssemblies();
-
-        // 加载引用的程序集
-        var assemblies = referencedAssemblies.Select(Assembly.Load).ToList();
-
-        // 将入口程序集也放入集合
-        assemblies.Add(entryAssembly);
-
-        return assemblies;
-    }
-
-    /// <summary>
-    /// 加载程序集中的所有类型
-    /// </summary>
-    /// <param name="ass"></param>
-    /// <returns></returns>
-    static IEnumerable<Type> GetTypes(Assembly ass)
-    {
-        var types = Array.Empty<Type>();
-
-        try
-        {
-            types = ass.GetTypes();
-        }
-        catch
-        {
-            Console.WriteLine($"Error load `{ass.FullName}` assembly.");
-        }
-
-        return types.Where(u => u.IsPublic);
+        EffectiveTypes = Assemblies.SelectMany(s =>
+            // 排除使用了 SuppressSnifferAttribute 特性的类型
+            InternalAssemblyUtil.GetAssemblyTypes(s, wh => !wh.IsDefined(suppressSnifferAttributeType, false)));
     }
 
     /// <summary>

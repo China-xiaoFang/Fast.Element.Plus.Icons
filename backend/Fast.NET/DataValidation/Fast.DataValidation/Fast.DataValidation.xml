@@ -108,6 +108,27 @@
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
+        <member name="T:Fast.NET.InternalAssemblyUtil">
+            <summary>
+            <see cref="T:System.Reflection.Assembly"/> 工具类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetEntryAssembly(System.Boolean)">
+            <summary>
+            获取入口程序集
+            </summary>
+            <param name="referenced"><see cref="T:System.Boolean"/> 是否包含引用的，默认为 true</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyUtil.GetAssemblyTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})">
+            <summary>
+            获取程序集中所有类型
+            </summary>
+            <remarks>这里默认获取所有 Public 声明的</remarks>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/> 程序集</param>
+            <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.DataValidation.Extensions.DataValidationIServiceCollectionExtension">
             <summary>
             <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 数据验证拓展类
