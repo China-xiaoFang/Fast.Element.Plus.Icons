@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
@@ -41,5 +42,28 @@ internal static class InternalHttpContextExtension
     internal static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
     {
         return httpContext.GetEndpoint()?.Metadata?.GetMetadata<TAttribute>();
+    }
+
+    /// <summary>
+    /// 获取 Action 特性
+    /// </summary>
+    /// <param name="metadata"><see cref="EndpointMetadataCollection"/></param>
+    /// <param name="attributeType"><see cref="Type"/></param>
+    /// <returns><see cref="object"/></returns>
+    internal static object GetMetadata(this EndpointMetadataCollection metadata, Type attributeType)
+    {
+        return metadata?.GetType()?.GetMethod(nameof(EndpointMetadataCollection.GetMetadata))
+            ?.MakeGenericMethod(attributeType).Invoke(metadata, null);
+    }
+
+    /// <summary>
+    /// 获取 Action 特性
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="attributeType"><see cref="Type"/></param>
+    /// <returns><see cref="object"/></returns>
+    internal static object GetMetadata(this HttpContext httpContext, Type attributeType)
+    {
+        return httpContext.GetEndpoint()?.Metadata.GetMetadata(attributeType);
     }
 }

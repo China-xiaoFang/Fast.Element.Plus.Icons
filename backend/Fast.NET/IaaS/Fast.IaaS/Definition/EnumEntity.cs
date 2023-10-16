@@ -12,20 +12,26 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace Fast.Exception.Handlers;
+namespace Fast.IaaS.Definition;
 
 /// <summary>
-/// 全局异常处理
+/// <see cref="EnumEntity{TProperty}"/> 枚举的Entity类
 /// </summary>
-public interface IGlobalExceptionHandler
+/// <typeparam name="TProperty">Value属性类型</typeparam>
+public class EnumEntity<TProperty> where TProperty : struct, IComparable, IConvertible, IFormattable
 {
-    /// <summary>
-    /// 异常拦截
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="isFriendlyException">是否友好异常</param>
-    /// <returns></returns>
-    Task OnExceptionAsync(ExceptionContext context, bool isFriendlyException);
+    /// <summary>  
+    /// 枚举的描述  
+    /// </summary>  
+    public string Describe { set; get; }
+
+    /// <summary>  
+    /// 枚举名称  
+    /// </summary>  
+    public string Name { set; get; }
+
+    /// <summary>  
+    /// 枚举对象的值  
+    /// </summary>  
+    public TProperty Value { set; get; }
 }

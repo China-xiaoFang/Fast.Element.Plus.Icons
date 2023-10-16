@@ -14,6 +14,7 @@
 
 using System.ComponentModel;
 using System.Reflection;
+using Fast.IaaS.Definition;
 using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
@@ -110,26 +111,4 @@ public static class EnumExtension
             Value = (TProperty) Convert.ChangeType(enumValue, propertyType)
         }).ToList();
     }
-}
-
-/// <summary>
-/// 枚举的Entity类
-/// </summary>
-/// <typeparam name="TProperty">Value属性类型</typeparam>
-public class EnumEntity<TProperty> where TProperty : struct, IComparable, IConvertible, IFormattable
-{
-    /// <summary>  
-    /// 枚举的描述  
-    /// </summary>  
-    public string Describe { set; get; }
-
-    /// <summary>  
-    /// 枚举名称  
-    /// </summary>  
-    public string Name { set; get; }
-
-    /// <summary>  
-    /// 枚举对象的值  
-    /// </summary>  
-    public TProperty Value { set; get; }
 }

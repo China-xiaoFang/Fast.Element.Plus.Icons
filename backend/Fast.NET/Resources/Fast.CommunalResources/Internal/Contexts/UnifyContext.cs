@@ -14,72 +14,69 @@
 
 using System.Collections.Concurrent;
 using System.Reflection;
-using Fast.NET;
-using Fast.UnifyResult.Attributes;
-using Fast.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Fast.UnifyResult.Contexts;
+// ReSharper disable once CheckNamespace
+namespace Fast.NET;
 
 /// <summary>
 /// <see cref="UnifyContext"/> 规范化结果上下文
 /// </summary>
 [SuppressSniffer]
-public static class UnifyContext
+internal static class UnifyContext
 {
-    ///// <summary>
-    ///// 是否启用规范化结果
-    ///// </summary>
-    //internal static bool EnabledUnifyHandler = false;
+    /// <summary>
+    /// 类型 UnifyProviderAttribute
+    /// </summary>
+    internal static Type UnifyProviderAttributeType { get; }
 
-    ///// <summary>
-    ///// 规范化结果额外数据键
-    ///// </summary>
-    //internal static string UnifyResultExtrasKey = "UNIFY_RESULT_EXTRAS";
+    /// <summary>
+    /// 类型 NonUnifyAttribute
+    /// </summary>
+    internal static Type NonUnifyAttributeType { get; }
+
+    /// <summary>
+    /// 类型 IUnifyResultProvider
+    /// </summary>
+    internal static Type IUnifyResultProviderType { get; }
+
+    /// <summary>
+    /// 方法 规范化提供器 缓存
+    /// </summary>
+    internal static ConcurrentDictionary<string, Attribute> CacheMethodInfoUnifyProviderAttributes = new();
 
     /// <summary>
     /// 规范化结果提供器
     /// </summary>
     internal static ConcurrentDictionary<string, UnifyMetadata> UnifyProviders = new();
 
-    /// <summary>
-    /// 设置响应状态码
-    /// </summary>
-    /// <param name="context"><see cref="HttpContext"/></param>
-    /// <param name="statusCode"><see cref="int"/></param>
-    /// <param name="return200StatusCodes"><see cref="Array"/> 设置返回 200 状态码列表。只支持 400+(404除外) 状态码</param>
-    /// <param name="adaptStatusCodes"><see cref="Array"/> 适配（篡改）状态码。只支持 400+(404除外) 状态码</param>
-    /// <remarks>
-    /// 示例：
-    ///     return200StatusCodes = [401, 403]
-    ///     adaptStatusCodes = [[401, 200], [403, 200]]
-    /// </remarks>
-    public static void SetResponseStatusCodes(HttpContext context, int statusCode, int[] return200StatusCodes = null,
-        int[][] adaptStatusCodes = null)
+    static UnifyContext()
     {
-        // 篡改响应状态码
-        if (adaptStatusCodes is {Length: > 0})
+        // 这里因为多个项目之间没有引用，所以使用了 名称 获取了类型
+
+        UnifyProviderAttributeType = Type.GetType("Fast.UnifyResult.Attributes.UnifyProviderAttribute");
+
+        if (UnifyProviderAttributeType == null)
         {
-            var adaptStatusCode = adaptStatusCodes.FirstOrDefault(f => f[0] == statusCode);
-            if (adaptStatusCode is {Length: > 0} && adaptStatusCode[0] > 0)
-            {
-                context.Response.StatusCode = adaptStatusCode[1];
-                return;
-            }
+            throw new System.Exception("Unable to find Fast.UnifyResult.Attributes.UnifyProviderAttribute class.");
         }
 
-        // 200 状态码返回
-        if (return200StatusCodes is {Length: > 0})
+        NonUnifyAttributeType = Type.GetType("Fast.UnifyResult.Attributes.NonUnifyAttribute");
+
+        if (NonUnifyAttributeType == null)
         {
-            // 判断当前状态码是否存在与200状态码列表中
-            if (return200StatusCodes.Contains(statusCode))
-            {
-                context.Response.StatusCode = StatusCodes.Status200OK;
-            }
+            throw new System.Exception("Unable to find Fast.UnifyResult.Attributes.NonUnifyAttribute class.");
+        }
+
+        IUnifyResultProviderType = Type.GetType("Fast.UnifyResult.IUnifyResultProvider");
+
+        if (IUnifyResultProviderType == null)
+        {
+            throw new System.Exception("Unable to find Fast.UnifyResult.IUnifyResultProvider class.");
         }
     }
 
@@ -88,12 +85,13 @@ public static class UnifyContext
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <param name="unifyResult"><see cref="IUnifyResultProvider"/></param>
+    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
     /// <param name="isWebRequest"><see cref="bool"/></param>
+    /// <param name="nonUnifyAttributeType"><see cref="Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
     /// <returns><see cref="bool"/></returns>
-    internal static bool CheckSucceededNonUnify(HttpContext httpContext, MethodInfo method, out IUnifyResultProvider unifyResult,
-        bool isWebRequest = true)
+    internal static bool CheckSucceededNonUnify(HttpContext httpContext, MethodInfo method, out object unifyResult,
+        bool isWebRequest = true, Type nonUnifyAttributeType = null)
     {
         // 解析规范化元数据
         var unityMetadata = GetMethodUnityMetadata(method);
@@ -108,8 +106,9 @@ public static class UnifyContext
             isSkip = true;
         }
 
+        nonUnifyAttributeType ??= NonUnifyAttributeType;
+
         // 这是不使用 method.GetCustomAttribute<NonUnifyAttribute>() != null 的原因是，避免直接继承了 NonUnifyAttribute 使用自定义的特性
-        var nonUnifyAttributeType = typeof(NonUnifyAttribute);
         var producesResponseTypeAttributeType = typeof(ProducesResponseTypeAttribute);
         var iApiResponseMetadataProviderType = typeof(IApiResponseMetadataProvider);
         if (!isSkip && method.CustomAttributes.Any(a =>
@@ -148,7 +147,7 @@ public static class UnifyContext
         }
         else
         {
-            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
+            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
         }
 
         return unifyResult == null || isSkip;
@@ -159,10 +158,12 @@ public static class UnifyContext
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <param name="unifyResult"><see cref="IUnifyResultProvider"/></param>
+    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
+    /// <param name="nonUnifyAttributeType"><see cref="Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
     /// <returns><see cref="bool"/></returns>
-    internal static bool CheckFailedNonUnify(HttpContext httpContext, MethodInfo method, out IUnifyResultProvider unifyResult)
+    internal static bool CheckFailedNonUnify(HttpContext httpContext, MethodInfo method, out object unifyResult,
+        Type nonUnifyAttributeType = null)
     {
         // 解析规范化元数据
         var unityMetadata = GetMethodUnityMetadata(method);
@@ -172,7 +173,7 @@ public static class UnifyContext
         var isSkip = false;
 
         // 这是不使用 method.GetCustomAttribute<NonUnifyAttribute>() != null 的原因是，避免直接继承了 NonUnifyAttribute 使用自定义的特性
-        var nonUnifyAttributeType = typeof(NonUnifyAttribute);
+        nonUnifyAttributeType ??= NonUnifyAttributeType;
 
         // 判断方法头部是否贴有 NonUnifyAttribute 特性
         if (method.CustomAttributes.Any(a => nonUnifyAttributeType.IsAssignableFrom(a.AttributeType)))
@@ -206,7 +207,7 @@ public static class UnifyContext
         }
         else
         {
-            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
+            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
         }
 
         return unifyResult == null || isSkip;
@@ -215,10 +216,12 @@ public static class UnifyContext
     /// <summary>
     /// 检查短路状态码（>=400）是否进行规范化处理
     /// </summary>
-    /// <param name="httpContext"></param>
-    /// <param name="unifyResult"></param>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
+    /// <param name="nonUnifyAttributeType"><see cref="Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-    internal static bool CheckStatusCodeNonUnify(HttpContext httpContext, out IUnifyResultProvider unifyResult)
+    internal static bool CheckStatusCodeNonUnify(HttpContext httpContext, out object unifyResult,
+        Type nonUnifyAttributeType = null)
     {
         // 获取终点路由特性
         var endpointFeature = httpContext.Features.Get<IEndpointFeature>();
@@ -232,14 +235,16 @@ public static class UnifyContext
         // ReSharper disable once ReplaceWithSingleAssignment.False
         var isSkip = false;
 
+        nonUnifyAttributeType ??= NonUnifyAttributeType;
+
         // 判断终点路由是否存在 NonUnifyAttribute 特性
-        if (httpContext.GetMetadata<NonUnifyAttribute>() != null)
+        if (httpContext.GetMetadata(nonUnifyAttributeType) != null)
         {
             isSkip = true;
         }
 
         // 判断终点路由是否存在 NonUnifyAttribute 特性
-        if (!isSkip && endpointFeature?.Endpoint?.Metadata?.GetMetadata<NonUnifyAttribute>() != null)
+        if (!isSkip && endpointFeature?.Endpoint?.Metadata?.GetMetadata(nonUnifyAttributeType) != null)
         {
             isSkip = true;
         }
@@ -265,10 +270,16 @@ public static class UnifyContext
         else
         {
             // 解析规范化元数据
-            var unifyProviderAttribute = endpointFeature?.Endpoint?.Metadata?.GetMetadata<UnifyProviderAttribute>();
-            if (UnifyProviders.TryGetValue(unifyProviderAttribute?.Name ?? string.Empty, out var unityMetadata))
+            var unifyProviderAttribute = endpointFeature?.Endpoint?.Metadata?.GetType()
+                ?.GetMethod(nameof(EndpointMetadataCollection.GetMetadata))?.MakeGenericMethod(UnifyProviderAttributeType)
+                .Invoke(httpContext.GetEndpoint()?.Metadata, null);
+
+            // 获取规范化提供器名称
+            var unifyProviderName = UnifyProviderAttributeType.GetProperty("Name")?.GetValue(unifyProviderAttribute)?.ToString();
+
+            if (UnifyProviders.TryGetValue(unifyProviderName ?? string.Empty, out var unityMetadata))
             {
-                unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
+                unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
             }
             else
             {
@@ -330,7 +341,6 @@ public static class UnifyContext
     /// <summary>
     /// 获取方法规范化元数据
     /// </summary>
-    /// <remarks>如果追求性能，这里理应缓存起来，避免每次请求去检测</remarks>
     /// <param name="method"></param>
     /// <returns></returns>
     internal static UnifyMetadata GetMethodUnityMetadata(MethodInfo method)
@@ -338,10 +348,26 @@ public static class UnifyContext
         if (method == default)
             return default;
 
-        var unityProviderAttribute = method.GetFoundAttribute<UnifyProviderAttribute>(true);
+        // 组装缓存字典的Key，这里使用 完全限定的类名(唯一的).方法名.参数名称
+        var cacheKey = method.DeclaringType?.FullName + "." + method.Name + "(" +
+                       string.Join(",", method.GetParameters().Select(p => p.ParameterType.FullName)) + ")";
+
+        // 尝试从缓存中读取
+        if (!CacheMethodInfoUnifyProviderAttributes.TryGetValue(cacheKey, out var unifyProviderAttribute))
+        {
+            // 不存在，再获取
+            unifyProviderAttribute = method.GetFoundAttribute(UnifyProviderAttributeType, true);
+
+            // 放入缓存中
+            CacheMethodInfoUnifyProviderAttributes.AddOrUpdate(cacheKey, _ => unifyProviderAttribute,
+                (_, _) => unifyProviderAttribute);
+        }
+
+        // 获取规范化提供器名称
+        var unifyProviderName = UnifyProviderAttributeType.GetProperty("Name")?.GetValue(unifyProviderAttribute)?.ToString();
 
         // 获取元数据
-        var isExists = UnifyProviders.TryGetValue(unityProviderAttribute?.Name ?? string.Empty, out var metadata);
+        var isExists = UnifyProviders.TryGetValue(unifyProviderName ?? string.Empty, out var metadata);
         if (!isExists)
         {
             // 不存在则将默认的返回
@@ -349,5 +375,31 @@ public static class UnifyContext
         }
 
         return metadata;
+    }
+}
+
+/// <summary>
+/// <see cref="UnifyContext{TAttribute, TIProvider}"/> 规范化结果上下文
+/// </summary>
+/// <typeparam name="TAttribute">必须是 UnifyProviderAttribute 特性</typeparam>
+/// <typeparam name="TIProvider">必须是 IUnifyResultProvider 接口</typeparam>
+[SuppressSniffer]
+internal static class UnifyContext<TAttribute, TIProvider> where TAttribute : Attribute where TIProvider : class
+{
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    static UnifyContext()
+    {
+        // 泛型检测
+        if (typeof(TAttribute).Name != "UnifyProviderAttribute")
+        {
+            throw new ArgumentException("The generic TAttribute must be the UnifyProviderAttribute attribute.");
+        }
+
+        if (typeof(TIProvider).Name != "IUnifyResultProvider")
+        {
+            throw new ArgumentException("The generic TIProvider must be an IUnifyResultProvider interface.");
+        }
     }
 }

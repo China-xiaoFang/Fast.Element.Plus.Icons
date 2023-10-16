@@ -13,7 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
-using Fast.UnifyResult.Contexts;
+using Fast.UnifyResult.Attributes;
 using Microsoft.AspNetCore.Http;
 
 namespace Fast.UnifyResult.Middlewares;
@@ -53,7 +53,7 @@ internal class UnifyResultStatusCodesMiddleware
         }
 
         // 处理规范化结果
-        if (!UnifyContext.CheckStatusCodeNonUnify(context, out var unifyResult))
+        if (!UnifyContext.CheckStatusCodeNonUnify(context, out var unifyResultObj))
         {
             // 解决刷新 Token 和 Token 时间相近问题
             if (context.Response.StatusCode == StatusCodes.Status401Unauthorized &&
@@ -68,7 +68,10 @@ internal class UnifyResultStatusCodesMiddleware
                 return;
             }
 
-            await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
+            if (unifyResultObj is IUnifyResultProvider unifyResult)
+            {
+                await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
+            }
         }
     }
 }

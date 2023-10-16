@@ -26,26 +26,26 @@ internal static class InternalMethodInfoExtension
     /// <summary>
     /// 判断方法是否是异步
     /// </summary>
-    /// <param name="method"><see cref="MethodInfo"/></param>
+    /// <param name="methodInfo"><see cref="MethodInfo"/></param>
     /// <returns><see cref="bool"/></returns>
-    internal static bool IsAsync(this MethodInfo method)
+    internal static bool IsAsync(this MethodInfo methodInfo)
     {
-        return method.GetCustomAttribute<AsyncMethodBuilderAttribute>() != null ||
-               method.ReturnType.ToString().StartsWith(typeof(Task).FullName);
+        return methodInfo.GetCustomAttribute<AsyncMethodBuilderAttribute>() != null ||
+               methodInfo.ReturnType.ToString().StartsWith(typeof(Task).FullName);
     }
 
     /// <summary>
     /// 获取方法真实返回类型
     /// </summary>
-    /// <param name="method"><see cref="MethodInfo"/></param>
+    /// <param name="methodInfo"><see cref="MethodInfo"/></param>
     /// <returns><see cref="Type"/></returns>
-    internal static Type GetRealReturnType(this MethodInfo method)
+    internal static Type GetRealReturnType(this MethodInfo methodInfo)
     {
         // 判断是否是异步方法
-        var isAsyncMethod = method.IsAsync();
+        var isAsyncMethod = methodInfo.IsAsync();
 
         // 获取类型返回值并处理 Task 和 Task<T> 类型返回值
-        var returnType = method.ReturnType;
+        var returnType = methodInfo.ReturnType;
         return isAsyncMethod ? (returnType.GenericTypeArguments.FirstOrDefault() ?? typeof(void)) : returnType;
     }
 
@@ -53,21 +53,21 @@ internal static class InternalMethodInfoExtension
     /// 查找方法指定特性，如果没找到则继续查找声明类
     /// </summary>
     /// <typeparam name="TAttribute"></typeparam>
-    /// <param name="method"></param>
+    /// <param name="methodInfo"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
-    internal static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo method, bool inherit) where TAttribute : Attribute
+    internal static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo methodInfo, bool inherit) where TAttribute : Attribute
     {
         // 获取方法所在类型
-        var declaringType = method.DeclaringType;
+        var declaringType = methodInfo.DeclaringType;
 
         var attributeType = typeof(TAttribute);
 
         // 判断方法是否定义了指定特性
-        if (method.IsDefined(attributeType, inherit))
+        if (methodInfo.IsDefined(attributeType, inherit))
         {
             // 直接返回
-            return method.GetCustomAttribute<TAttribute>(inherit);
+            return methodInfo.GetCustomAttribute<TAttribute>(inherit);
         }
 
         // 没有找到，查找方法所在的类型，是否定义了特性
@@ -79,6 +79,39 @@ internal static class InternalMethodInfoExtension
         if (declaringType.IsDefined(attributeType, inherit))
         {
             return declaringType.GetCustomAttribute<TAttribute>(inherit);
+        }
+
+        return default;
+    }
+
+    /// <summary>
+    /// 查找方法指定特性，如果没找到则继续查找声明类
+    /// </summary>
+    /// <param name="methodInfo"></param>
+    /// <param name="attributeType"></param>
+    /// <param name="inherit"></param>
+    /// <returns></returns>
+    internal static Attribute GetFoundAttribute(this MethodInfo methodInfo,Type attributeType, bool inherit) 
+    {
+        // 获取方法所在类型
+        var declaringType = methodInfo.DeclaringType;
+
+        // 判断方法是否定义了指定特性
+        if (methodInfo.IsDefined(attributeType, inherit))
+        {
+            // 直接返回
+            return methodInfo.GetCustomAttribute(attributeType, inherit);
+        }
+
+        // 没有找到，查找方法所在的类型，是否定义了特性
+        if (declaringType == null)
+        {
+            return default;
+        }
+
+        if (declaringType.IsDefined(attributeType, inherit))
+        {
+            return declaringType.GetCustomAttribute(attributeType, inherit);
         }
 
         return default;

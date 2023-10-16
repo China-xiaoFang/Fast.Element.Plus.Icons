@@ -56,4 +56,14 @@ public static class AssemblyExtension
     {
         return assembly.GetName().Version;
     }
+
+    /// <summary>
+    /// 获取程序集名称
+    /// </summary>
+    /// <param name="assembly"><see cref="Assembly"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string GetAssemblyName(this Assembly assembly)
+    {
+        return InternalAssemblyExtension.GetAssemblyName(assembly);
+    }
 }

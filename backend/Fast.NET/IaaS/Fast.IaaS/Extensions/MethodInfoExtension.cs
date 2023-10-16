@@ -56,6 +56,18 @@ public static class MethodInfoExtension
     }
 
     /// <summary>
+    /// 查找方法指定特性，如果没找到则继续查找声明类
+    /// </summary>
+    /// <param name="methodInfo"></param>
+    /// <param name="attributeType"></param>
+    /// <param name="inherit"></param>
+    /// <returns></returns>
+    public static Attribute GetFoundAttribute(this MethodInfo methodInfo,Type attributeType, bool inherit) 
+    {
+        return InternalMethodInfoExtension.GetFoundAttribute(methodInfo,attributeType, inherit);
+    }
+
+    /// <summary>
     /// 获取方法参数数量
     /// </summary>
     /// <param name="methodInfo"><see cref="MemberInfo"/></param>

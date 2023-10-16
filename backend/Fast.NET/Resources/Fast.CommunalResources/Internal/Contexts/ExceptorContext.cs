@@ -75,7 +75,7 @@ internal static class ExceptorContext
             errorCode = appException.ErrorCode;
             originErrorCode = appException.OriginErrorCode;
             statusCode = appException.StatusCode;
-            isValidationException = appException.ValidationException;
+            isValidationException = false;
             errors = appException.ErrorMessage;
             data = appException.Data;
         }

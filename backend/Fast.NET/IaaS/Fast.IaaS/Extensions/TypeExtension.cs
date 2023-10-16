@@ -39,6 +39,26 @@ public static class TypeExtension
     }
 
     /// <summary>
+    /// 获取类型所在程序集名称
+    /// </summary>
+    /// <param name="type"><see cref="Type"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string GetAssemblyName(this Type type)
+    {
+        return InternalTypeExtension.GetAssemblyName(type);
+    }
+
+    /// <summary>
+    /// 获取类型所在程序集名称
+    /// </summary>
+    /// <param name="typeInfo"><see cref="TypeInfo"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string GetAssemblyName(this TypeInfo typeInfo)
+    {
+        return InternalTypeExtension.GetAssemblyName(typeInfo);
+    }
+
+    /// <summary>
     /// 判断是否是富基元类型
     /// </summary>
     /// <param name="type"><see cref="Type"/></param>

@@ -49,6 +49,17 @@ public static class HttpContextExtension
     }
 
     /// <summary>
+    /// 获取 Action 特性
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="attributeType"><see cref="Type"/></param>
+    /// <returns><see cref="object"/></returns>
+    public static object GetMetadata(this HttpContext httpContext, Type attributeType)
+    {
+        return InternalHttpContextExtension.GetMetadata(httpContext, attributeType);
+    }
+
+    /// <summary>
     /// 获取 控制器/Action 描述器
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
@@ -286,5 +297,42 @@ public static class HttpContextExtension
         }
 
         return remoteIpv4 ?? string.Empty;
+    }
+
+    /// <summary>
+    /// 设置响应状态码
+    /// </summary>
+    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="statusCode"><see cref="int"/></param>
+    /// <param name="return200StatusCodes"><see cref="Array"/> 设置返回 200 状态码列表。只支持 400+(404除外) 状态码</param>
+    /// <param name="adaptStatusCodes"><see cref="Array"/> 适配（篡改）状态码。只支持 400+(404除外) 状态码</param>
+    /// <remarks>
+    /// 示例：
+    ///     return200StatusCodes = [401, 403]
+    ///     adaptStatusCodes = [[401, 200], [403, 200]]
+    /// </remarks>
+    public static void SetResponseStatusCodes(this HttpContext context, int statusCode, int[] return200StatusCodes = null,
+        int[][] adaptStatusCodes = null)
+    {
+        // 篡改响应状态码
+        if (adaptStatusCodes is {Length: > 0})
+        {
+            var adaptStatusCode = adaptStatusCodes.FirstOrDefault(f => f[0] == statusCode);
+            if (adaptStatusCode is {Length: > 0} && adaptStatusCode[0] > 0)
+            {
+                context.Response.StatusCode = adaptStatusCode[1];
+                return;
+            }
+        }
+
+        // 200 状态码返回
+        if (return200StatusCodes is {Length: > 0})
+        {
+            // 判断当前状态码是否存在与200状态码列表中
+            if (return200StatusCodes.Contains(statusCode))
+            {
+                context.Response.StatusCode = StatusCodes.Status200OK;
+            }
+        }
     }
 }

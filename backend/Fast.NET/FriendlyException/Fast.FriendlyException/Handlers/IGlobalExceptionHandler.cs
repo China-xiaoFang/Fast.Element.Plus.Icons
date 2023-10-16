@@ -12,37 +12,21 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.Exception.Handlers;
-using Fast.NET;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Fast.Exception.Filters;
+namespace Fast.FriendlyException.Handlers;
 
 /// <summary>
-/// 友好异常拦截器
+/// <see cref="IGlobalExceptionHandler"/> 全局异常处理
 /// </summary>
-internal sealed class ExceptionFilter : IAsyncExceptionFilter
+public interface IGlobalExceptionHandler
 {
     /// <summary>
     /// 异常拦截
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="context"><see cref="ExceptionContext"/></param>
+    /// <param name="isUserFriendlyException"><see cref="bool"/> 是否友好异常</param>
+    /// <param name="isValidationException"><see cref="bool"/> 是否验证异常</param>
     /// <returns></returns>
-    public async Task OnExceptionAsync(ExceptionContext context)
-    {
-        // 判断是否是异常验证
-        UserFriendlyException friendlyException = null;
-        if (context.Exception is UserFriendlyException exception)
-        {
-            friendlyException = exception;
-        }
-
-        // 解析异常处理服务，实现自定义异常额外操作，如记录日志等
-        var globalExceptionHandler = context.HttpContext.RequestServices.GetService<IGlobalExceptionHandler>();
-        if (globalExceptionHandler != null)
-        {
-            await globalExceptionHandler.OnExceptionAsync(context, isFriendlyException: friendlyException != null);
-        }
-    }
+    Task OnExceptionAsync(ExceptionContext context, bool isUserFriendlyException, bool isValidationException);
 }

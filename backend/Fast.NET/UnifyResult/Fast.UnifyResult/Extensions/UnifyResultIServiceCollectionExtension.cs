@@ -15,9 +15,7 @@
 using System.Reflection;
 using Fast.NET;
 using Fast.UnifyResult.Attributes;
-using Fast.UnifyResult.Contexts;
 using Fast.UnifyResult.Filters;
-using Fast.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -99,7 +97,8 @@ public static class UnifyResultIServiceCollectionExtension
         };
 
         // 添加或替换规范化配置
-        UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata, (_, _) => metadata);
+        UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata,
+            (_, _) => metadata);
 
         // 添加规范化提供器
         services.TryAddSingleton(typeof(IUnifyResultProvider), providerType);

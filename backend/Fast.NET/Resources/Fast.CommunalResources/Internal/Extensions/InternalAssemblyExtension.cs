@@ -12,25 +12,23 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.UnifyResult.Metadatas;
+using System.Reflection;
+
+// ReSharper disable once CheckNamespace
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="UnifyMetadata"/> 规范化元数据
+/// <see cref="Assembly"/> 内部拓展类
 /// </summary>
-internal sealed class UnifyMetadata
+internal static class InternalAssemblyExtension
 {
     /// <summary>
-    /// 提供器名称
+    /// 获取程序集名称
     /// </summary>
-    public string ProviderName { get; set; }
-
-    /// <summary>
-    /// 提供器类型
-    /// </summary>
-    public Type ProviderType { get; set; }
-
-    /// <summary>
-    /// 统一的结果类型
-    /// </summary>
-    public Type ResultType { get; set; }
+    /// <param name="assembly"><see cref="Assembly"/></param>
+    /// <returns><see cref="string"/></returns>
+    internal static string GetAssemblyName(this Assembly assembly)
+    {
+        return assembly.GetName().Name;
+    }
 }

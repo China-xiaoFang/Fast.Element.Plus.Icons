@@ -96,11 +96,6 @@ public class AppException : Exception
     public int StatusCode { get; set; } = StatusCodes.Status400BadRequest;
 
     /// <summary>
-    /// 是否是数据验证异常
-    /// </summary>
-    public bool ValidationException { get; set; } = false;
-
-    /// <summary>
     /// 额外数据
     /// </summary>
     public new object Data { get; set; }

@@ -47,9 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataValidation", "DataValid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.DataValidation", "DataValidation\Fast.DataValidation\Fast.DataValidation.csproj", "{8110EB42-8C21-4511-A22E-CE200B9045CA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exception", "Exception", "{E641CD8C-21A7-43A7-89C1-9735EF213E11}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FriendlyException", "FriendlyException", "{E641CD8C-21A7-43A7-89C1-9735EF213E11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Exception", "Exception\Fast.Exception\Fast.Exception.csproj", "{D6DA435E-1919-456A-9884-88485C94A927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.FriendlyException", "FriendlyException\Fast.FriendlyException\Fast.FriendlyException.csproj", "{D6DA435E-1919-456A-9884-88485C94A927}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnifyResult", "UnifyResult", "{0A145836-8A7B-4263-8F6D-A5AAE7F7E196}"
 EndProject

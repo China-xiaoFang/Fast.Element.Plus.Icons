@@ -14,6 +14,8 @@
 
 // ReSharper disable once CheckNamespace
 
+using System.Reflection;
+
 namespace Fast.NET;
 
 /// <summary>
@@ -47,5 +49,25 @@ internal static class InternalTypeExtension
 
         // 判断逻辑
         bool IsTheRawGenericType(Type t) => generic == (t.IsGenericType ? t.GetGenericTypeDefinition() : t);
+    }
+
+    /// <summary>
+    /// 获取类型所在程序集名称
+    /// </summary>
+    /// <param name="type"><see cref="Type"/></param>
+    /// <returns><see cref="string"/></returns>
+    internal static string GetAssemblyName(this Type type)
+    {
+        return type.GetTypeInfo().GetAssemblyName();
+    }
+
+    /// <summary>
+    /// 获取类型所在程序集名称
+    /// </summary>
+    /// <param name="typeInfo"><see cref="TypeInfo"/></param>
+    /// <returns><see cref="string"/></returns>
+    internal static string GetAssemblyName(this TypeInfo typeInfo)
+    {
+        return typeInfo.Assembly.GetAssemblyName();
     }
 }
