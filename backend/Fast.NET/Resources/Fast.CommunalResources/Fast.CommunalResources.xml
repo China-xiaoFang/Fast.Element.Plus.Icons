@@ -4,6 +4,28 @@
         <name>Fast.CommunalResources</name>
     </assembly>
     <members>
+        <member name="T:Fast.NET.InternalPenetrates">
+            <summary>
+            <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
+            <summary>
+            ApiController 缓存
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.IDynamicApplicationType">
+            <summary>
+            类型 IDynamicApplication
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
+            <summary>
+            是否是 Api 控制器
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
         <member name="T:Fast.NET.ExceptorContext">
             <summary>
             <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
@@ -26,6 +48,11 @@
             类型 UnifyProviderAttribute
             </summary>
         </member>
+        <member name="P:Fast.NET.UnifyContext.NonUnifyAttributeType">
+            <summary>
+            类型 NonUnifyAttribute
+            </summary>
+        </member>
         <member name="P:Fast.NET.UnifyContext.IUnifyResultProviderType">
             <summary>
             类型 IUnifyResultProvider
@@ -41,36 +68,36 @@
             规范化结果提供器
             </summary>
         </member>
-        <member name="M:Fast.NET.UnifyContext.CheckSucceededNonUnify``1(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Boolean)">
+        <member name="M:Fast.NET.UnifyContext.CheckSucceededNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Boolean,System.Type)">
             <summary>
             检查请求成功是否进行规范化处理
             </summary>
-            <typeparam name="TNonAttribute">可以是 NonUnifyAttribute 特性，也可以是自定义的 禁止规范化处理 特性</typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
             <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
             <param name="isWebRequest"><see cref="T:System.Boolean"/></param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
             <returns>返回 true 跳过处理，否则进行规范化处理</returns>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.NET.UnifyContext.CheckFailedNonUnify``1(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@)">
+        <member name="M:Fast.NET.UnifyContext.CheckFailedNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Type)">
             <summary>
             检查请求失败（验证失败、抛异常）是否进行规范化处理
             </summary>
-            <typeparam name="TNonAttribute">可以是 NonUnifyAttribute 特性，也可以是自定义的 禁止规范化处理 特性</typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
             <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
             <returns>返回 true 跳过处理，否则进行规范化处理</returns>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.NET.UnifyContext.CheckStatusCodeNonUnify``1(Microsoft.AspNetCore.Http.HttpContext,System.Object@)">
+        <member name="M:Fast.NET.UnifyContext.CheckStatusCodeNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Object@,System.Type)">
             <summary>
             检查短路状态码（>=400）是否进行规范化处理
             </summary>
-            <typeparam name="TNonAttribute">可以是 NonUnifyAttribute 特性，也可以是自定义的 禁止规范化处理 特性</typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
             <returns>返回 true 跳过处理，否则进行规范化处理</returns>
         </member>
         <member name="M:Fast.NET.UnifyContext.CheckValidResult(Microsoft.AspNetCore.Mvc.IActionResult,System.Object@)">
@@ -162,6 +189,14 @@
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns></returns>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.EndpointMetadataCollection,System.Type)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <param name="metadata"><see cref="T:Microsoft.AspNetCore.Http.EndpointMetadataCollection"/></param>
+            <param name="attributeType"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Object"/></returns>
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.HttpContext,System.Type)">
             <summary>

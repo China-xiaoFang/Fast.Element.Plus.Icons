@@ -42,7 +42,7 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
         if (context.Exception is UserFriendlyException userFriendlyException)
         {
             isUserFriendlyException = true;
-            
+
             // 判断是否为验证异常
             if (userFriendlyException.ValidationException)
             {
@@ -99,28 +99,38 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
         // 处理 Mvc/WebApi
 
         // 获取控制器信息
-        var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+        if (context.ActionDescriptor is not ControllerActionDescriptor controllerActionDescriptor)
+        {
+            return;
+        }
 
         // 判断是否跳过规范化结果，如果是，则只处理友好异常消息
-        if (UnifyContext.CheckFailedNonUnify(controllerActionDescriptor.MethodInfo, out object unifyResultObj))
+        if (UnifyContext.CheckFailedNonUnify(context.HttpContext, controllerActionDescriptor.MethodInfo, out var unifyResultObj))
         {
             // WebAPI 情况
-            if (Penetrates.IsApiController(actionDescriptor.MethodInfo.DeclaringType))
+            if (InternalPenetrates.IsApiController(controllerActionDescriptor.MethodInfo.DeclaringType))
             {
                 // 返回 JsonResult
-                context.Result = new JsonResult(exceptionMetadata.Errors)
-                {
-                    StatusCode = exceptionMetadata.StatusCode,
-                };
+                context.Result = new JsonResult(exceptionMetadata.Errors) {StatusCode = exceptionMetadata.StatusCode,};
             }
             else
             {
                 // 返回自定义错误页面
                 context.Result = new BadPageResult(exceptionMetadata.StatusCode)
                 {
-                    Title = "Internal Server: " + exceptionMetadata.Errors.ToString(),
-                    Code = context.Exception.ToString()
+                    Title = "Internal Server: " + exceptionMetadata.Errors, Code = context.Exception.ToString()
                 };
+            }
+        }
+        else
+        {
+            // 这里通过反射查找 OnException 方法并且执行
+            var onExceptionMethod = unifyResultObj.GetType().GetMethod("OnException");
+            if (onExceptionMethod != null)
+            {
+                // 执行规范化异常处理
+                context.Result =
+                    onExceptionMethod.Invoke(unifyResultObj, new object[] {context, exceptionMetadata}) as IActionResult;
             }
         }
     }

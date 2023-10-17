@@ -4,6 +4,28 @@
         <name>Fast.Mapster</name>
     </assembly>
     <members>
+        <member name="T:Fast.NET.InternalPenetrates">
+            <summary>
+            <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
+            <summary>
+            ApiController 缓存
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.IDynamicApplicationType">
+            <summary>
+            类型 IDynamicApplication
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
+            <summary>
+            是否是 Api 控制器
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
         <member name="T:Fast.NET.ExceptorContext">
             <summary>
             <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
@@ -16,6 +38,95 @@
             <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
             <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
         </member>
+        <member name="T:Fast.NET.UnifyContext">
+            <summary>
+            <see cref="T:Fast.NET.UnifyContext"/> 规范化结果上下文
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyContext.UnifyProviderAttributeType">
+            <summary>
+            类型 UnifyProviderAttribute
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyContext.NonUnifyAttributeType">
+            <summary>
+            类型 NonUnifyAttribute
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyContext.IUnifyResultProviderType">
+            <summary>
+            类型 IUnifyResultProvider
+            </summary>
+        </member>
+        <member name="F:Fast.NET.UnifyContext.CacheMethodInfoUnifyProviderAttributes">
+            <summary>
+            方法 规范化提供器 缓存
+            </summary>
+        </member>
+        <member name="F:Fast.NET.UnifyContext.UnifyProviders">
+            <summary>
+            规范化结果提供器
+            </summary>
+        </member>
+        <member name="M:Fast.NET.UnifyContext.CheckSucceededNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Boolean,System.Type)">
+            <summary>
+            检查请求成功是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
+            <param name="isWebRequest"><see cref="T:System.Boolean"/></param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.UnifyContext.CheckFailedNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Type)">
+            <summary>
+            检查请求失败（验证失败、抛异常）是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.UnifyContext.CheckStatusCodeNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Object@,System.Type)">
+            <summary>
+            检查短路状态码（>=400）是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
+            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+        </member>
+        <member name="M:Fast.NET.UnifyContext.CheckValidResult(Microsoft.AspNetCore.Mvc.IActionResult,System.Object@)">
+            <summary>
+            检查是否是有效的结果（可进行规范化的结果）
+            </summary>
+            <param name="result"><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></param>
+            <param name="data"><see cref="T:System.Object"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.UnifyContext.GetMethodUnityMetadata(System.Reflection.MethodInfo)">
+            <summary>
+            获取方法规范化元数据
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.NET.UnifyContext`2">
+            <summary>
+            <see cref="T:Fast.NET.UnifyContext`2"/> 规范化结果上下文
+            </summary>
+            <typeparam name="TAttribute">必须是 UnifyProviderAttribute 特性</typeparam>
+            <typeparam name="TIProvider">必须是 IUnifyResultProvider 接口</typeparam>
+        </member>
+        <member name="M:Fast.NET.UnifyContext`2.#cctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="T:Fast.NET.ValidatorContext">
             <summary>
             <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
@@ -27,6 +138,18 @@
             </summary>
             <param name="errors"><see cref="T:System.Object"/></param>
             <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
+        </member>
+        <member name="T:Fast.NET.InternalAssemblyExtension">
+            <summary>
+            <see cref="T:System.Reflection.Assembly"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalAssemblyExtension.GetAssemblyName(System.Reflection.Assembly)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="assembly"><see cref="T:System.Reflection.Assembly"/></param>
+            <returns><see cref="T:System.String"/></returns>
         </member>
         <member name="T:Fast.NET.InternalConvertExtension">
             <summary>
@@ -67,6 +190,22 @@
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns></returns>
         </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.EndpointMetadataCollection,System.Type)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <param name="metadata"><see cref="T:Microsoft.AspNetCore.Http.EndpointMetadataCollection"/></param>
+            <param name="attributeType"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Object"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.HttpContext,System.Type)">
+            <summary>
+            获取 Action 特性
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="attributeType"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Object"/></returns>
+        </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
             <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
@@ -76,14 +215,14 @@
             <summary>
             判断方法是否是异步
             </summary>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="methodInfo"><see cref="T:System.Reflection.MethodInfo"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
             <summary>
             获取方法真实返回类型
             </summary>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="methodInfo"><see cref="T:System.Reflection.MethodInfo"/></param>
             <returns><see cref="T:System.Type"/></returns>
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
@@ -91,7 +230,16 @@
             查找方法指定特性，如果没找到则继续查找声明类
             </summary>
             <typeparam name="TAttribute"></typeparam>
-            <param name="method"></param>
+            <param name="methodInfo"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute(System.Reflection.MethodInfo,System.Type,System.Boolean)">
+            <summary>
+            查找方法指定特性，如果没找到则继续查找声明类
+            </summary>
+            <param name="methodInfo"></param>
+            <param name="attributeType"></param>
             <param name="inherit"></param>
             <returns></returns>
         </member>
@@ -107,6 +255,40 @@
             <param name="type"><see cref="T:System.Type"/> 类型</param>
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
             <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.GetAssemblyName(System.Type)">
+            <summary>
+            获取类型所在程序集名称
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.GetAssemblyName(System.Reflection.TypeInfo)">
+            <summary>
+            获取类型所在程序集名称
+            </summary>
+            <param name="typeInfo"><see cref="T:System.Reflection.TypeInfo"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="T:Fast.NET.UnifyMetadata">
+            <summary>
+            <see cref="T:Fast.NET.UnifyMetadata"/> 规范化元数据
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyMetadata.ProviderName">
+            <summary>
+            提供器名称
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyMetadata.ProviderType">
+            <summary>
+            提供器类型
+            </summary>
+        </member>
+        <member name="P:Fast.NET.UnifyMetadata.ResultType">
+            <summary>
+            统一的结果类型
+            </summary>
         </member>
         <member name="T:Fast.NET.InternalAssemblyUtil">
             <summary>
