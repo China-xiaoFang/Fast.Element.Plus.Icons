@@ -15,17 +15,20 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 using Fast.NET.Core.Extensions;
+using Fast.NET.Core.Filters;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET.Core;
 
 /// <summary>
-/// App 上下文
+/// <see cref="App"/> App 上下文
 /// </summary>
 public static class App
 {
@@ -33,48 +36,57 @@ public static class App
     /// 配置
     /// </summary>
     public static IConfiguration Configuration =>
-        InternalApp.CatchOrDefault(() => InternalApp.Configuration.Reload(), new ConfigurationBuilder().Build());
+        CatchOrDefault(() => InternalPenetrates.Configuration.Reload(), new ConfigurationBuilder().Build());
 
     /// <summary>
     /// 获取Web主机环境
     /// </summary>
-    public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
+    public static IWebHostEnvironment WebHostEnvironment => InternalPenetrates.WebHostEnvironment;
 
     /// <summary>
     /// 应用服务
     /// </summary>
-    public static IServiceCollection InternalServices => InternalApp.InternalServices;
+    public static IServiceCollection InternalServices => InternalPenetrates.InternalServices;
 
     /// <summary>
     /// 存储根服务，可能为空
     /// </summary>
-    public static IServiceProvider RootServices => InternalApp.RootServices;
+    public static IServiceProvider RootServices => InternalPenetrates.RootServices;
 
     /// <summary>
     /// 应用有效程序集
     /// </summary>
-    public static IEnumerable<Assembly> Assemblies => InternalApp.Assemblies;
+    public static IEnumerable<Assembly> Assemblies => InternalPenetrates.Assemblies;
 
     /// <summary>
     /// 有效程序集类型
     /// </summary>
-    public static IEnumerable<Type> EffectiveTypes => InternalApp.EffectiveTypes;
+    public static IEnumerable<Type> EffectiveTypes => InternalPenetrates.EffectiveTypes;
 
     /// <summary>
     /// 请求上下文
     /// </summary>
-    public static HttpContext HttpContext =>
-        InternalApp.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
-
-    ///// <summary>
-    ///// App 日志对象
-    ///// </summary>
-    //public static ILogger Logger => InternalApp.Logger;
+    public static HttpContext HttpContext => CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
 
     /// <summary>
     /// 未托管的对象集合
     /// </summary>
-    public static ConcurrentBag<IDisposable> UnmanagedObjects => InternalApp.UnmanagedObjects;
+    public static ConcurrentBag<IDisposable> UnmanagedObjects => InternalPenetrates.UnmanagedObjects;
+
+    /// <summary>
+    /// 默认配置文件扫描目录
+    /// </summary>
+    internal static IEnumerable<string> InternalConfigurationScanDirectories => new[] {"AppConfig", "JsonConfig"};
+
+    /// <summary>
+    /// GC 回收默认间隔
+    /// </summary>
+    internal const int GC_COLLECT_INTERVAL_SECONDS = 5;
+
+    /// <summary>
+    /// 记录最近 GC 回收时间
+    /// </summary>
+    internal static DateTime? LastGCCollectTime { get; set; }
 
     /// <summary>
     /// 解析服务提供器
@@ -84,7 +96,7 @@ public static class App
     public static IServiceProvider GetServiceProvider(Type serviceType)
     {
         // 第一选择，判断是否是单例注册且单例服务不为空，如果是直接返回根服务提供器
-        if (RootServices != null && InternalApp.InternalServices
+        if (RootServices != null && InternalServices
                 .Where(u => u.ServiceType == (serviceType.IsGenericType ? serviceType.GetGenericTypeDefinition() : serviceType))
                 .Any(u => u.Lifetime == ServiceLifetime.Singleton))
             return RootServices;
@@ -103,7 +115,7 @@ public static class App
         }
 
         // 第四选择，构建新的服务对象（性能最差）
-        var serviceProvider = InternalApp.InternalServices.BuildServiceProvider();
+        var serviceProvider = InternalServices.BuildServiceProvider();
         UnmanagedObjects.Add(serviceProvider);
         return serviceProvider;
     }
@@ -200,7 +212,7 @@ public static class App
     /// <returns></returns>
     public static string GetTraceId()
     {
-        return Activity.Current?.Id ?? (InternalApp.RootServices == null ? default : HttpContext?.TraceIdentifier);
+        return Activity.Current?.Id ?? (RootServices == null ? default : HttpContext?.TraceIdentifier);
     }
 
     /// <summary>
@@ -228,7 +240,7 @@ public static class App
     /// <returns></returns>
     public static ServiceLifetime? GetServiceLifetime(Type serviceType)
     {
-        var serviceDescriptor = InternalApp.InternalServices.FirstOrDefault(u =>
+        var serviceDescriptor = InternalServices.FirstOrDefault(u =>
             u.ServiceType == (serviceType.IsGenericType ? serviceType.GetGenericTypeDefinition() : serviceType));
 
         return serviceDescriptor?.Lifetime;
@@ -248,15 +260,168 @@ public static class App
         if (UnmanagedObjects.Any())
         {
             var nowTime = DateTime.UtcNow;
-            if ((InternalApp.LastGCCollectTime == null || (nowTime - InternalApp.LastGCCollectTime.Value).TotalSeconds >
-                    InternalApp.GC_COLLECT_INTERVAL_SECONDS))
+            if ((LastGCCollectTime == null || (nowTime - LastGCCollectTime.Value).TotalSeconds > GC_COLLECT_INTERVAL_SECONDS))
             {
-                InternalApp.LastGCCollectTime = nowTime;
+                LastGCCollectTime = nowTime;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
             }
         }
 
         UnmanagedObjects.Clear();
+    }
+
+    /// <summary>
+    /// 处理获取对象异常问题
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="action">获取对象委托</param>
+    /// <param name="defaultValue">默认值</param>
+    /// <returns>T</returns>
+    internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
+    {
+        try
+        {
+            return action();
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    /// <summary>
+    /// 配置 Application
+    /// </summary>
+    /// <param name="builder"></param>
+    internal static void ConfigureApplication(IWebHostBuilder builder)
+    {
+        // 自动装载配置
+        builder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
+        {
+            // 存储环境对象
+            InternalPenetrates.WebHostEnvironment = hostContext.HostingEnvironment;
+
+            // 加载配置
+            AddJsonFiles(configurationBuilder, hostContext.HostingEnvironment);
+        });
+
+        // 应用初始化服务
+        builder.ConfigureServices((hostContext, services) =>
+        {
+            // 存储配置对象
+            InternalPenetrates.Configuration = hostContext.Configuration;
+
+            // 存储服务提供器
+            InternalPenetrates.InternalServices = services;
+
+            // 注册 Startup 过滤器
+            services.AddTransient<IStartupFilter, StartupFilter>();
+
+            // 跨域配置
+            services.AddCorsAccessor(hostContext.Configuration);
+
+            // 注册 HttpContextAccessor 服务
+            services.AddHttpContextAccessor();
+
+            // 注册 内存缓存
+            services.AddMemoryCache();
+
+            // JSON 序列化配置
+            services.AddJsonOptions();
+
+            // 注册全局依赖注入
+            services.AddInnerDependencyInjection();
+
+            // 添加对象映射
+            services.AddObjectMapper();
+
+            // 默认内置 GBK，Windows-1252, Shift-JIS, GB2312 编码支持
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        });
+    }
+
+    /// <summary>
+    /// 添加 JSON 文件
+    /// </summary>
+    /// <param name="configurationBuilder"></param>
+    /// <param name="hostEnvironment"></param>
+    private static void AddJsonFiles(IConfigurationBuilder configurationBuilder, IHostEnvironment hostEnvironment)
+    {
+        // 获取程序执行目录
+        var executeDirectory = AppContext.BaseDirectory;
+
+        // 扫描自定义配置扫描目录
+        var jsonFiles = new[] {executeDirectory}.Concat(InternalConfigurationScanDirectories).Where(Directory.Exists)
+            .SelectMany(s => Directory.GetFiles(s, "*.json", SearchOption.TopDirectoryOnly)).ToList();
+
+        // 如果没有配置文件，中止执行
+        if (!jsonFiles.Any())
+            return;
+
+        // 获取环境变量名，如果没找到，则读取 NETCORE_ENVIRONMENT 环境变量信息识别（用于非 Web 环境）
+        var envName = hostEnvironment?.EnvironmentName ?? Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT") ?? "Unknown";
+
+        // 处理控制台应用程序
+        var _excludeJsonPrefixArr = hostEnvironment == default
+            ? excludeJsonPrefixArr.Where(u => !u.Equals("appsettings"))
+            : excludeJsonPrefixArr;
+
+        // 将所有文件进行分组
+        var jsonFilesGroups = SplitConfigFileNameToGroups(jsonFiles).Where(u =>
+            !_excludeJsonPrefixArr.Contains(u.Key, StringComparer.OrdinalIgnoreCase) && !u.Any(c =>
+                runtimeJsonSuffixArr.Any(z => c.EndsWith(z, StringComparison.OrdinalIgnoreCase))));
+
+        // 遍历所有配置分组
+        foreach (var group in jsonFilesGroups)
+        {
+            // 限制查找的 json 文件组
+            var limitFileNames = new[] {$"{group.Key}.json", $"{group.Key}.{envName}.json"};
+
+            // 查找默认配置和环境配置
+            var files = group.Where(u => limitFileNames.Contains(Path.GetFileName(u), StringComparer.OrdinalIgnoreCase))
+                .OrderBy(u => Path.GetFileName(u).Length);
+
+            // 循环加载
+            foreach (var jsonFile in files)
+            {
+                configurationBuilder.AddJsonFile(jsonFile, optional: true, reloadOnChange: true);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 排除的配置文件前缀
+    /// </summary>
+    private static readonly string[] excludeJsonPrefixArr = {"appsettings", "bundleconfig", "compilerconfig"};
+
+    /// <summary>
+    /// 排除运行时 Json 后缀
+    /// </summary>
+    private static readonly string[] runtimeJsonSuffixArr =
+    {
+        "deps.json", "runtimeconfig.dev.json", "runtimeconfig.prod.json", "runtimeconfig.json", "staticwebassets.runtime.json"
+    };
+
+    /// <summary>
+    /// 对配置文件名进行分组
+    /// </summary>
+    /// <param name="configFiles"></param>
+    /// <returns></returns>
+    private static IEnumerable<IGrouping<string, string>> SplitConfigFileNameToGroups(IEnumerable<string> configFiles)
+    {
+        // 分组
+        return configFiles.GroupBy(Function);
+
+        // 本地函数
+        static string Function(string file)
+        {
+            // 根据 . 分隔
+            var fileNameParts = Path.GetFileName(file).Split('.', StringSplitOptions.RemoveEmptyEntries);
+            if (fileNameParts.Length == 2)
+                return fileNameParts[0];
+
+            return string.Join('.', fileNameParts.Take(fileNameParts.Length - 2));
+        }
     }
 }

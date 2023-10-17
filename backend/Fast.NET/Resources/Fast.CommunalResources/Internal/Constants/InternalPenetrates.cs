@@ -13,7 +13,11 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
+using System.Reflection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
@@ -21,8 +25,44 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="InternalPenetrates"/> 内部常量，公共方法配置类
 /// </summary>
+/// <remarks>虽然这里有一些 App 中的属性，但是一般情况下还是不建议使用，可能为 Null，这里只是为了框架内部避免互相引用，所以单独提取出来了</remarks>
 internal static class InternalPenetrates
 {
+    /// <summary>
+    /// 应用服务
+    /// </summary>
+    internal static IServiceCollection InternalServices;
+
+    /// <summary>
+    /// 根服务
+    /// </summary>
+    internal static IServiceProvider RootServices;
+
+    /// <summary>
+    /// 配置对象
+    /// </summary>
+    internal static IConfiguration Configuration;
+
+    /// <summary>
+    /// 应用有效程序集
+    /// </summary>
+    internal static readonly IEnumerable<Assembly> Assemblies;
+
+    /// <summary>
+    /// 有效程序集类型
+    /// </summary>
+    internal static readonly IEnumerable<Type> EffectiveTypes;
+
+    /// <summary>
+    /// 获取Web主机环境
+    /// </summary>
+    internal static IWebHostEnvironment WebHostEnvironment;
+
+    /// <summary>
+    /// 未托管的对象集合
+    /// </summary>
+    internal static readonly ConcurrentBag<IDisposable> UnmanagedObjects;
+
     /// <summary>
     /// ApiController 缓存
     /// </summary>
@@ -39,6 +79,19 @@ internal static class InternalPenetrates
         IDynamicApplicationType = Type.GetType("Fast.DynamicApplication.IDynamicApplication");
 
         CacheIsApiController = new ConcurrentDictionary<Type, bool>();
+
+        // 加载程序集
+        Assemblies = InternalAssemblyUtil.GetEntryAssembly();
+
+        var suppressSnifferAttributeType = typeof(SuppressSnifferAttribute);
+
+        // 获取有效的类型集合
+        EffectiveTypes = Assemblies.SelectMany(s =>
+            // 排除使用了 SuppressSnifferAttribute 特性的类型
+            InternalAssemblyUtil.GetAssemblyTypes(s, wh => !wh.IsDefined(suppressSnifferAttributeType, false)));
+
+        // 未托管的对象
+        UnmanagedObjects = new ConcurrentBag<IDisposable>();
     }
 
     /// <summary>

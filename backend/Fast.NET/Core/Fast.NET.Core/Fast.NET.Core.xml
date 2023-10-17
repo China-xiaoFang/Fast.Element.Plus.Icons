@@ -8,6 +8,42 @@
             <summary>
             <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
             </summary>
+            <remarks>虽然这里有一些 App 中的属性，但是一般情况下还是不建议使用，可能为 Null，这里只是为了框架内部避免互相引用，所以单独提取出来了</remarks>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.InternalServices">
+            <summary>
+            应用服务
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.RootServices">
+            <summary>
+            根服务
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.Configuration">
+            <summary>
+            配置对象
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.Assemblies">
+            <summary>
+            应用有效程序集
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.EffectiveTypes">
+            <summary>
+            有效程序集类型
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.WebHostEnvironment">
+            <summary>
+            获取Web主机环境
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.UnmanagedObjects">
+            <summary>
+            未托管的对象集合
+            </summary>
         </member>
         <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
             <summary>
@@ -313,7 +349,7 @@
         </member>
         <member name="T:Fast.NET.Core.App">
             <summary>
-            App 上下文
+            <see cref="T:Fast.NET.Core.App"/> App 上下文
             </summary>
         </member>
         <member name="P:Fast.NET.Core.App.Configuration">
@@ -354,6 +390,21 @@
         <member name="P:Fast.NET.Core.App.UnmanagedObjects">
             <summary>
             未托管的对象集合
+            </summary>
+        </member>
+        <member name="P:Fast.NET.Core.App.InternalConfigurationScanDirectories">
+            <summary>
+            默认配置文件扫描目录
+            </summary>
+        </member>
+        <member name="F:Fast.NET.Core.App.GC_COLLECT_INTERVAL_SECONDS">
+            <summary>
+            GC 回收默认间隔
+            </summary>
+        </member>
+        <member name="P:Fast.NET.Core.App.LastGCCollectTime">
+            <summary>
+            记录最近 GC 回收时间
             </summary>
         </member>
         <member name="M:Fast.NET.Core.App.GetServiceProvider(System.Type)">
@@ -450,67 +501,7 @@
             释放所有未托管的对象
             </summary>
         </member>
-        <member name="T:Fast.NET.Core.InternalApp">
-            <summary>
-            内部 App 副本
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.InternalServices">
-            <summary>
-            应用服务
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.RootServices">
-            <summary>
-            根服务
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.Configuration">
-            <summary>
-            配置对象
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.WebHostEnvironment">
-            <summary>
-            获取Web主机环境
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.Assemblies">
-            <summary>
-            应用有效程序集
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.EffectiveTypes">
-            <summary>
-            有效程序集类型
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.UnmanagedObjects">
-            <summary>
-            未托管的对象集合
-            </summary>
-        </member>
-        <member name="P:Fast.NET.Core.InternalApp.InternalConfigurationScanDirectories">
-            <summary>
-            默认配置文件扫描目录
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.InternalApp.GC_COLLECT_INTERVAL_SECONDS">
-            <summary>
-            GC 回收默认间隔
-            </summary>
-        </member>
-        <member name="P:Fast.NET.Core.InternalApp.LastGCCollectTime">
-            <summary>
-            记录最近 GC 回收时间
-            </summary>
-        </member>
-        <member name="M:Fast.NET.Core.InternalApp.#cctor">
-            <summary>
-            <see cref="T:Fast.NET.Core.InternalApp"/>
-            </summary>
-        </member>
-        <member name="M:Fast.NET.Core.InternalApp.CatchOrDefault``1(System.Func{``0},``0)">
+        <member name="M:Fast.NET.Core.App.CatchOrDefault``1(System.Func{``0},``0)">
             <summary>
             处理获取对象异常问题
             </summary>
@@ -519,17 +510,30 @@
             <param name="defaultValue">默认值</param>
             <returns>T</returns>
         </member>
-        <member name="F:Fast.NET.Core.InternalApp.excludeJsonPrefixArr">
+        <member name="M:Fast.NET.Core.App.ConfigureApplication(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+            <summary>
+            配置 Application
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Fast.NET.Core.App.AddJsonFiles(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Extensions.Hosting.IHostEnvironment)">
+            <summary>
+            添加 JSON 文件
+            </summary>
+            <param name="configurationBuilder"></param>
+            <param name="hostEnvironment"></param>
+        </member>
+        <member name="F:Fast.NET.Core.App.excludeJsonPrefixArr">
             <summary>
             排除的配置文件前缀
             </summary>
         </member>
-        <member name="F:Fast.NET.Core.InternalApp.runtimeJsonSuffixArr">
+        <member name="F:Fast.NET.Core.App.runtimeJsonSuffixArr">
             <summary>
             排除运行时 Json 后缀
             </summary>
         </member>
-        <member name="M:Fast.NET.Core.InternalApp.SplitConfigFileNameToGroups(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Fast.NET.Core.App.SplitConfigFileNameToGroups(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             对配置文件名进行分组
             </summary>

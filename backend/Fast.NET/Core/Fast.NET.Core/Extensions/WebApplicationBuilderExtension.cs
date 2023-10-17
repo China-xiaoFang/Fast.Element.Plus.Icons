@@ -31,10 +31,10 @@ public static class WebApplicationBuilderExtension
         // 运行控制台输出
         UseDefault();
 
-        InternalApp.WebHostEnvironment = builder.Environment;
+        InternalPenetrates.WebHostEnvironment = builder.Environment;
 
         // 初始化配置
-        InternalApp.ConfigureApplication(builder.WebHost);
+        App.ConfigureApplication(builder.WebHost);
 
         return builder;
     }

@@ -12,28 +12,14 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Microsoft.Extensions.Configuration;
+using Fast.NET;
 
-namespace Fast.NET.Core.Extensions;
+namespace Fast.DependencyInjection.Attributes;
 
 /// <summary>
-/// <see cref="IConfiguration"/> 拓展类
+/// 跳过全局代理
 /// </summary>
-public static class IConfigurationExtension
+[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
+public class SuppressProxyAttribute : Attribute
 {
-    /// <summary>
-    /// 刷新配置对象
-    /// </summary>
-    /// <param name="configuration"><see cref="IConfiguration"/></param>
-    /// <returns><see cref="IConfiguration"/></returns>
-    public static IConfiguration Reload(this IConfiguration configuration)
-    {
-        if (App.RootServices == null)
-            return configuration;
-
-        var newConfiguration = App.GetService<IConfiguration>(App.RootServices);
-        InternalPenetrates.Configuration = newConfiguration;
-
-        return newConfiguration;
-    }
 }

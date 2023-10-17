@@ -48,10 +48,10 @@ public static class ObjectMapperExtension
         var config = TypeAdapterConfig.GlobalSettings;
 
         // 获取当前入口所有程序集
-        var assemblies = InternalAssemblyUtil.GetEntryAssembly().ToArray();
+        var assemblies = InternalPenetrates.Assemblies?.ToArray();
 
         // 扫描所有继承  IRegister 接口的对象映射配置
-        if (assemblies.Length > 0)
+        if (assemblies?.Length > 0)
             config.Scan(assemblies);
 
         // 配置默认全局映射（支持覆盖）

@@ -13,8 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
-using Fast.DependencyInjection.Reflection;
-using Fast.NET.Core;
+using Fast.NET;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.DependencyInjection.Extensions;
@@ -22,6 +21,7 @@ namespace Fast.DependencyInjection.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 依赖注入拓展类
 /// </summary>
+[SuppressSniffer]
 public static class DependencyInjectionIServiceCollectionExtension
 {
     /// <summary>
@@ -35,17 +35,45 @@ public static class DependencyInjectionIServiceCollectionExtension
     }
 
     /// <summary>
+    /// 添加依赖注入
+    /// </summary>
+    /// <param name="builder"><see cref="MvcBuilder"/></param>
+    /// <returns><see cref="MvcBuilder"/></returns>
+    public static IMvcBuilder AddDependencyInjection(this IMvcBuilder builder)
+    {
+        builder.Services.AddDependencyInjection();
+
+        return builder;
+    }
+
+    /// <summary>
+    /// 添加依赖注入
+    /// </summary>
+    /// <param name="services"><see cref="IServiceCollection"/></param>
+    /// <returns><see cref="IServiceCollection"/></returns>
+    public static IServiceCollection AddDependencyInjection(this IServiceCollection services)
+    {
+        // 添加内部依赖注入扫描拓展
+        services.AddInnerDependencyInjection();
+
+        // 注册命名服务
+        services.AddTransient(typeof(INamedServiceProvider<>), typeof(NamedServiceProvider<>));
+
+        return services;
+    }
+
+    /// <summary>
     /// 添加扫描注入
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/></param>
     /// <returns><see cref="IServiceCollection"/></returns>
-    public static IServiceCollection AddInnerDependencyInjection(this IServiceCollection services)
+    private static IServiceCollection AddInnerDependencyInjection(this IServiceCollection services)
     {
         // 查找所有需要依赖注入的类型
-        var injectTypes = App.EffectiveTypes.Where(u =>
+        var injectTypes = InternalPenetrates.EffectiveTypes.Where(u =>
             typeof(IDependency).IsAssignableFrom(u) && u.IsClass && !u.IsInterface && !u.IsAbstract);
 
-        var projectAssemblies = App.Assemblies;
+        var projectAssemblies = InternalPenetrates.Assemblies;
         var lifetimeInterfaces = new[] {typeof(ITransientDependency), typeof(IScopedDependency), typeof(ISingletonDependency)};
 
         // 执行依赖注入
@@ -55,9 +83,8 @@ public static class DependencyInjectionIServiceCollectionExtension
 
             // 获取所有能注册的接口
             var canInjectInterfaces = interfaces.Where(u =>
-                //!DependencyAttribute.ExceptInterfaces.Contains(u) && 
                 u != typeof(IDisposable) && u != typeof(IAsyncDisposable) && u != typeof(IDependency)
-                //&& u != typeof(IDynamicApiController)
+                && (InternalPenetrates.IDynamicApplicationType == null || u != InternalPenetrates.IDynamicApplicationType)
                 && !lifetimeInterfaces.Contains(u) && projectAssemblies.Contains(u.Assembly) &&
                 (!type.IsGenericType && !u.IsGenericType || type.IsGenericType && u.IsGenericType &&
                     type.GetGenericArguments().Length == u.GetGenericArguments().Length));
@@ -90,6 +117,7 @@ public static class DependencyInjectionIServiceCollectionExtension
     private static void RegisterService(IServiceCollection services, Type dependencyType, Type type,
         IEnumerable<Type> canInjectInterfaces)
     {
+        // 这里默认注册多个接口
         foreach (var inter in canInjectInterfaces)
         {
             Register(services, dependencyType, type, inter);
@@ -144,7 +172,7 @@ public static class DependencyInjectionIServiceCollectionExtension
         if (!type.IsGenericType)
             return type;
 
-        return Reflect.GetType(type.Assembly, $"{type.Namespace}.{type.Name}");
+        return type.Assembly.GetType($"{type.Namespace}.{type.Name}");
     }
 
     /// <summary>

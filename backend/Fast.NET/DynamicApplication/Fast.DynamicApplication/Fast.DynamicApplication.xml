@@ -19,6 +19,16 @@
             类型 IDynamicApplication
             </summary>
         </member>
+        <member name="F:Fast.NET.InternalPenetrates.Assemblies">
+            <summary>
+            应用有效程序集
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.EffectiveTypes">
+            <summary>
+            有效程序集类型
+            </summary>
+        </member>
         <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
             <summary>
             是否是 Api 控制器

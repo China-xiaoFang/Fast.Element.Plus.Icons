@@ -8,6 +8,42 @@
             <summary>
             <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
             </summary>
+            <remarks>虽然这里有一些 App 中的属性，但是一般情况下还是不建议使用，可能为 Null，这里只是为了框架内部避免互相引用，所以单独提取出来了</remarks>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.InternalServices">
+            <summary>
+            应用服务
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.RootServices">
+            <summary>
+            根服务
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.Configuration">
+            <summary>
+            配置对象
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.Assemblies">
+            <summary>
+            应用有效程序集
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.EffectiveTypes">
+            <summary>
+            有效程序集类型
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.WebHostEnvironment">
+            <summary>
+            获取Web主机环境
+            </summary>
+        </member>
+        <member name="F:Fast.NET.InternalPenetrates.UnmanagedObjects">
+            <summary>
+            未托管的对象集合
+            </summary>
         </member>
         <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
             <summary>
@@ -311,6 +347,37 @@
             <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
             <returns></returns>
         </member>
+        <member name="T:Fast.DependencyInjection.Attributes.SuppressProxyAttribute">
+            <summary>
+            跳过全局代理
+            </summary>
+        </member>
+        <member name="T:Fast.DependencyInjection.Scoped">
+            <summary>
+            <see cref="T:Fast.DependencyInjection.Scoped"/> 创建作用域静态类
+            </summary>
+        </member>
+        <member name="M:Fast.DependencyInjection.Scoped.Create(System.Action{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+            <summary>
+            创建一个作用域范围
+            </summary>
+            <param name="handler"></param>
+            <param name="scopeFactory"></param>
+        </member>
+        <member name="M:Fast.DependencyInjection.Scoped.CreateAsync(System.Func{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope,System.Threading.Tasks.Task},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+            <summary>
+            创建一个作用域范围（异步）
+            </summary>
+            <param name="handler"></param>
+            <param name="scopeFactory"></param>
+        </member>
+        <member name="M:Fast.DependencyInjection.Scoped.CreateScope(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory@)">
+            <summary>
+            创建一个作用域
+            </summary>
+            <param name="scopeFactory"></param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.DependencyInjection.IDependency">
             <summary>
             依赖关系接口
@@ -340,6 +407,20 @@
             <summary>
             类型名称集合
             </summary>
+        </member>
+        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            添加依赖注入
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></returns>
+        </member>
+        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加依赖注入
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
         </member>
         <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddInnerDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -396,80 +477,59 @@
             <param name="dependencyType"></param>
             <returns></returns>
         </member>
-        <member name="T:Fast.DependencyInjection.Scoped">
+        <member name="T:Fast.DependencyInjection.INamedServiceProvider`1">
             <summary>
-            创建作用域静态类
+            <see cref="T:Fast.DependencyInjection.INamedServiceProvider`1"/> 命名服务提供器
+            </summary>
+            <typeparam name="TService">目标服务接口</typeparam>
+        </member>
+        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetService``1(System.String)">
+            <summary>
+            根据服务名称获取服务
+            </summary>
+            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
+            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
+            <returns><see cref="!:TService"/></returns>
+        </member>
+        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetRequiredService``1(System.String)">
+            <summary>
+            根据服务名称获取服务
+            </summary>
+            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
+            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
+            <returns><see cref="!:TService"/></returns>
+        </member>
+        <member name="T:Fast.DependencyInjection.NamedServiceProvider`1">
+            <summary>
+            <see cref="T:Fast.DependencyInjection.NamedServiceProvider`1"/> 命名服务提供器默认实现
+            </summary>
+            <typeparam name="TService">目标服务接口</typeparam>
+        </member>
+        <member name="F:Fast.DependencyInjection.NamedServiceProvider`1._serviceProvider">
+            <summary>
+            服务提供器
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.Scoped.Create(System.Action{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.#ctor(System.IServiceProvider)">
             <summary>
-            创建一个作用域范围
-            </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateAsync(System.Func{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope,System.Threading.Tasks.Task},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
-            <summary>
-            创建一个作用域范围（异步）
-            </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateScope(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory@)">
-            <summary>
-            创建一个作用域
-            </summary>
-            <param name="scopeFactory"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Fast.DependencyInjection.Reflection.Reflect">
-            <summary>
-            内部反射静态类
+            
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.GetAssembly(System.String)">
+        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetService``1(System.String)">
             <summary>
-            根据程序集名称获取运行时程序集
+            根据服务名称获取服务
             </summary>
-            <param name="assemblyName"></param>
-            <returns></returns>
+            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
+            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
+            <returns><see cref="!:TService"/></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.LoadAssembly(System.IO.MemoryStream)">
+        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetRequiredService``1(System.String)">
             <summary>
-            通过流加载程序集
+            根据服务名称获取服务
             </summary>
-            <param name="assembly"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.GetType(System.String,System.String)">
-            <summary>
-            根据程序集名称、类型完整限定名获取运行时类型
-            </summary>
-            <param name="assemblyName"></param>
-            <param name="typeFullName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.GetType(System.Reflection.Assembly,System.String)">
-            <summary>
-            根据程序集和类型完全限定名获取运行时类型
-            </summary>
-            <param name="assembly"></param>
-            <param name="typeFullName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.GetAssemblyName(System.Reflection.Assembly)">
-            <summary>
-            获取程序集名称
-            </summary>
-            <param name="assembly"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Reflection.Reflect.GetAssemblyName(System.Reflection.TypeInfo)">
-            <summary>
-            获取程序集名称
-            </summary>
-            <param name="typeInfo"></param>
-            <returns></returns>
+            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
+            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
+            <returns><see cref="!:TService"/></returns>
         </member>
     </members>
 </doc>

@@ -13,14 +13,16 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.FriendlyException.Filters;
+using Fast.NET;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.FriendlyException.Extensions;
 
 /// <summary>
-/// 友好异常服务拓展类
+/// <see cref="IServiceCollection"/> 友好异常服务拓展类
 /// </summary>
+[SuppressSniffer]
 public static class ExceptionIServiceCollectionExtension
 {
     /// <summary>
