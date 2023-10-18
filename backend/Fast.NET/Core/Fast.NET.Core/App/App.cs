@@ -36,7 +36,7 @@ public static class App
     /// 配置
     /// </summary>
     public static IConfiguration Configuration =>
-        CatchOrDefault(() => InternalPenetrates.Configuration.Reload(), new ConfigurationBuilder().Build());
+        InternalPenetrates.CatchOrDefault(() => InternalPenetrates.Configuration.Reload(), new ConfigurationBuilder().Build());
 
     /// <summary>
     /// 获取Web主机环境
@@ -66,7 +66,7 @@ public static class App
     /// <summary>
     /// 请求上下文
     /// </summary>
-    public static HttpContext HttpContext => CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
+    public static HttpContext HttpContext => InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
 
     /// <summary>
     /// 未托管的对象集合
@@ -203,7 +203,7 @@ public static class App
     /// <returns></returns>
     public static int GetThreadId()
     {
-        return Environment.CurrentManagedThreadId;
+        return InternalPenetrates.GetThreadId();
     }
 
     /// <summary>
@@ -212,7 +212,7 @@ public static class App
     /// <returns></returns>
     public static string GetTraceId()
     {
-        return Activity.Current?.Id ?? (RootServices == null ? default : HttpContext?.TraceIdentifier);
+        return InternalPenetrates.GetTraceId();
     }
 
     /// <summary>
@@ -222,15 +222,7 @@ public static class App
     /// <returns><see cref="long"/></returns>
     public static long GetExecutionTime(Action action)
     {
-        // 空检查
-        if (action == null)
-            throw new ArgumentNullException(nameof(action));
-
-        // 计算接口执行时间
-        var timeOperation = Stopwatch.StartNew();
-        action();
-        timeOperation.Stop();
-        return timeOperation.ElapsedMilliseconds;
+        return InternalPenetrates.GetExecutionTime(action);
     }
 
     /// <summary>
@@ -269,25 +261,6 @@ public static class App
         }
 
         UnmanagedObjects.Clear();
-    }
-
-    /// <summary>
-    /// 处理获取对象异常问题
-    /// </summary>
-    /// <typeparam name="T">类型</typeparam>
-    /// <param name="action">获取对象委托</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns>T</returns>
-    internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
-    {
-        try
-        {
-            return action();
-        }
-        catch
-        {
-            return defaultValue;
-        }
     }
 
     /// <summary>

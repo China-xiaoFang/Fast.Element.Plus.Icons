@@ -4,8 +4,4 @@
 		<Description>Fast.NET 框架日志模块库。</Description>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Core\Fast.NET.Core\Fast.NET.Core.csproj" />
-	</ItemGroup>
-
 </Project>

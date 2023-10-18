@@ -65,22 +65,7 @@ public static class TypeExtension
     /// <returns><see cref="bool"/></returns>
     public static bool IsRichPrimitive(this Type type)
     {
-        // 处理元组类型
-        if (type.IsValueTuple())
-            return false;
-
-        // 处理数组类型，基元数组类型也可以是基元类型
-        if (type.IsArray)
-            return type.GetElementType()?.IsRichPrimitive() == true;
-
-        // 基元类型或值类型或字符串类型
-        if (type.IsPrimitive || type.IsValueType || type == typeof(string))
-            return true;
-
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            return type.GenericTypeArguments[0].IsRichPrimitive();
-
-        return false;
+        return InternalTypeExtension.IsRichPrimitive(type);
     }
 
     /// <summary>
@@ -90,7 +75,7 @@ public static class TypeExtension
     /// <returns><see cref="bool"/></returns>
     public static bool IsValueTuple(this Type type)
     {
-        return type.Namespace == "System" && type.Name.Contains("ValueTuple`");
+        return InternalTypeExtension.IsValueTuple(type);
     }
 
     /// <summary>

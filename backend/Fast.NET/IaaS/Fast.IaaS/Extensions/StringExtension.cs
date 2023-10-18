@@ -13,7 +13,6 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Text;
-using System.Text.RegularExpressions;
 using Fast.NET;
 
 namespace Fast.IaaS.Extensions;
@@ -24,6 +23,26 @@ namespace Fast.IaaS.Extensions;
 [SuppressSniffer]
 public static class StringExtension
 {
+    /// <summary>
+    /// 字符串首字母小写
+    /// </summary>
+    /// <param name="str"><see cref="string"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string FirstCharToLower(this string str)
+    {
+        return InternalStringExtension.FirstCharToLower(str);
+    }
+
+    /// <summary>
+    /// 切割骆驼命名式字符串
+    /// </summary>
+    /// <param name="str"><see cref="string"/></param>
+    /// <returns><see cref="string"/></returns>
+    public static string[] SplitCamelCase(this string str)
+    {
+        return InternalStringExtension.SplitCamelCase(str);
+    }
+
     /// <summary>
     /// 字符串首字母大写
     /// </summary>
@@ -42,28 +61,6 @@ public static class StringExtension
 
         // 设置字符串构建器首个字符为小写
         stringBuilder[0] = char.ToUpper(stringBuilder[0]);
-
-        return stringBuilder.ToString();
-    }
-
-    /// <summary>
-    /// 字符串首字母小写
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string FirstCharToLower(this string str)
-    {
-        // 空检查
-        if (string.IsNullOrWhiteSpace(str))
-        {
-            return str;
-        }
-
-        // 初始化字符串构建器
-        var stringBuilder = new StringBuilder(str);
-
-        // 设置字符串构建器首个字符为小写
-        stringBuilder[0] = char.ToLower(stringBuilder[0]);
 
         return stringBuilder.ToString();
     }
@@ -112,24 +109,6 @@ public static class StringExtension
         }
 
         return !string.IsNullOrWhiteSpace(tempStr) ? tempStr : str;
-    }
-
-    /// <summary>
-    /// 切割骆驼命名式字符串
-    /// </summary>
-    /// <param name="str"><see cref="string"/></param>
-    /// <returns><see cref="string"/></returns>
-    public static string[] SplitCamelCase(this string str)
-    {
-        if (str == null)
-            return Array.Empty<string>();
-
-        if (string.IsNullOrWhiteSpace(str))
-            return new[] {str};
-        if (str.Length == 1)
-            return new[] {str};
-
-        return Regex.Split(str, @"(?=\p{Lu}\p{Ll})|(?<=\p{Ll})(?=\p{Lu})").Where(u => u.Length > 0).ToArray();
     }
 
     /// <summary>

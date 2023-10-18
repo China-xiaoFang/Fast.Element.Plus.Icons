@@ -16,6 +16,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Fast.DynamicApplication.Internal;
+using Fast.NET;
 using Fast.NET.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

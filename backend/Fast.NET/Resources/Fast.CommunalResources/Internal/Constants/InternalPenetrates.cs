@@ -13,8 +13,10 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -92,6 +94,63 @@ internal static class InternalPenetrates
 
         // 未托管的对象
         UnmanagedObjects = new ConcurrentBag<IDisposable>();
+    }
+
+    /// <summary>
+    /// 处理获取对象异常问题
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="action">获取对象委托</param>
+    /// <param name="defaultValue">默认值</param>
+    /// <returns>T</returns>
+    internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
+    {
+        try
+        {
+            return action();
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    /// <summary>
+    /// 获取当前线程 Id
+    /// </summary>
+    /// <returns></returns>
+    internal static int GetThreadId()
+    {
+        return Environment.CurrentManagedThreadId;
+    }
+
+    /// <summary>
+    /// 获取当前请求 TraceId
+    /// </summary>
+    /// <returns></returns>
+    internal static string GetTraceId()
+    {
+        return Activity.Current?.Id ?? (RootServices == null
+            ? default
+            : CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)?.TraceIdentifier);
+    }
+
+    /// <summary>
+    /// 获取一段代码执行耗时
+    /// </summary>
+    /// <param name="action">委托</param>
+    /// <returns><see cref="long"/></returns>
+    internal static long GetExecutionTime(Action action)
+    {
+        // 空检查
+        if (action == null)
+            throw new ArgumentNullException(nameof(action));
+
+        // 计算接口执行时间
+        var timeOperation = Stopwatch.StartNew();
+        action();
+        timeOperation.Stop();
+        return timeOperation.ElapsedMilliseconds;
     }
 
     /// <summary>
