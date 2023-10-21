@@ -21,7 +21,7 @@ namespace Fast.DependencyInjection;
 /// <summary>
 /// <see cref="Scoped"/> 创建作用域静态类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class Scoped
 {
     /// <summary>

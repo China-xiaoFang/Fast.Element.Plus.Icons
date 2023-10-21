@@ -12,4 +12,23 @@
 	  <EmbeddedResource Include="Assets\error.html" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Exceptions\UserFriendlyException.cs">
+	    <PackagePath>\</PackagePath>
+	    <Pack>true</Pack>
+	  </Compile>
+	  <Compile Update="Extensions\ExceptionExtension.cs">
+	    <PackagePath>\</PackagePath>
+	    <Pack>true</Pack>
+	  </Compile>
+	  <Compile Update="Metadatas\ExceptionMetadata.cs">
+	    <PackagePath>\</PackagePath>
+	    <Pack>true</Pack>
+	  </Compile>
+	  <Compile Update="Metadatas\ValidationMetadata.cs">
+	    <PackagePath>\</PackagePath>
+	    <Pack>true</Pack>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

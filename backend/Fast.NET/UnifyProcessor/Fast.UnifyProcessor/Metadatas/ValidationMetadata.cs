@@ -12,20 +12,32 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-// ReSharper disable once CheckNamespace
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+// ReSharper disable once CheckNamespace
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="ExceptionMetadata"/> 异常元数据
+/// <see cref="ValidationMetadata"/> 验证信息元数据
 /// </summary>
-[SuppressSniffer]
-public sealed class ExceptionMetadata
+[InternalSuppressSniffer]
+public sealed class ValidationMetadata
 {
     /// <summary>
-    /// 状态码
+    /// 验证结果
     /// </summary>
-    public int StatusCode { get; set; }
+    /// <remarks>返回字典或字符串类型</remarks>
+    public object ValidationResult { get; set; }
+
+    /// <summary>
+    /// 异常消息
+    /// </summary>
+    public string Message { get; set; }
+
+    /// <summary>
+    /// 验证状态
+    /// </summary>
+    public ModelStateDictionary ModelState { get; set; }
 
     /// <summary>
     /// 错误码
@@ -38,9 +50,19 @@ public sealed class ExceptionMetadata
     public object OriginErrorCode { get; set; }
 
     /// <summary>
-    /// 错误对象（信息）
+    /// 状态码
     /// </summary>
-    public object Errors { get; set; }
+    public int? StatusCode { get; set; }
+
+    /// <summary>
+    /// 首个错误属性
+    /// </summary>
+    public string FirstErrorProperty { get; set; }
+
+    /// <summary>
+    /// 首个错误消息
+    /// </summary>
+    public string FirstErrorMessage { get; set; }
 
     /// <summary>
     /// 额外数据

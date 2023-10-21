@@ -19,7 +19,7 @@ namespace Fast.UnifyProcessor.Attributes;
 /// <summary>
 /// <see cref="UnifyProviderAttribute"/> 规范化提供器特性
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class UnifyProviderAttribute : Attribute
 {
     /// <summary>

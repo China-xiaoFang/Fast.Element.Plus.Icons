@@ -19,7 +19,7 @@ namespace Fast.UnifyProcessor.Attributes;
 /// <summary>
 /// <see cref="UnifyModelAttribute"/> 规范化模型特性
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class)]
 public class UnifyModelAttribute : Attribute
 {
     /// <summary>

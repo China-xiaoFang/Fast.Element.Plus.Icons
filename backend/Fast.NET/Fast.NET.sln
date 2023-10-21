@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{635A426C-ACF1-407E-8FC2-BD6B507B316B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.CommunalResources", "Resources\Fast.CommunalResources\Fast.CommunalResources.csproj", "{364A7C8E-F644-452A-A797-43012E805255}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IaaS", "IaaS", "{934603BB-5DD5-4A49-9A7E-51E2DA6C03B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.IaaS", "IaaS\Fast.IaaS\Fast.IaaS.csproj", "{9B9FD8F8-FD69-4DB0-B2FD-C00201152C14}"
@@ -61,7 +57,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.DependencyInjection", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnifyProcessor", "UnifyProcessor", "{6F6EC286-7BC4-4839-936D-0657E126E553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.UnifyProcessor", "UnifyProcessor\Fast.UnifyProcessor\Fast.UnifyProcessor.csproj", "{E1FA9EC2-4AF9-4CB7-BC65-19B7E917F285}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.UnifyProcessor", "UnifyProcessor\Fast.UnifyProcessor\Fast.UnifyProcessor.csproj", "{E1FA9EC2-4AF9-4CB7-BC65-19B7E917F285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,10 +65,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{364A7C8E-F644-452A-A797-43012E805255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{364A7C8E-F644-452A-A797-43012E805255}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{364A7C8E-F644-452A-A797-43012E805255}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{364A7C8E-F644-452A-A797-43012E805255}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B9FD8F8-FD69-4DB0-B2FD-C00201152C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B9FD8F8-FD69-4DB0-B2FD-C00201152C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B9FD8F8-FD69-4DB0-B2FD-C00201152C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -134,7 +126,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{364A7C8E-F644-452A-A797-43012E805255} = {635A426C-ACF1-407E-8FC2-BD6B507B316B}
 		{9B9FD8F8-FD69-4DB0-B2FD-C00201152C14} = {934603BB-5DD5-4A49-9A7E-51E2DA6C03B5}
 		{90D05FF4-73F4-41C4-A9C9-FC895FC0CFCF} = {A57C51E7-2F83-4F3E-AD4D-C5D9AC46104D}
 		{D97235DC-52BB-4D65-8795-D7E6E4642F71} = {E16E97C8-B09A-452C-8C80-02AF452D0C7C}

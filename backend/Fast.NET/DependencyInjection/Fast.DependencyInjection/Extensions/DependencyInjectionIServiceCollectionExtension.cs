@@ -21,7 +21,7 @@ namespace Fast.DependencyInjection.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 依赖注入拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class DependencyInjectionIServiceCollectionExtension
 {
     /// <summary>

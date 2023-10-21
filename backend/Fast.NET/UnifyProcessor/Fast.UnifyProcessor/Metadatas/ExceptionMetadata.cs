@@ -12,54 +12,38 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-#nullable enable
-
 // ReSharper disable once CheckNamespace
+
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="FastEnumAttribute"/> 枚举特性
+/// <see cref="ExceptionMetadata"/> 异常元数据
 /// </summary>
-/// <remarks>用于区分是否可以写入枚举字典的特性</remarks>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Enum)]
-public class FastEnumAttribute : Attribute
+[InternalSuppressSniffer]
+public sealed class ExceptionMetadata
 {
     /// <summary>
-    /// 中文名称
+    /// 状态码
     /// </summary>
-    public string? ChName { get; set; }
+    public int StatusCode { get; set; }
 
     /// <summary>
-    /// 英文名称
+    /// 错误码
     /// </summary>
-    public string? EnName { get; set; }
+    public object ErrorCode { get; set; }
 
     /// <summary>
-    /// 备注
+    /// 错误码（没被复写过的 ErrorCode ）
     /// </summary>
-    public string? Remark { get; set; }
+    public object OriginErrorCode { get; set; }
 
-    public FastEnumAttribute()
-    {
-    }
+    /// <summary>
+    /// 错误对象（信息）
+    /// </summary>
+    public object Errors { get; set; }
 
-    public FastEnumAttribute(string? chName, string? enName, string? remark)
-    {
-        ChName = chName;
-        EnName = enName;
-        Remark = remark;
-    }
-
-    public FastEnumAttribute(string? chName, string? enName)
-    {
-        ChName = chName;
-        EnName = enName;
-        Remark = chName;
-    }
-
-    public FastEnumAttribute(string? chName)
-    {
-        ChName = chName;
-        Remark = chName;
-    }
+    /// <summary>
+    /// 额外数据
+    /// </summary>
+    public object Data { get; set; }
 }

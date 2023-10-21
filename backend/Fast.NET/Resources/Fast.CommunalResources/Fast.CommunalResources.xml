@@ -429,9 +429,9 @@
             备注
             </summary>
         </member>
-        <member name="T:Fast.NET.SuppressSnifferAttribute">
+        <member name="T:Fast.NET.InternalSuppressSnifferAttribute">
             <summary>
-            <see cref="T:Fast.NET.SuppressSnifferAttribute"/> 不被扫描和发现的特性
+            <see cref="T:Fast.NET.InternalSuppressSnifferAttribute"/> 不被扫描和发现的特性
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>

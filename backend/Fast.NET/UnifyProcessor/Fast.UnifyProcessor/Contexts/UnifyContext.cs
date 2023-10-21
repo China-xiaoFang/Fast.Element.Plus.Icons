@@ -25,7 +25,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="UnifyContext"/> 规范化结果上下文
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 internal static class UnifyContext
 {
     /// <summary>
@@ -382,7 +382,7 @@ internal static class UnifyContext
 /// </summary>
 /// <typeparam name="TAttribute">必须是 UnifyProviderAttribute 特性</typeparam>
 /// <typeparam name="TIProvider">必须是 IUnifyResultProvider 接口</typeparam>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 internal static class UnifyContext<TAttribute, TIProvider> where TAttribute : Attribute where TIProvider : class
 {
     /// <summary>

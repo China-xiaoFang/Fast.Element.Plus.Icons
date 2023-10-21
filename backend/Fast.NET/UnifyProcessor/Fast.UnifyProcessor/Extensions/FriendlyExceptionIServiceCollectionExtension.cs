@@ -22,7 +22,7 @@ namespace Fast.UnifyProcessor.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 友好异常服务拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class ExceptionIServiceCollectionExtension
 {
     /// <summary>

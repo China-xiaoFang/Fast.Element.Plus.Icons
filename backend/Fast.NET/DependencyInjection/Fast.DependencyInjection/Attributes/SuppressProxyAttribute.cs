@@ -19,7 +19,7 @@ namespace Fast.DependencyInjection.Attributes;
 /// <summary>
 /// 跳过全局代理
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class)]
 public class SuppressProxyAttribute : Attribute
 {
 }

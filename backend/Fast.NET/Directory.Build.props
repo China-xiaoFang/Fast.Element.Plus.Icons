@@ -31,12 +31,6 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
-	<!-- 确保每个项目都引用公共资源类库 -->
-	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)\Resources\Fast.CommunalResources\Fast.CommunalResources.csproj" />
-		<ProjectReference Remove="$(SolutionDir)\Resources\Fast.CommunalResources\Fast.CommunalResources.csproj" Condition="'$(RemoveProjectReferenceCommunalResources)' == 'true'" />
-	</ItemGroup>
-
 	<!-- NU1803 是为了解决使用 Http 源的Nuget包导致的警告 -->
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -55,12 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- 将内部资源文件夹共享到每个类库的 CommunalResources 文件夹下面 -->
-		<Compile Include="$(SolutionDir)Resources\Fast.CommunalResources\Internal\**\*.cs" Pack="true" PackagePath="\" Link="CommunalResources\%(RecursiveDir)%(Filename)%(Extension)" />
-		<!-- 阻止共享 bin 文件夹 -->
-		<Compile Remove="$(SolutionDir)Resources\Fast.CommunalResources\bin\**" />
-		<!-- 阻止共享 obj 文件夹 -->
-		<Compile Remove="$(SolutionDir)Resources\Fast.CommunalResources\obj\**" />
+		 <!-- 将内部资源文件夹共享到每个类库的 InternalResources 文件夹下面 --> 
+		<Compile Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\**\*.cs" Pack="true" PackagePath="\" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" Exclude="*.md" />
+		<None Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\*.md" Pack="true" PackagePath="\" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
 </Project>

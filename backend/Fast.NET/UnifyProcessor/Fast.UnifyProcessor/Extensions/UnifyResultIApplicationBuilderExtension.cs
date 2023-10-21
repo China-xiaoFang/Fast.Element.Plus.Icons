@@ -21,7 +21,7 @@ namespace Fast.UnifyProcessor.Extensions;
 /// <summary>
 /// <see cref="IApplicationBuilder"/> 规范化服务拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class UnifyResultIApplicationBuilderExtension
 {
     /// <summary>

@@ -26,7 +26,7 @@ namespace Fast.UnifyProcessor.Filters;
 /// <summary>
 /// <see cref="FriendlyExceptionFilter"/> 友好异常拦截器
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
 {
     /// <summary>

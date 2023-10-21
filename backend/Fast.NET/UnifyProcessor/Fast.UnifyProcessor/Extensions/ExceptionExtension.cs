@@ -12,42 +12,39 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-// ReSharper disable once CheckNamespace
+using Microsoft.AspNetCore.Http;
 
+// ReSharper disable once CheckNamespace
 namespace Fast.NET;
 
 /// <summary>
-/// <see cref="Convert"/> 内部转换拓展类
+/// <see cref="Exception"/> 拓展类
 /// </summary>
-internal static class InternalConvertExtension
+[InternalSuppressSniffer]
+public static class ExceptionExtension
 {
     /// <summary>
-    /// 将 DateTimeOffset 转换成本地 DateTime
+    /// 设置异常状态码
     /// </summary>
-    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    internal static DateTime ParseToDateTime(this DateTimeOffset dateTime)
+    /// <param name="exception"><see cref="UserFriendlyException"/></param>
+    /// <param name="statusCode"><see cref="int"/></param>
+    /// <returns><see cref="UserFriendlyException"/></returns>
+    public static UserFriendlyException StatusCode(this UserFriendlyException exception,
+        int statusCode = StatusCodes.Status400BadRequest)
     {
-        if (dateTime.Offset.Equals(TimeSpan.Zero))
-        {
-            return dateTime.UtcDateTime;
-        }
-
-        if (dateTime.Offset.Equals(TimeZoneInfo.Local.GetUtcOffset(dateTime.DateTime)))
-        {
-            return dateTime.ToLocalTime().DateTime;
-        }
-
-        return dateTime.DateTime;
+        exception.StatusCode = statusCode;
+        return exception;
     }
 
     /// <summary>
-    /// 将 DateTimeOffset? 转换成本地 DateTime?
+    /// 设置额外数据
     /// </summary>
-    /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
-    /// <returns><see cref="DateTime"/></returns>
-    internal static DateTime? ParseToDateTime(this DateTimeOffset? dateTime)
+    /// <param name="exception"><see cref="UserFriendlyException"/></param>
+    /// <param name="data"><see cref="object"/></param>
+    /// <returns><see cref="UserFriendlyException"/></returns>
+    public static UserFriendlyException WithData(this UserFriendlyException exception, object data)
     {
-        return dateTime?.ParseToDateTime();
+        exception.Data = data;
+        return exception;
     }
 }

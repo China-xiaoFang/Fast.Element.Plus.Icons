@@ -19,7 +19,7 @@ namespace Fast.UnifyProcessor.Attributes;
 /// <summary>
 /// <see cref="NonUnifyAttribute"/> 禁止规范化处理
 /// </summary>
-[SuppressSniffer, AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
 public sealed class NonUnifyAttribute : Attribute
 {
 }
