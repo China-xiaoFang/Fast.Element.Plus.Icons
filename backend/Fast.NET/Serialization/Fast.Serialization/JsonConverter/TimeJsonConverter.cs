@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Fast.NET;
@@ -47,7 +48,40 @@ public class TimeJsonConverter : JsonConverter<DateTime>
     /// <returns>The converted value.</returns>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return reader.GetDateTime();
+        var value = reader.GetString()!;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            var result = DateTime.Parse(value);
+
+            result = new DateTime(1970, 1, 1, result.Hour, result.Minute, result.Second);
+            return result;
+        }
+
+        switch (value.Length)
+        {
+            case 2:
+            {
+                var result = DateTime.ParseExact(value, "HH", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, 0, 0);
+                return result;
+            }
+            case 4:
+            {
+                var result = DateTime.ParseExact(value, "HHmm", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, result.Minute, 0);
+                return result;
+            }
+            default:
+            {
+                var result = DateTime.ParseExact(value, "HHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, result.Minute, result.Second);
+                return result;
+            }
+        }
     }
 
     /// <summary>Writes a specified value as JSON.</summary>
@@ -89,7 +123,40 @@ public class NullableTimeJsonConverter : JsonConverter<DateTime?>
     /// <returns>The converted value.</returns>
     public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return reader.GetDateTime();
+        var value = reader.GetString()!;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            var result = DateTime.Parse(value);
+
+            result = new DateTime(1970, 1, 1, result.Hour, result.Minute, result.Second);
+            return result;
+        }
+
+        switch (value.Length)
+        {
+            case 2:
+            {
+                var result = DateTime.ParseExact(value, "HH", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, 0, 0);
+                return result;
+            }
+            case 4:
+            {
+                var result = DateTime.ParseExact(value, "HHmm", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, result.Minute, 0);
+                return result;
+            }
+            default:
+            {
+                var result = DateTime.ParseExact(value, "HHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(1970, 1, 1, result.Hour, result.Minute, result.Second);
+                return result;
+            }
+        }
     }
 
     /// <summary>Writes a specified value as JSON.</summary>

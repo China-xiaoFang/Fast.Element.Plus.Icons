@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Fast.NET;
@@ -63,7 +64,62 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
     /// <returns>The converted value.</returns>
     public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()), Localized ? DateTimeKind.Local : DateTimeKind.Utc);
+        var value = reader.GetString()!;
+
+        DateTime result;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            result = DateTime.Parse(value);
+        }
+        else
+        {
+            switch (value.Length)
+            {
+                case 4:
+                {
+                    result = DateTime.ParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                }
+                    break;
+                case 6:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                }
+                    break;
+                case 8:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                }
+                    break;
+                case 10:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHH", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, 0, 0);
+                }
+                    break;
+                case 12:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHHmm", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, result.Minute, 0);
+                }
+                    break;
+                default:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
+                }
+                    break;
+            }
+        }
+
+        return DateTime.SpecifyKind(result, Localized ? DateTimeKind.Local : DateTimeKind.Utc);
     }
 
     /// <summary>Writes a specified value as JSON.</summary>
@@ -123,7 +179,62 @@ public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?
     /// <returns>The converted value.</returns>
     public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()), Localized ? DateTimeKind.Local : DateTimeKind.Utc);
+        var value = reader.GetString()!;
+
+        DateTime result;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            result = DateTime.Parse(value);
+        }
+        else
+        {
+            switch (value.Length)
+            {
+                case 4:
+                {
+                    result = DateTime.ParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                }
+                    break;
+                case 6:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                }
+                    break;
+                case 8:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                }
+                    break;
+                case 10:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHH", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, 0, 0);
+                }
+                    break;
+                case 12:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHHmm", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                    result = new DateTime(result.Year, result.Month, result.Day, result.Hour, result.Minute, 0);
+                }
+                    break;
+                default:
+                {
+                    result = DateTime.ParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
+                }
+                    break;
+            }
+        }
+
+        return DateTime.SpecifyKind(result, Localized ? DateTimeKind.Local : DateTimeKind.Utc);
     }
 
     /// <summary>Writes a specified value as JSON.</summary>
@@ -133,12 +244,21 @@ public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?
     public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
     {
         if (value == null)
+        {
             writer.WriteNullValue();
+        }
         else
         {
             // 判断是否序列化成当地时间
             var formatDateTime = Localized ? value.ParseToDateTime() : value;
-            writer.WriteStringValue(formatDateTime.Value.ToString(Format));
+            if (formatDateTime == null)
+            {
+                writer.WriteNullValue();
+            }
+            else
+            {
+                writer.WriteStringValue(formatDateTime.Value.ToString(Format));
+            }
         }
     }
 }

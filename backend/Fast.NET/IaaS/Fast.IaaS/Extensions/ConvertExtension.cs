@@ -463,7 +463,7 @@ public static class ConvertExtension
                 throw new ArgumentNullException(nameof(value), "传入的值为空或者空字符串");
             }
 
-            if (value.Contains("-") || value.Contains("/"))
+            if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
             {
                 return DateTime.Parse(value);
             }
@@ -505,8 +505,6 @@ public static class ConvertExtension
                     result = new DateTime(result.Year, result.Month, result.Day, result.Hour, result.Minute, 0);
                     return result;
                 }
-                // ReSharper disable once RedundantCaseLabel
-                case 14:
                 default:
                 {
                     var result = DateTime.ParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None);
@@ -521,7 +519,7 @@ public static class ConvertExtension
             return defaultValue;
         }
 
-        if (value.Contains("-") || value.Contains("/"))
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
         {
             if (DateTime.TryParse(value, out var result))
             {
@@ -582,8 +580,6 @@ public static class ConvertExtension
             }
 
                 break;
-            // ReSharper disable once RedundantCaseLabel
-            case 14:
             default:
             {
                 if (DateTime.TryParseExact(value, "yyyyMMddHHmmss", CultureInfo.CurrentCulture, DateTimeStyles.None,

@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Fast.NET;
@@ -47,7 +48,39 @@ public class DateJsonConverter : JsonConverter<DateTime>
     /// <returns>The converted value.</returns>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return reader.GetDateTime();
+        var value = reader.GetString()!;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            var result = DateTime.Parse(value);
+
+            return result.Date;
+        }
+
+        switch (value.Length)
+        {
+            case 4:
+            {
+                var result = DateTime.ParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                return result;
+            }
+            case 6:
+            {
+                var result = DateTime.ParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                return result;
+            }
+            default:
+            {
+                var result = DateTime.ParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                return result;
+            }
+        }
     }
 
     /// <summary>Writes a specified value as JSON.</summary>
@@ -89,7 +122,39 @@ public class NullableDateJsonConverter : JsonConverter<DateTime?>
     /// <returns>The converted value.</returns>
     public override DateTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return reader.GetDateTime();
+        var value = reader.GetString()!;
+
+        if (value.Contains("-") || value.Contains("/") || value.Contains(":"))
+        {
+            var result = DateTime.Parse(value);
+
+            return result.Date;
+        }
+
+        switch (value.Length)
+        {
+            case 4:
+            {
+                var result = DateTime.ParseExact(value, "yyyy", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, 1, 1, 0, 0, 0);
+                return result;
+            }
+            case 6:
+            {
+                var result = DateTime.ParseExact(value, "yyyyMM", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, result.Month, 1, 0, 0, 0);
+                return result;
+            }
+            default:
+            {
+                var result = DateTime.ParseExact(value, "yyyyMMdd", CultureInfo.CurrentCulture, DateTimeStyles.None);
+
+                result = new DateTime(result.Year, result.Month, result.Day, 0, 0, 0);
+                return result;
+            }
+        }
     }
 
     /// <summary>Writes a specified value as JSON.</summary>
