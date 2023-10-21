@@ -21,7 +21,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Convert"/> 转换拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class ConvertExtension
 {
     #region 转换为long
@@ -644,7 +644,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+            return timeStamps == 0 ? DateTime.MinValue : InternalConstant.DefaultTime.AddMilliseconds(timeStamps);
         }
         catch
         {
@@ -663,7 +663,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : GlobalConstant.DefaultTime.AddMilliseconds(timeStamps);
+            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : InternalConstant.DefaultTime.AddMilliseconds(timeStamps);
         }
         catch
         {
@@ -681,7 +681,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0 ? DateTime.MinValue : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+            return timeStamps == 0 ? DateTime.MinValue : InternalConstant.DefaultTime.AddSeconds(timeStamps);
         }
         catch
         {
@@ -700,7 +700,7 @@ public static class ConvertExtension
         try
         {
             // 当地时区
-            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : GlobalConstant.DefaultTime.AddSeconds(timeStamps);
+            return timeStamps == 0 ? defaultValue.GetValueOrDefault() : InternalConstant.DefaultTime.AddSeconds(timeStamps);
         }
         catch
         {

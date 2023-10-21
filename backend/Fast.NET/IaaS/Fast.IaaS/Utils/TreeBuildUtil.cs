@@ -53,7 +53,7 @@ public interface ITreeNode<out TProperty> where TProperty : struct, IComparable,
 /// </summary>
 /// <typeparam name="TEntity">模型</typeparam>
 /// <typeparam name="TProperty">Id属性类型</typeparam>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class TreeBuildUtil<TEntity, TProperty> where TEntity : ITreeNode<TProperty>
     where TProperty : struct, IComparable, IConvertible, IFormattable
 {

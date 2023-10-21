@@ -12,41 +12,53 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
+#nullable enable
 
-namespace Fast.IaaS.Utils;
+namespace Fast.NET.Core.Attributes;
 
 /// <summary>
-/// <see cref="GuidUtil"/> Guid 工具类
+/// <see cref="FastEnumAttribute"/> 枚举特性
 /// </summary>
-[InternalSuppressSniffer]
-public static class GuidUtil
+/// <remarks>用于区分是否可以写入枚举字典的特性</remarks>
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Enum)]
+public class FastEnumAttribute : Attribute
 {
     /// <summary>
-    /// 生成一个Guid
-    /// <remarks>
-    /// <para>只支持 N D B P</para>
-    /// <para>N ece4f4a60b764339b94a07c84e338a27</para>
-    /// <para>D 5bf99df1-dc49-4023-a34a-7bd80a42d6bb</para>
-    /// <para>B 2280f8d7-fd18-4c72-a9ab-405de3fcfbc9</para>
-    /// <para>P 25e6e09f-fb66-4cab-b4cd-bfb429566549</para>
-    /// </remarks>
+    /// 中文名称
     /// </summary>
-    /// <param name="format"><see cref="string"/>格式化方式</param>
-    /// <returns><see cref="string"/></returns>
-    public static string GetGuid(string format = "N")
-    {
-        return Guid.NewGuid().ToString(format);
-    }
+    public string? ChName { get; set; }
 
     /// <summary>
-    /// 生成一个短的Guid
+    /// 英文名称
     /// </summary>
-    /// <returns><see cref="string"/></returns>
-    public static string GetShortGuid()
-    {
-        var i = Guid.NewGuid().ToByteArray().Aggregate<byte, long>(1, (current, b) => current * (b + 1));
+    public string? EnName { get; set; }
 
-        return $"{i - DateTime.Now.Ticks:x}";
+    /// <summary>
+    /// 备注
+    /// </summary>
+    public string? Remark { get; set; }
+
+    public FastEnumAttribute()
+    {
+    }
+
+    public FastEnumAttribute(string? chName, string? enName, string? remark)
+    {
+        ChName = chName;
+        EnName = enName;
+        Remark = remark;
+    }
+
+    public FastEnumAttribute(string? chName, string? enName)
+    {
+        ChName = chName;
+        EnName = enName;
+        Remark = chName;
+    }
+
+    public FastEnumAttribute(string? chName)
+    {
+        ChName = chName;
+        Remark = chName;
     }
 }

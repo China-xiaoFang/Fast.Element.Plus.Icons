@@ -20,7 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="ValidateExtension"/> 验证拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class ValidateExtension
 {
     /// <summary>

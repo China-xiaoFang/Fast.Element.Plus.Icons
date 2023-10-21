@@ -19,7 +19,7 @@ namespace Fast.IaaS.Utils;
 /// <summary>
 /// <see cref="DateTimeUtil"/> DateTime工具类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class DateTimeUtil
 {
     /// <summary>

@@ -32,7 +32,7 @@ public static class IConfigurationExtension
             return configuration;
 
         var newConfiguration = App.GetService<IConfiguration>(App.RootServices);
-        InternalPenetrates.Configuration = newConfiguration;
+        InternalApp.Configuration = newConfiguration;
 
         return newConfiguration;
     }

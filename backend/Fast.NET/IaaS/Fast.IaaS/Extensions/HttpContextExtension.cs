@@ -24,7 +24,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="HttpContext"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class HttpContextExtension
 {
     /// <summary>

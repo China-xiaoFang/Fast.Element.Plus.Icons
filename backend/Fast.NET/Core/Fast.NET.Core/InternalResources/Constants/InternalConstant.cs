@@ -12,29 +12,33 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
-using Fast.NET;
+// ReSharper disable once CheckNamespace
 
-namespace Fast.IaaS.Extensions;
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="FieldInfo"/> 拓展类
+/// <see cref="InternalConstant"/> 内部常用常量
 /// </summary>
-[InternalSuppressSniffer]
-public static class FieldInfoExtension
+internal class InternalConstant
 {
     /// <summary>
-    /// 获取字段特性
+    /// 默认DateTime
     /// </summary>
-    /// <param name="field"><see cref="FieldInfo"/></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetDescriptionValue<T>(this FieldInfo field) where T : Attribute
-    {
-        // 获取字段的指定特性，不包含继承中的特性
-        var customAttributes = field.GetCustomAttributes(typeof(T), false);
+    public static DateTime DefaultTime => TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
 
-        // 如果没有数据返回null
-        return customAttributes.Length > 0 ? (T) customAttributes[0] : null;
-    }
+    /// <summary>
+    /// 时间戳
+    /// </summary>
+    //public static long TimeStamp => Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
+    public static long TimeStamp => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+    /// <summary>
+    /// Sql Server 最小时间
+    /// </summary>
+    public static DateTime SqlServerMinTime => new(1753, 01, 01, 00, 00, 00);
+
+    /// <summary>
+    /// Sql Server 最大时间
+    /// </summary>
+    public static DateTime SqlServerMaxTime => new(9999, 12, 31, 23, 59, 59);
 }

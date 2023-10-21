@@ -22,7 +22,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Enum"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class EnumExtension
 {
     /// <summary>

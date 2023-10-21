@@ -23,7 +23,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="StringEncodingExtension"/> 字符串编码拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class StringEncodingExtension
 {
     #region ASCII

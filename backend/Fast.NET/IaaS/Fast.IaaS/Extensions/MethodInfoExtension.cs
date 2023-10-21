@@ -20,7 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="MethodInfo"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class MethodInfoExtension
 {
     /// <summary>
@@ -62,9 +62,9 @@ public static class MethodInfoExtension
     /// <param name="attributeType"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
-    public static Attribute GetFoundAttribute(this MethodInfo methodInfo,Type attributeType, bool inherit) 
+    public static Attribute GetFoundAttribute(this MethodInfo methodInfo, Type attributeType, bool inherit)
     {
-        return InternalMethodInfoExtension.GetFoundAttribute(methodInfo,attributeType, inherit);
+        return InternalMethodInfoExtension.GetFoundAttribute(methodInfo, attributeType, inherit);
     }
 
     /// <summary>

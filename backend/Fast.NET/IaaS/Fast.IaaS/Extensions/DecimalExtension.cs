@@ -19,7 +19,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="decimal"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class DecimalExtension
 {
     /// <summary>

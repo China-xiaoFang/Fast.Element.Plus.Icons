@@ -20,7 +20,7 @@ namespace Fast.IaaS.Utils;
 /// <summary>
 /// <see cref="VerificationUtil"/> 验证工具类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class VerificationUtil
 {
     /// <summary>

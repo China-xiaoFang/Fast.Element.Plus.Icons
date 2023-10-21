@@ -20,7 +20,7 @@ namespace Fast.IaaS.Utils;
 /// <summary>
 /// <see cref="FileUtil"/> 文件工具类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class FileUtil
 {
     /// <summary>

@@ -20,7 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="string"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class StringExtension
 {
     /// <summary>

@@ -21,7 +21,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Base64Extension"/> Base64 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class Base64Extension
 {
     /// <summary>

@@ -19,7 +19,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="DynamicExtension"/> dynamic 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class DynamicExtension
 {
     /// <summary>

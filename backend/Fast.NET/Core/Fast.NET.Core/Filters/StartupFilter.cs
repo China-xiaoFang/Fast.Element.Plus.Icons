@@ -36,7 +36,7 @@ public class StartupFilter : IStartupFilter
         return app =>
         {
             // 存储根服务
-            InternalPenetrates.RootServices = app.ApplicationServices;
+            InternalApp.RootServices = app.ApplicationServices;
 
             // 环境名
             var envName = App.WebHostEnvironment?.EnvironmentName ?? "Unknown";

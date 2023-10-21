@@ -20,7 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="IDictionary{TKey,TValue}"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class IDictionaryExtension
 {
     /// <summary>

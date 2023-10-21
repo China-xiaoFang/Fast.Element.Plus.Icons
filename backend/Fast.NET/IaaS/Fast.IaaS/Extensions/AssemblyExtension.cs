@@ -20,7 +20,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Assembly"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class AssemblyExtension
 {
     /// <summary>

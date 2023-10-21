@@ -12,41 +12,23 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
+using System.Reflection;
 
-namespace Fast.IaaS.Utils;
+// ReSharper disable once CheckNamespace
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="GuidUtil"/> Guid 工具类
+/// <see cref="Assembly"/> 内部拓展类
 /// </summary>
-[InternalSuppressSniffer]
-public static class GuidUtil
+internal static class InternalAssemblyExtension
 {
     /// <summary>
-    /// 生成一个Guid
-    /// <remarks>
-    /// <para>只支持 N D B P</para>
-    /// <para>N ece4f4a60b764339b94a07c84e338a27</para>
-    /// <para>D 5bf99df1-dc49-4023-a34a-7bd80a42d6bb</para>
-    /// <para>B 2280f8d7-fd18-4c72-a9ab-405de3fcfbc9</para>
-    /// <para>P 25e6e09f-fb66-4cab-b4cd-bfb429566549</para>
-    /// </remarks>
+    /// 获取程序集名称
     /// </summary>
-    /// <param name="format"><see cref="string"/>格式化方式</param>
+    /// <param name="assembly"><see cref="Assembly"/></param>
     /// <returns><see cref="string"/></returns>
-    public static string GetGuid(string format = "N")
+    internal static string GetAssemblyName(this Assembly assembly)
     {
-        return Guid.NewGuid().ToString(format);
-    }
-
-    /// <summary>
-    /// 生成一个短的Guid
-    /// </summary>
-    /// <returns><see cref="string"/></returns>
-    public static string GetShortGuid()
-    {
-        var i = Guid.NewGuid().ToByteArray().Aggregate<byte, long>(1, (current, b) => current * (b + 1));
-
-        return $"{i - DateTime.Now.Ticks:x}";
+        return assembly.GetName().Name;
     }
 }

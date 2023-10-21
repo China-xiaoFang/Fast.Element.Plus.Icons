@@ -22,7 +22,7 @@ namespace Fast.Cache.Realize;
 /// <summary>
 /// 缓存实现
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class Cache : ICache
 {
     /// <summary>

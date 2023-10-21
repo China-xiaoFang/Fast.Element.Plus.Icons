@@ -22,7 +22,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="object"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class ObjectExtension
 {
     /// <summary>

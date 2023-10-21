@@ -21,7 +21,7 @@ namespace Fast.IaaS.Utils;
 /// <summary>
 /// <see cref="CryptoUtil"/> 加密解密工具类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class CryptoUtil
 {
     #region AES

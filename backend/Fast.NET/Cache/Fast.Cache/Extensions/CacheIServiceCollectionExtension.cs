@@ -20,7 +20,7 @@ namespace Fast.Cache.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class CacheIServiceCollectionExtension
 {
     /// <summary>

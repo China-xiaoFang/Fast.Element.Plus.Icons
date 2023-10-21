@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.ComponentModel;
+using Fast.NET.Core.Attributes;
 
 namespace Fast.NET.Core.Enum;
 

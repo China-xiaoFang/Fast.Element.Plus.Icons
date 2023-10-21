@@ -21,7 +21,7 @@ namespace Fast.IaaS.Extensions;
 /// <summary>
 /// <see cref="Expression"/> 拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class LinqExpressionExtension
 {
     /// <summary>

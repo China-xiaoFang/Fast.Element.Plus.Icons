@@ -13,9 +13,9 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Reflection;
 using System.Text;
+using Fast.NET.Core.Attributes;
 using Fast.NET.Core.Extensions;
 using Fast.NET.Core.Filters;
 using Microsoft.AspNetCore.Hosting;
@@ -36,22 +36,22 @@ public static class App
     /// 配置
     /// </summary>
     public static IConfiguration Configuration =>
-        InternalPenetrates.CatchOrDefault(() => InternalPenetrates.Configuration.Reload(), new ConfigurationBuilder().Build());
+        InternalApp.CatchOrDefault(() => InternalApp.Configuration.Reload(), new ConfigurationBuilder().Build());
 
     /// <summary>
     /// 获取Web主机环境
     /// </summary>
-    public static IWebHostEnvironment WebHostEnvironment => InternalPenetrates.WebHostEnvironment;
+    public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
 
     /// <summary>
     /// 应用服务
     /// </summary>
-    public static IServiceCollection InternalServices => InternalPenetrates.InternalServices;
+    public static IServiceCollection InternalServices => InternalApp.InternalServices;
 
     /// <summary>
     /// 存储根服务，可能为空
     /// </summary>
-    public static IServiceProvider RootServices => InternalPenetrates.RootServices;
+    public static IServiceProvider RootServices => InternalApp.RootServices;
 
     /// <summary>
     /// 应用有效程序集
@@ -61,17 +61,18 @@ public static class App
     /// <summary>
     /// 有效程序集类型
     /// </summary>
-    public static IEnumerable<Type> EffectiveTypes => InternalPenetrates.EffectiveTypes;
+    public static readonly IEnumerable<Type> EffectiveTypes;
 
     /// <summary>
     /// 请求上下文
     /// </summary>
-    public static HttpContext HttpContext => InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
+    public static HttpContext HttpContext =>
+        InternalApp.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
 
     /// <summary>
     /// 未托管的对象集合
     /// </summary>
-    public static ConcurrentBag<IDisposable> UnmanagedObjects => InternalPenetrates.UnmanagedObjects;
+    public static ConcurrentBag<IDisposable> UnmanagedObjects => InternalApp.UnmanagedObjects;
 
     /// <summary>
     /// 默认配置文件扫描目录
@@ -87,6 +88,14 @@ public static class App
     /// 记录最近 GC 回收时间
     /// </summary>
     internal static DateTime? LastGCCollectTime { get; set; }
+
+    static App()
+    {
+        var suppressSnifferAttributeType = typeof(SuppressSnifferAttribute);
+
+        // 排除使用了 SuppressSnifferAttribute 特性的类型
+        EffectiveTypes = InternalPenetrates.EffectiveTypes.Where(wh => wh.IsDefined(suppressSnifferAttributeType, false));
+    }
 
     /// <summary>
     /// 解析服务提供器
@@ -212,7 +221,7 @@ public static class App
     /// <returns></returns>
     public static string GetTraceId()
     {
-        return InternalPenetrates.GetTraceId();
+        return InternalApp.GetTraceId();
     }
 
     /// <summary>
@@ -273,7 +282,7 @@ public static class App
         builder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
         {
             // 存储环境对象
-            InternalPenetrates.WebHostEnvironment = hostContext.HostingEnvironment;
+            InternalApp.WebHostEnvironment = hostContext.HostingEnvironment;
 
             // 加载配置
             AddJsonFiles(configurationBuilder, hostContext.HostingEnvironment);
@@ -283,10 +292,10 @@ public static class App
         builder.ConfigureServices((hostContext, services) =>
         {
             // 存储配置对象
-            InternalPenetrates.Configuration = hostContext.Configuration;
+            InternalApp.Configuration = hostContext.Configuration;
 
             // 存储服务提供器
-            InternalPenetrates.InternalServices = services;
+            InternalApp.InternalServices = services;
 
             // 注册 Startup 过滤器
             services.AddTransient<IStartupFilter, StartupFilter>();

@@ -12,29 +12,16 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
-using Fast.NET;
+// ReSharper disable once CheckNamespace
 
-namespace Fast.IaaS.Extensions;
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="FieldInfo"/> 拓展类
+/// <see cref="InternalSuppressSnifferAttribute"/> 内部不被扫描和发现的特性
 /// </summary>
-[InternalSuppressSniffer]
-public static class FieldInfoExtension
+/// <remarks>用于程序集扫描类型或方法时候</remarks>
+[InternalSuppressSniffer,
+ AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct)]
+internal class InternalSuppressSnifferAttribute : Attribute
 {
-    /// <summary>
-    /// 获取字段特性
-    /// </summary>
-    /// <param name="field"><see cref="FieldInfo"/></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetDescriptionValue<T>(this FieldInfo field) where T : Attribute
-    {
-        // 获取字段的指定特性，不包含继承中的特性
-        var customAttributes = field.GetCustomAttributes(typeof(T), false);
-
-        // 如果没有数据返回null
-        return customAttributes.Length > 0 ? (T) customAttributes[0] : null;
-    }
 }

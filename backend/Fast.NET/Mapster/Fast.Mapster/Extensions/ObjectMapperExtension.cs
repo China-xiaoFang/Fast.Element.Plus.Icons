@@ -22,7 +22,7 @@ namespace Fast.Mapster.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 对象映射拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class ObjectMapperExtension
 {
     /// <summary>

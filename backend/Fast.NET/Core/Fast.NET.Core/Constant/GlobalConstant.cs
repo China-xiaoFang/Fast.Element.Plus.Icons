@@ -12,41 +12,31 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
-
-namespace Fast.IaaS.Utils;
+namespace Fast.NET.Core.Constant;
 
 /// <summary>
-/// <see cref="GuidUtil"/> Guid 工具类
+/// <see cref="GlobalConstant"/> 常用常量
 /// </summary>
 [InternalSuppressSniffer]
-public static class GuidUtil
+public class GlobalConstant
 {
     /// <summary>
-    /// 生成一个Guid
-    /// <remarks>
-    /// <para>只支持 N D B P</para>
-    /// <para>N ece4f4a60b764339b94a07c84e338a27</para>
-    /// <para>D 5bf99df1-dc49-4023-a34a-7bd80a42d6bb</para>
-    /// <para>B 2280f8d7-fd18-4c72-a9ab-405de3fcfbc9</para>
-    /// <para>P 25e6e09f-fb66-4cab-b4cd-bfb429566549</para>
-    /// </remarks>
+    /// 默认DateTime
     /// </summary>
-    /// <param name="format"><see cref="string"/>格式化方式</param>
-    /// <returns><see cref="string"/></returns>
-    public static string GetGuid(string format = "N")
-    {
-        return Guid.NewGuid().ToString(format);
-    }
+    public static DateTime DefaultTime => InternalConstant.DefaultTime;
 
     /// <summary>
-    /// 生成一个短的Guid
+    /// 时间戳
     /// </summary>
-    /// <returns><see cref="string"/></returns>
-    public static string GetShortGuid()
-    {
-        var i = Guid.NewGuid().ToByteArray().Aggregate<byte, long>(1, (current, b) => current * (b + 1));
+    public static long TimeStamp => InternalConstant.TimeStamp;
 
-        return $"{i - DateTime.Now.Ticks:x}";
-    }
+    /// <summary>
+    /// Sql Server 最小时间
+    /// </summary>
+    public DateTime SqlServerMinTime => InternalConstant.SqlServerMinTime;
+
+    /// <summary>
+    /// Sql Server 最大时间
+    /// </summary>
+    public DateTime SqlServerMaxTime => InternalConstant.SqlServerMaxTime;
 }
