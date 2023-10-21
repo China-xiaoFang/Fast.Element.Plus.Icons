@@ -12,17 +12,16 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Collections.Concurrent;
-using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="UnifyContext"/> 规范化结果上下文
 /// </summary>

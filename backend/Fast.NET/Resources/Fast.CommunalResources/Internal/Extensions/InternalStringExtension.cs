@@ -17,7 +17,6 @@ using System.Text.RegularExpressions;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="string"/> 内部拓展类
 /// </summary>
@@ -57,9 +56,9 @@ internal static class InternalStringExtension
             return Array.Empty<string>();
 
         if (string.IsNullOrWhiteSpace(str))
-            return new[] {str};
+            return new[] { str };
         if (str.Length == 1)
-            return new[] {str};
+            return new[] { str };
 
         return Regex.Split(str, @"(?=\p{Lu}\p{Ll})|(?<=\p{Ll})(?=\p{Lu})").Where(u => u.Length > 0).ToArray();
     }

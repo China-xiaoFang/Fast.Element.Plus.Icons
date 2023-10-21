@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Fast.DependencyInjection</name>
+        <name>Fast.UnifyProcessor</name>
     </assembly>
     <members>
         <member name="T:Fast.NET.InternalPenetrates">
@@ -408,189 +408,340 @@
             <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
             <returns></returns>
         </member>
-        <member name="T:Fast.DependencyInjection.Attributes.SuppressProxyAttribute">
+        <member name="T:Fast.UnifyProcessor.Attributes.NonUnifyAttribute">
             <summary>
-            跳过全局代理
+            <see cref="T:Fast.UnifyProcessor.Attributes.NonUnifyAttribute"/> 禁止规范化处理
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.Scoped">
+        <member name="T:Fast.UnifyProcessor.Attributes.UnifyModelAttribute">
             <summary>
-            <see cref="T:Fast.DependencyInjection.Scoped"/> 创建作用域静态类
+            <see cref="T:Fast.UnifyProcessor.Attributes.UnifyModelAttribute"/> 规范化模型特性
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.Scoped.Create(System.Action{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+        <member name="M:Fast.UnifyProcessor.Attributes.UnifyModelAttribute.#ctor(System.Type)">
             <summary>
-            创建一个作用域范围
+            规范化模型
             </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
+            <param name="modelType"></param>
         </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateAsync(System.Func{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope,System.Threading.Tasks.Task},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+        <member name="P:Fast.UnifyProcessor.Attributes.UnifyModelAttribute.ModelType">
             <summary>
-            创建一个作用域范围（异步）
-            </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateScope(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory@)">
-            <summary>
-            创建一个作用域
-            </summary>
-            <param name="scopeFactory"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Fast.DependencyInjection.IDependency">
-            <summary>
-            依赖关系接口
+            模型类型（泛型）
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.IScopedDependency">
+        <member name="T:Fast.UnifyProcessor.Attributes.UnifyProviderAttribute">
             <summary>
-            作用域服务注册依赖
+            <see cref="T:Fast.UnifyProcessor.Attributes.UnifyProviderAttribute"/> 规范化提供器特性
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.ISingletonDependency">
+        <member name="M:Fast.UnifyProcessor.Attributes.UnifyProviderAttribute.#ctor">
             <summary>
-            单例服务注册依赖
+            构造函数
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.ITransientDependency">
+        <member name="M:Fast.UnifyProcessor.Attributes.UnifyProviderAttribute.#ctor(System.String)">
             <summary>
-            瞬时服务注册依赖
+            构造函数
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Attributes.UnifyProviderAttribute.Name">
+            <summary>
+            提供器名称
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension">
+        <member name="T:Fast.UnifyProcessor.Extensions.ExceptionIServiceCollectionExtension">
             <summary>
-            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 依赖注入拓展类
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 友好异常服务拓展类
             </summary>
         </member>
-        <member name="F:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.TypeNamedCollection">
+        <member name="M:Fast.UnifyProcessor.Extensions.ExceptionIServiceCollectionExtension.AddFriendlyException(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
             <summary>
-            类型名称集合
+            添加友好异常服务拓展服务
             </summary>
+            <param name="mvcBuilder"><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/>Mvc构建器</param>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+        <member name="M:Fast.UnifyProcessor.Extensions.ExceptionIServiceCollectionExtension.AddFriendlyException(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            添加依赖注入
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></param>
-            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加依赖注入
+            添加友好异常服务拓展服务
             </summary>
             <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
             <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddInnerDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="T:Fast.UnifyProcessor.Extensions.UnifyResultIApplicationBuilderExtension">
             <summary>
-            添加扫描注入
+            <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 规范化服务拓展类
             </summary>
-            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
-            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.RegisterService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Collections.Generic.IEnumerable{System.Type})">
+        <member name="M:Fast.UnifyProcessor.Extensions.UnifyResultIApplicationBuilderExtension.UseUnifyResultStatusCodes(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
-            注册服务
+            添加状态码拦截中间件
             </summary>
-            <param name="services">服务集合</param>
-            <param name="dependencyType"></param>
-            <param name="type">类型</param>
-            <param name="canInjectInterfaces">能被注册的接口</param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.Register(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type)">
+        <member name="T:Fast.UnifyProcessor.Extensions.UnifyResultIServiceCollectionExtension">
             <summary>
-            注册类型
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 规范化服务拓展类
             </summary>
-            <param name="services">服务</param>
-            <param name="dependencyType"></param>
-            <param name="type">类型</param>
-            <param name="inter">接口</param>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDispatchProxy(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type)">
+        <member name="M:Fast.UnifyProcessor.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
             <summary>
-            创建服务代理
+            添加规范化结果服务
             </summary>
-            <param name="services">服务集合</param>
-            <param name="dependencyType"></param>
-            <param name="type">拦截的类型</param>
-            <param name="inter">代理接口</param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.FixedGenericType(System.Type)">
-            <summary>
-            修复泛型类型注册类型问题
-            </summary>
-            <param name="type">类型</param>
+            <typeparam name="TUnifyResultProvider"></typeparam>
+            <param name="mvcBuilder"></param>
             <returns></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.RegisterNamedService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Fast.UnifyProcessor.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            注册命名服务（接口多实现）
+            添加规范化结果服务
             </summary>
-            <typeparam name="TDependency"></typeparam>
+            <typeparam name="TUnifyResultProvider"></typeparam>
             <param name="services"></param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.TryGetServiceLifetime(System.Type)">
-            <summary>
-            根据依赖接口类型解析 ServiceLifetime 对象
-            </summary>
-            <param name="dependencyType"></param>
             <returns></returns>
         </member>
-        <member name="T:Fast.DependencyInjection.INamedServiceProvider`1">
+        <member name="M:Fast.UnifyProcessor.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.String)">
             <summary>
-            <see cref="T:Fast.DependencyInjection.INamedServiceProvider`1"/> 命名服务提供器
+            添加规范化结果服务
             </summary>
-            <typeparam name="TService">目标服务接口</typeparam>
+            <typeparam name="TUnifyResultProvider"></typeparam>
+            <param name="mvcBuilder"></param>
+            <param name="providerName"></param>
+            <returns></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetService``1(System.String)">
+        <member name="M:Fast.UnifyProcessor.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
             <summary>
-            根据服务名称获取服务
+            添加规范化结果服务
             </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <typeparam name="TUnifyResultProvider"></typeparam>
+            <param name="services"></param>
+            <param name="providerName"></param>
+            <returns></returns>
         </member>
-        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetRequiredService``1(System.String)">
+        <member name="T:Fast.UnifyProcessor.Filters.FriendlyExceptionFilter">
             <summary>
-            根据服务名称获取服务
-            </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
-        </member>
-        <member name="T:Fast.DependencyInjection.NamedServiceProvider`1">
-            <summary>
-            <see cref="T:Fast.DependencyInjection.NamedServiceProvider`1"/> 命名服务提供器默认实现
-            </summary>
-            <typeparam name="TService">目标服务接口</typeparam>
-        </member>
-        <member name="F:Fast.DependencyInjection.NamedServiceProvider`1._serviceProvider">
-            <summary>
-            服务提供器
+            <see cref="T:Fast.UnifyProcessor.Filters.FriendlyExceptionFilter"/> 友好异常拦截器
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.#ctor(System.IServiceProvider)">
+        <member name="M:Fast.UnifyProcessor.Filters.FriendlyExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            异常拦截
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.Filters.SucceededUnifyResultFilter">
+            <summary>
+            <see cref="T:Fast.UnifyProcessor.Filters.SucceededUnifyResultFilter"/> 规范化结构（请求成功）过滤器
+            </summary>
+        </member>
+        <member name="F:Fast.UnifyProcessor.Filters.SucceededUnifyResultFilter.FilterOrder">
+            <summary>
+            过滤器排序
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Filters.SucceededUnifyResultFilter.Order">
+            <summary>
+            排序属性
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Filters.SucceededUnifyResultFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)">
+            <summary>
+            处理规范化结果
+            </summary>
+            <param name="context"></param>
+            <param name="next"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.Handlers.IGlobalExceptionHandler">
+            <summary>
+            <see cref="T:Fast.UnifyProcessor.Handlers.IGlobalExceptionHandler"/> 全局异常处理
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Handlers.IGlobalExceptionHandler.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,System.Boolean,System.Boolean)">
+            <summary>
+            异常拦截
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ExceptionContext"/></param>
+            <param name="isUserFriendlyException"><see cref="T:System.Boolean"/> 是否友好异常</param>
+            <param name="isValidationException"><see cref="T:System.Boolean"/> 是否验证异常</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.Middlewares.UnifyResultStatusCodesMiddleware">
+            <summary>
+            <see cref="T:Fast.UnifyProcessor.Middlewares.UnifyResultStatusCodesMiddleware"/> 状态码中间件
+            </summary>
+        </member>
+        <member name="F:Fast.UnifyProcessor.Middlewares.UnifyResultStatusCodesMiddleware._next">
+            <summary>
+            请求委托
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Middlewares.UnifyResultStatusCodesMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Middlewares.UnifyResultStatusCodesMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            中间件执行方法
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.Oops">
+            <summary>
+            抛异常静态类
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Oops.Bah(System.String,System.Object[])">
+            <summary>
+            抛出业务异常信息
+            </summary>
+            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
+            <param name="args">String.Format 参数</param>
+            <returns><see cref="T:Fast.NET.UserFriendlyException"/>异常实例</returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Oops.Oh(System.String,System.Object[])">
+            <summary>
+            抛出字符串异常
+            </summary>
+            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
+            <param name="args">String.Format 参数</param>
+            <returns><see cref="T:Fast.NET.AppException"/>异常实例</returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Oops.Oh(System.String,System.Type,System.Object[])">
+            <summary>
+            抛出字符串异常
+            </summary>
+            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
+            <param name="exceptionType">具体异常类型</param>
+            <param name="args">String.Format 参数</param>
+            <returns><see cref="T:Fast.NET.AppException"/>异常实例</returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Oops.Oh``1(System.String,System.Object[])">
+            <summary>
+            抛出字符串异常
+            </summary>
+            <typeparam name="TException">具体异常类型</typeparam>
+            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
+            <param name="args">String.Format 参数</param>
+            <returns><see cref="T:Fast.NET.AppException"/>异常实例</returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.IUnifyResultProvider">
+            <summary>
+            <see cref="T:Fast.UnifyProcessor.IUnifyResultProvider"/> 规范化结果提供器
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.IUnifyResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,Fast.NET.ExceptionMetadata)">
+            <summary>
+            异常返回值
+            </summary>
+            <param name="context"><see cref="T:Fast.NET.ExceptorContext"/></param>
+            <param name="metadata"><see cref="T:Fast.NET.ExceptionMetadata"/> 异常元数据</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.IUnifyResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Object)">
+            <summary>
+            成功返回值
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+            <param name="data"></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.IUnifyResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Fast.NET.ValidationMetadata)">
+            <summary>
+            验证失败返回值
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext"/></param>
+            <param name="metadata"><see cref="T:Fast.NET.ValidationMetadata"/> 验证信息元数据</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.UnifyProcessor.IUnifyResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32)">
+            <summary>
+            拦截返回状态码
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/> 状态码</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.UnifyProcessor.Results.BadPageResult">
+            <summary>
+            <see cref="T:Fast.UnifyProcessor.Results.BadPageResult"/> 错误页面
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Base64Icon">
+            <summary>
+            图标
+            </summary>
+            <remarks>必须是 base64 类型</remarks>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Code">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.CodeLang">
+            <summary>
+            错误代码语言
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Status401Unauthorized">
+            <summary>
+            返回通用 401 错误页
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Status403Forbidden">
+            <summary>
+            返回通用 403 错误页
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Status404NotFound">
+            <summary>
+            返回通用 404 错误页
+            </summary>
+        </member>
+        <member name="P:Fast.UnifyProcessor.Results.BadPageResult.Status500InternalServerError">
+            <summary>
+            返回通用 500 错误页
+            </summary>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Results.BadPageResult.#ctor">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetService``1(System.String)">
+        <member name="M:Fast.UnifyProcessor.Results.BadPageResult.#ctor(System.Int32)">
             <summary>
-            根据服务名称获取服务
+            Initializes a new instance of the <see cref="T:Microsoft.AspNetCore.Mvc.StatusCodeResult" /> class
+            with the given <paramref name="statusCode" />.
             </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <param name="statusCode">The HTTP status code of the response.</param>
         </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetRequiredService``1(System.String)">
+        <member name="M:Fast.UnifyProcessor.Results.BadPageResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)">
             <summary>
-            根据服务名称获取服务
+            重写返回结果
             </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <param name="context"></param>
+        </member>
+        <member name="M:Fast.UnifyProcessor.Results.BadPageResult.ToString">
+            <summary>
+            将 <see cref="T:Fast.UnifyProcessor.Results.BadPageResult"/> 转换成字符串
+            </summary>
+            <returns><see cref="T:System.String"/></returns>
         </member>
     </members>
 </doc>

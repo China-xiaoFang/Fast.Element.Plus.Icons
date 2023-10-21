@@ -12,12 +12,12 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.FriendlyException.Filters;
 using Fast.NET;
+using Fast.UnifyProcessor.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fast.FriendlyException.Extensions;
+namespace Fast.UnifyProcessor.Extensions;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> 友好异常服务拓展类
@@ -44,6 +44,12 @@ public static class ExceptionIServiceCollectionExtension
     /// <returns><see cref="IServiceCollection"/></returns>
     public static IServiceCollection AddFriendlyException(this IServiceCollection services)
     {
+        if (services.All(a => a.ServiceType != typeof(IUnifyResultProvider)))
+        {
+            throw new InvalidOperationException(
+                $"`{nameof(AddFriendlyException)}` must be invoked after `{nameof(UnifyResultIServiceCollectionExtension.AddUnifyResult)}`.");
+        }
+
         services.Configure<MvcOptions>(options => { options.Filters.Add<FriendlyExceptionFilter>(); });
 
         return services;

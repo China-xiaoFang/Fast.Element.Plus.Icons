@@ -12,22 +12,28 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
+using Fast.NET;
+using Fast.UnifyProcessor.Middlewares;
+using Microsoft.AspNetCore.Builder;
 
-// ReSharper disable once CheckNamespace
-namespace Fast.NET;
+namespace Fast.UnifyProcessor.Extensions;
+
 /// <summary>
-/// <see cref="Assembly"/> 内部拓展类
+/// <see cref="IApplicationBuilder"/> 规范化服务拓展类
 /// </summary>
-internal static class InternalAssemblyExtension
+[SuppressSniffer]
+public static class UnifyResultIApplicationBuilderExtension
 {
     /// <summary>
-    /// 获取程序集名称
+    /// 添加状态码拦截中间件
     /// </summary>
-    /// <param name="assembly"><see cref="Assembly"/></param>
-    /// <returns><see cref="string"/></returns>
-    internal static string GetAssemblyName(this Assembly assembly)
+    /// <param name="builder"><see cref="IApplicationBuilder"/></param>
+    /// <returns><see cref="IApplicationBuilder"/></returns>
+    public static IApplicationBuilder UseUnifyResultStatusCodes(this IApplicationBuilder builder)
     {
-        return assembly.GetName().Name;
+        // 注册中间件
+        builder.UseMiddleware<UnifyResultStatusCodesMiddleware>();
+
+        return builder;
     }
 }

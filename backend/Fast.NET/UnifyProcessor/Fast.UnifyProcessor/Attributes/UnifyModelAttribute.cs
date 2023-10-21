@@ -12,22 +12,27 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
+using Fast.NET;
 
-// ReSharper disable once CheckNamespace
-namespace Fast.NET;
+namespace Fast.UnifyProcessor.Attributes;
+
 /// <summary>
-/// <see cref="Assembly"/> 内部拓展类
+/// <see cref="UnifyModelAttribute"/> 规范化模型特性
 /// </summary>
-internal static class InternalAssemblyExtension
+[SuppressSniffer, AttributeUsage(AttributeTargets.Class)]
+public class UnifyModelAttribute : Attribute
 {
     /// <summary>
-    /// 获取程序集名称
+    /// 规范化模型
     /// </summary>
-    /// <param name="assembly"><see cref="Assembly"/></param>
-    /// <returns><see cref="string"/></returns>
-    internal static string GetAssemblyName(this Assembly assembly)
+    /// <param name="modelType"></param>
+    public UnifyModelAttribute(Type modelType)
     {
-        return assembly.GetName().Name;
+        ModelType = modelType;
     }
+
+    /// <summary>
+    /// 模型类型（泛型）
+    /// </summary>
+    public Type ModelType { get; set; }
 }

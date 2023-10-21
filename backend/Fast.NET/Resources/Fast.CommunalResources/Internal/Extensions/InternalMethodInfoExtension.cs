@@ -17,7 +17,6 @@ using System.Runtime.CompilerServices;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="MethodInfo"/> 内部拓展类
 /// </summary>
@@ -91,7 +90,7 @@ internal static class InternalMethodInfoExtension
     /// <param name="attributeType"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
-    internal static Attribute GetFoundAttribute(this MethodInfo methodInfo,Type attributeType, bool inherit) 
+    internal static Attribute GetFoundAttribute(this MethodInfo methodInfo, Type attributeType, bool inherit)
     {
         // 获取方法所在类型
         var declaringType = methodInfo.DeclaringType;

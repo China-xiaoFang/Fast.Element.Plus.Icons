@@ -48,7 +48,7 @@ public static class DynamicApplicationIServiceCollectionExtension
     public static IServiceCollection AddDynamicApiControllers(this IServiceCollection services)
     {
         var partManager =
-            services.FirstOrDefault(s => s.ServiceType == typeof(ApplicationPartManager))?.ImplementationInstance as
+            services.FirstOrDefault(f => f.ServiceType == typeof(ApplicationPartManager))?.ImplementationInstance as
                 ApplicationPartManager ?? throw new InvalidOperationException(
                 $"`{nameof(AddDynamicApiControllers)}` must be invoked after `{nameof(MvcServiceCollectionExtensions.AddControllers)}`.");
 

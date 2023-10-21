@@ -55,6 +55,34 @@
             类型 IDynamicApplication
             </summary>
         </member>
+        <member name="M:Fast.NET.InternalPenetrates.CatchOrDefault``1(System.Func{``0},``0)">
+            <summary>
+            处理获取对象异常问题
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="action">获取对象委托</param>
+            <param name="defaultValue">默认值</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.GetThreadId">
+            <summary>
+            获取当前线程 Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.GetTraceId">
+            <summary>
+            获取当前请求 TraceId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.GetExecutionTime(System.Action)">
+            <summary>
+            获取一段代码执行耗时
+            </summary>
+            <param name="action">委托</param>
+            <returns><see cref="T:System.Int64"/></returns>
+        </member>
         <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
             <summary>
             是否是 Api 控制器
@@ -279,6 +307,25 @@
             <param name="inherit"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.NET.InternalStringExtension">
+            <summary>
+            <see cref="T:System.String"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.FirstCharToLower(System.String)">
+            <summary>
+            字符串首字母小写
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.SplitCamelCase(System.String)">
+            <summary>
+            切割骆驼命名式字符串
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
         <member name="T:Fast.NET.InternalTypeExtension">
             <summary>
             <see cref="T:System.Type"/> 内部拓展类
@@ -305,6 +352,20 @@
             </summary>
             <param name="typeInfo"><see cref="T:System.Reflection.TypeInfo"/></param>
             <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.IsRichPrimitive(System.Type)">
+            <summary>
+            判断是否是富基元类型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.IsValueTuple(System.Type)">
+            <summary>
+            判断是否是元组类型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.NET.UnifyMetadata">
             <summary>
@@ -1272,16 +1333,23 @@
             <see cref="T:System.String"/> 拓展类
             </summary>
         </member>
-        <member name="M:Fast.IaaS.Extensions.StringExtension.FirstCharToUpper(System.String)">
+        <member name="M:Fast.IaaS.Extensions.StringExtension.FirstCharToLower(System.String)">
             <summary>
-            字符串首字母大写
+            字符串首字母小写
             </summary>
             <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.StringExtension.FirstCharToLower(System.String)">
+        <member name="M:Fast.IaaS.Extensions.StringExtension.SplitCamelCase(System.String)">
             <summary>
-            字符串首字母小写
+            切割骆驼命名式字符串
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.StringExtension.FirstCharToUpper(System.String)">
+            <summary>
+            字符串首字母大写
             </summary>
             <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
@@ -1293,13 +1361,6 @@
             <param name="str"><see cref="T:System.String"/>字符串</param>
             <param name="pos">0：前后缀，1：后缀，-1：前缀</param>
             <param name="affixes">前后缀集合</param>
-            <returns><see cref="T:System.String"/></returns>
-        </member>
-        <member name="M:Fast.IaaS.Extensions.StringExtension.SplitCamelCase(System.String)">
-            <summary>
-            切割骆驼命名式字符串
-            </summary>
-            <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.StringExtension.Format(System.String,System.Object[])">
