@@ -21,7 +21,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="DecimalJsonConverter"/> decimal 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class DecimalJsonConverter : JsonConverter<decimal>
 {
     /// <summary>
@@ -63,7 +63,7 @@ public class DecimalJsonConverter : JsonConverter<decimal>
 /// <summary>
 /// <see cref="NullableDecimalJsonConverter"/> decimal? 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class NullableDecimalJsonConverter : JsonConverter<decimal?>
 {
     /// <summary>

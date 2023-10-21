@@ -21,7 +21,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="LongJsonConverter"/> Long 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class LongJsonConverter : JsonConverter<long>
 {
     /// <summary>Reads and converts the JSON to type <see cref="long"/>.</summary>
@@ -48,7 +48,7 @@ public class LongJsonConverter : JsonConverter<long>
 /// <summary>
 /// <see cref="NullableLongJsonConverter"/> Long? 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class NullableLongJsonConverter : JsonConverter<long?>
 {
     /// <summary>Reads and converts the JSON to type <see cref="long"/>.</summary>

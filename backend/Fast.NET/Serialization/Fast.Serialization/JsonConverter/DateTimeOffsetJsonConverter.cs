@@ -22,7 +22,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="DateTimeOffsetJsonConverter"/> DateTimeOffset 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 {
     /// <summary>
@@ -137,7 +137,7 @@ public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
 /// <summary>
 /// <see cref="NullableDateTimeOffsetJsonConverter"/> DateTimeOffset? 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class NullableDateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset?>
 {
     /// <summary>

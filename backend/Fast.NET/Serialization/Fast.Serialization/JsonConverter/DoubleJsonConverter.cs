@@ -21,7 +21,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="DoubleJsonConverter"/> double 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class DoubleJsonConverter : JsonConverter<double>
 {
     /// <summary>
@@ -63,7 +63,7 @@ public class DoubleJsonConverter : JsonConverter<double>
 /// <summary>
 /// <see cref="NullableDoubleJsonConverter"/> double? 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class NullableDoubleJsonConverter : JsonConverter<double?>
 {
     /// <summary>

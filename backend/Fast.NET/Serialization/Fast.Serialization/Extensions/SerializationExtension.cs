@@ -21,7 +21,7 @@ namespace Fast.Serialization.Extensions;
 /// <summary>
 /// <see cref="SerializationExtension"/> 序列化拓展类
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public static class SerializationExtension
 {
     /// <summary>

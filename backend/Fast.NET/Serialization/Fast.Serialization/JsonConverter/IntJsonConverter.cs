@@ -21,7 +21,7 @@ namespace Fast.Serialization.JsonConverter;
 /// <summary>
 /// <see cref="IntJsonConverter"/> int 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class IntJsonConverter : JsonConverter<int>
 {
     /// <summary>Reads and converts the JSON to type <see cref="int"/>.</summary>
@@ -48,7 +48,7 @@ public class IntJsonConverter : JsonConverter<int>
 /// <summary>
 /// <see cref="NullableIntJsonConverter"/> int? 类型Json返回处理
 /// </summary>
-[SuppressSniffer]
+[InternalSuppressSniffer]
 public class NullableIntJsonConverter : JsonConverter<int?>
 {
     /// <summary>Reads and converts the JSON to type <see cref="int"/>.</summary>
