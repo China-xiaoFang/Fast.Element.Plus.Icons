@@ -12,26 +12,26 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
-using Fast.NET;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
+using Fast.Logging.App;
+using Microsoft.AspNetCore.Builder;
 
-namespace Fast.DependencyInjection.App;
+namespace Fast.Logging.Extensions;
 
 /// <summary>
-/// <see cref="InternalApp"/> 内部 App 上下文
+/// <see cref="IApplicationBuilder"/> 日志服务中间件拓展类
 /// </summary>
-internal static class InternalApp
+public static class LoggingIApplicationBuilderExtension
 {
     /// <summary>
-    /// 应用服务
+    /// 添加日志中间件
     /// </summary>
-    internal static IServiceCollection InternalServices;
+    /// <param name="app"><see cref="IApplicationBuilder"/></param>
+    /// <returns><see cref="IApplicationBuilder"/></returns>
+    public static IApplicationBuilder UseLogging(this IApplicationBuilder app)
+    {
+        // 存储根服务
+        InternalApp.RootServices = app.ApplicationServices;
 
-    /// <summary>
-    /// 根服务
-    /// </summary>
-    internal static IServiceProvider RootServices;
+        return app;
+    }
 }

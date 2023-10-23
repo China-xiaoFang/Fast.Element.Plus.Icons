@@ -48,6 +48,11 @@ internal static class InternalApp
     internal static IWebHostEnvironment WebHostEnvironment;
 
     /// <summary>
+    /// 获取主机环境
+    /// </summary>
+    internal static IWebHostEnvironment HostEnvironment;
+
+    /// <summary>
     /// 未托管的对象集合
     /// </summary>
     internal static readonly ConcurrentBag<IDisposable> UnmanagedObjects;
@@ -59,25 +64,6 @@ internal static class InternalApp
     }
 
     /// <summary>
-    /// 处理获取对象异常问题
-    /// </summary>
-    /// <typeparam name="T">类型</typeparam>
-    /// <param name="action">获取对象委托</param>
-    /// <param name="defaultValue">默认值</param>
-    /// <returns>T</returns>
-    internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
-    {
-        try
-        {
-            return action();
-        }
-        catch
-        {
-            return defaultValue;
-        }
-    }
-
-    /// <summary>
     /// 获取当前请求 TraceId
     /// </summary>
     /// <returns></returns>
@@ -85,6 +71,6 @@ internal static class InternalApp
     {
         return Activity.Current?.Id ?? (RootServices == null
             ? default
-            : CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)?.TraceIdentifier);
+            : InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)?.TraceIdentifier);
     }
 }

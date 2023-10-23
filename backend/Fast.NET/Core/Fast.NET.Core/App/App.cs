@@ -36,12 +36,17 @@ public static class App
     /// 配置
     /// </summary>
     public static IConfiguration Configuration =>
-        InternalApp.CatchOrDefault(() => InternalApp.Configuration.Reload(), new ConfigurationBuilder().Build());
+        InternalPenetrates.CatchOrDefault(() => InternalApp.Configuration.Reload(), new ConfigurationBuilder().Build());
 
     /// <summary>
     /// 获取Web主机环境
     /// </summary>
     public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
+
+    /// <summary>
+    /// 获取主机环境
+    /// </summary>
+    internal static IWebHostEnvironment HostEnvironment => InternalApp.HostEnvironment;
 
     /// <summary>
     /// 应用服务
@@ -67,7 +72,7 @@ public static class App
     /// 请求上下文
     /// </summary>
     public static HttpContext HttpContext =>
-        InternalApp.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
+        InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext);
 
     /// <summary>
     /// 未托管的对象集合
@@ -282,7 +287,7 @@ public static class App
         builder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
         {
             // 存储环境对象
-            InternalApp.WebHostEnvironment = hostContext.HostingEnvironment;
+            InternalApp.HostEnvironment = hostContext.HostingEnvironment;
 
             // 加载配置
             AddJsonFiles(configurationBuilder, hostContext.HostingEnvironment);

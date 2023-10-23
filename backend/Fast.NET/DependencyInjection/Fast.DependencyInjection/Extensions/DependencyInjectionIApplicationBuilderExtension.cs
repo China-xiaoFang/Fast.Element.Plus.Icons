@@ -24,13 +24,11 @@ namespace Fast.DependencyInjection.Extensions;
 public static class DependencyInjectionIApplicationBuilderExtension
 {
     /// <summary>
-    /// 添加跨域中间件
+    /// 添加依赖注入中间件
     /// </summary>
     /// <param name="app"><see cref="IApplicationBuilder"/></param>
-    /// <param name="corsPolicyBuilderHandler"></param>
     /// <returns><see cref="IApplicationBuilder"/></returns>
-    public static IApplicationBuilder UseDependencyInjection(this IApplicationBuilder app,
-        Action<CorsPolicyBuilder> corsPolicyBuilderHandler = default)
+    public static IApplicationBuilder UseDependencyInjection(this IApplicationBuilder app)
     {
         // 存储根服务
         InternalApp.RootServices = app.ApplicationServices;

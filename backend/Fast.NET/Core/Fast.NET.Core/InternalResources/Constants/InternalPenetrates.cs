@@ -74,6 +74,25 @@ internal static class InternalPenetrates
     }
 
     /// <summary>
+    /// 处理获取对象异常问题
+    /// </summary>
+    /// <typeparam name="T">类型</typeparam>
+    /// <param name="action">获取对象委托</param>
+    /// <param name="defaultValue">默认值</param>
+    /// <returns>T</returns>
+    internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
+    {
+        try
+        {
+            return action();
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    /// <summary>
     /// 获取当前线程 Id
     /// </summary>
     /// <returns></returns>

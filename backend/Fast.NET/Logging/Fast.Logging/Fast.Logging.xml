@@ -4,25 +4,40 @@
         <name>Fast.Logging</name>
     </assembly>
     <members>
+        <member name="T:Fast.NET.InternalSuppressSnifferAttribute">
+            <summary>
+            <see cref="T:Fast.NET.InternalSuppressSnifferAttribute"/> 内部不被扫描和发现的特性
+            </summary>
+            <remarks>用于程序集扫描类型或方法时候</remarks>
+        </member>
+        <member name="T:Fast.NET.InternalConstant">
+            <summary>
+            <see cref="T:Fast.NET.InternalConstant"/> 内部常用常量
+            </summary>
+        </member>
+        <member name="P:Fast.NET.InternalConstant.DefaultTime">
+            <summary>
+            默认DateTime
+            </summary>
+        </member>
+        <member name="P:Fast.NET.InternalConstant.TimeStamp">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="P:Fast.NET.InternalConstant.SqlServerMinTime">
+            <summary>
+            Sql Server 最小时间
+            </summary>
+        </member>
+        <member name="P:Fast.NET.InternalConstant.SqlServerMaxTime">
+            <summary>
+            Sql Server 最大时间
+            </summary>
+        </member>
         <member name="T:Fast.NET.InternalPenetrates">
             <summary>
             <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
-            </summary>
-            <remarks>虽然这里有一些 App 中的属性，但是一般情况下还是不建议使用，可能为 Null，这里只是为了框架内部避免互相引用，所以单独提取出来了</remarks>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.InternalServices">
-            <summary>
-            应用服务
-            </summary>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.RootServices">
-            <summary>
-            根服务
-            </summary>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.Configuration">
-            <summary>
-            配置对象
             </summary>
         </member>
         <member name="F:Fast.NET.InternalPenetrates.Assemblies">
@@ -35,16 +50,6 @@
             有效程序集类型
             </summary>
         </member>
-        <member name="F:Fast.NET.InternalPenetrates.WebHostEnvironment">
-            <summary>
-            获取Web主机环境
-            </summary>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.UnmanagedObjects">
-            <summary>
-            未托管的对象集合
-            </summary>
-        </member>
         <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
             <summary>
             ApiController 缓存
@@ -53,7 +58,30 @@
         <member name="F:Fast.NET.InternalPenetrates.IDynamicApplicationType">
             <summary>
             类型 IDynamicApplication
+            <remarks>如果没有引用 Fast.DynamicApplication 则为空</remarks>
             </summary>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.CatchOrDefault``1(System.Func{``0},``0)">
+            <summary>
+            处理获取对象异常问题
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="action">获取对象委托</param>
+            <param name="defaultValue">默认值</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.GetThreadId">
+            <summary>
+            获取当前线程 Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.InternalPenetrates.GetExecutionTime(System.Action)">
+            <summary>
+            获取一段代码执行耗时
+            </summary>
+            <param name="action">委托</param>
+            <returns><see cref="T:System.Int64"/></returns>
         </member>
         <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
             <summary>
@@ -61,119 +89,6 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="T:Fast.NET.ExceptorContext">
-            <summary>
-            <see cref="T:Fast.NET.ExceptorContext"/> 异常上下文
-            </summary>
-        </member>
-        <member name="M:Fast.NET.ExceptorContext.GetExceptionMetadata(Microsoft.AspNetCore.Mvc.ActionContext)">
-            <summary>
-            获取异常元数据
-            </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.ActionContext"/></param>
-            <returns><see cref="T:Fast.NET.ExceptionMetadata"/></returns>
-        </member>
-        <member name="T:Fast.NET.UnifyContext">
-            <summary>
-            <see cref="T:Fast.NET.UnifyContext"/> 规范化结果上下文
-            </summary>
-        </member>
-        <member name="P:Fast.NET.UnifyContext.UnifyProviderAttributeType">
-            <summary>
-            类型 UnifyProviderAttribute
-            </summary>
-        </member>
-        <member name="P:Fast.NET.UnifyContext.NonUnifyAttributeType">
-            <summary>
-            类型 NonUnifyAttribute
-            </summary>
-        </member>
-        <member name="P:Fast.NET.UnifyContext.IUnifyResultProviderType">
-            <summary>
-            类型 IUnifyResultProvider
-            </summary>
-        </member>
-        <member name="F:Fast.NET.UnifyContext.CacheMethodInfoUnifyProviderAttributes">
-            <summary>
-            方法 规范化提供器 缓存
-            </summary>
-        </member>
-        <member name="F:Fast.NET.UnifyContext.UnifyProviders">
-            <summary>
-            规范化结果提供器
-            </summary>
-        </member>
-        <member name="M:Fast.NET.UnifyContext.CheckSucceededNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Boolean,System.Type)">
-            <summary>
-            检查请求成功是否进行规范化处理
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
-            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
-            <param name="isWebRequest"><see cref="T:System.Boolean"/></param>
-            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
-            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.NET.UnifyContext.CheckFailedNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,System.Object@,System.Type)">
-            <summary>
-            检查请求失败（验证失败、抛异常）是否进行规范化处理
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
-            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
-            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
-            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.NET.UnifyContext.CheckStatusCodeNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Object@,System.Type)">
-            <summary>
-            检查短路状态码（>=400）是否进行规范化处理
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="unifyResult"><see cref="T:System.Object"/> 类型 IUnifyResultProvider</param>
-            <param name="nonUnifyAttributeType"><see cref="T:System.Type"/> 禁止规范化处理特性，不传默认 NonUnifyAttribute</param>
-            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-        </member>
-        <member name="M:Fast.NET.UnifyContext.CheckValidResult(Microsoft.AspNetCore.Mvc.IActionResult,System.Object@)">
-            <summary>
-            检查是否是有效的结果（可进行规范化的结果）
-            </summary>
-            <param name="result"><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></param>
-            <param name="data"><see cref="T:System.Object"/></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.NET.UnifyContext.GetMethodUnityMetadata(System.Reflection.MethodInfo)">
-            <summary>
-            获取方法规范化元数据
-            </summary>
-            <param name="method"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Fast.NET.UnifyContext`2">
-            <summary>
-            <see cref="T:Fast.NET.UnifyContext`2"/> 规范化结果上下文
-            </summary>
-            <typeparam name="TAttribute">必须是 UnifyProviderAttribute 特性</typeparam>
-            <typeparam name="TIProvider">必须是 IUnifyResultProvider 接口</typeparam>
-        </member>
-        <member name="M:Fast.NET.UnifyContext`2.#cctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="T:Fast.NET.ValidatorContext">
-            <summary>
-            <see cref="T:Fast.NET.ValidatorContext"/> 验证上下文
-            </summary>
-        </member>
-        <member name="M:Fast.NET.ValidatorContext.GetValidationMetadata(System.Object)">
-            <summary>
-            获取验证错误信息
-            </summary>
-            <param name="errors"><see cref="T:System.Object"/></param>
-            <returns><see cref="T:Fast.NET.ValidationMetadata"/></returns>
         </member>
         <member name="T:Fast.NET.InternalAssemblyExtension">
             <summary>
@@ -279,6 +194,25 @@
             <param name="inherit"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.NET.InternalStringExtension">
+            <summary>
+            <see cref="T:System.String"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.FirstCharToLower(System.String)">
+            <summary>
+            字符串首字母小写
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.SplitCamelCase(System.String)">
+            <summary>
+            切割骆驼命名式字符串
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
         <member name="T:Fast.NET.InternalTypeExtension">
             <summary>
             <see cref="T:System.Type"/> 内部拓展类
@@ -306,25 +240,103 @@
             <param name="typeInfo"><see cref="T:System.Reflection.TypeInfo"/></param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="T:Fast.NET.UnifyMetadata">
+        <member name="M:Fast.NET.InternalTypeExtension.IsRichPrimitive(System.Type)">
             <summary>
-            <see cref="T:Fast.NET.UnifyMetadata"/> 规范化元数据
+            判断是否是富基元类型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.NET.InternalTypeExtension.IsValueTuple(System.Type)">
+            <summary>
+            判断是否是元组类型
+            </summary>
+            <param name="type"><see cref="T:System.Type"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="T:Fast.NET.Reflect">
+            <summary>
+            内部反射静态类
             </summary>
         </member>
-        <member name="P:Fast.NET.UnifyMetadata.ProviderName">
+        <member name="M:Fast.NET.Reflect.GetEntryAssembly">
             <summary>
-            提供器名称
+            获取入口程序集
             </summary>
+            <returns></returns>
         </member>
-        <member name="P:Fast.NET.UnifyMetadata.ProviderType">
+        <member name="M:Fast.NET.Reflect.GetAssembly(System.String)">
             <summary>
-            提供器类型
+            根据程序集名称获取运行时程序集
             </summary>
+            <param name="assemblyName"></param>
+            <returns></returns>
         </member>
-        <member name="P:Fast.NET.UnifyMetadata.ResultType">
+        <member name="M:Fast.NET.Reflect.LoadAssembly(System.String)">
             <summary>
-            统一的结果类型
+            根据路径加载程序集
             </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.LoadAssembly(System.IO.MemoryStream)">
+            <summary>
+            通过流加载程序集
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetType(System.String,System.String)">
+            <summary>
+            根据程序集名称、类型完整限定名获取运行时类型
+            </summary>
+            <param name="assemblyName"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetType(System.Reflection.Assembly,System.String)">
+            <summary>
+            根据程序集和类型完全限定名获取运行时类型
+            </summary>
+            <param name="assembly"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetType(System.IO.MemoryStream,System.String)">
+            <summary>
+            根据程序集和类型完全限定名获取运行时类型
+            </summary>
+            <param name="assembly"></param>
+            <param name="typeFullName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Reflection.Assembly)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Type)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Reflection.TypeInfo)">
+            <summary>
+            获取程序集名称
+            </summary>
+            <param name="typeInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.NET.Reflect.GetStringType(System.String)">
+            <summary>
+            加载程序集类型，支持格式：程序集;网站类型命名空间
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
         </member>
         <member name="T:Fast.NET.InternalAssemblyUtil">
             <summary>
@@ -345,6 +357,56 @@
             <remarks>这里默认获取所有 Public 声明的</remarks>
             <param name="assembly"><see cref="T:System.Reflection.Assembly"/> 程序集</param>
             <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Logging.App.InternalApp">
+            <summary>
+            <see cref="T:Fast.Logging.App.InternalApp"/> 内部 App 上下文
+            </summary>
+        </member>
+        <member name="F:Fast.Logging.App.InternalApp.InternalServices">
+            <summary>
+            应用服务
+            </summary>
+        </member>
+        <member name="F:Fast.Logging.App.InternalApp.RootServices">
+            <summary>
+            根服务
+            </summary>
+        </member>
+        <member name="F:Fast.Logging.App.InternalApp.Configuration">
+            <summary>
+            配置对象
+            </summary>
+        </member>
+        <member name="P:Fast.Logging.App.InternalApp.HttpContext">
+            <summary>
+            请求上下文
+            </summary>
+        </member>
+        <member name="F:Fast.Logging.App.InternalApp.WebHostEnvironment">
+            <summary>
+            获取Web主机环境
+            </summary>
+        </member>
+        <member name="M:Fast.Logging.App.InternalApp.GetTraceId">
+            <summary>
+            获取当前请求 TraceId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Logging.App.InternalApp.GetRequiredService(System.Type)">
+            <summary>
+            获取请求生存周期的服务
+            </summary>
+            <param name="serviceType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Logging.App.InternalApp.GetRequiredService``1">
+            <summary>
+            获取请求生存周期的服务
+            </summary>
+            <typeparam name="TService"></typeparam>
             <returns></returns>
         </member>
         <member name="T:Fast.Logging.Extensions.ILoggerExtension">
@@ -502,69 +564,88 @@
             <param name="key">键</param>
             <returns></returns>
         </member>
-        <member name="T:Fast.Logging.Extensions.LoggingIServiceCollectionExtension">
+        <member name="T:Fast.Logging.Extensions.LoggingIApplicationBuilderExtension">
             <summary>
-            日志服务拓展类
+            <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 日志服务中间件拓展类
             </summary>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddConsoleFormatter(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Fast.Logging.Implantation.Console.ConsoleFormatterExtendOptions})">
+        <member name="M:Fast.Logging.Extensions.LoggingIApplicationBuilderExtension.UseLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            添加日志中间件
+            </summary>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
+        </member>
+        <member name="T:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/> 日志服务拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddConsoleFormatter(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Fast.Logging.Implantation.Console.ConsoleFormatterExtendOptions})">
             <summary>
             添加控制台默认格式化器
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="configure">添加更多配置</param>
-            <returns></returns>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddFileLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Boolean)">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddFileLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.String,System.Boolean)">
             <summary>
             添加文件日志服务
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="fileName">日志文件完整路径或文件名，推荐 .log 作为拓展名</param>
             <param name="append">追加到已存在日志文件或覆盖它们</param>
-            <returns></returns>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddFileLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddFileLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.String,System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
             <summary>
             添加文件日志服务
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="fileName">日志文件完整路径或文件名，推荐 .log 作为拓展名</param>
             <param name="configure">文件日志记录器配置选项委托</param>
-            <returns></returns>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddFileLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddFileLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
             <summary>
             添加文件日志服务（从配置文件中读取配置）
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="configure">文件日志记录器配置选项委托</param>
-            <returns></returns>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddFileLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.String},System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddFileLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Func{System.String},System.Action{Fast.Logging.Implantation.File.FileLoggerOptions})">
             <summary>
             添加文件日志服务（从配置文件中读取配置）
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="configurationKey">获取配置文件对应的 Key</param>
             <param name="configure">文件日志记录器配置选项委托</param>
-            <returns></returns>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.AddLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Int64)">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.AddLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Int64)">
             <summary>
             添加日志服务
             197001/01/24.log
             </summary>
-            <param name="services"></param>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></param>
             <param name="fileSizeLimitBytes">日志文件大小 控制每一个日志文件最大存储大小，默认无限制，单位是 B，也就是 1024 才等于 1KB</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder"/></returns>
         </member>
-        <member name="M:Fast.Logging.Extensions.LoggingIServiceCollectionExtension.SetLogOptions(Fast.Logging.Implantation.File.FileLoggerOptions,Microsoft.Extensions.Logging.LogLevel,System.Int64)">
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.SetLogOptions(Fast.Logging.Implantation.File.FileLoggerOptions,Microsoft.Extensions.Logging.LogLevel,System.Int64)">
             <summary>
             配置日志
             </summary>
             <param name="options"></param>
             <param name="logLevel"></param>
             <param name="fileSizeLimitBytes">日志文件大小 控制每一个日志文件最大存储大小，默认无限制，单位是 B，也就是 1024 才等于 1KB</param>
+        </member>
+        <member name="M:Fast.Logging.Extensions.LoggingWebApplicationBuilderExtension.InitializeLogging(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            初始化日志
+            </summary>
+            <param name="builder"></param>
         </member>
         <member name="T:Fast.Logging.Extensions.LogMessageExtension">
             <summary>

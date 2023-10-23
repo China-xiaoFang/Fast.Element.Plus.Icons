@@ -12,10 +12,11 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.Logging.App;
 using Fast.Logging.Implantation.Console;
 using Fast.Logging.Implantation.File;
 using Fast.Logging.Templates;
-using Fast.NET.Core;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -23,80 +24,103 @@ using Microsoft.Extensions.Logging;
 namespace Fast.Logging.Extensions;
 
 /// <summary>
-/// 日志服务拓展类
+/// <see cref="WebApplicationBuilder"/> 日志服务拓展类
 /// </summary>
-public static class LoggingIServiceCollectionExtension
+public static class LoggingWebApplicationBuilderExtension
 {
     /// <summary>
     /// 添加控制台默认格式化器
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="configure">添加更多配置</param>
-    /// <returns></returns>
-    public static IServiceCollection AddConsoleFormatter(this IServiceCollection services,
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddConsoleFormatter(this WebApplicationBuilder builder,
         Action<ConsoleFormatterExtendOptions> configure = default)
     {
-        return services.AddLogging(builder => builder.AddConsoleFormatter(configure));
+        builder.InitializeLogging();
+
+        builder.Services.AddLogging(options => options.AddConsoleFormatter(configure));
+
+        return builder;
     }
 
     /// <summary>
     /// 添加文件日志服务
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="fileName">日志文件完整路径或文件名，推荐 .log 作为拓展名</param>
     /// <param name="append">追加到已存在日志文件或覆盖它们</param>
-    /// <returns></returns>
-    public static IServiceCollection AddFileLogging(this IServiceCollection services, string fileName, bool append = true)
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddFileLogging(this WebApplicationBuilder builder, string fileName, bool append = true)
     {
-        return services.AddLogging(builder => builder.AddFile(fileName, append));
+        builder.InitializeLogging();
+
+        builder.Services.AddLogging(options => options.AddFile(fileName, append));
+
+        return builder;
     }
 
     /// <summary>
     /// 添加文件日志服务
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="fileName">日志文件完整路径或文件名，推荐 .log 作为拓展名</param>
     /// <param name="configure">文件日志记录器配置选项委托</param>
-    /// <returns></returns>
-    public static IServiceCollection AddFileLogging(this IServiceCollection services, string fileName,
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddFileLogging(this WebApplicationBuilder builder, string fileName,
         Action<FileLoggerOptions> configure)
     {
-        return services.AddLogging(builder => builder.AddFile(fileName, configure));
+        builder.InitializeLogging();
+
+        builder.Services.AddLogging(options => options.AddFile(fileName, configure));
+
+        return builder;
     }
 
     /// <summary>
     /// 添加文件日志服务（从配置文件中读取配置）
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="configure">文件日志记录器配置选项委托</param>
-    /// <returns></returns>
-    public static IServiceCollection AddFileLogging(this IServiceCollection services,
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddFileLogging(this WebApplicationBuilder builder,
         Action<FileLoggerOptions> configure = default)
     {
-        return services.AddLogging(builder => builder.AddFile(configure));
+        builder.InitializeLogging();
+
+        builder.Services.AddLogging(options => options.AddFile(configure));
+
+        return builder;
     }
 
     /// <summary>
     /// 添加文件日志服务（从配置文件中读取配置）
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="configurationKey">获取配置文件对应的 Key</param>
     /// <param name="configure">文件日志记录器配置选项委托</param>
-    /// <returns></returns>
-    public static IServiceCollection AddFileLogging(this IServiceCollection services, Func<string> configurationKey,
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddFileLogging(this WebApplicationBuilder builder, Func<string> configurationKey,
         Action<FileLoggerOptions> configure = default)
     {
-        return services.AddLogging(builder => builder.AddFile(configurationKey, configure));
+        builder.InitializeLogging();
+
+        builder.Services.AddLogging(options => options.AddFile(configurationKey, configure));
+
+        return builder;
     }
 
     /// <summary>
     /// 添加日志服务
     /// 197001/01/24.log
     /// </summary>
-    /// <param name="services"></param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="fileSizeLimitBytes">日志文件大小 控制每一个日志文件最大存储大小，默认无限制，单位是 B，也就是 1024 才等于 1KB</param>
-    public static void AddLogging(this IServiceCollection services, long fileSizeLimitBytes = 10 * 1024 * 1024)
+    /// <returns><see cref="WebApplicationBuilder"/></returns>
+    public static WebApplicationBuilder AddLogging(this WebApplicationBuilder builder, long fileSizeLimitBytes = 10 * 1024 * 1024)
     {
+        builder.InitializeLogging();
+
         const string monthFormat = "{0:yyyy}{0:MM}";
 
         const string dayFormat = "{0:dd}";
@@ -105,18 +129,20 @@ public static class LoggingIServiceCollectionExtension
 
         const string logFileFormat = $"{monthFormat}/{dayFormat}/{hourFormat}";
 
-        services.AddLogging(loggingBuilder =>
+        builder.Services.AddLogging(loggingBuilder =>
         {
             loggingBuilder.AddFile($"logs/error/{logFileFormat}.log",
                 options => { SetLogOptions(options, LogLevel.Error, fileSizeLimitBytes); });
             // Environments other than the development environment are not logged.
-            if (!App.WebHostEnvironment.IsDevelopment())
+            if (!InternalApp.WebHostEnvironment.IsDevelopment())
                 return;
             loggingBuilder.AddFile($"logs/info/{logFileFormat}.log",
                 options => { SetLogOptions(options, LogLevel.Information, fileSizeLimitBytes); });
             loggingBuilder.AddFile($"logs/warn/{logFileFormat}.log",
                 options => { SetLogOptions(options, LogLevel.Warning, fileSizeLimitBytes); });
         });
+
+        return builder;
     }
 
     /// <summary>
@@ -148,5 +174,23 @@ public static class LoggingIServiceCollectionExtension
             var template = TP.Wrapper("WMS.Admin", "", msg.ToArray());
             return template;
         };
+    }
+
+    /// <summary>
+    /// 初始化日志
+    /// </summary>
+    /// <param name="builder"></param>
+    private static void InitializeLogging(this WebApplicationBuilder builder)
+    {
+        InternalApp.WebHostEnvironment = builder.Environment;
+
+        builder.WebHost.ConfigureServices((hostContext, services) =>
+        {
+            // 存储配置对象 
+            InternalApp.Configuration = hostContext.Configuration;
+
+            // 存储服务提供器
+            InternalApp.InternalServices = services;
+        });
     }
 }

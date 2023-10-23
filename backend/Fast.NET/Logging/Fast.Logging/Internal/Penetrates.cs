@@ -14,11 +14,13 @@
 
 using System.Diagnostics;
 using System.Text;
+using Fast.Logging.App;
 using Fast.Logging.Extensions;
 using Fast.Logging.Implantation;
 using Fast.Logging.Implantation.Console;
 using Fast.Logging.Implantation.File;
-using Fast.NET.Core;
+using Fast.NET;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Fast.Logging.Internal;
@@ -48,7 +50,9 @@ internal static class Penetrates
             return new FileLoggerProvider("application.log", new FileLoggerOptions());
 
         // 加载配置文件中指定节点
-        var fileLoggerSettings = App.GetConfig<FileLoggerSettings>(key) ?? new FileLoggerSettings();
+        var fileLoggerSettings =
+            InternalPenetrates.CatchOrDefault(() => InternalApp.Configuration, new ConfigurationBuilder().Build()).GetSection(key)
+                .Get<FileLoggerSettings>() ?? new FileLoggerSettings();
 
         // 创建文件日志记录器配置选项
         var fileLoggerOptions = new FileLoggerOptions
