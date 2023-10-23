@@ -12,12 +12,13 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-// ReSharper disable once CheckNamespace
-namespace Fast.NET;
+namespace Fast.UnifyProcessor.Contexts;
+
 /// <summary>
 /// <see cref="ExceptorContext"/> 异常上下文
 /// </summary>
@@ -65,18 +66,6 @@ internal static class ExceptorContext
             isValidationException = friendlyException.ValidationException;
             errors = friendlyException.ErrorMessage;
             data = friendlyException.Data;
-        }
-
-        // 判断是否是 应用程序异常
-        if (exception is AppException appException)
-        {
-            isUserFriendlyException = false;
-            errorCode = appException.ErrorCode;
-            originErrorCode = appException.OriginErrorCode;
-            statusCode = appException.StatusCode;
-            isValidationException = false;
-            errors = appException.ErrorMessage;
-            data = appException.Data;
         }
 
         // 处理非验证失败的错误对象
