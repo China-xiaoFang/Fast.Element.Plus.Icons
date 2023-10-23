@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
+using Fast.DependencyInjection.App;
 using Fast.NET;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -69,6 +70,9 @@ public static class DependencyInjectionIServiceCollectionExtension
     /// <returns><see cref="IServiceCollection"/></returns>
     private static IServiceCollection AddInnerDependencyInjection(this IServiceCollection services)
     {
+        // 存储服务提供器
+        InternalApp.InternalServices = services;
+
         // 查找所有需要依赖注入的类型
         var injectTypes = InternalPenetrates.EffectiveTypes.Where(u =>
             typeof(IDependency).IsAssignableFrom(u) && u.IsClass && !u.IsInterface && !u.IsAbstract);

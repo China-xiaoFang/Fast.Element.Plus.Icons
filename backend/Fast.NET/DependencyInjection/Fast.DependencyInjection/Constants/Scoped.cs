@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.DependencyInjection.App;
 using Fast.NET;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -79,14 +80,14 @@ public static class Scoped
         if (scopeFactory == null)
         {
             // 默认返回根服务
-            if (InternalPenetrates.RootServices != null)
+            if (InternalApp.RootServices != null)
             {
-                scopeFactory = InternalPenetrates.RootServices.GetService<IServiceScopeFactory>();
+                scopeFactory = InternalApp.RootServices.GetService<IServiceScopeFactory>();
             }
             else
             {
                 // 这里创建了一个待释放服务提供器（这里会有性能小问题，如果走到这一步）
-                unDisposeServiceProvider = InternalPenetrates.InternalServices?.BuildServiceProvider();
+                unDisposeServiceProvider = InternalApp.InternalServices?.BuildServiceProvider();
                 scopeFactory = unDisposeServiceProvider.GetService<IServiceScopeFactory>();
             }
         }
