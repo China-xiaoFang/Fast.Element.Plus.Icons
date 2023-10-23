@@ -19,7 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Fast.EventBus.Extensions;
 
 /// <summary>
-/// EventBus 模块服务拓展
+/// <see cref="IServiceCollection"/> EventBus 模块服务拓展
 /// </summary>
 public static class EventBusIServiceCollectionExtension
 {
