@@ -12,22 +12,25 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
+namespace Fast.SpecificationDocument.Attributes;
 
-// ReSharper disable once CheckNamespace
-namespace Fast.NET;
 /// <summary>
-/// <see cref="Assembly"/> 内部拓展类
+/// 配置规范化文档 OperationId 问题
 /// </summary>
-internal static class InternalAssemblyExtension
+[AttributeUsage(AttributeTargets.Method)]
+public sealed class OperationIdAttribute : Attribute
 {
     /// <summary>
-    /// 获取程序集名称
+    /// 构造函数
     /// </summary>
-    /// <param name="assembly"><see cref="Assembly"/></param>
-    /// <returns><see cref="string"/></returns>
-    internal static string GetAssemblyName(this Assembly assembly)
+    /// <param name="operationId">自定义 OperationId，可用户生成可读的前端代码</param>
+    public OperationIdAttribute(string operationId)
     {
-        return assembly.GetName().Name;
+        OperationId = operationId;
     }
+
+    /// <summary>
+    /// 自定义 OperationId
+    /// </summary>
+    public string OperationId { get; set; }
 }

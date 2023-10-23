@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Http;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
-
 /// <summary>
 /// <see cref="HttpContext"/> 内部拓展类
 /// </summary>
