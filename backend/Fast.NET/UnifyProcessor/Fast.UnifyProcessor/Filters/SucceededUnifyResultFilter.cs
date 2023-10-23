@@ -60,7 +60,7 @@ internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
             if (statusCodeActionResult.StatusCode.Value < 200 || statusCodeActionResult.StatusCode.Value > 299)
             {
                 // 处理规范化结果
-                if (!UnifyContext.CheckStatusCodeNonUnify(context.HttpContext, out var failUnifyResultObj))
+                if (!UnifyContext.CheckStatusCodeNonUnify(context.HttpContext, out var failUnifyResult))
                 {
                     var httpContext = context.HttpContext;
                     var statusCode = statusCodeActionResult.StatusCode.Value;
@@ -79,10 +79,7 @@ internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
                         return;
                     }
 
-                    if (failUnifyResultObj is IUnifyResultProvider failUnifyResult)
-                    {
-                        await failUnifyResult.OnResponseStatusCodes(httpContext, statusCode);
-                    }
+                    await failUnifyResult.OnResponseStatusCodes(httpContext, statusCode);
                 }
 
                 return;
@@ -99,46 +96,42 @@ internal class SucceededUnifyResultFilter : IAsyncActionFilter, IOrderedFilter
         var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
         // 判断是否跳过规范化处理
-        if (UnifyContext.CheckSucceededNonUnify(context.HttpContext, controllerActionDescriptor!.MethodInfo,
-                out var unifyResultObj))
+        if (UnifyContext.CheckSucceededNonUnify(context.HttpContext, controllerActionDescriptor!.MethodInfo, out var unifyResult))
         {
             return;
         }
 
 
-        if (unifyResultObj is IUnifyResultProvider unifyResult)
+        // 处理 BadRequestObjectResult 类型规范化处理
+        if (actionExecutedContext.Result is BadRequestObjectResult badRequestObjectResult)
         {
-            // 处理 BadRequestObjectResult 类型规范化处理
-            if (actionExecutedContext.Result is BadRequestObjectResult badRequestObjectResult)
+            // 解析验证消息
+            var validationMetadata = ValidatorContext.GetValidationMetadata(badRequestObjectResult.Value);
+
+            var result = unifyResult.OnValidateFailed(context, validationMetadata);
+
+            if (result != null)
             {
-                // 解析验证消息
-                var validationMetadata = ValidatorContext.GetValidationMetadata(badRequestObjectResult.Value);
-
-                var result = unifyResult.OnValidateFailed(context, validationMetadata);
-
-                if (result != null)
-                {
-                    actionExecutedContext.Result = result;
-                }
-            }
-            else
-            {
-                IActionResult result = default;
-
-                // 检查是否是有效的结果（可进行规范化的结果）
-                if (UnifyContext.CheckValidResult(actionExecutedContext.Result, out var data))
-                {
-                    result = unifyResult.OnSucceeded(actionExecutedContext, data);
-                }
-
-                // 如果是不能规范化的结果类型，则跳过
-                if (result == null)
-                {
-                    return;
-                }
-
                 actionExecutedContext.Result = result;
             }
+        }
+        else
+        {
+            IActionResult result = default;
+
+            // 检查是否是有效的结果（可进行规范化的结果）
+            if (UnifyContext.CheckValidResult(actionExecutedContext.Result, out var data))
+            {
+                result = unifyResult.OnSucceeded(actionExecutedContext, data);
+            }
+
+            // 如果是不能规范化的结果类型，则跳过
+            if (result == null)
+            {
+                return;
+            }
+
+            actionExecutedContext.Result = result;
         }
     }
 }

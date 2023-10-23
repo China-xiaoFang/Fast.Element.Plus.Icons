@@ -14,12 +14,12 @@
 
 using Fast.NET;
 
-namespace Fast.DependencyInjection.Attributes;
+namespace Fast.UnifyProcessor.Attributes;
 
 /// <summary>
-/// 跳过全局代理
+/// <see cref="NonValidationAttribute"/> 跳过验证
 /// </summary>
-[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class)]
-public class SuppressProxyAttribute : Attribute
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+public sealed class NonValidationAttribute : Attribute
 {
 }

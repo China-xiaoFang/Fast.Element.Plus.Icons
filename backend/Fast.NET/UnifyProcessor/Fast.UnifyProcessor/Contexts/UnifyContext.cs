@@ -44,11 +44,11 @@ internal static class UnifyContext
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
+    /// <param name="unifyResult"><see cref="IUnifyResultProvider"/></param>
     /// <param name="isWebRequest"><see cref="bool"/></param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
     /// <returns><see cref="bool"/></returns>
-    internal static bool CheckSucceededNonUnify(HttpContext httpContext, MethodInfo method, out object unifyResult,
+    internal static bool CheckSucceededNonUnify(HttpContext httpContext, MethodInfo method, out IUnifyResultProvider unifyResult,
         bool isWebRequest = true)
     {
         // 解析规范化元数据
@@ -105,7 +105,7 @@ internal static class UnifyContext
         }
         else
         {
-            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
+            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
         }
 
         return unifyResult == null || isSkip;
@@ -116,10 +116,10 @@ internal static class UnifyContext
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="method"><see cref="MethodInfo"/></param>
-    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
+    /// <param name="unifyResult"><see cref="IUnifyResultProvider"/></param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
     /// <returns><see cref="bool"/></returns>
-    internal static bool CheckFailedNonUnify(HttpContext httpContext, MethodInfo method, out object unifyResult)
+    internal static bool CheckFailedNonUnify(HttpContext httpContext, MethodInfo method, out IUnifyResultProvider unifyResult)
     {
         // 解析规范化元数据
         var unityMetadata = GetMethodUnityMetadata(method);
@@ -163,7 +163,7 @@ internal static class UnifyContext
         }
         else
         {
-            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
+            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
         }
 
         return unifyResult == null || isSkip;
@@ -173,9 +173,9 @@ internal static class UnifyContext
     /// 检查短路状态码（>=400）是否进行规范化处理
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <param name="unifyResult"><see cref="object"/> 类型 IUnifyResultProvider</param>
+    /// <param name="unifyResult"><see cref="IUnifyResultProvider"/></param>
     /// <returns>返回 true 跳过处理，否则进行规范化处理</returns>
-    internal static bool CheckStatusCodeNonUnify(HttpContext httpContext, out object unifyResult)
+    internal static bool CheckStatusCodeNonUnify(HttpContext httpContext, out IUnifyResultProvider unifyResult)
     {
         // 获取终点路由特性
         var endpointFeature = httpContext.Features.Get<IEndpointFeature>();
@@ -228,7 +228,7 @@ internal static class UnifyContext
 
             if (UnifyProviders.TryGetValue(unifyProviderAttribute?.Name ?? string.Empty, out var unityMetadata))
             {
-                unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType);
+                unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
             }
             else
             {

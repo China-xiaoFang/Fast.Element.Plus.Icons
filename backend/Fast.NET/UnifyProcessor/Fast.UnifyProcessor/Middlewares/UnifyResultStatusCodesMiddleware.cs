@@ -53,7 +53,7 @@ internal class UnifyResultStatusCodesMiddleware
         }
 
         // 处理规范化结果
-        if (!UnifyContext.CheckStatusCodeNonUnify(context, out var unifyResultObj))
+        if (!UnifyContext.CheckStatusCodeNonUnify(context, out var unifyResult))
         {
             // 解决刷新 Token 和 Token 时间相近问题
             if (context.Response.StatusCode == StatusCodes.Status401Unauthorized &&
@@ -68,10 +68,7 @@ internal class UnifyResultStatusCodesMiddleware
                 return;
             }
 
-            if (unifyResultObj is IUnifyResultProvider unifyResult)
-            {
-                await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
-            }
+            await unifyResult.OnResponseStatusCodes(context, context.Response.StatusCode);
         }
     }
 }

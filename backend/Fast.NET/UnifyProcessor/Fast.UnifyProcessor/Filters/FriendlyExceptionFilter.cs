@@ -16,10 +16,12 @@ using Fast.NET;
 using Fast.UnifyProcessor.Contexts;
 using Fast.UnifyProcessor.Handlers;
 using Fast.UnifyProcessor.Results;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.UnifyProcessor.Filters;
@@ -27,7 +29,6 @@ namespace Fast.UnifyProcessor.Filters;
 /// <summary>
 /// <see cref="FriendlyExceptionFilter"/> 友好异常拦截器
 /// </summary>
-[InternalSuppressSniffer]
 internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
 {
     /// <summary>
@@ -75,11 +76,14 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
         // 解析异常信息
         var exceptionMetadata = ExceptorContext.GetExceptionMetadata(context);
 
+        // 判断是否是 Razor Pages
+        var isPageDescriptor = context.ActionDescriptor is CompiledPageActionDescriptor;
+
         // 判断是否是验证异常，如果是，则不处理
         if (isValidationException)
         {
             // 从 HttpContext 上下文中读取验证执行结果
-            var resultHttpContext = context.HttpContext.Items[nameof(userFriendlyException)];
+            var resultHttpContext = context.HttpContext.Items[nameof(DataValidationFilter) + nameof(UserFriendlyException)];
 
             if (resultHttpContext != null)
             {
@@ -98,41 +102,50 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
             }
         }
 
-        // 处理 Mvc/WebApi
-
-        // 获取控制器信息
-        if (context.ActionDescriptor is not ControllerActionDescriptor controllerActionDescriptor)
+        // 处理 Razor Pages
+        if (isPageDescriptor)
         {
-            return;
-        }
-
-        // 判断是否跳过规范化结果，如果是，则只处理友好异常消息
-        if (UnifyContext.CheckFailedNonUnify(context.HttpContext, controllerActionDescriptor.MethodInfo, out var unifyResultObj))
-        {
-            // WebAPI 情况
-            if (InternalPenetrates.IsApiController(controllerActionDescriptor.MethodInfo.DeclaringType))
+            // 返回自定义错误页面
+            context.Result = new BadPageResult(isValidationException ? StatusCodes.Status400BadRequest : exceptionMetadata.StatusCode)
             {
-                // 返回 JsonResult
-                context.Result = new JsonResult(exceptionMetadata.Errors) {StatusCode = exceptionMetadata.StatusCode,};
+                Title = isValidationException ? "ModelState Invalid" : ("Internal Server: " + exceptionMetadata.Errors.ToString()),
+                Code = isValidationException
+                    ? ValidatorContext.GetValidationMetadata((context.Exception as UserFriendlyException)?.ErrorMessage).Message
+                    : context.Exception.ToString()
+            };
+        }
+        // 处理 Mvc/WebApi
+        else
+        {
+            // 获取控制器信息
+            if (context.ActionDescriptor is not ControllerActionDescriptor controllerActionDescriptor)
+            {
+                return;
+            }
+
+            // 判断是否跳过规范化结果，如果是，则只处理友好异常消息
+            if (UnifyContext.CheckFailedNonUnify(context.HttpContext, controllerActionDescriptor.MethodInfo,
+                    out var unifyResult))
+            {
+                // WebAPI 情况
+                if (InternalPenetrates.IsApiController(controllerActionDescriptor.MethodInfo.DeclaringType))
+                {
+                    // 返回 JsonResult
+                    context.Result = new JsonResult(exceptionMetadata.Errors) {StatusCode = exceptionMetadata.StatusCode,};
+                }
+                else
+                {
+                    // 返回自定义错误页面
+                    context.Result = new BadPageResult(exceptionMetadata.StatusCode)
+                    {
+                        Title = "Internal Server: " + exceptionMetadata.Errors, Code = context.Exception.ToString()
+                    };
+                }
             }
             else
             {
-                // 返回自定义错误页面
-                context.Result = new BadPageResult(exceptionMetadata.StatusCode)
-                {
-                    Title = "Internal Server: " + exceptionMetadata.Errors, Code = context.Exception.ToString()
-                };
-            }
-        }
-        else
-        {
-            // 这里通过反射查找 OnException 方法并且执行
-            var onExceptionMethod = unifyResultObj.GetType().GetMethod("OnException");
-            if (onExceptionMethod != null)
-            {
                 // 执行规范化异常处理
-                context.Result =
-                    onExceptionMethod.Invoke(unifyResultObj, new object[] {context, exceptionMetadata}) as IActionResult;
+                context.Result = unifyResult.OnException(context, exceptionMetadata);
             }
         }
     }
