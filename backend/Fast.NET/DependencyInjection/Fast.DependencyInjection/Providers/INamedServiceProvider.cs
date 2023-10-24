@@ -20,7 +20,7 @@ namespace Fast.DependencyInjection;
 /// <see cref="INamedServiceProvider{TService}"/> 命名服务提供器
 /// </summary>
 /// <typeparam name="TService">目标服务接口</typeparam>
-public interface INamedServiceProvider<TService> where TService : class
+public interface INamedServiceProvider<out TService> where TService : class
 {
     ///// <summary>
     ///// 根据服务名称获取服务
@@ -34,7 +34,7 @@ public interface INamedServiceProvider<TService> where TService : class
     /// </summary>
     /// <typeparam name="ILifetime">服务生存周期接口，<see cref="ITransientDependency"/>，<see cref="IScopedDependency"/>，<see cref="IScopedDependency"/></typeparam>
     /// <param name="serviceName"><see cref="string"/> 服务名称</param>
-    /// <returns><see cref="TService"/></returns>
+    /// <returns></returns>
     TService GetService<ILifetime>(string serviceName) where ILifetime : IDependency;
 
     ///// <summary>
@@ -49,6 +49,6 @@ public interface INamedServiceProvider<TService> where TService : class
     /// </summary>
     /// <typeparam name="ILifetime">服务生存周期接口，<see cref="ITransientDependency"/>，<see cref="IScopedDependency"/>，<see cref="IScopedDependency"/></typeparam>
     /// <param name="serviceName"><see cref="string"/> 服务名称</param>
-    /// <returns><see cref="TService"/></returns>
+    /// <returns></returns>
     TService GetRequiredService<ILifetime>(string serviceName) where ILifetime : IDependency;
 }

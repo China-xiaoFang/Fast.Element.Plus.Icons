@@ -291,7 +291,7 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
     /// <param name="apiDescriptionSettings">接口描述配置</param>
     /// <param name="controllerApiDescriptionSettings">控制器接口描述配置</param>
     /// <param name="hasApiControllerAttribute"></param>
-    private void ConfigureActionRouteAttribute(ActionModel action, ApiDescriptionSettingsAttribute apiDescriptionSettings,
+    private static void ConfigureActionRouteAttribute(ActionModel action, ApiDescriptionSettingsAttribute apiDescriptionSettings,
         ApiDescriptionSettingsAttribute controllerApiDescriptionSettings, bool hasApiControllerAttribute)
     {
         foreach (var selectorModel in action.Selectors)
@@ -392,7 +392,7 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
     /// <param name="controller"></param>
     /// <param name="apiDescriptionSettings"></param>
     /// <returns></returns>
-    private string GenerateControllerRouteTemplate(ControllerModel controller,
+    private static string GenerateControllerRouteTemplate(ControllerModel controller,
         ApiDescriptionSettingsAttribute apiDescriptionSettings)
     {
         var selectorModel = controller.Selectors[0];
@@ -411,7 +411,7 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
     /// </summary>
     /// <param name="action">动作方法模型</param>
     /// <param name="hasApiControllerAttribute"></param>
-    private IList<string> GenerateParameterRouteTemplates(ActionModel action, bool hasApiControllerAttribute)
+    private static IList<string> GenerateParameterRouteTemplates(ActionModel action, bool hasApiControllerAttribute)
     {
         // 如果没有参数，则跳过
         if (action.Parameters.Count == 0)
@@ -458,9 +458,6 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
             // 判断是否可以为null
             var canBeNull = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>);
 
-            // 判断是否贴有路由约束特性
-            string constraint = default;
-
             var template = $"{parameterModel.ParameterName}{(canBeNull ? "?" : string.Empty)}";
 
             // 动作方法名之后
@@ -504,7 +501,7 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
     /// </summary>
     /// <param name="controllerApiDescriptionSettings"></param>
     /// <returns></returns>
-    private bool CheckIsForceWithDefaultRoute(ApiDescriptionSettingsAttribute controllerApiDescriptionSettings)
+    private static bool CheckIsForceWithDefaultRoute(ApiDescriptionSettingsAttribute controllerApiDescriptionSettings)
     {
         bool isForceWithRoutePrefix;
 
@@ -579,8 +576,8 @@ internal sealed class DynamicApiControllerApplicationModelConvention : IApplicat
             foreach (var temp in templates)
             {
                 // 处理带路由约束的路由参数模板 https://gitee.com/zuohuaijun/Admin.NET/issues/I736XJ
-                var t = !temp.Contains("?", StringComparison.CurrentCulture)
-                    ? (!temp.Contains(":", StringComparison.CurrentCulture) ? temp : temp[..temp.IndexOf(":")] + "}")
+                var t = !temp.Contains('?', StringComparison.CurrentCulture)
+                    ? (!temp.Contains(':', StringComparison.CurrentCulture) ? temp : temp[..temp.IndexOf(":")] + "}")
                     : temp[..temp.IndexOf("?")] + "}";
 
                 if (!paramTemplates.Contains(t, StringComparer.OrdinalIgnoreCase))

@@ -525,7 +525,7 @@
             </summary>
             <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
             <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <returns></returns>
         </member>
         <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetRequiredService``1(System.String)">
             <summary>
@@ -533,7 +533,7 @@
             </summary>
             <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
             <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <returns></returns>
         </member>
         <member name="T:Fast.DependencyInjection.NamedServiceProvider`1">
             <summary>
@@ -557,7 +557,7 @@
             </summary>
             <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
             <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <returns></returns>
         </member>
         <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetRequiredService``1(System.String)">
             <summary>
@@ -565,7 +565,7 @@
             </summary>
             <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
             <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns><see cref="!:TService"/></returns>
+            <returns></returns>
         </member>
     </members>
 </doc>

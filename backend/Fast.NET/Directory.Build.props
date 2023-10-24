@@ -50,8 +50,8 @@
 
 	<ItemGroup>
 		<!-- 将内部资源文件夹共享到每个类库的 InternalResources 文件夹下面 --> 
-		<Compile Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\**\*.cs" Pack="true" PackagePath="\" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" Exclude="*.md" />
-		<None Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\*.md" Pack="true" PackagePath="\" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" />
+		<Compile Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\**\*.cs" Pack="true" PackagePath="\InternalResources" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" />
+		<None Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\*.md" Pack="true" PackagePath="\InternalResources" Link="InternalResources\%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
 </Project>

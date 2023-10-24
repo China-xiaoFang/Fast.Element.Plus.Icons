@@ -131,20 +131,20 @@ public class BadPageResult : StatusCodeResult
         // 解析嵌入式文件流
         using var readStream = thisAssembly.GetManifestResourceStream(errorHtml);
 
-        if (readStream == null)
+        if (readStream != null)
         {
-            throw new NullReferenceException("The embedded resource file error.html could not be found");
+            var buffer = new byte[readStream.Length];
+            _ = readStream.Read(buffer, 0, buffer.Length);
+
+            // 读取内容并替换
+            var content = Encoding.UTF8.GetString(buffer);
+            content = content.Replace($"@{{{nameof(Title)}}}", Title).Replace($"@{{{nameof(Description)}}}", Description)
+                .Replace($"@{{{nameof(StatusCode)}}}", StatusCode.ToString()).Replace($"@{{{nameof(Code)}}}", Code)
+                .Replace($"@{{{nameof(CodeLang)}}}", CodeLang).Replace($"@{{{nameof(Base64Icon)}}}", Base64Icon);
+
+            return content;
         }
 
-        var buffer = new byte[readStream.Length];
-        _ = readStream.Read(buffer, 0, buffer.Length);
-
-        // 读取内容并替换
-        var content = Encoding.UTF8.GetString(buffer);
-        content = content.Replace($"@{{{nameof(Title)}}}", Title).Replace($"@{{{nameof(Description)}}}", Description)
-            .Replace($"@{{{nameof(StatusCode)}}}", StatusCode.ToString()).Replace($"@{{{nameof(Code)}}}", Code)
-            .Replace($"@{{{nameof(CodeLang)}}}", CodeLang).Replace($"@{{{nameof(Base64Icon)}}}", Base64Icon);
-
-        return content;
+        throw new NullReferenceException("The embedded resource file error.html could not be found");
     }
 }

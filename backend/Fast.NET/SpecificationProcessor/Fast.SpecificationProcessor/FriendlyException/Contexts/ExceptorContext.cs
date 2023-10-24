@@ -40,8 +40,6 @@ internal static class ExceptorContext
         var statusCode = StatusCodes.Status500InternalServerError;
         // 判断是否是验证异常
         var isValidationException = false;
-        // 判断是否友好异常
-        var isUserFriendlyException = false;
 
         Exception exception = default;
 
@@ -60,7 +58,6 @@ internal static class ExceptorContext
         // 判断是否是 用户友好异常
         if (exception is UserFriendlyException friendlyException)
         {
-            isUserFriendlyException = true;
             errorCode = friendlyException.ErrorCode;
             originErrorCode = friendlyException.OriginErrorCode;
             statusCode = friendlyException.StatusCode;

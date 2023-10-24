@@ -44,24 +44,24 @@ public static class RemoteRequestUtil
         }
     }
 
-    /// <summary>
-    /// 得到天气预报
-    /// </summary>
-    /// <param name="cityName"></param>
-    /// <returns></returns>
-    public static async Task<WeatherInfoEntity> GetWeatherInfo(string cityName = "长沙")
-    {
-        //var weatherOutPut = await $"http://wthrcdn.etouch.cn/weather_mini?city={cityName}".SetClient("weatherCdn").GetAsAsync<WeatherOutPut>();
-        //if (weatherOutPut.Status != 1000 || weatherOutPut.Desc != "OK")
-        //{
-        //    return new WeatherInfoOutPut {Success = false, Desc = weatherOutPut.Desc};
-        //}
+    ///// <summary>
+    ///// 得到天气预报
+    ///// </summary>
+    ///// <param name="cityName"></param>
+    ///// <returns></returns>
+    //public static async Task<WeatherInfoEntity> GetWeatherInfo(string cityName = "长沙")
+    //{
+    //    //var weatherOutPut = await $"http://wthrcdn.etouch.cn/weather_mini?city={cityName}".SetClient("weatherCdn").GetAsAsync<WeatherOutPut>();
+    //    //if (weatherOutPut.Status != 1000 || weatherOutPut.Desc != "OK")
+    //    //{
+    //    //    return new WeatherInfoOutPut {Success = false, Desc = weatherOutPut.Desc};
+    //    //}
 
-        //weatherOutPut.Data.Success = true;
+    //    //weatherOutPut.Data.Success = true;
 
-        //return weatherOutPut.Data;
-        throw new Exception("暂未实现！");
-    }
+    //    //return weatherOutPut.Data;
+    //    throw new Exception("暂未实现！");
+    //}
 }
 
 public class DaySentenceEntity

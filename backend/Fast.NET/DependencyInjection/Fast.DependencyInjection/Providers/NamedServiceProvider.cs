@@ -52,7 +52,7 @@ internal class NamedServiceProvider<TService> : INamedServiceProvider<TService> 
     /// </summary>
     /// <typeparam name="ILifetime">服务生存周期接口，<see cref="ITransientDependency"/>，<see cref="IScopedDependency"/>，<see cref="IScopedDependency"/></typeparam>
     /// <param name="serviceName"><see cref="string"/> 服务名称</param>
-    /// <returns><see cref="TService"/></returns>
+    /// <returns></returns>
     public TService GetService<ILifetime>(string serviceName) where ILifetime : IDependency
     {
         var resolveNamed = _serviceProvider.GetService<Func<string, ILifetime, object>>();
@@ -78,7 +78,7 @@ internal class NamedServiceProvider<TService> : INamedServiceProvider<TService> 
     /// </summary>
     /// <typeparam name="ILifetime">服务生存周期接口，<see cref="ITransientDependency"/>，<see cref="IScopedDependency"/>，<see cref="IScopedDependency"/></typeparam>
     /// <param name="serviceName"><see cref="string"/> 服务名称</param>
-    /// <returns><see cref="TService"/></returns>
+    /// <returns></returns>
     public TService GetRequiredService<ILifetime>(string serviceName) where ILifetime : IDependency
     {
         var resolveNamed = _serviceProvider.GetRequiredService<Func<string, ILifetime, object>>();
