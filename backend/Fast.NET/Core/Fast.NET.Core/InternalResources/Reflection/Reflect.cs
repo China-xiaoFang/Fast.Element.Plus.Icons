@@ -21,12 +21,14 @@ namespace Fast.NET;
 /// <summary>
 /// 内部反射静态类
 /// </summary>
+/// <exclude />
 internal static class Reflect
 {
     /// <summary>
     /// 获取入口程序集
     /// </summary>
     /// <returns></returns>
+    /// <exclude />
     internal static Assembly GetEntryAssembly()
     {
         return Assembly.GetEntryAssembly();
@@ -37,6 +39,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="assemblyName"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Assembly GetAssembly(string assemblyName)
     {
         // 加载程序集
@@ -48,6 +51,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Assembly LoadAssembly(string path)
     {
         if (!File.Exists(path))
@@ -60,6 +64,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="assembly"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Assembly LoadAssembly(MemoryStream assembly)
     {
         return Assembly.Load(assembly.ToArray());
@@ -71,6 +76,7 @@ internal static class Reflect
     /// <param name="assemblyName"></param>
     /// <param name="typeFullName"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Type GetType(string assemblyName, string typeFullName)
     {
         return GetAssembly(assemblyName).GetType(typeFullName);
@@ -82,6 +88,7 @@ internal static class Reflect
     /// <param name="assembly"></param>
     /// <param name="typeFullName"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Type GetType(Assembly assembly, string typeFullName)
     {
         return assembly.GetType(typeFullName);
@@ -93,6 +100,7 @@ internal static class Reflect
     /// <param name="assembly"></param>
     /// <param name="typeFullName"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Type GetType(MemoryStream assembly, string typeFullName)
     {
         return LoadAssembly(assembly).GetType(typeFullName);
@@ -103,6 +111,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="assembly"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static string GetAssemblyName(Assembly assembly)
     {
         return assembly.GetName().Name;
@@ -113,6 +122,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static string GetAssemblyName(Type type)
     {
         return GetAssemblyName(type.GetTypeInfo());
@@ -123,6 +133,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="typeInfo"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static string GetAssemblyName(TypeInfo typeInfo)
     {
         return GetAssemblyName(typeInfo.Assembly);
@@ -133,6 +144,7 @@ internal static class Reflect
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Type GetStringType(string str)
     {
         var typeDefinitions = str.Split(";");

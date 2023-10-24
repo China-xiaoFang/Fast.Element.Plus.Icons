@@ -31,7 +31,7 @@ public static class IServiceCollectionExtension
     /// 添加Gzip Brotli 压缩
     /// </summary>
     /// <param name="service"></param>
-    internal static void AddGzipBrotliCompression(this IServiceCollection service)
+    public static void AddGzipBrotliCompression(this IServiceCollection service)
     {
         Debugging.Info("Registering for the Gzip compression service......");
         service.Configure<BrotliCompressionProviderOptions>(options => { options.Level = CompressionLevel.Optimal; });

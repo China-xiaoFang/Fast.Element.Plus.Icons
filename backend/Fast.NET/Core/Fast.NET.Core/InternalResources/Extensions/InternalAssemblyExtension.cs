@@ -20,6 +20,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="Assembly"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalAssemblyExtension
 {
     /// <summary>
@@ -27,6 +28,7 @@ internal static class InternalAssemblyExtension
     /// </summary>
     /// <param name="assembly"><see cref="Assembly"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string GetAssemblyName(this Assembly assembly)
     {
         return assembly.GetName().Name;

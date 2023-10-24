@@ -46,17 +46,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Fast.NET\Cache\Fast.Cache\Fast.Cache.csproj" />
     <ProjectReference Include="..\..\Fast.NET\Core\Fast.NET.Core\Fast.NET.Core.csproj" />
     <ProjectReference Include="..\..\Fast.NET\CorsAccessor\Fast.CorsAccessor\Fast.CorsAccessor.csproj" />
-    <ProjectReference Include="..\..\Fast.NET\DataValidation\Fast.DataValidation\Fast.DataValidation.csproj" />
-    <ProjectReference Include="..\..\Fast.NET\DynamicApplication\Fast.DynamicApplication\Fast.DynamicApplication.csproj" />
+    <ProjectReference Include="..\..\Fast.NET\DependencyInjection\Fast.DependencyInjection\Fast.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Fast.NET\EventBus\Fast.EventBus\Fast.EventBus.csproj" />
-    <ProjectReference Include="..\..\Fast.NET\Exception\Fast.Exception\Fast.Exception.csproj" />
+    <ProjectReference Include="..\..\Fast.NET\IaaS\Fast.IaaS\Fast.IaaS.csproj" />
     <ProjectReference Include="..\..\Fast.NET\Logging\Fast.Logging\Fast.Logging.csproj" />
     <ProjectReference Include="..\..\Fast.NET\Mapster\Fast.Mapster\Fast.Mapster.csproj" />
     <ProjectReference Include="..\..\Fast.NET\Serialization\Fast.Serialization\Fast.Serialization.csproj" />
-    <ProjectReference Include="..\..\Fast.NET\SpecificationDocument\Fast.SpecificationDocument\Fast.SpecificationDocument.csproj" />
-    <ProjectReference Include="..\..\Fast.NET\UnifyResult\Fast.UnifyResult\Fast.UnifyResult.csproj" />
+    <ProjectReference Include="..\..\Fast.NET\SpecificationProcessor\Fast.SpecificationProcessor\Fast.SpecificationProcessor.csproj" />
   </ItemGroup>
 
 </Project>

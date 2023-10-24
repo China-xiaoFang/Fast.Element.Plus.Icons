@@ -21,6 +21,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="string"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalStringExtension
 {
     /// <summary>
@@ -28,6 +29,7 @@ internal static class InternalStringExtension
     /// </summary>
     /// <param name="str"><see cref="string"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string FirstCharToUpper(this string str)
     {
         // 空检查
@@ -50,6 +52,7 @@ internal static class InternalStringExtension
     /// </summary>
     /// <param name="str"><see cref="string"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string FirstCharToLower(this string str)
     {
         // 空检查
@@ -72,6 +75,7 @@ internal static class InternalStringExtension
     /// </summary>
     /// <param name="str"><see cref="string"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string[] SplitCamelCase(this string str)
     {
         if (str == null)

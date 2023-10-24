@@ -19,6 +19,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="Convert"/> 内部转换拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalConvertExtension
 {
     /// <summary>
@@ -26,6 +27,7 @@ internal static class InternalConvertExtension
     /// </summary>
     /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
     /// <returns><see cref="DateTime"/></returns>
+    /// <exclude />
     internal static DateTime ParseToDateTime(this DateTimeOffset dateTime)
     {
         if (dateTime.Offset.Equals(TimeSpan.Zero))
@@ -46,6 +48,7 @@ internal static class InternalConvertExtension
     /// </summary>
     /// <param name="dateTime"><see cref="DateTimeOffset"/></param>
     /// <returns><see cref="DateTime"/></returns>
+    /// <exclude />
     internal static DateTime? ParseToDateTime(this DateTimeOffset? dateTime)
     {
         return dateTime?.ParseToDateTime();

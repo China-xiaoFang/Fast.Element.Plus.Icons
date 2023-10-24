@@ -463,8 +463,9 @@ internal static class SpecificationDocumentBuilder
             {
                 var xmlDoc = XDocument.Load(assemblyXmlPath);
 
-                // 查找所有 member[name] 节点，且不包含 <inheritdoc /> 节点的注释
-                var memberNotInheritdocElementList = xmlDoc.XPathSelectElements("/doc/members/member[@name and not(inheritdoc)]");
+                // 查找所有 member[name] 节点，且不包含 <inheritdoc /> 和 <exclude /> 节点的注释
+                var memberNotInheritdocElementList =
+                    xmlDoc.XPathSelectElements("/doc/members/member[@name and not(inheritdoc) and not(exclude)]");
 
                 foreach (var memberElement in memberNotInheritdocElementList)
                 {

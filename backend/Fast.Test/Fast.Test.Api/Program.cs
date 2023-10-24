@@ -1,31 +1,55 @@
 using Fast.CorsAccessor.Extensions;
-using Fast.DataValidation.Extensions;
-using Fast.DynamicApplication.Extensions;
-using Fast.Exception.Extensions;
+using Fast.DependencyInjection.Extensions;
 using Fast.Logging.Extensions;
+using Fast.Mapster.Extensions;
 using Fast.NET.Core.Extensions;
-using Fast.SpecificationDocument.Extensions;
+using Fast.Serialization.Extensions;
+using Fast.SpecificationProcessor.DataValidation.Extensions;
+using Fast.SpecificationProcessor.DynamicApplication.Extensions;
+using Fast.SpecificationProcessor.FriendlyException.Extensions;
+using Fast.SpecificationProcessor.SpecificationDocument.Extensions;
+using Fast.SpecificationProcessor.UnifyResult.Extensions;
 using Fast.Test.Api;
-using Fast.UnifyResult.Extensions;
 
 var builder = WebApplication.CreateBuilder(args).Initialize();
 
 // Customize the console log output template.
 builder.Logging.AddConsoleFormatter(options => { options.DateFormat = "yyyy-MM-dd HH:mm:ss"; });
 
-builder.Services.AddLogging();
+// 日志
+builder.AddLogging();
+
+// 跨域配置
+builder.Services.AddCorsAccessor(builder.Configuration);
+
+// GZIP 压缩
+builder.Services.AddGzipBrotliCompression();
+
+// JSON 序列化配置
+builder.Services.AddJsonOptions();
+
+// 注册全局依赖注入
+builder.Services.AddDependencyInjection();
+
+// 添加对象映射
+builder.Services.AddObjectMapper();
 
 builder.Services.AddControllers();
 
+// 动态 API
 builder.Services.AddDynamicApiControllers();
 
+// 数据验证
 builder.Services.AddDataValidation();
 
+// 友好异常
 builder.Services.AddFriendlyException();
 
+// 规范返回
 builder.Services.AddUnifyResult<RESTfulResultProvider>();
 
-builder.Services.AddSpecificationDocuments();
+// 文档
+builder.AddSpecificationDocuments();
 
 //builder.Services.AddSqlSugar();
 
@@ -51,14 +75,21 @@ var app = builder.Build();
 // Mandatory Https.
 app.UseHttpsRedirection();
 
+// 日志中间件
+app.UseLogging();
+
+// 跨域中间件
+app.UseCorsAccessor();
+
+// 依赖注入中间件
+app.UseDependencyInjection();
+
 // Enable compression.
 //app.UseResponseCompression();
 
 // Add the status code interception middleware.
 app.UseUnifyResultStatusCodes();
 
-// Add cross-domain middleware.
-app.UseCorsAccessor();
 
 app.UseStaticFiles();
 

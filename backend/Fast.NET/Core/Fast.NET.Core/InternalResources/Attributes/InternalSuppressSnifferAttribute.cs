@@ -20,6 +20,7 @@ namespace Fast.NET;
 /// <see cref="InternalSuppressSnifferAttribute"/> 内部不被扫描和发现的特性
 /// </summary>
 /// <remarks>用于程序集扫描类型或方法时候</remarks>
+/// <exclude />
 [InternalSuppressSniffer,
  AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct |
                 AttributeTargets.Interface)]

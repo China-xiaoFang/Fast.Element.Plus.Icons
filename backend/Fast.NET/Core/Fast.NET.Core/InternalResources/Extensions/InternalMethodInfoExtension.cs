@@ -21,6 +21,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="MethodInfo"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalMethodInfoExtension
 {
     /// <summary>
@@ -28,6 +29,7 @@ internal static class InternalMethodInfoExtension
     /// </summary>
     /// <param name="methodInfo"><see cref="MethodInfo"/></param>
     /// <returns><see cref="bool"/></returns>
+    /// <exclude />
     internal static bool IsAsync(this MethodInfo methodInfo)
     {
         return methodInfo.GetCustomAttribute<AsyncMethodBuilderAttribute>() != null ||
@@ -39,6 +41,7 @@ internal static class InternalMethodInfoExtension
     /// </summary>
     /// <param name="methodInfo"><see cref="MethodInfo"/></param>
     /// <returns><see cref="Type"/></returns>
+    /// <exclude />
     internal static Type GetRealReturnType(this MethodInfo methodInfo)
     {
         // 判断是否是异步方法
@@ -56,6 +59,7 @@ internal static class InternalMethodInfoExtension
     /// <param name="methodInfo"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static TAttribute GetFoundAttribute<TAttribute>(this MethodInfo methodInfo, bool inherit)
         where TAttribute : Attribute
     {
@@ -92,6 +96,7 @@ internal static class InternalMethodInfoExtension
     /// <param name="attributeType"></param>
     /// <param name="inherit"></param>
     /// <returns></returns>
+    /// <exclude />
     internal static Attribute GetFoundAttribute(this MethodInfo methodInfo, Type attributeType, bool inherit)
     {
         // 获取方法所在类型

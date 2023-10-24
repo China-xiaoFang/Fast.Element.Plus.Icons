@@ -9,46 +9,55 @@
             <see cref="T:Fast.NET.InternalSuppressSnifferAttribute"/> 内部不被扫描和发现的特性
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalConstant">
             <summary>
             <see cref="T:Fast.NET.InternalConstant"/> 内部常用常量
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.InternalConstant.DefaultTime">
             <summary>
             默认DateTime
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.InternalConstant.TimeStamp">
             <summary>
             时间戳
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.InternalConstant.SqlServerMinTime">
             <summary>
             Sql Server 最小时间
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.InternalConstant.SqlServerMaxTime">
             <summary>
             Sql Server 最大时间
             </summary>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalPenetrates">
             <summary>
             <see cref="T:Fast.NET.InternalPenetrates"/> 内部常量，公共方法配置类
             </summary>
+            <exclude />
         </member>
         <member name="F:Fast.NET.InternalPenetrates.Assemblies">
             <summary>
             应用有效程序集
             </summary>
+            <exclude />
         </member>
         <member name="F:Fast.NET.InternalPenetrates.EffectiveTypes">
             <summary>
             有效程序集类型
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalPenetrates.CatchOrDefault``1(System.Func{``0},``0)">
             <summary>
@@ -58,12 +67,14 @@
             <param name="action">获取对象委托</param>
             <param name="defaultValue">默认值</param>
             <returns>T</returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalPenetrates.GetThreadId">
             <summary>
             获取当前线程 Id
             </summary>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalPenetrates.GetExecutionTime(System.Action)">
             <summary>
@@ -71,11 +82,13 @@
             </summary>
             <param name="action">委托</param>
             <returns><see cref="T:System.Int64"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalAssemblyExtension">
             <summary>
             <see cref="T:System.Reflection.Assembly"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalAssemblyExtension.GetAssemblyName(System.Reflection.Assembly)">
             <summary>
@@ -83,11 +96,13 @@
             </summary>
             <param name="assembly"><see cref="T:System.Reflection.Assembly"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalConvertExtension">
             <summary>
             <see cref="T:System.Convert"/> 内部转换拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.DateTimeOffset)">
             <summary>
@@ -95,6 +110,7 @@
             </summary>
             <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
             <returns><see cref="T:System.DateTime"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalConvertExtension.ParseToDateTime(System.Nullable{System.DateTimeOffset})">
             <summary>
@@ -102,11 +118,13 @@
             </summary>
             <param name="dateTime"><see cref="T:System.DateTimeOffset"/></param>
             <returns><see cref="T:System.DateTime"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalHttpContextExtension">
             <summary>
             <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.IsWebSocketRequest(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -114,6 +132,7 @@
             </summary>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata``1(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -122,6 +141,7 @@
             <typeparam name="TAttribute"></typeparam>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.EndpointMetadataCollection,System.Type)">
             <summary>
@@ -130,6 +150,7 @@
             <param name="metadata"><see cref="T:Microsoft.AspNetCore.Http.EndpointMetadataCollection"/></param>
             <param name="attributeType"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Object"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.GetMetadata(Microsoft.AspNetCore.Http.HttpContext,System.Type)">
             <summary>
@@ -138,11 +159,13 @@
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="attributeType"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Object"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
             <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.IsAsync(System.Reflection.MethodInfo)">
             <summary>
@@ -150,6 +173,7 @@
             </summary>
             <param name="methodInfo"><see cref="T:System.Reflection.MethodInfo"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.GetRealReturnType(System.Reflection.MethodInfo)">
             <summary>
@@ -157,6 +181,7 @@
             </summary>
             <param name="methodInfo"><see cref="T:System.Reflection.MethodInfo"/></param>
             <returns><see cref="T:System.Type"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute``1(System.Reflection.MethodInfo,System.Boolean)">
             <summary>
@@ -166,6 +191,7 @@
             <param name="methodInfo"></param>
             <param name="inherit"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalMethodInfoExtension.GetFoundAttribute(System.Reflection.MethodInfo,System.Type,System.Boolean)">
             <summary>
@@ -175,11 +201,13 @@
             <param name="attributeType"></param>
             <param name="inherit"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalObjectExtension">
             <summary>
             <see cref="T:System.Object"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalObjectExtension.ChangeType(System.Object,System.Type)">
             <summary>
@@ -188,11 +216,13 @@
             <param name="obj">待转换的对象</param>
             <param name="type">目标类型</param>
             <returns>转换后的对象</returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalStringExtension">
             <summary>
             <see cref="T:System.String"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalStringExtension.FirstCharToUpper(System.String)">
             <summary>
@@ -200,6 +230,7 @@
             </summary>
             <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalStringExtension.FirstCharToLower(System.String)">
             <summary>
@@ -207,6 +238,7 @@
             </summary>
             <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalStringExtension.SplitCamelCase(System.String)">
             <summary>
@@ -214,11 +246,13 @@
             </summary>
             <param name="str"><see cref="T:System.String"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalTypeExtension">
             <summary>
             <see cref="T:System.Type"/> 内部拓展类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalTypeExtension.HasImplementedRawGeneric(System.Type,System.Type)">
             <summary>
@@ -227,6 +261,7 @@
             <param name="type"><see cref="T:System.Type"/> 类型</param>
             <param name="generic"><see cref="T:System.Type"/>泛型类型</param>
             <returns><see cref="T:System.Boolean"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalTypeExtension.GetAssemblyName(System.Type)">
             <summary>
@@ -234,6 +269,7 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalTypeExtension.GetAssemblyName(System.Reflection.TypeInfo)">
             <summary>
@@ -241,6 +277,7 @@
             </summary>
             <param name="typeInfo"><see cref="T:System.Reflection.TypeInfo"/></param>
             <returns><see cref="T:System.String"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalTypeExtension.IsRichPrimitive(System.Type)">
             <summary>
@@ -248,6 +285,7 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalTypeExtension.IsValueTuple(System.Type)">
             <summary>
@@ -255,17 +293,20 @@
             </summary>
             <param name="type"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.Reflect">
             <summary>
             内部反射静态类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetEntryAssembly">
             <summary>
             获取入口程序集
             </summary>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetAssembly(System.String)">
             <summary>
@@ -273,6 +314,7 @@
             </summary>
             <param name="assemblyName"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.LoadAssembly(System.String)">
             <summary>
@@ -280,6 +322,7 @@
             </summary>
             <param name="path"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.LoadAssembly(System.IO.MemoryStream)">
             <summary>
@@ -287,6 +330,7 @@
             </summary>
             <param name="assembly"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetType(System.String,System.String)">
             <summary>
@@ -295,6 +339,7 @@
             <param name="assemblyName"></param>
             <param name="typeFullName"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetType(System.Reflection.Assembly,System.String)">
             <summary>
@@ -303,6 +348,7 @@
             <param name="assembly"></param>
             <param name="typeFullName"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetType(System.IO.MemoryStream,System.String)">
             <summary>
@@ -311,6 +357,7 @@
             <param name="assembly"></param>
             <param name="typeFullName"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Reflection.Assembly)">
             <summary>
@@ -318,6 +365,7 @@
             </summary>
             <param name="assembly"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Type)">
             <summary>
@@ -325,6 +373,7 @@
             </summary>
             <param name="type"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetAssemblyName(System.Reflection.TypeInfo)">
             <summary>
@@ -332,6 +381,7 @@
             </summary>
             <param name="typeInfo"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.Reflect.GetStringType(System.String)">
             <summary>
@@ -339,11 +389,13 @@
             </summary>
             <param name="str"></param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalAssemblyUtil">
             <summary>
             <see cref="T:System.Reflection.Assembly"/> 工具类
             </summary>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalAssemblyUtil.GetEntryAssembly(System.Boolean)">
             <summary>
@@ -351,6 +403,7 @@
             </summary>
             <param name="referenced"><see cref="T:System.Boolean"/> 是否包含引用的，默认为 true</param>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalAssemblyUtil.GetAssemblyTypes(System.Reflection.Assembly,System.Func{System.Type,System.Boolean})">
             <summary>
@@ -360,6 +413,7 @@
             <param name="assembly"><see cref="T:System.Reflection.Assembly"/> 程序集</param>
             <param name="typeFilter"><see cref="T:System.Func`1"/> 类型过滤条件</param>
             <returns></returns>
+            <exclude />
         </member>
         <member name="T:Fast.Logging.App.InternalApp">
             <summary>

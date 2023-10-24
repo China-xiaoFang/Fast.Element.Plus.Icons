@@ -305,23 +305,11 @@ public static class App
             // 注册 Startup 过滤器
             services.AddTransient<IStartupFilter, StartupFilter>();
 
-            // 跨域配置
-            services.AddCorsAccessor(hostContext.Configuration);
-
             // 注册 HttpContextAccessor 服务
             services.AddHttpContextAccessor();
 
             // 注册 内存缓存
             services.AddMemoryCache();
-
-            // JSON 序列化配置
-            services.AddJsonOptions();
-
-            // 注册全局依赖注入
-            services.AddInnerDependencyInjection();
-
-            // 添加对象映射
-            services.AddObjectMapper();
 
             // 默认内置 GBK，Windows-1252, Shift-JIS, GB2312 编码支持
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);

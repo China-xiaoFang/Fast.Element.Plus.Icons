@@ -21,6 +21,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="Assembly"/> 工具类
 /// </summary>
+/// <exclude />
 internal static class InternalAssemblyUtil
 {
     /// <summary>
@@ -28,6 +29,7 @@ internal static class InternalAssemblyUtil
     /// </summary>
     /// <param name="referenced"><see cref="bool"/> 是否包含引用的，默认为 true</param>
     /// <returns><see cref="IEnumerable{Assembly}"/></returns>
+    /// <exclude />
     internal static IEnumerable<Assembly> GetEntryAssembly(bool referenced = true)
     {
         // 获取入口程序集
@@ -58,6 +60,7 @@ internal static class InternalAssemblyUtil
     /// <param name="assembly"><see cref="Assembly"/> 程序集</param>
     /// <param name="typeFilter"><see cref="Func{TResult}"/> 类型过滤条件</param>
     /// <returns></returns>
+    /// <exclude />
     internal static IEnumerable<Type> GetAssemblyTypes(Assembly assembly, Func<Type, bool> typeFilter = null)
     {
         var types = Array.Empty<Type>();

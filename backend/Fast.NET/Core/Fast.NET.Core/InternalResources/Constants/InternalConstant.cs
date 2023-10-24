@@ -19,26 +19,31 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="InternalConstant"/> 内部常用常量
 /// </summary>
+/// <exclude />
 internal class InternalConstant
 {
     /// <summary>
     /// 默认DateTime
     /// </summary>
+    /// <exclude />
     public static DateTime DefaultTime => TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
 
     /// <summary>
     /// 时间戳
     /// </summary>
+    /// <exclude />
     //public static long TimeStamp => Convert.ToInt64((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds);
     public static long TimeStamp => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
     /// <summary>
     /// Sql Server 最小时间
     /// </summary>
+    /// <exclude />
     public static DateTime SqlServerMinTime => new(1753, 01, 01, 00, 00, 00);
 
     /// <summary>
     /// Sql Server 最大时间
     /// </summary>
+    /// <exclude />
     public static DateTime SqlServerMaxTime => new(9999, 12, 31, 23, 59, 59);
 }

@@ -1,4 +1,4 @@
-﻿using Fast.DynamicApplication;
+﻿using Fast.SpecificationProcessor.DynamicApplication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Test.Api.Application;

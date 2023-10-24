@@ -21,16 +21,19 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="InternalPenetrates"/> 内部常量，公共方法配置类
 /// </summary>
+/// <exclude />
 internal static class InternalPenetrates
 {
     /// <summary>
     /// 应用有效程序集
     /// </summary>
+    /// <exclude />
     internal static readonly IEnumerable<Assembly> Assemblies;
 
     /// <summary>
     /// 有效程序集类型
     /// </summary>
+    /// <exclude />
     internal static readonly IEnumerable<Type> EffectiveTypes;
 
     static InternalPenetrates()
@@ -54,6 +57,7 @@ internal static class InternalPenetrates
     /// <param name="action">获取对象委托</param>
     /// <param name="defaultValue">默认值</param>
     /// <returns>T</returns>
+    /// <exclude />
     internal static T CatchOrDefault<T>(Func<T> action, T defaultValue = null) where T : class
     {
         try
@@ -70,6 +74,7 @@ internal static class InternalPenetrates
     /// 获取当前线程 Id
     /// </summary>
     /// <returns></returns>
+    /// <exclude />
     internal static int GetThreadId()
     {
         return Environment.CurrentManagedThreadId;
@@ -80,6 +85,7 @@ internal static class InternalPenetrates
     /// </summary>
     /// <param name="action">委托</param>
     /// <returns><see cref="long"/></returns>
+    /// <exclude />
     internal static long GetExecutionTime(Action action)
     {
         // 空检查

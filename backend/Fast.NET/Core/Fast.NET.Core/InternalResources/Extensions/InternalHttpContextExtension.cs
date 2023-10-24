@@ -20,6 +20,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="HttpContext"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalHttpContextExtension
 {
     /// <summary>
@@ -27,6 +28,7 @@ internal static class InternalHttpContextExtension
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <returns><see cref="bool"/></returns>
+    /// <exclude />
     internal static bool IsWebSocketRequest(this HttpContext httpContext)
     {
         return httpContext.WebSockets.IsWebSocketRequest || httpContext.Request.Path == "/ws";
@@ -38,6 +40,7 @@ internal static class InternalHttpContextExtension
     /// <typeparam name="TAttribute"></typeparam>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <returns></returns>
+    /// <exclude />
     internal static TAttribute GetMetadata<TAttribute>(this HttpContext httpContext) where TAttribute : class
     {
         return httpContext.GetEndpoint()?.Metadata?.GetMetadata<TAttribute>();
@@ -49,6 +52,7 @@ internal static class InternalHttpContextExtension
     /// <param name="metadata"><see cref="EndpointMetadataCollection"/></param>
     /// <param name="attributeType"><see cref="Type"/></param>
     /// <returns><see cref="object"/></returns>
+    /// <exclude />
     internal static object GetMetadata(this EndpointMetadataCollection metadata, Type attributeType)
     {
         return metadata?.GetType()?.GetMethod(nameof(EndpointMetadataCollection.GetMetadata))?.MakeGenericMethod(attributeType)
@@ -61,6 +65,7 @@ internal static class InternalHttpContextExtension
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="attributeType"><see cref="Type"/></param>
     /// <returns><see cref="object"/></returns>
+    /// <exclude />
     internal static object GetMetadata(this HttpContext httpContext, Type attributeType)
     {
         return httpContext.GetEndpoint()?.Metadata.GetMetadata(attributeType);

@@ -11,11 +11,11 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    public ILogger<WeatherForecastController> Logger1 { get; }
 
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
-        _logger = logger;
+        Logger1 = logger;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]

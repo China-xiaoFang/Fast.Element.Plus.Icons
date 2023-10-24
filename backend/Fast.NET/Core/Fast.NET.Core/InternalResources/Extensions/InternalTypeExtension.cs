@@ -21,6 +21,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="Type"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalTypeExtension
 {
     /// <summary>
@@ -29,6 +30,7 @@ internal static class InternalTypeExtension
     /// <param name="type"><see cref="Type"/> 类型</param>
     /// <param name="generic"><see cref="Type"/>泛型类型</param>
     /// <returns><see cref="bool"/></returns>
+    /// <exclude />
     internal static bool HasImplementedRawGeneric(this Type type, Type generic)
     {
         // 检查接口类型
@@ -56,6 +58,7 @@ internal static class InternalTypeExtension
     /// </summary>
     /// <param name="type"><see cref="Type"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string GetAssemblyName(this Type type)
     {
         return type.GetTypeInfo().GetAssemblyName();
@@ -66,6 +69,7 @@ internal static class InternalTypeExtension
     /// </summary>
     /// <param name="typeInfo"><see cref="TypeInfo"/></param>
     /// <returns><see cref="string"/></returns>
+    /// <exclude />
     internal static string GetAssemblyName(this TypeInfo typeInfo)
     {
         return typeInfo.Assembly.GetAssemblyName();
@@ -76,6 +80,7 @@ internal static class InternalTypeExtension
     /// </summary>
     /// <param name="type"><see cref="Type"/></param>
     /// <returns><see cref="bool"/></returns>
+    /// <exclude />
     internal static bool IsRichPrimitive(this Type type)
     {
         // 处理元组类型
@@ -101,6 +106,7 @@ internal static class InternalTypeExtension
     /// </summary>
     /// <param name="type"><see cref="Type"/></param>
     /// <returns><see cref="bool"/></returns>
+    /// <exclude />
     internal static bool IsValueTuple(this Type type)
     {
         return type.Namespace == "System" && type.Name.Contains("ValueTuple`");

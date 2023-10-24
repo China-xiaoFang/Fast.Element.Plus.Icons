@@ -14,8 +14,6 @@
 
 using Fast.NET;
 using Fast.SpecificationProcessor.FriendlyException.Filters;
-using Fast.SpecificationProcessor.UnifyResult;
-using Fast.SpecificationProcessor.UnifyResult.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -46,12 +44,6 @@ public static class ExceptionIServiceCollectionExtension
     /// <returns><see cref="IServiceCollection"/></returns>
     public static IServiceCollection AddFriendlyException(this IServiceCollection services)
     {
-        if (services.All(a => a.ServiceType != typeof(IUnifyResultProvider)))
-        {
-            throw new InvalidOperationException(
-                $"`{nameof(AddFriendlyException)}` must be invoked after `{nameof(UnifyResultIServiceCollectionExtension.AddUnifyResult)}`.");
-        }
-
         services.Configure<MvcOptions>(options => { options.Filters.Add<FriendlyExceptionFilter>(); });
 
         return services;

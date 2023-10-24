@@ -20,6 +20,7 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="object"/> 内部拓展类
 /// </summary>
+/// <exclude />
 internal static class InternalObjectExtension
 {
     /// <summary>
@@ -28,6 +29,7 @@ internal static class InternalObjectExtension
     /// <param name="obj">待转换的对象</param>
     /// <param name="type">目标类型</param>
     /// <returns>转换后的对象</returns>
+    /// <exclude />
     internal static object ChangeType(this object obj, Type type)
     {
         if (type == null)
