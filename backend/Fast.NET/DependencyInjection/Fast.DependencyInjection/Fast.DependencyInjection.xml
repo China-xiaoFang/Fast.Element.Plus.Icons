@@ -50,16 +50,14 @@
             有效程序集类型
             </summary>
         </member>
-        <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
+        <member name="M:Fast.NET.InternalPenetrates.CatchOrDefault``1(System.Func{``0},``0)">
             <summary>
-            ApiController 缓存
+            处理获取对象异常问题
             </summary>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.IDynamicApplicationType">
-            <summary>
-            类型 IDynamicApplication
-            <remarks>如果没有引用 Fast.DynamicApplication 则为空</remarks>
-            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="action">获取对象委托</param>
+            <param name="defaultValue">默认值</param>
+            <returns>T</returns>
         </member>
         <member name="M:Fast.NET.InternalPenetrates.GetThreadId">
             <summary>
@@ -73,13 +71,6 @@
             </summary>
             <param name="action">委托</param>
             <returns><see cref="T:System.Int64"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
-            <summary>
-            是否是 Api 控制器
-            </summary>
-            <param name="type"><see cref="T:System.Type"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.NET.InternalAssemblyExtension">
             <summary>
@@ -185,10 +176,30 @@
             <param name="inherit"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.NET.InternalObjectExtension">
+            <summary>
+            <see cref="T:System.Object"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalObjectExtension.ChangeType(System.Object,System.Type)">
+            <summary>
+            将一个对象转换为指定类型
+            </summary>
+            <param name="obj">待转换的对象</param>
+            <param name="type">目标类型</param>
+            <returns>转换后的对象</returns>
+        </member>
         <member name="T:Fast.NET.InternalStringExtension">
             <summary>
             <see cref="T:System.String"/> 内部拓展类
             </summary>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.FirstCharToUpper(System.String)">
+            <summary>
+            字符串首字母大写
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
         </member>
         <member name="M:Fast.NET.InternalStringExtension.FirstCharToLower(System.String)">
             <summary>
@@ -416,12 +427,11 @@
             <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 依赖注入中间件拓展类
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIApplicationBuilderExtension.UseDependencyInjection(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder})">
+        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIApplicationBuilderExtension.UseDependencyInjection(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
-            添加跨域中间件
+            添加依赖注入中间件
             </summary>
             <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
-            <param name="corsPolicyBuilderHandler"></param>
             <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
         </member>
         <member name="T:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension">

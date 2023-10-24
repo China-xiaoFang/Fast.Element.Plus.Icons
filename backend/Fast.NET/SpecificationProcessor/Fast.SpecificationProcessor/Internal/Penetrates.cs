@@ -13,10 +13,10 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
-using Fast.DynamicApplication;
+using Fast.SpecificationProcessor.DynamicApplication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fast.SpecificationApplication.Internal;
+namespace Fast.SpecificationProcessor.Internal;
 
 /// <summary>
 /// <see cref="Penetrates"/> 常量，公共方法配置类

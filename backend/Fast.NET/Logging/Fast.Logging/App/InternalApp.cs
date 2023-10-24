@@ -12,13 +12,12 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Diagnostics;
 using Fast.NET;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.Logging.App;
 
@@ -61,7 +60,8 @@ internal static class InternalApp
     {
         return Activity.Current?.Id ?? (RootServices == null
             ? default
-            : InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)?.TraceIdentifier);
+            : InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)
+                ?.TraceIdentifier);
     }
 
     /// <summary>
@@ -72,23 +72,23 @@ internal static class InternalApp
     internal static object GetRequiredService(Type serviceType)
     {
         // 第一选择，判断是否是单例注册且单例服务不为空，如果是直接返回根服务提供器
-        if (InternalApp.RootServices != null && InternalApp.InternalServices
+        if (RootServices != null && InternalServices
                 .Where(u => u.ServiceType == (serviceType.IsGenericType ? serviceType.GetGenericTypeDefinition() : serviceType))
                 .Any(u => u.Lifetime == ServiceLifetime.Singleton))
         {
-            return InternalApp.RootServices.GetRequiredService(serviceType);
+            return RootServices.GetRequiredService(serviceType);
         }
         // 第二选择是获取 HttpContext 对象的 RequestServices
 
-        if (InternalApp.HttpContext != null)
+        if (HttpContext != null)
         {
-            return InternalApp.HttpContext.RequestServices.GetRequiredService(serviceType);
+            return HttpContext.RequestServices.GetRequiredService(serviceType);
         }
         // 第三选择，创建新的作用域并返回服务提供器
 
-        if (InternalApp.RootServices != null)
+        if (RootServices != null)
         {
-            var scoped = InternalApp.RootServices.CreateScope();
+            var scoped = RootServices.CreateScope();
 
             var result = scoped.ServiceProvider.GetRequiredService(serviceType);
 
@@ -99,7 +99,7 @@ internal static class InternalApp
 
         {
             // 第四选择，构建新的服务对象（性能最差）
-            var serviceProvider = InternalApp.InternalServices.BuildServiceProvider();
+            var serviceProvider = InternalServices.BuildServiceProvider();
 
             var result = serviceProvider.GetRequiredService(serviceType);
 
@@ -119,23 +119,23 @@ internal static class InternalApp
         var serviceType = typeof(TService);
 
         // 第一选择，判断是否是单例注册且单例服务不为空，如果是直接返回根服务提供器
-        if (InternalApp.RootServices != null && InternalApp.InternalServices
+        if (RootServices != null && InternalServices
                 .Where(u => u.ServiceType == (serviceType.IsGenericType ? serviceType.GetGenericTypeDefinition() : serviceType))
                 .Any(u => u.Lifetime == ServiceLifetime.Singleton))
         {
-            return InternalApp.RootServices.GetRequiredService<TService>();
+            return RootServices.GetRequiredService<TService>();
         }
         // 第二选择是获取 HttpContext 对象的 RequestServices
 
-        if (InternalApp.HttpContext != null)
+        if (HttpContext != null)
         {
-            return InternalApp.HttpContext.RequestServices.GetRequiredService<TService>();
+            return HttpContext.RequestServices.GetRequiredService<TService>();
         }
         // 第三选择，创建新的作用域并返回服务提供器
 
-        if (InternalApp.RootServices != null)
+        if (RootServices != null)
         {
-            var scoped = InternalApp.RootServices.CreateScope();
+            var scoped = RootServices.CreateScope();
 
             var result = scoped.ServiceProvider.GetRequiredService<TService>();
 
@@ -146,7 +146,7 @@ internal static class InternalApp
 
         {
             // 第四选择，构建新的服务对象（性能最差）
-            var serviceProvider = InternalApp.InternalServices.BuildServiceProvider();
+            var serviceProvider = InternalServices.BuildServiceProvider();
 
             var result = serviceProvider.GetRequiredService<TService>();
 

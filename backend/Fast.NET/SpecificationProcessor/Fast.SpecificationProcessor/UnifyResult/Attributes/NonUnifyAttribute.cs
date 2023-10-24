@@ -14,7 +14,8 @@
 
 using Fast.NET;
 
-namespace Fast.UnifyProcessor.Attributes;
+// ReSharper disable once CheckNamespace
+namespace Fast.SpecificationProcessor.UnifyResult;
 
 /// <summary>
 /// <see cref="NonUnifyAttribute"/> 禁止规范化处理

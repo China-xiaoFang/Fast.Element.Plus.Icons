@@ -14,11 +14,12 @@
 
 using System.Reflection;
 using Fast.NET;
-using Fast.UnifyProcessor.Contexts;
+using Fast.SpecificationProcessor.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fast.UnifyProcessor.Attributes;
+// ReSharper disable once CheckNamespace
+namespace Fast.SpecificationProcessor.UnifyResult;
 
 /// <summary>
 /// <see cref="UnifyResultAttribute"/> 规范化结果配置

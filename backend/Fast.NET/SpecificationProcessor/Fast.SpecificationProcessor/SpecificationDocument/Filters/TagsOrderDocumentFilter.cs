@@ -13,12 +13,12 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Collections.Concurrent;
-using Fast.SpecificationDocument.Builders;
+using Fast.SpecificationProcessor.SpecificationDocument.Builders;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fast.SpecificationDocument.Filters;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Filters;
 
 /// <summary>
 /// 标签文档排序/注释拦截器

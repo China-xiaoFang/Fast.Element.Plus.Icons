@@ -15,11 +15,11 @@
 using System.Collections;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using Fast.NET;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Fast.UnifyProcessor.Contexts;
+namespace Fast.SpecificationProcessor.DataValidation.Contexts;
+
 /// <summary>
 /// <see cref="ValidatorContext"/> 验证上下文
 /// </summary>
@@ -59,9 +59,9 @@ internal static class ValidatorContext
             }
 
             message = JsonSerializer.Serialize(validationResults,
-                new JsonSerializerOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true });
-            firstErrorMessage = ((Dictionary<string, string[]>)validationResults).First().Value[0];
-            firstErrorProperty = ((Dictionary<string, string[]>)validationResults).First().Key;
+                new JsonSerializerOptions {Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true});
+            firstErrorMessage = ((Dictionary<string, string[]>) validationResults).First().Value[0];
+            firstErrorProperty = ((Dictionary<string, string[]>) validationResults).First().Key;
         }
         // 其他类型
         else

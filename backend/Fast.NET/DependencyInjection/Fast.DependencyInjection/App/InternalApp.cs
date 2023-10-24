@@ -13,10 +13,6 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
-using Fast.NET;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Fast.DependencyInjection.App;
 

@@ -17,12 +17,34 @@ using System.Text.RegularExpressions;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="string"/> 内部拓展类
 /// </summary>
-[InternalSuppressSniffer]
 internal static class InternalStringExtension
 {
+    /// <summary>
+    /// 字符串首字母大写
+    /// </summary>
+    /// <param name="str"><see cref="string"/></param>
+    /// <returns><see cref="string"/></returns>
+    internal static string FirstCharToUpper(this string str)
+    {
+        // 空检查
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            return str;
+        }
+
+        // 初始化字符串构建器
+        var stringBuilder = new StringBuilder(str);
+
+        // 设置字符串构建器首个字符为小写
+        stringBuilder[0] = char.ToUpper(stringBuilder[0]);
+
+        return stringBuilder.ToString();
+    }
+
     /// <summary>
     /// 字符串首字母小写
     /// </summary>
@@ -56,9 +78,9 @@ internal static class InternalStringExtension
             return Array.Empty<string>();
 
         if (string.IsNullOrWhiteSpace(str))
-            return new[] { str };
+            return new[] {str};
         if (str.Length == 1)
-            return new[] { str };
+            return new[] {str};
 
         return Regex.Split(str, @"(?=\p{Lu}\p{Ll})|(?<=\p{Ll})(?=\p{Lu})").Where(u => u.Length > 0).ToArray();
     }

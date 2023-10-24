@@ -12,13 +12,15 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.NET;
 using Microsoft.OpenApi.Models;
 
-namespace Fast.SpecificationDocument.Internal;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Internal;
 
 /// <summary>
 /// 规范化文档开放接口信息
 /// </summary>
+[InternalSuppressSniffer]
 public sealed class SpecificationOpenApiInfo : OpenApiInfo
 {
     /// <summary>

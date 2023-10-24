@@ -50,17 +50,6 @@
             有效程序集类型
             </summary>
         </member>
-        <member name="F:Fast.NET.InternalPenetrates.CacheIsApiController">
-            <summary>
-            ApiController 缓存
-            </summary>
-        </member>
-        <member name="F:Fast.NET.InternalPenetrates.IDynamicApplicationType">
-            <summary>
-            类型 IDynamicApplication
-            <remarks>如果没有引用 Fast.DynamicApplication 则为空</remarks>
-            </summary>
-        </member>
         <member name="M:Fast.NET.InternalPenetrates.CatchOrDefault``1(System.Func{``0},``0)">
             <summary>
             处理获取对象异常问题
@@ -82,13 +71,6 @@
             </summary>
             <param name="action">委托</param>
             <returns><see cref="T:System.Int64"/></returns>
-        </member>
-        <member name="M:Fast.NET.InternalPenetrates.IsApiController(System.Type)">
-            <summary>
-            是否是 Api 控制器
-            </summary>
-            <param name="type"><see cref="T:System.Type"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.NET.InternalAssemblyExtension">
             <summary>
@@ -194,10 +176,30 @@
             <param name="inherit"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.NET.InternalObjectExtension">
+            <summary>
+            <see cref="T:System.Object"/> 内部拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.NET.InternalObjectExtension.ChangeType(System.Object,System.Type)">
+            <summary>
+            将一个对象转换为指定类型
+            </summary>
+            <param name="obj">待转换的对象</param>
+            <param name="type">目标类型</param>
+            <returns>转换后的对象</returns>
+        </member>
         <member name="T:Fast.NET.InternalStringExtension">
             <summary>
             <see cref="T:System.String"/> 内部拓展类
             </summary>
+        </member>
+        <member name="M:Fast.NET.InternalStringExtension.FirstCharToUpper(System.String)">
+            <summary>
+            字符串首字母大写
+            </summary>
+            <param name="str"><see cref="T:System.String"/></param>
+            <returns><see cref="T:System.String"/></returns>
         </member>
         <member name="M:Fast.NET.InternalStringExtension.FirstCharToLower(System.String)">
             <summary>
@@ -767,7 +769,7 @@
         </member>
         <member name="T:Fast.EventBus.Extensions.EventBusIServiceCollectionExtension">
             <summary>
-            EventBus 模块服务拓展
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> EventBus 模块服务拓展
             </summary>
         </member>
         <member name="M:Fast.EventBus.Extensions.EventBusIServiceCollectionExtension.AddEventBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Fast.EventBus.Builders.EventBusOptionsBuilder})">

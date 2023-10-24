@@ -13,10 +13,10 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
-using Fast.DynamicApplication.Internal;
+using Fast.SpecificationProcessor.Internal;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace Fast.DynamicApplication.Providers;
+namespace Fast.SpecificationProcessor.DynamicApplication.Providers;
 
 /// <summary>
 /// 动态API引用特性提供器

@@ -12,27 +12,17 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
+using Microsoft.Extensions.Configuration;
 
-namespace Fast.SpecificationDocument.Attributes;
+namespace Fast.SpecificationProcessor.App;
 
 /// <summary>
-/// 配置规范化文档 OperationId 问题
+/// <see cref="InternalApp"/> 内部 App 上下文
 /// </summary>
-[InternalSuppressSniffer,AttributeUsage(AttributeTargets.Method)]
-public sealed class OperationIdAttribute : Attribute
+internal static class InternalApp
 {
     /// <summary>
-    /// 构造函数
+    /// 配置对象
     /// </summary>
-    /// <param name="operationId">自定义 OperationId，可用户生成可读的前端代码</param>
-    public OperationIdAttribute(string operationId)
-    {
-        OperationId = operationId;
-    }
-
-    /// <summary>
-    /// 自定义 OperationId
-    /// </summary>
-    public string OperationId { get; set; }
+    internal static IConfiguration Configuration;
 }

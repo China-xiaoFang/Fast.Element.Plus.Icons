@@ -15,7 +15,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fast.SpecificationDocument.Filters;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Filters;
 
 /// <summary>
 /// 修正 规范化文档 object schema，统一显示为 any

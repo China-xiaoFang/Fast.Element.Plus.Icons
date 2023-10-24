@@ -18,13 +18,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Fast.DynamicApplication;
-using Fast.IaaS.Extensions;
-using Fast.NET.Core;
-using Fast.SpecificationDocument.Attributes;
-using Fast.SpecificationDocument.Filters;
-using Fast.SpecificationDocument.Internal;
-using Fast.SpecificationDocument.Options;
+using Fast.NET;
+using Fast.SpecificationProcessor.App;
+using Fast.SpecificationProcessor.DynamicApplication;
+using Fast.SpecificationProcessor.Internal;
+using Fast.SpecificationProcessor.SpecificationDocument.Filters;
+using Fast.SpecificationProcessor.SpecificationDocument.Internal;
+using Fast.SpecificationProcessor.SpecificationDocument.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -36,7 +36,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Fast.SpecificationDocument.Builders;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Builders;
 
 /// <summary>
 /// 规范化文档构建器
@@ -74,7 +74,7 @@ internal static class SpecificationDocumentBuilder
     static SpecificationDocumentBuilder()
     {
         // 载入配置
-        _specificationDocumentSettings = App.Configuration.GetSection("SpecificationDocumentSettings")
+        _specificationDocumentSettings = InternalApp.Configuration.GetSection("SpecificationDocumentSettings")
             .Get<SpecificationDocumentSettingsOptions>();
 
         // 初始化常量
@@ -180,7 +180,7 @@ internal static class SpecificationDocumentBuilder
 
             // 处理外部定义
             var groupKey = "[openapi:{0}]";
-            if (App.Configuration.GetSection(string.Format(groupKey, group)).Exists())
+            if (InternalApp.Configuration.GetSection(string.Format(groupKey, group)).Exists())
             {
                 SetProperty<int>(group, nameof(SpecificationOpenApiInfo.Order), value => groupInfo.Order = value);
                 SetProperty<bool>(group, nameof(SpecificationOpenApiInfo.Visible), value => groupInfo.Visible = value);
@@ -209,9 +209,9 @@ internal static class SpecificationDocumentBuilder
     private static void SetProperty<T>(string group, string propertyName, Action<T> action)
     {
         var propertyKey = $"[openapi:{group}]:{propertyName}";
-        if (App.Configuration.GetSection(propertyKey).Exists())
+        if (InternalApp.Configuration.GetSection(propertyKey).Exists())
         {
-            var value = App.Configuration.GetSection(propertyKey).Get<T>();
+            var value = InternalApp.Configuration.GetSection(propertyKey).Get<T>();
             action?.Invoke(value);
         }
     }
@@ -670,7 +670,7 @@ internal static class SpecificationDocumentBuilder
     private static IEnumerable<string> ReadGroups()
     {
         // 获取所有的控制器和动作方法
-        var controllers = App.EffectiveTypes.Where(Penetrates.IsApiController);
+        var controllers = InternalPenetrates.EffectiveTypes.Where(Penetrates.IsApiController);
         if (!controllers.Any())
         {
             var defaultGroups = new List<string> {_specificationDocumentSettings.DefaultGroupName};

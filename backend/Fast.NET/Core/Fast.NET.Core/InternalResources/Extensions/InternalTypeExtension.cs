@@ -17,6 +17,7 @@
 using System.Reflection;
 
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="Type"/> 内部拓展类
 /// </summary>

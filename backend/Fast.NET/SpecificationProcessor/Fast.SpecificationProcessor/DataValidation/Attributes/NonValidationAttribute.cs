@@ -14,7 +14,8 @@
 
 using Fast.NET;
 
-namespace Fast.UnifyProcessor.Attributes;
+// ReSharper disable once CheckNamespace
+namespace Fast.SpecificationProcessor.DataValidation;
 
 /// <summary>
 /// <see cref="NonValidationAttribute"/> 跳过验证

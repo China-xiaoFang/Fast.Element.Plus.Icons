@@ -12,17 +12,15 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Reflection;
-using Fast.DynamicApplication.Conventions;
-using Fast.DynamicApplication.Formatters;
-using Fast.DynamicApplication.Providers;
 using Fast.NET;
+using Fast.SpecificationProcessor.DynamicApplication.Conventions;
+using Fast.SpecificationProcessor.DynamicApplication.Formatters;
+using Fast.SpecificationProcessor.DynamicApplication.Providers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fast.DynamicApplication.Extensions;
+namespace Fast.SpecificationProcessor.DynamicApplication.Extensions;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> 动态API应用拓展类

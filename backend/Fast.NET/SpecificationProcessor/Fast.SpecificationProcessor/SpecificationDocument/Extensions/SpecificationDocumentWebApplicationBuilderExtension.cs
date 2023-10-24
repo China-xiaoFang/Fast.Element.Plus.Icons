@@ -12,53 +12,46 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET.Core;
-using Fast.SpecificationDocument.Builders;
+using Fast.SpecificationProcessor.App;
+using Fast.SpecificationProcessor.SpecificationDocument.Builders;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fast.SpecificationDocument.Extensions;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Extensions;
 
 /// <summary>
-/// <see cref="IServiceCollection"/>规范化接口服务拓展类
+/// <see cref="WebApplicationBuilder"/>规范化接口服务拓展类
 /// </summary>
-public static class SpecificationDocumentIServiceCollectionExtension
+public static class SpecificationDocumentWebApplicationBuilderExtension
 {
     /// <summary>
     /// 添加规范化文档服务
     /// </summary>
-    /// <param name="mvcBuilder"><see cref="IMvcBuilder"/>Mvc 构建器</param>
+    /// <param name="builder"><see cref="WebApplicationBuilder"/></param>
     /// <param name="configure">自定义配置</param>
     /// <returns>服务集合</returns>
-    public static IMvcBuilder AddSpecificationDocuments(this IMvcBuilder mvcBuilder,
+    public static WebApplicationBuilder AddSpecificationDocuments(this WebApplicationBuilder builder,
         Action<SwaggerGenOptions> configure = default)
     {
-        mvcBuilder.Services.AddSpecificationDocuments(configure);
+        builder.WebHost.ConfigureServices((hostContext, services) =>
+        {
+            // 存储配置对象 
+            InternalApp.Configuration = hostContext.Configuration;
+        });
 
-        return mvcBuilder;
-    }
-
-    /// <summary>
-    /// 添加规范化文档服务
-    /// </summary>
-    /// <param name="services"><see cref="IServiceCollection"/>服务集合</param>
-    /// <param name="configure">自定义配置</param>
-    /// <returns>服务集合</returns>
-    public static IServiceCollection AddSpecificationDocuments(this IServiceCollection services,
-        Action<SwaggerGenOptions> configure = default)
-    {
         // 判断是否启用规范化文档
-        if (App.Configuration.GetValue("AppSettings:InjectSpecificationDocument", true) != true)
-            return services;
+        if (InternalApp.Configuration.GetValue("AppSettings:InjectSpecificationDocument", true) != true)
+            return builder;
 
 #if !NET5_0
-        services.AddEndpointsApiExplorer();
+        builder.Services.AddEndpointsApiExplorer();
 #endif
 
         // 添加Swagger生成器服务
-        services.AddSwaggerGen(options => SpecificationDocumentBuilder.BuildGen(options, configure));
+        builder.Services.AddSwaggerGen(options => SpecificationDocumentBuilder.BuildGen(options, configure));
 
-        return services;
+        return builder;
     }
 }

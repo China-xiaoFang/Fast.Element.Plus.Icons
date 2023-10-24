@@ -58,7 +58,7 @@ public static class Oops
     {
         var exceptionMessage = string.Format(errorMessage, args);
         return new Exception(exceptionMessage,
-            innerException: Activator.CreateInstance(exceptionType, exceptionMessage) as System.Exception);
+            innerException: Activator.CreateInstance(exceptionType, exceptionMessage) as Exception);
     }
 
     /// <summary>

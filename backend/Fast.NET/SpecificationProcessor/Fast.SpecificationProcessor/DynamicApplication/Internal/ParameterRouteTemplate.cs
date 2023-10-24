@@ -12,44 +12,42 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
 
-namespace Fast.SpecificationDocument.Attributes;
+namespace Fast.SpecificationProcessor.DynamicApplication.Internal;
 
 /// <summary>
-/// 解决规范化文档 SchemaId 冲突问题
+/// <see cref="ParameterRouteTemplate"/> 参数路由模板
 /// </summary>
-[InternalSuppressSniffer,AttributeUsage(AttributeTargets.Class)]
-public sealed class SchemaIdAttribute : Attribute
+internal class ParameterRouteTemplate
 {
     /// <summary>
     /// 构造函数
     /// </summary>
-    /// <param name="schemaId">自定义 SchemaId，只能是字母开头，只运行下划线_连接</param>
-    public SchemaIdAttribute(string schemaId)
+    internal ParameterRouteTemplate()
     {
-        SchemaId = schemaId;
+        ControllerStartTemplates = new List<string>();
+        ControllerEndTemplates = new List<string>();
+        ActionStartTemplates = new List<string>();
+        ActionEndTemplates = new List<string>();
     }
 
     /// <summary>
-    /// 构造函数
+    /// 控制器之前的参数
     /// </summary>
-    /// <param name="schemaId">自定义 SchemaId</param>
-    /// <param name="replace">默认在头部叠加，设置 true 之后，将直接使用 <see cref="SchemaId"/></param>
-    public SchemaIdAttribute(string schemaId, bool replace)
-    {
-        SchemaId = schemaId;
-        Replace = replace;
-    }
+    public IList<string> ControllerStartTemplates { get; set; }
 
     /// <summary>
-    /// 自定义 SchemaId
+    /// 控制器之后的参数
     /// </summary>
-    public string SchemaId { get; set; }
+    public IList<string> ControllerEndTemplates { get; set; }
 
     /// <summary>
-    /// 完全覆盖
+    /// 行为之前的参数
     /// </summary>
-    /// <remarks>默认在头部叠加，设置 true 之后，将直接使用 <see cref="SchemaId"/></remarks>
-    public bool Replace { get; set; }
+    public IList<string> ActionStartTemplates { get; set; }
+
+    /// <summary>
+    /// 行为之后的参数
+    /// </summary>
+    public IList<string> ActionEndTemplates { get; set; }
 }

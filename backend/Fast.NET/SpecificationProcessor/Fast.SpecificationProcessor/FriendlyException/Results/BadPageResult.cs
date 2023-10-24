@@ -17,7 +17,7 @@ using Fast.NET;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fast.UnifyProcessor.Results;
+namespace Fast.SpecificationProcessor.FriendlyException.Results;
 
 /// <summary>
 /// <see cref="BadPageResult"/> 错误页面

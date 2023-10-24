@@ -12,12 +12,15 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.SpecificationDocument.Attributes;
+using Fast.NET;
+
+// ReSharper disable once CheckNamespace
+namespace Fast.SpecificationProcessor.SpecificationDocument;
 
 /// <summary>
-/// 解决规范化文档 SchemaId 冲突问题
+/// <see cref="SchemaIdAttribute"/> 解决规范化文档 SchemaId 冲突问题
 /// </summary>
-[AttributeUsage(AttributeTargets.Class)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class)]
 public sealed class SchemaIdAttribute : Attribute
 {
     /// <summary>

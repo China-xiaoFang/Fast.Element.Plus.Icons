@@ -13,11 +13,12 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
+using Fast.SpecificationProcessor.FriendlyException.Metadatas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Fast.UnifyProcessor.Contexts;
+namespace Fast.SpecificationProcessor.FriendlyException.Contexts;
 
 /// <summary>
 /// <see cref="ExceptorContext"/> 异常上下文
@@ -42,7 +43,7 @@ internal static class ExceptorContext
         // 判断是否友好异常
         var isUserFriendlyException = false;
 
-        System.Exception exception = default;
+        Exception exception = default;
 
         // 判断是否是 ExceptionContext
         if (context is ExceptionContext exceptionContext)

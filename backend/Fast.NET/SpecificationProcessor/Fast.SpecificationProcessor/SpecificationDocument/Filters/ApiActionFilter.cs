@@ -13,11 +13,11 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
-using Fast.DynamicApplication;
+using Fast.SpecificationProcessor.DynamicApplication;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fast.SpecificationDocument.Filters;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Filters;
 
 /// <summary>
 /// 规范化文档自定义更多功能

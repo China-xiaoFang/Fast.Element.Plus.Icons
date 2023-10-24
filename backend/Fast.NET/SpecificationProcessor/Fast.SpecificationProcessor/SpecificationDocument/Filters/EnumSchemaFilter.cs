@@ -16,14 +16,14 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using Fast.IaaS.Extensions;
-using Fast.NET.Core;
+using Fast.NET;
+using Fast.SpecificationProcessor.App;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Fast.SpecificationDocument.Filters;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Filters;
 
 /// <summary>
 /// 修正 规范化文档 Enum 提示
@@ -55,7 +55,7 @@ internal class EnumSchemaFilter : ISchemaFilter
             var enumValues = Enum.GetValues(type);
 
             // 从配置文件中读取全局配置
-            var convertToNumber = App.Configuration.GetValue("AppSettings:SpecificationDocumentEnumToNumber", false);
+            var convertToNumber = InternalApp.Configuration.GetValue("AppSettings:SpecificationDocumentEnumToNumber", false);
 
             // 包含中文情况
             if (Enum.GetNames(type).Any(v => Regex.IsMatch(v, CHINESE_PATTERN)))

@@ -16,6 +16,7 @@ using System.Reflection;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="Assembly"/> 内部拓展类
 /// </summary>

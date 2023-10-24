@@ -14,7 +14,7 @@
 
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Fast.UnifyProcessor.Handlers;
+namespace Fast.SpecificationProcessor.FriendlyException.Handlers;
 
 /// <summary>
 /// <see cref="IGlobalExceptionHandler"/> 全局异常处理

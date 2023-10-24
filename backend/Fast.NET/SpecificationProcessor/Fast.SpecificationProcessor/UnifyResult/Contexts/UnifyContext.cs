@@ -15,14 +15,14 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using Fast.NET;
-using Fast.UnifyProcessor.Attributes;
+using Fast.SpecificationProcessor.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Fast.UnifyProcessor.Contexts;
+namespace Fast.SpecificationProcessor.UnifyResult.Contexts;
 
 /// <summary>
 /// <see cref="UnifyContext"/> 规范化结果上下文
@@ -109,7 +109,7 @@ internal static class UnifyContext
         }
         else
         {
-            unifyResult = httpContext.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
+            unifyResult = httpContext?.RequestServices.GetService(unityMetadata.ProviderType) as IUnifyResultProvider;
         }
 
         return unifyResult == null || isSkip;

@@ -16,7 +16,6 @@ using Fast.Logging.App;
 using Fast.Logging.Extensions;
 using Fast.Logging.Implantation;
 using Fast.Logging.Internal;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 // ReSharper disable once CheckNamespace

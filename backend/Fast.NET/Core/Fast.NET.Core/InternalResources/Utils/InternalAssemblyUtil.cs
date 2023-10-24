@@ -17,6 +17,7 @@ using System.Reflection;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="Assembly"/> 工具类
 /// </summary>
@@ -35,7 +36,7 @@ internal static class InternalAssemblyUtil
         // 判断是否包含引用的，不包含直接返回
         if (!referenced)
         {
-            return new List<Assembly> { entryAssembly };
+            return new List<Assembly> {entryAssembly};
         }
 
         // 获取入口程序集所引用的所有程序集

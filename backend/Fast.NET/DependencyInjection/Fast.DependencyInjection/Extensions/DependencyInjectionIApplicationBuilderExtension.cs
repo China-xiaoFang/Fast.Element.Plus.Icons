@@ -14,7 +14,6 @@
 
 using Fast.DependencyInjection.App;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Fast.DependencyInjection.Extensions;
 

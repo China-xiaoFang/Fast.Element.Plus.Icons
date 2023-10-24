@@ -13,7 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
-using Fast.SpecificationDocument.Internal;
+using Fast.SpecificationProcessor.Internal;
 using Microsoft.AspNetCore.Mvc;
 
 // ReSharper disable once CheckNamespace
@@ -22,7 +22,7 @@ namespace Fast.SpecificationProcessor.DynamicApplication;
 /// <summary>
 /// 接口描述设置
 /// </summary>
-[InternalSuppressSniffer,AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class ApiDescriptionSettingsAttribute : ApiExplorerSettingsAttribute
 {
     /// <summary>
@@ -60,31 +60,6 @@ public sealed class ApiDescriptionSettingsAttribute : ApiExplorerSettingsAttribu
     public string Name { get; set; }
 
     /// <summary>
-    /// 保留原有名称（Boolean 类型）
-    /// </summary>
-    public object KeepName { get; set; }
-
-    /// <summary>
-    /// 切割骆驼命名（Boolean 类型）
-    /// </summary>
-    public object SplitCamelCase { get; set; }
-
-    /// <summary>
-    /// 小驼峰命名（首字符小写）
-    /// </summary>
-    public object AsLowerCamelCase { get; set; }
-
-    /// <summary>
-    /// 保留路由谓词（Boolean 类型）
-    /// </summary>
-    public object KeepVerb { get; set; }
-
-    /// <summary>
-    /// 小写路由（Boolean 类型）
-    /// </summary>
-    public object LowercaseRoute { get; set; }
-
-    /// <summary>
     /// 模块名
     /// </summary>
     public string Module { get; set; }
@@ -108,11 +83,6 @@ public sealed class ApiDescriptionSettingsAttribute : ApiExplorerSettingsAttribu
     /// 排序
     /// </summary>
     public int Order { get; set; }
-
-    /// <summary>
-    /// 配置控制器区域（只对控制器有效）
-    /// </summary>
-    public string Area { get; set; }
 
     /// <summary>
     /// 额外描述，支持 HTML

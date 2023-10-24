@@ -14,17 +14,17 @@
 
 using System.Reflection;
 using Fast.NET;
-using Fast.SpecificationDocument.Internal;
-using Fast.UnifyProcessor.Attributes;
-using Fast.UnifyProcessor.Contexts;
-using Fast.UnifyProcessor.Results;
+using Fast.SpecificationProcessor.DataValidation.Contexts;
+using Fast.SpecificationProcessor.FriendlyException.Results;
+using Fast.SpecificationProcessor.Internal;
+using Fast.SpecificationProcessor.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 
-namespace Fast.UnifyProcessor.Filters;
+namespace Fast.SpecificationProcessor.DataValidation.Filters;
 
 /// <summary>
 /// <see cref="DataValidationFilter"/> 数据验证拦截器

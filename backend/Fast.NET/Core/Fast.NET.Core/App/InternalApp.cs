@@ -71,6 +71,7 @@ internal static class InternalApp
     {
         return Activity.Current?.Id ?? (RootServices == null
             ? default
-            : InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)?.TraceIdentifier);
+            : InternalPenetrates.CatchOrDefault(() => RootServices?.GetService<IHttpContextAccessor>()?.HttpContext)
+                ?.TraceIdentifier);
     }
 }

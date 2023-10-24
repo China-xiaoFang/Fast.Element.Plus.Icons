@@ -17,6 +17,7 @@ using System.Runtime.Loader;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// 内部反射静态类
 /// </summary>

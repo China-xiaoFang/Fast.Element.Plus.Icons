@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
+
 /// <summary>
 /// <see cref="MethodInfo"/> 内部拓展类
 /// </summary>

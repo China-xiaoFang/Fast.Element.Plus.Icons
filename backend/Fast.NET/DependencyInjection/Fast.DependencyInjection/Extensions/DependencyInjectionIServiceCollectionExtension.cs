@@ -87,9 +87,8 @@ public static class DependencyInjectionIServiceCollectionExtension
 
             // 获取所有能注册的接口
             var canInjectInterfaces = interfaces.Where(u =>
-                u != typeof(IDisposable) && u != typeof(IAsyncDisposable) && u != typeof(IDependency)
-                && (InternalPenetrates.IDynamicApplicationType == null || u != InternalPenetrates.IDynamicApplicationType)
-                && !lifetimeInterfaces.Contains(u) && projectAssemblies.Contains(u.Assembly) &&
+                u != typeof(IDisposable) && u != typeof(IAsyncDisposable) && u != typeof(IDependency) &&
+                !lifetimeInterfaces.Contains(u) && projectAssemblies.Contains(u.Assembly) &&
                 (!type.IsGenericType && !u.IsGenericType || type.IsGenericType && u.IsGenericType &&
                     type.GetGenericArguments().Length == u.GetGenericArguments().Length));
 

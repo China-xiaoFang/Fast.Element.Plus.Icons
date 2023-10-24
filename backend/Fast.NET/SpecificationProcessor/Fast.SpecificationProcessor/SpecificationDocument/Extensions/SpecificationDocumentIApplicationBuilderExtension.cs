@@ -12,14 +12,14 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET.Core;
-using Fast.SpecificationDocument.Builders;
+using Fast.SpecificationProcessor.App;
+using Fast.SpecificationProcessor.SpecificationDocument.Builders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Fast.SpecificationDocument.Extensions;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Extensions;
 
 /// <summary>
 /// <see cref="IApplicationBuilder"/> 规范化文档中间件拓展
@@ -37,7 +37,7 @@ public static class SpecificationDocumentIApplicationBuilderExtension
         Action<SwaggerOptions> configureSwagger = default, Action<SwaggerUIOptions> configureSwaggerUI = default)
     {
         // 判断是否启用规范化文档
-        if (App.Configuration.GetValue("AppSettings:InjectSpecificationDocument", true) != true)
+        if (InternalApp.Configuration.GetValue("AppSettings:InjectSpecificationDocument", true) != true)
             return app;
 
         // 配置 Swagger 全局参数

@@ -13,12 +13,12 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
-using Fast.NET.Core;
-using Fast.SpecificationDocument.Internal;
+using Fast.NET;
+using Fast.SpecificationProcessor.SpecificationDocument.Internal;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace Fast.SpecificationDocument.Options;
+namespace Fast.SpecificationProcessor.SpecificationDocument.Options;
 
 /// <summary>
 /// 规范化文档配置选项
@@ -132,8 +132,8 @@ public sealed class SpecificationDocumentSettingsOptions
 
         // 加载项目注册和模块化/插件注释
         var frameworkPackageName = GetType().GetTypeInfo().Assembly.GetName().Name;
-        var projectXmlComments =
-            App.Assemblies.Where(u => u.GetName().Name != frameworkPackageName).Select(t => t.GetName().Name);
+        var projectXmlComments = InternalPenetrates.Assemblies.Where(u => u.GetName().Name != frameworkPackageName)
+            .Select(t => t.GetName().Name);
         XmlComments = projectXmlComments.ToArray();
 
         GroupOpenApiInfos = new[] {new SpecificationOpenApiInfo {Group = DefaultGroupName}};

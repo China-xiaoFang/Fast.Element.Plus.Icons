@@ -15,25 +15,12 @@
 using Fast.NET;
 
 // ReSharper disable once CheckNamespace
-namespace Fast.SpecificationProcessor.SpecificationDocument;
+namespace Fast.SpecificationProcessor.DynamicApplication;
 
 /// <summary>
-/// <see cref="OperationIdAttribute"/> 配置规范化文档 OperationId 问题
+/// <see cref="DynamicApplicationAttribute"/> 动态API应用特性
 /// </summary>
-[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Method)]
-public sealed class OperationIdAttribute : Attribute
+[InternalSuppressSniffer, AttributeUsage(AttributeTargets.Class)]
+public sealed class DynamicApplicationAttribute : Attribute
 {
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    /// <param name="operationId">自定义 OperationId，可用户生成可读的前端代码</param>
-    public OperationIdAttribute(string operationId)
-    {
-        OperationId = operationId;
-    }
-
-    /// <summary>
-    /// 自定义 OperationId
-    /// </summary>
-    public string OperationId { get; set; }
 }

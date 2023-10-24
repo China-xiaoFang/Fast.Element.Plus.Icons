@@ -13,11 +13,13 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
-using Fast.SpecificationApplication.Internal;
-using Fast.UnifyProcessor.Contexts;
-using Fast.UnifyProcessor.Handlers;
-using Fast.UnifyProcessor.Results;
-using Microsoft.AspNetCore.Authentication;
+using Fast.SpecificationProcessor.DataValidation.Contexts;
+using Fast.SpecificationProcessor.DataValidation.Filters;
+using Fast.SpecificationProcessor.FriendlyException.Contexts;
+using Fast.SpecificationProcessor.FriendlyException.Handlers;
+using Fast.SpecificationProcessor.FriendlyException.Results;
+using Fast.SpecificationProcessor.Internal;
+using Fast.SpecificationProcessor.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -25,7 +27,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fast.UnifyProcessor.Filters;
+namespace Fast.SpecificationProcessor.FriendlyException.Filters;
 
 /// <summary>
 /// <see cref="FriendlyExceptionFilter"/> 友好异常拦截器
@@ -107,13 +109,15 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
         if (isPageDescriptor)
         {
             // 返回自定义错误页面
-            context.Result = new BadPageResult(isValidationException ? StatusCodes.Status400BadRequest : exceptionMetadata.StatusCode)
-            {
-                Title = isValidationException ? "ModelState Invalid" : ("Internal Server: " + exceptionMetadata.Errors.ToString()),
-                Code = isValidationException
-                    ? ValidatorContext.GetValidationMetadata((context.Exception as UserFriendlyException)?.ErrorMessage).Message
-                    : context.Exception.ToString()
-            };
+            context.Result =
+                new BadPageResult(isValidationException ? StatusCodes.Status400BadRequest : exceptionMetadata.StatusCode)
+                {
+                    Title = isValidationException ? "ModelState Invalid" : ("Internal Server: " + exceptionMetadata.Errors),
+                    Code = isValidationException
+                        ? ValidatorContext.GetValidationMetadata((context.Exception as UserFriendlyException)?.ErrorMessage)
+                            .Message
+                        : context.Exception.ToString()
+                };
         }
         // 处理 Mvc/WebApi
         else
@@ -125,8 +129,7 @@ internal sealed class FriendlyExceptionFilter : IAsyncExceptionFilter
             }
 
             // 判断是否跳过规范化结果，如果是，则只处理友好异常消息
-            if (UnifyContext.CheckFailedNonUnify(context.HttpContext, controllerActionDescriptor.MethodInfo,
-                    out var unifyResult))
+            if (UnifyContext.CheckFailedNonUnify(context.HttpContext, controllerActionDescriptor.MethodInfo, out var unifyResult))
             {
                 // WebAPI 情况
                 if (Penetrates.IsApiController(controllerActionDescriptor.MethodInfo.DeclaringType))

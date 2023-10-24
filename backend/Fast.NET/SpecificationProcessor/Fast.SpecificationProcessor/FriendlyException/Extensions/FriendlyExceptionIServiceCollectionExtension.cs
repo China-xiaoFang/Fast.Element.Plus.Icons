@@ -13,11 +13,13 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
-using Fast.UnifyProcessor.Filters;
+using Fast.SpecificationProcessor.FriendlyException.Filters;
+using Fast.SpecificationProcessor.UnifyResult;
+using Fast.SpecificationProcessor.UnifyResult.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fast.UnifyProcessor.Extensions;
+namespace Fast.SpecificationProcessor.FriendlyException.Extensions;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> 友好异常服务拓展类

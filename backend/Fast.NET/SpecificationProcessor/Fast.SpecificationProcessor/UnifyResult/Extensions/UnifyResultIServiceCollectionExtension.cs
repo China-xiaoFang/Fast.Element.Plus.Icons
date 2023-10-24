@@ -14,14 +14,14 @@
 
 using System.Reflection;
 using Fast.NET;
-using Fast.UnifyProcessor.Attributes;
-using Fast.UnifyProcessor.Contexts;
-using Fast.UnifyProcessor.Filters;
+using Fast.SpecificationProcessor.UnifyResult.Contexts;
+using Fast.SpecificationProcessor.UnifyResult.Filters;
+using Fast.SpecificationProcessor.UnifyResult.Metadatas;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Fast.UnifyProcessor.Extensions;
+namespace Fast.SpecificationProcessor.UnifyResult.Extensions;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> 规范化服务拓展类
@@ -101,8 +101,7 @@ public static class UnifyResultIServiceCollectionExtension
         };
 
         // 添加或替换规范化配置
-        UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata,
-            (_, _) => metadata);
+        UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata, (_, _) => metadata);
 
         // 添加规范化提供器
         services.TryAddSingleton(typeof(IUnifyResultProvider), providerType);

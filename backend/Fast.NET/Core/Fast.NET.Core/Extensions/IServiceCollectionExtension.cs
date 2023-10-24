@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.IO.Compression;
+using Fast.NET.Core.Diagnostics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -32,7 +33,7 @@ public static class IServiceCollectionExtension
     /// <param name="service"></param>
     internal static void AddGzipBrotliCompression(this IServiceCollection service)
     {
-        Diagnostics.Debugging.Info("Registering for the Gzip compression service......");
+        Debugging.Info("Registering for the Gzip compression service......");
         service.Configure<BrotliCompressionProviderOptions>(options => { options.Level = CompressionLevel.Optimal; });
         service.Configure<GzipCompressionProviderOptions>(options => { options.Level = CompressionLevel.Optimal; });
         service.AddResponseCompression(options =>

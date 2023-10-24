@@ -21,7 +21,8 @@ namespace Fast.NET;
 /// </summary>
 /// <remarks>用于程序集扫描类型或方法时候</remarks>
 [InternalSuppressSniffer,
- AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct)]
+ AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Struct |
+                AttributeTargets.Interface)]
 internal class InternalSuppressSnifferAttribute : Attribute
 {
 }

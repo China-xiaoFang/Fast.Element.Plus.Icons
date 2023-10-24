@@ -16,7 +16,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace Fast.DynamicApplication.Formatters;
+namespace Fast.SpecificationProcessor.DynamicApplication.Formatters;
 
 /// <summary>
 /// text/plain 请求 Body 参数支持

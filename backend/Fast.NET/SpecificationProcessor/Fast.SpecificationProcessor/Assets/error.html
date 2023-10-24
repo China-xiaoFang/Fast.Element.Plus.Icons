@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="@{Description}" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="@{Description}"/>
     <title>@{Title}</title>
     <style>
         html,
@@ -121,22 +121,22 @@
     </style>
 </head>
 <body>
-    <div id="frame-error">
-        <div id="content">
-            <div class="icon icon-page-error"></div>
-            <div id="message">
-                <h1>@{Title}</h1>
-                <p>@{Description}</p>
-                <details>
-                    <summary>See more details.</summary>
-                    <pre class="code" data-language="@{CodeLang}">
+<div id="frame-error">
+    <div id="content">
+        <div class="icon icon-page-error"></div>
+        <div id="message">
+            <h1>@{Title}</h1>
+            <p>@{Description}</p>
+            <details>
+                <summary>See more details.</summary>
+                <pre class="code" data-language="@{CodeLang}">
 @{Code}</pre>
-                </details>
-                <div class="error-code">HTTP ERROR @{StatusCode}</div>
-            </div>
+            </details>
+            <div class="error-code">HTTP ERROR @{StatusCode}</div>
         </div>
     </div>
-    <script type="text/javascript">
+</div>
+<script type="text/javascript">
         var codes = document.querySelectorAll(".code");
         Array.prototype.forEach.call(codes, function (code, i) {
             var language = code.getAttribute("data-language");

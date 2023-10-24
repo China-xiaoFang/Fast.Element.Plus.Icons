@@ -13,14 +13,15 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
-using Fast.UnifyProcessor.Contexts;
+using Fast.SpecificationProcessor.DataValidation.Contexts;
+using Fast.SpecificationProcessor.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
-namespace Fast.UnifyProcessor.Filters;
+namespace Fast.SpecificationProcessor.UnifyResult.Filters;
 
 /// <summary>
 /// <see cref="SucceededUnifyResultFilter"/> 规范化结构（请求成功）过滤器
