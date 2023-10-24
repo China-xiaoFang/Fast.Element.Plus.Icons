@@ -16,8 +16,4 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\DynamicApplication\Fast.DynamicApplication\Fast.DynamicApplication.csproj" />
-	</ItemGroup>
-
 </Project>
