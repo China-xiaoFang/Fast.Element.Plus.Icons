@@ -262,4 +262,27 @@ public static class VerificationUtil
 
         return result;
     }
+
+    /// <summary>
+    /// 生成随机数
+    /// </summary>
+    /// <param name="minVal">最小值（包含）</param>
+    /// <param name="maxVal">最大值（默认不包含）</param>
+    /// <param name="isInclude">是否包含最大值</param>
+    /// <returns></returns>
+    public static int GenRandomNum(int minVal, int maxVal, bool isInclude = false)
+    {
+        if (isInclude)
+        {
+            maxVal--;
+        }
+
+        if (maxVal < minVal)
+        {
+            throw new Exception("最大值不能小于最小值");
+        }
+
+        var random = new Random();
+        return random.Next(minVal, isInclude ? maxVal - 1 : maxVal);
+    }
 }
