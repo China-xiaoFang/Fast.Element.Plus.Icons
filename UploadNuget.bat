@@ -8,11 +8,35 @@ echo 欢迎使用 Fast.NET 打包编译工具
 REM 换行
 echo.
 
+echo 正在删除 NuGet 包缓存
+
+REM 换行
+echo.
+
+REM 删除包缓存
+rd /s /q "%~dp0nupkgs"
+
+REM 判断删除包缓存是否成功
+if %errorlevel% equ 0 (
+	REM 换行
+	echo.
+
+	echo 删除包缓存成功...... 
+) else (
+	REM 换行
+	echo.
+
+	echo 删除包缓存失败...... 
+)
+
+REM 换行
+echo.
+
 REM 开启变量延迟
 setlocal enabledelayedexpansion
 
 REM 设置要编译和生成的 .sln 项目文件路径。使用 %~dp0 变量来获取 当前批处理文件所在的目录
-set solution_file=%~dp0Fast.NET.sln
+set solution_file=%~dp0backend\Fast.NET\Fast.NET.sln
 
 REM 设置多个可选择的 MSBuild.exe 文件路径
 set "msbuild_path[1]=C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
@@ -98,14 +122,77 @@ if %errorlevel% equ 0 (
 	echo 编译，生成失败...... 
 )
 
-REM 结束关闭变量延迟
-endlocal
+REM 换行
+echo.
+
+REM 输入 APIKey
+set /p api_key=请输入 NuGet Api 密钥：
 
 REM 换行
 echo.
 
-REM 上传 Nuget 服务器
+echo 当前上传的所有 NuGet 包信息：
 
+REM 获取 nupkgs 文件夹中所有的包文件
+set "nuget_file_list="
+for /f "delims=" %%a in ('dir /b /s "%~dp0nupkgs"') do (
+	REM 这里好像可以自动上传 .snupkg 符号包，所以手动排除
+	if not "%%~xa"==".snupkg" (
+		set "nuget_file_list=!nuget_file_list! "%%a""
+	)
+)
+
+REM 初始化计数器和记录变量
+set "success_count=0"
+set "error_count=0"
+set "error_file="
+
+REM 循环遍历文件列表
+for %%f in (%nuget_file_list%) do (
+	REM 换行
+	echo.
+	
+	echo 正在上传：%%f
+	
+	REM 这里因为 dotnet 命令的错误码不会直接传递给批处理脚本的 %errorlevel% 变量。所以这里使用 && 和 || 运算符进行判断
+	
+	REM 上传 NuGet 服务器
+	dotnet nuget push --api-key %api_key% --skip-duplicate --source https://api.nuget.org/v3/index.json %%f && (
+		REM 记录成功次数
+		set /a success_count+=1
+	
+		REM 换行
+		echo.
+
+		echo 上传：%%f 成功...... 
+	) || (
+		REM 记录失败次数
+		set /a error_count+=1
+		
+		REM 记录失败文件
+		set "error_file=!error_file! %%f"
+	
+		REM 换行
+		echo.
+
+		echo 上传：%%f 失败......
+	)
+)
+
+REM 换行
+echo.
+
+REM 输出上传结果
+echo 上传成功 %success_count% 个，失败 %error_count% 个，失败列表：
+
+
+REM 循环遍历失败文件列表
+for %%f in (%error_file%) do (
+	echo %%f
+)
+
+REM 结束关闭变量延迟
+endlocal
 
 REM 等待用户按下任意键继续。
 REM pause
