@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>Fast.Admin 应用系统实体模块库。</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Sugar\Fast.Sugar\Fast.Sugar.csproj" />
+	</ItemGroup>
+
+</Project>
