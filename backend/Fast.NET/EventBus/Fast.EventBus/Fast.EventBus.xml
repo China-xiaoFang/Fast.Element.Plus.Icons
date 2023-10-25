@@ -811,7 +811,7 @@
         </member>
         <member name="T:Fast.EventBus.Extensions.EventBusExtension">
             <summary>
-            事件总线拓展类
+            <see cref="T:Fast.EventBus.Extensions.EventBusExtension"/> 事件总线拓展类
             </summary>
         </member>
         <member name="M:Fast.EventBus.Extensions.EventBusExtension.ParseToString(System.Enum)">
@@ -819,6 +819,13 @@
             将事件枚举 Id 转换成字符串对象
             </summary>
             <param name="em"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.EventBus.Extensions.EventBusExtension.ParseToEnum(System.String)">
+            <summary>
+            将事件枚举字符串转换成枚举对象
+            </summary>
+            <param name="str"></param>
             <returns></returns>
         </member>
         <member name="T:Fast.EventBus.Extensions.EventBusIServiceCollectionExtension">
