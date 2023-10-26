@@ -1225,7 +1225,7 @@
         </member>
         <member name="T:Fast.SpecificationProcessor.SpecificationDocument.Builders.SpecificationDocumentBuilder">
             <summary>
-            规范化文档构建器
+            <see cref="T:Fast.SpecificationProcessor.SpecificationDocument.Builders.SpecificationDocumentBuilder"/> 规范化文档构建器
             </summary>
         </member>
         <member name="F:Fast.SpecificationProcessor.SpecificationDocument.Builders.SpecificationDocumentBuilder.AllGroupsKey">

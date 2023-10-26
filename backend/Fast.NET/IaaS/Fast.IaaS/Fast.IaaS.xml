@@ -1086,14 +1086,6 @@
             <param name="refererHeaderKey">默认从 “Referer” 获取</param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.UserAgent(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-            请求 UserAgent 信息
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
-            <returns><see cref="T:System.String"/></returns>
-        </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.LanIpv4(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             局域网 IPv4 地址
@@ -1150,11 +1142,12 @@
                 adaptStatusCodes = [[401, 200], [403, 200]]
             </remarks>
         </member>
-        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgent(Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgent(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>
             请求用户代理字符串（User-Agent）
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
             <returns><see cref="T:System.String"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgentInfo(Microsoft.AspNetCore.Http.HttpContext)">
