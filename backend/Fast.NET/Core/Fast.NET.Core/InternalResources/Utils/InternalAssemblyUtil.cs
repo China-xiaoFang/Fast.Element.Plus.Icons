@@ -33,6 +33,7 @@ internal static class InternalAssemblyUtil
     /// <exclude />
     internal static IEnumerable<Assembly> GetEntryAssembly(bool referenced = true)
     {
+        var assemblies = new List<Assembly>();
         // 获取入口程序集
         var entryAssembly = Assembly.GetEntryAssembly();
 
@@ -48,10 +49,9 @@ internal static class InternalAssemblyUtil
         // 非独立发布/非单文件发布
         if (!string.IsNullOrWhiteSpace(entryAssembly?.Location))
         {
-            var dependencyContext = DependencyContext.Default;
-
+            // TODO：这里引用了一个包，想办法手写去掉
             // 读取项目程序集 或 Fast 官方发布的包，或手动添加引用的dll，或配置特定的包前缀
-            return dependencyContext?.RuntimeLibraries
+            return DependencyContext.Default?.RuntimeLibraries
                 .Where(wh => (wh.Type == "project" && !excludeAssemblyNames.Any(a => wh.Name.EndsWith(a))) ||
                              (wh.Type == "package" && (wh.Name.StartsWith(nameof(Fast)))))
                 .Select(sl => Reflect.GetAssembly(sl.Name));
