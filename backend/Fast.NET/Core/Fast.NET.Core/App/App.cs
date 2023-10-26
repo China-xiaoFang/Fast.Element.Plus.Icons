@@ -327,7 +327,8 @@ public static class App
         var executeDirectory = AppContext.BaseDirectory;
 
         // 扫描自定义配置扫描目录
-        var jsonFiles = new[] {executeDirectory}.Concat(InternalConfigurationScanDirectories).Where(Directory.Exists)
+        var jsonFiles = new[] {executeDirectory}
+            .Concat(InternalConfigurationScanDirectories.Select(sl => $"{executeDirectory}{sl}")).Where(Directory.Exists)
             .SelectMany(s => Directory.GetFiles(s, "*.json", SearchOption.TopDirectoryOnly)).ToList();
 
         // 如果没有配置文件，中止执行
