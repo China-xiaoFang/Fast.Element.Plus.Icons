@@ -876,14 +876,14 @@
             <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 动态API应用拓展类
             </summary>
         </member>
-        <member name="M:Fast.SpecificationProcessor.DynamicApplication.Extensions.DynamicApplicationIServiceCollectionExtension.AddDynamicApiControllers(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+        <member name="M:Fast.SpecificationProcessor.DynamicApplication.Extensions.DynamicApplicationIServiceCollectionExtension.AddDynamicApplication(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
             <summary>
             添加动态接口控制器服务
             </summary>
             <param name="mvcBuilder"><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/>Mvc构建器</param>
             <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IMvcBuilder"/>Mvc构建器</returns>
         </member>
-        <member name="M:Fast.SpecificationProcessor.DynamicApplication.Extensions.DynamicApplicationIServiceCollectionExtension.AddDynamicApiControllers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Fast.SpecificationProcessor.DynamicApplication.Extensions.DynamicApplicationIServiceCollectionExtension.AddDynamicApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             添加动态接口控制器服务
             </summary>

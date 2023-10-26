@@ -6,7 +6,6 @@ using Fast.NET.Core.Extensions;
 using Fast.Serialization.Extensions;
 using Fast.SpecificationProcessor.DataValidation.Extensions;
 using Fast.SpecificationProcessor.DynamicApplication.Extensions;
-using Fast.SpecificationProcessor.FriendlyException.Extensions;
 using Fast.SpecificationProcessor.SpecificationDocument.Extensions;
 using Fast.SpecificationProcessor.UnifyResult.Extensions;
 using Fast.Test.Api;
@@ -36,20 +35,21 @@ builder.Services.AddObjectMapper();
 
 builder.Services.AddControllers();
 
+// 文档
+builder.AddSpecificationDocuments();
+
 // 动态 API
-builder.Services.AddDynamicApiControllers();
+builder.Services.AddDynamicApplication();
 
 // 数据验证
 builder.Services.AddDataValidation();
 
 // 友好异常
-builder.Services.AddFriendlyException();
+//builder.Services.AddFriendlyException();
 
 // 规范返回
 builder.Services.AddUnifyResult<RESTfulResultProvider>();
 
-// 文档
-builder.AddSpecificationDocuments();
 
 //builder.Services.AddSqlSugar();
 

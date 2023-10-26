@@ -163,11 +163,18 @@
             释放所有未托管的对象
             </summary>
         </member>
-        <member name="M:Fast.NET.Core.App.ConfigureApplication(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+        <member name="M:Fast.NET.Core.App.ConfigureHostAppConfiguration(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            自动装载主机配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Fast.NET.Core.App.ConfigureApplication(Microsoft.AspNetCore.Hosting.IWebHostBuilder,Microsoft.Extensions.Hosting.IHostBuilder)">
             <summary>
             配置 Application
             </summary>
             <param name="builder"></param>
+            <param name="hostBuilder"></param>
         </member>
         <member name="M:Fast.NET.Core.App.AddJsonFiles(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Extensions.Hosting.IHostEnvironment)">
             <summary>
@@ -220,7 +227,7 @@
         </member>
         <member name="F:Fast.NET.Core.InternalApp.HostEnvironment">
             <summary>
-            获取主机环境
+            获取泛型主机环境
             </summary>
         </member>
         <member name="F:Fast.NET.Core.InternalApp.UnmanagedObjects">

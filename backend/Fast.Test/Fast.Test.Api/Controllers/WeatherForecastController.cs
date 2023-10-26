@@ -16,7 +16,7 @@ public class WeatherForecastController : ControllerBase
 
     public ILogger<WeatherForecastController> Logger1 { get; }
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,TestService testService)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, ITestService testService)
     {
         Logger1 = logger;
         _testService = testService;

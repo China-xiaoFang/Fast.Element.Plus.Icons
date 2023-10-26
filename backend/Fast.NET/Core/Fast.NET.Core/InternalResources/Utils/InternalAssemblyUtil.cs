@@ -56,6 +56,7 @@ internal static class InternalAssemblyUtil
                              (wh.Type == "package" && (wh.Name.StartsWith(nameof(Fast)))))
                 .Select(sl => Reflect.GetAssembly(sl.Name));
         }
+
         // 独立发布/单文件发布
         throw new Exception("暂时不支持单文件或独立发布！");
     }

@@ -34,7 +34,7 @@ public static class WebApplicationBuilderExtension
         InternalApp.WebHostEnvironment = builder.Environment;
 
         // 初始化配置
-        App.ConfigureApplication(builder.WebHost);
+        App.ConfigureApplication(builder.WebHost, builder.Host);
 
         return builder;
     }

@@ -46,7 +46,7 @@ public static class App
     /// <summary>
     /// 获取主机环境
     /// </summary>
-    internal static IWebHostEnvironment HostEnvironment => InternalApp.HostEnvironment;
+    internal static IHostEnvironment HostEnvironment => InternalApp.HostEnvironment;
 
     /// <summary>
     /// 应用服务
@@ -278,12 +278,11 @@ public static class App
     }
 
     /// <summary>
-    /// 配置 Application
+    /// 自动装载主机配置
     /// </summary>
     /// <param name="builder"></param>
-    internal static void ConfigureApplication(IWebHostBuilder builder)
+    private static void ConfigureHostAppConfiguration(IHostBuilder builder)
     {
-        // 自动装载配置
         builder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
         {
             // 存储环境对象
@@ -292,6 +291,32 @@ public static class App
             // 加载配置
             AddJsonFiles(configurationBuilder, hostContext.HostingEnvironment);
         });
+    }
+
+    /// <summary>
+    /// 配置 Application
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="hostBuilder"></param>
+    internal static void ConfigureApplication(IWebHostBuilder builder, IHostBuilder hostBuilder = default)
+    {
+        // 自动装载配置
+        if (hostBuilder == default)
+        {
+            builder.ConfigureAppConfiguration((hostContext, configurationBuilder) =>
+            {
+                // 存储环境对象
+                InternalApp.HostEnvironment = InternalApp.WebHostEnvironment = hostContext.HostingEnvironment;
+
+                // 加载配置
+                AddJsonFiles(configurationBuilder, hostContext.HostingEnvironment);
+            });
+        }
+        // 自动装载配置
+        else
+        {
+            ConfigureHostAppConfiguration(hostBuilder);
+        }
 
         // 应用初始化服务
         builder.ConfigureServices((hostContext, services) =>
