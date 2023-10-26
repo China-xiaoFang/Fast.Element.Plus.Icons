@@ -29,23 +29,13 @@ public static class CorsAccessorIServiceCollectionExtension
     /// 配置跨域
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/> 服务集合</param>
-    /// <param name="configuration"><see cref="IConfiguration"/> 配置项，建议通过框架自带的 App.Configuration 传入，否则会在内部自动解析 IConfiguration 性能会很低</param>
+    /// <param name="configuration"><see cref="IConfiguration"/> 配置项</param>
     /// <param name="corsOptionsHandler"></param>
     /// <param name="corsPolicyBuilderHandler"></param>
     /// <returns>服务集合</returns>
-    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration = null,
+    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration,
         Action<CorsOptions> corsOptionsHandler = default, Action<CorsPolicyBuilder> corsPolicyBuilderHandler = default)
     {
-        // 处理 IConfiguration
-        if (configuration == null)
-        {
-            // 构建新的服务对象
-            var serviceProvider = services.BuildServiceProvider();
-            configuration = serviceProvider.GetService<IConfiguration>();
-            // 释放服务对象
-            serviceProvider.Dispose();
-        }
-
         // 获取跨域配置选项
         var corsAccessorSettings = configuration.GetSection("CorsAccessorSettings").Get<CorsAccessorSettingsOptions>();
 
