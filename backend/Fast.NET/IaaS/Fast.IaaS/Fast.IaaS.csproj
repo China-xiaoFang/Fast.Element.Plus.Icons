@@ -4,4 +4,9 @@
 		<Description>Fast.NET 框架基础设施模块库。</Description>
 	</PropertyGroup>
 
+	<!-- 这里由于要获取请求头部的 UserAgent 信息进行解析，因此才会引用此包，但是确保此包不会传递出去，只会在内部使用 -->
+	<ItemGroup>
+		<PackageReference Include="UAParser" Version="3.1.47" PrivateAssets="all" />
+	</ItemGroup>
+
 </Project>

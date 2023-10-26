@@ -2190,6 +2190,15 @@
             <param name="len"><see cref="T:System.Int32"/> 验证码长度，默认6位</param>
             <returns><see cref="T:System.String"/></returns>
         </member>
+        <member name="M:Fast.IaaS.Utils.VerificationUtil.GenRandomNum(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            生成随机数
+            </summary>
+            <param name="minVal">最小值（包含）</param>
+            <param name="maxVal">最大值（默认不包含）</param>
+            <param name="isInclude">是否包含最大值</param>
+            <returns></returns>
+        </member>
         <member name="T:System.Linq.ExpressionExtension">
             <summary>
             <see cref="T:System.Linq.ExpressionExtension"/> 表达式拓展类
