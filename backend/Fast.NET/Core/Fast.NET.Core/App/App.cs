@@ -99,7 +99,7 @@ public static class App
         var suppressSnifferAttributeType = typeof(SuppressSnifferAttribute);
 
         // 排除使用了 SuppressSnifferAttribute 特性的类型
-        EffectiveTypes = InternalPenetrates.EffectiveTypes.Where(wh => wh.IsDefined(suppressSnifferAttributeType, false));
+        EffectiveTypes = InternalPenetrates.EffectiveTypes.Where(wh => !wh.IsDefined(suppressSnifferAttributeType, false));
     }
 
     /// <summary>

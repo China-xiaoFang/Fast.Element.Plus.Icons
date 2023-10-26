@@ -33,7 +33,6 @@ internal static class InternalAssemblyUtil
     /// <exclude />
     internal static IEnumerable<Assembly> GetEntryAssembly(bool referenced = true)
     {
-        var assemblies = new List<Assembly>();
         // 获取入口程序集
         var entryAssembly = Assembly.GetEntryAssembly();
 

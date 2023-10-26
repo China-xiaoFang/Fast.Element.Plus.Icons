@@ -2,6 +2,7 @@ using Fast.CorsAccessor.Extensions;
 using Fast.DependencyInjection.Extensions;
 using Fast.Logging.Extensions;
 using Fast.Mapster.Extensions;
+using Fast.NET.Core;
 using Fast.NET.Core.Extensions;
 using Fast.Serialization.Extensions;
 using Fast.SpecificationProcessor.DataValidation.Extensions;
@@ -34,6 +35,8 @@ builder.Services.AddDependencyInjection();
 builder.Services.AddObjectMapper();
 
 builder.Services.AddControllers();
+
+var a = App.EffectiveTypes;
 
 // ÎÄµµ
 builder.AddSpecificationDocuments();
