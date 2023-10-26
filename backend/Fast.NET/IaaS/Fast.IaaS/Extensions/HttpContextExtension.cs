@@ -174,17 +174,6 @@ public static class HttpContextExtension
     }
 
     /// <summary>
-    /// 请求 UserAgent 信息
-    /// </summary>
-    /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
-    /// <returns><see cref="string"/></returns>
-    public static string UserAgent(this HttpContext httpContext, string userAgentHeaderKey = "User-Agent")
-    {
-        return httpContext?.Request.Headers[userAgentHeaderKey];
-    }
-
-    /// <summary>
     /// 局域网 IPv4 地址
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
@@ -343,10 +332,11 @@ public static class HttpContextExtension
     /// 请求用户代理字符串（User-Agent）
     /// </summary>
     /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
     /// <returns><see cref="string"/></returns>
-    public static string RequestUserAgent(this HttpContext context)
+    public static string RequestUserAgent(this HttpContext context, string userAgentHeaderKey = "User-Agent")
     {
-        return context?.Request.Headers["User-Agent"];
+        return context?.Request.Headers[userAgentHeaderKey];
     }
 
     /// <summary>

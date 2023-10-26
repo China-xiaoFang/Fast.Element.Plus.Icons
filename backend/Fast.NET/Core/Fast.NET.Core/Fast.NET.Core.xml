@@ -261,27 +261,27 @@
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>
-        <member name="T:Fast.NET.Core.Constant.GlobalConstant">
+        <member name="T:Fast.NET.Core.Constants.GlobalConstant">
             <summary>
-            <see cref="T:Fast.NET.Core.Constant.GlobalConstant"/> 常用常量
+            <see cref="T:Fast.NET.Core.Constants.GlobalConstant"/> 常用常量
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.DefaultTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.DefaultTime">
             <summary>
             默认DateTime
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.TimeStamp">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.TimeStamp">
             <summary>
             时间戳
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.SqlServerMinTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.SqlServerMinTime">
             <summary>
             Sql Server 最小时间
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.SqlServerMaxTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.SqlServerMaxTime">
             <summary>
             Sql Server 最大时间
             </summary>

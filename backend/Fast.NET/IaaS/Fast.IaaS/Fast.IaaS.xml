@@ -436,6 +436,66 @@
             枚举对象的值  
             </summary>  
         </member>
+        <member name="T:Fast.IaaS.Definition.UserAgentInfo">
+            <summary>
+            <see cref="T:Fast.IaaS.Definition.UserAgentInfo"/> 用户代理信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.Device">
+            <summary>
+            设备
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.OS">
+            <summary>
+            操作系统（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.Browser">
+            <summary>
+            浏览器（版本）
+            </summary>
+        </member>
+        <member name="T:Fast.IaaS.Definition.WanNetIPInfo">
+            <summary>
+            <see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/> 公网IP信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Ip">
+            <summary>
+            Ip地址
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Province">
+            <summary>
+            省份
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.ProvinceZipCode">
+            <summary>
+            省份邮政编码
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.CityZipCode">
+            <summary>
+            城市邮政编码
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Address">
+            <summary>
+            地理信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Operator">
+            <summary>
+            运营商
+            </summary>
+        </member>
         <member name="T:Fast.IaaS.Extensions.AssemblyExtension">
             <summary>
             <see cref="T:System.Reflection.Assembly"/> 拓展类
@@ -1089,6 +1149,38 @@
                 return200StatusCodes = [401, 403]
                 adaptStatusCodes = [[401, 200], [403, 200]]
             </remarks>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgent(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            请求用户代理字符串（User-Agent）
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgentInfo(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            请求用户代理信息（User-Agent）
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:Fast.IaaS.Definition.UserAgentInfo"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RemoteIpv4Info(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            远程 Ipv4 地址信息
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="ip"><see cref="T:System.String"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+            <returns><see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RemoteIpv4InfoAsync(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            远程 Ipv4 地址信息
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="ip"><see cref="T:System.String"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+            <returns><see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:Fast.IaaS.Extensions.IDictionaryExtension">
             <summary>
