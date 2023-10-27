@@ -741,6 +741,25 @@
             <param name="value">The value to convert to JSON.</param>
             <param name="options">An object that specifies serialization options to use.</param>
         </member>
+        <member name="T:Fast.Serialization.JsonConverter.ExceptionJsonConverter">
+            <summary>
+            <see cref="T:Fast.Serialization.JsonConverter.ExceptionJsonConverter"/> Exception 类型Json返回日期处理
+            <remarks>解决 <see cref="T:System.Exception"/> 类型不能被正常序列化和反序列化操作</remarks>
+            </summary>
+        </member>
+        <member name="M:Fast.Serialization.JsonConverter.ExceptionJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>Reads and converts the JSON to type <see cref="T:System.Exception"/>.</summary>
+            <param name="reader">The reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Fast.Serialization.JsonConverter.ExceptionJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.Exception,System.Text.Json.JsonSerializerOptions)">
+            <summary>Writes a specified value as JSON.</summary>
+            <param name="writer">The writer to write to.</param>
+            <param name="value">The value to convert to JSON.</param>
+            <param name="options">An object that specifies serialization options to use.</param>
+        </member>
         <member name="T:Fast.Serialization.JsonConverter.IntJsonConverter">
             <summary>
             <see cref="T:Fast.Serialization.JsonConverter.IntJsonConverter"/> int 类型Json返回处理
