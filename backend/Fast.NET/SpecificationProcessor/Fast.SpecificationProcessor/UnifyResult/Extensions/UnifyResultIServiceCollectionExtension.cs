@@ -104,7 +104,7 @@ public static class UnifyResultIServiceCollectionExtension
         UnifyContext.UnifyProviders.AddOrUpdate(providerName, _ => metadata, (_, _) => metadata);
 
         // 添加规范化提供器
-        services.TryAddSingleton(typeof(IUnifyResultProvider), providerType);
+        services.TryAddSingleton(providerType, providerType);
 
         // 添加成功规范化结果筛选器
         services.Configure<MvcOptions>(options => { options.Filters.Add<SucceededUnifyResultFilter>(); });

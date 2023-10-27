@@ -142,27 +142,13 @@ public static class DependencyInjectionIServiceCollectionExtension
         var lifetime = TryGetServiceLifetime(dependencyType);
 
         if (fixedInter == null)
+        {
             services.Add(ServiceDescriptor.Describe(fixedType, fixedType, lifetime));
+        }
         else
         {
             services.Add(ServiceDescriptor.Describe(fixedInter, fixedType, lifetime));
-            AddDispatchProxy(services, dependencyType, fixedType, fixedInter);
         }
-    }
-
-    /// <summary>
-    /// 创建服务代理
-    /// </summary>
-    /// <param name="services">服务集合</param>
-    /// <param name="dependencyType"></param>
-    /// <param name="type">拦截的类型</param>
-    /// <param name="inter">代理接口</param>
-    private static void AddDispatchProxy(IServiceCollection services, Type dependencyType, Type type, Type inter)
-    {
-        var lifetime = TryGetServiceLifetime(dependencyType);
-
-        // 注册服务
-        services.Add(ServiceDescriptor.Describe(type, inter, lifetime));
     }
 
     /// <summary>

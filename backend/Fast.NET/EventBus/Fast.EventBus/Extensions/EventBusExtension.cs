@@ -12,21 +12,37 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Reflection;
+
 namespace Fast.EventBus.Extensions;
 
 /// <summary>
-/// 事件总线拓展类
+/// <see cref="EventBusExtension"/> 事件总线拓展类
 /// </summary>
-internal static class EventBusExtension
+public static class EventBusExtension
 {
     /// <summary>
     /// 将事件枚举 Id 转换成字符串对象
     /// </summary>
     /// <param name="em"></param>
     /// <returns></returns>
-    internal static string ParseToString(this Enum em)
+    public static string ParseToString(this Enum em)
     {
         var enumType = em.GetType();
         return $"{enumType.Assembly.GetName().Name};{enumType.FullName}.{em}";
+    }
+
+    /// <summary>
+    /// 将事件枚举字符串转换成枚举对象
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static Enum ParseToEnum(this string str)
+    {
+        var assemblyName = str[..str.IndexOf(';')];
+        var fullName = str[(str.IndexOf(';') + 1)..str.LastIndexOf('.')];
+        var name = str[(str.LastIndexOf('.') + 1)..];
+
+        return Enum.Parse(Assembly.Load(assemblyName).GetType(fullName), name) as Enum;
     }
 }

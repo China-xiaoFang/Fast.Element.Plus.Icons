@@ -15,9 +15,12 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
+using Fast.IaaS.Definition;
 using Fast.NET;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using UAParser;
 
 namespace Fast.IaaS.Extensions;
 
@@ -168,17 +171,6 @@ public static class HttpContextExtension
         }
 
         return string.Empty;
-    }
-
-    /// <summary>
-    /// 请求 UserAgent 信息
-    /// </summary>
-    /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
-    /// <returns><see cref="string"/></returns>
-    public static string UserAgent(this HttpContext httpContext, string userAgentHeaderKey = "User-Agent")
-    {
-        return httpContext?.Request.Headers[userAgentHeaderKey];
     }
 
     /// <summary>
@@ -333,6 +325,139 @@ public static class HttpContextExtension
             {
                 context.Response.StatusCode = StatusCodes.Status200OK;
             }
+        }
+    }
+
+    /// <summary>
+    /// 请求用户代理字符串（User-Agent）
+    /// </summary>
+    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
+    /// <returns><see cref="string"/></returns>
+    public static string RequestUserAgent(this HttpContext context, string userAgentHeaderKey = "User-Agent")
+    {
+        return context?.Request.Headers[userAgentHeaderKey];
+    }
+
+    /// <summary>
+    /// 请求用户代理信息（User-Agent）
+    /// </summary>
+    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <returns><see cref="UserAgentInfo"/></returns>
+    public static UserAgentInfo RequestUserAgentInfo(this HttpContext context)
+    {
+        // 获取用户代理字符串
+        var userAgent = context.RequestUserAgent();
+
+        // 解析用户代理字符串
+        var clientInfo = Parser.GetDefault().Parse(userAgent);
+
+
+        return new UserAgentInfo
+        {
+            Device = clientInfo.Device.ToString(), OS = clientInfo.OS.ToString(), Browser = clientInfo.UA.ToString()
+        };
+    }
+
+    /// <summary>
+    /// 远程 Ipv4 地址信息
+    /// </summary>
+    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="ip"><see cref="string"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+    /// <returns><see cref="WanNetIPInfo"/></returns>
+    /// <exception cref="Exception"></exception>
+    public static WanNetIPInfo RemoteIpv4Info(this HttpContext context, string ip = null)
+    {
+        return context.RemoteIpv4InfoAsync(ip).Result;
+    }
+
+    /// <summary>
+    /// 远程 Ipv4 地址信息
+    /// </summary>
+    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="ip"><see cref="string"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+    /// <returns><see cref="WanNetIPInfo"/></returns>
+    /// <exception cref="Exception"></exception>
+    public static async Task<WanNetIPInfo> RemoteIpv4InfoAsync(this HttpContext context, string ip = null)
+    {
+        // 判断是否传入IP地址
+        ip ??= context.RemoteIpv4();
+
+        var url = $"http://whois.pconline.com.cn/ipJson.jsp?ip={ip}";
+
+        using var httpClient = new HttpClient();
+        // 设置请求超时事件
+        httpClient.Timeout = TimeSpan.FromSeconds(30);
+
+        using var request = new HttpRequestMessage();
+        var uri = new Uri(url);
+
+        // 设置请求 Url
+        request.RequestUri = uri;
+        // 设置请求方式
+        request.Method = HttpMethod.Get;
+        // 设置请求头部
+        request.Headers.Add("Accept", "application/json, text/plain, */*");
+        request.Headers.Add("Accept-Encoding", "gzip, compress, deflate, br");
+        request.Headers.Referrer = uri;
+
+        // 添加默认 User-Agent
+        request.Headers.TryAddWithoutValidation("User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.47");
+
+        try
+        {
+            // 发送请求
+            using var response = await httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var ipInfo = responseContent[
+                (responseContent.IndexOf("IPCallBack(", StringComparison.Ordinal) + "IPCallBack(".Length)..].TrimEnd();
+            ipInfo = ipInfo[..^3];
+
+            var ipInfoDictionary = JsonSerializer.Deserialize<IDictionary<string, string>>(ipInfo);
+
+            var result = new WanNetIPInfo();
+
+            if (ipInfoDictionary.TryGetValue("ip", out var resIp))
+            {
+                result.Ip = resIp;
+            }
+
+            if (ipInfoDictionary.TryGetValue("pro", out var resPro))
+            {
+                result.Province = resPro;
+            }
+
+            if (ipInfoDictionary.TryGetValue("pro", out var resProCode))
+            {
+                result.ProvinceZipCode = resProCode;
+            }
+
+            if (ipInfoDictionary.TryGetValue("city", out var resCity))
+            {
+                result.City = resCity;
+            }
+
+            if (ipInfoDictionary.TryGetValue("cityCode", out var resCityCode))
+            {
+                result.CityZipCode = resCityCode;
+            }
+
+            if (ipInfoDictionary.TryGetValue("addr", out var resAddr))
+            {
+                result.Address = resAddr;
+            }
+
+            return result;
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new Exception("请求错误：" + ex.Message, ex);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new Exception("请求超时：" + ex.Message, ex);
         }
     }
 }

@@ -16,4 +16,8 @@
 		<None Include="$(SolutionDir)Core\Fast.NET.Core\InternalResources\*.md" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\DependencyInjection\Fast.DependencyInjection\Fast.DependencyInjection.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
 ﻿using Fast.SpecificationProcessor.DynamicApplication;
+using Fast.Test.Api.Controllers;
+using Fast.Test.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Test.Api.Application;
@@ -9,6 +11,16 @@ namespace Fast.Test.Api.Application;
 [ApiDescriptionSettings(Name = "auth", Order = 1)]
 public class AuthApplication : IDynamicApplication
 {
+    private readonly ITestService _testService;
+
+    public ILogger<WeatherForecastController> Logger1 { get; }
+
+    public AuthApplication(ILogger<WeatherForecastController> logger, ITestService testService)
+    {
+        Logger1 = logger;
+        _testService = testService;
+    }
+
     /// <summary>
     /// 获取登录用户信息
     /// </summary>

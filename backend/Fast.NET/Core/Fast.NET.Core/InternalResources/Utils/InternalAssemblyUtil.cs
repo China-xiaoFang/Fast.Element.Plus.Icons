@@ -14,6 +14,7 @@
 
 
 using System.Reflection;
+using Microsoft.Extensions.DependencyModel;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
@@ -41,16 +42,22 @@ internal static class InternalAssemblyUtil
             return new List<Assembly> {entryAssembly};
         }
 
-        // 获取入口程序集所引用的所有程序集
-        var referencedAssemblies = entryAssembly?.GetReferencedAssemblies();
+        // 需排除的程序集后缀
+        var excludeAssemblyNames = new[] {"Database.Migrations"};
 
-        // 加载引用的程序集
-        var assemblies = referencedAssemblies.Select(Assembly.Load).ToList();
+        // 非独立发布/非单文件发布
+        if (!string.IsNullOrWhiteSpace(entryAssembly?.Location))
+        {
+            // TODO：这里引用了一个包，想办法手写去掉
+            // 读取项目程序集 或 Fast 官方发布的包，或手动添加引用的dll，或配置特定的包前缀
+            return DependencyContext.Default?.RuntimeLibraries
+                .Where(wh => (wh.Type == "project" && !excludeAssemblyNames.Any(a => wh.Name.EndsWith(a))) ||
+                             (wh.Type == "package" && (wh.Name.StartsWith(nameof(Fast)))))
+                .Select(sl => Reflect.GetAssembly(sl.Name));
+        }
 
-        // 将入口程序集也放入集合
-        assemblies.Add(entryAssembly);
-
-        return assemblies;
+        // 独立发布/单文件发布
+        throw new Exception("暂时不支持单文件或独立发布！");
     }
 
     /// <summary>

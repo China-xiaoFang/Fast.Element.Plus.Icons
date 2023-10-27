@@ -537,15 +537,6 @@
             <param name="type">类型</param>
             <param name="inter">接口</param>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDispatchProxy(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type)">
-            <summary>
-            创建服务代理
-            </summary>
-            <param name="services">服务集合</param>
-            <param name="dependencyType"></param>
-            <param name="type">拦截的类型</param>
-            <param name="inter">代理接口</param>
-        </member>
         <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.FixedGenericType(System.Type)">
             <summary>
             修复泛型类型注册类型问题

@@ -39,9 +39,10 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 namespace Fast.SpecificationProcessor.SpecificationDocument.Builders;
 
 /// <summary>
-/// 规范化文档构建器
+/// <see cref="SpecificationDocumentBuilder"/> 规范化文档构建器
 /// </summary>
-internal static class SpecificationDocumentBuilder
+[InternalSuppressSniffer]
+public static class SpecificationDocumentBuilder
 {
     /// <summary>
     /// 所有分组默认的组名 Key

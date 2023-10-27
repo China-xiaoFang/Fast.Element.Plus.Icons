@@ -118,9 +118,9 @@ public static class ObjectExtension
     /// </summary>
     /// <param name="obj"><see cref="object"/></param>
     /// <returns><see cref="IDictionary{TKey,TValue}"/></returns>
-    public static IDictionary<string, string> ToDictionary(this object obj)
+    public static IDictionary<string, object> ToDictionary(this object obj)
     {
-        var dictionary = new Dictionary<string, string>();
+        var dictionary = new Dictionary<string, object>();
 
         var t = obj.GetType(); // 获取对象对应的类， 对应的类型
 
@@ -133,9 +133,9 @@ public static class ObjectExtension
             if (m == null || !m.IsPublic)
                 continue;
             // 进行判NULL处理
-            if (m.Invoke(obj, new object[] { }) != null)
+            if (m.Invoke(obj, parameters: Array.Empty<object>()) != null)
             {
-                dictionary.Add(p.Name, m.Invoke(obj, new object[] { })?.ToString()); // 向字典添加元素
+                dictionary.Add(p.Name, m.Invoke(obj, parameters: Array.Empty<object>())); // 向字典添加元素
             }
         }
 

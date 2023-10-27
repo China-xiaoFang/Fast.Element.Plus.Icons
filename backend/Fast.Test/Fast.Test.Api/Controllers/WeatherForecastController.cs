@@ -1,3 +1,4 @@
+using Fast.Test.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Test.Api.Controllers;
@@ -11,16 +12,20 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
+    private readonly ITestService _testService;
+
     public ILogger<WeatherForecastController> Logger1 { get; }
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, ITestService testService)
     {
         Logger1 = logger;
+        _testService = testService;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        var a = _testService.Test();
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),

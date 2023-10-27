@@ -12,44 +12,31 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.ComponentModel;
-using Fast.NET.Core.Attributes;
-
-namespace Fast.NET.Core.Enum;
+namespace Fast.NET.Core.Constants;
 
 /// <summary>
-/// App运行环境枚举
+/// <see cref="GlobalConstant"/> 常用常量
 /// </summary>
-[FastEnum("App运行环境枚举")]
-public enum AppEnvironmentEnum
+[InternalSuppressSniffer]
+public class GlobalConstant
 {
     /// <summary>
-    /// PC
+    /// 默认DateTime
     /// </summary>
-    [Description("PC")]
-    PC = 1,
+    public static DateTime DefaultTime => InternalConstant.DefaultTime;
 
     /// <summary>
-    /// Windows端
+    /// 时间戳
     /// </summary>
-    [Description("Windows")]
-    Windows = 2,
+    public static long TimeStamp => InternalConstant.TimeStamp;
 
     /// <summary>
-    /// App端
+    /// Sql Server 最小时间
     /// </summary>
-    [Description("App")]
-    App = 4,
+    public DateTime SqlServerMinTime => InternalConstant.SqlServerMinTime;
 
     /// <summary>
-    /// H5
+    /// Sql Server 最大时间
     /// </summary>
-    [Description("H5")]
-    H5 = 8,
-
-    /// <summary>
-    /// 微信小程序
-    /// </summary>
-    [Description("微信小程序")]
-    WeChatMiniProgram = 16,
+    public DateTime SqlServerMaxTime => InternalConstant.SqlServerMaxTime;
 }

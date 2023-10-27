@@ -163,11 +163,18 @@
             释放所有未托管的对象
             </summary>
         </member>
-        <member name="M:Fast.NET.Core.App.ConfigureApplication(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+        <member name="M:Fast.NET.Core.App.ConfigureHostAppConfiguration(Microsoft.Extensions.Hosting.IHostBuilder)">
+            <summary>
+            自动装载主机配置
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Fast.NET.Core.App.ConfigureApplication(Microsoft.AspNetCore.Hosting.IWebHostBuilder,Microsoft.Extensions.Hosting.IHostBuilder)">
             <summary>
             配置 Application
             </summary>
             <param name="builder"></param>
+            <param name="hostBuilder"></param>
         </member>
         <member name="M:Fast.NET.Core.App.AddJsonFiles(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Extensions.Hosting.IHostEnvironment)">
             <summary>
@@ -220,7 +227,7 @@
         </member>
         <member name="F:Fast.NET.Core.InternalApp.HostEnvironment">
             <summary>
-            获取主机环境
+            获取泛型主机环境
             </summary>
         </member>
         <member name="F:Fast.NET.Core.InternalApp.UnmanagedObjects">
@@ -261,27 +268,27 @@
             </summary>
             <remarks>用于程序集扫描类型或方法时候</remarks>
         </member>
-        <member name="T:Fast.NET.Core.Constant.GlobalConstant">
+        <member name="T:Fast.NET.Core.Constants.GlobalConstant">
             <summary>
-            <see cref="T:Fast.NET.Core.Constant.GlobalConstant"/> 常用常量
+            <see cref="T:Fast.NET.Core.Constants.GlobalConstant"/> 常用常量
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.DefaultTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.DefaultTime">
             <summary>
             默认DateTime
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.TimeStamp">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.TimeStamp">
             <summary>
             时间戳
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.SqlServerMinTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.SqlServerMinTime">
             <summary>
             Sql Server 最小时间
             </summary>
         </member>
-        <member name="P:Fast.NET.Core.Constant.GlobalConstant.SqlServerMaxTime">
+        <member name="P:Fast.NET.Core.Constants.GlobalConstant.SqlServerMaxTime">
             <summary>
             Sql Server 最大时间
             </summary>
@@ -500,96 +507,6 @@
             </list>
             </param>
             <returns><see cref="T:System.String"/></returns>
-        </member>
-        <member name="T:Fast.NET.Core.Enum.AppEnvironmentEnum">
-            <summary>
-            App运行环境枚举
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.AppEnvironmentEnum.PC">
-            <summary>
-            PC
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.AppEnvironmentEnum.Windows">
-            <summary>
-            Windows端
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.AppEnvironmentEnum.App">
-            <summary>
-            App端
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.AppEnvironmentEnum.H5">
-            <summary>
-            H5
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.AppEnvironmentEnum.WeChatMiniProgram">
-            <summary>
-            微信小程序
-            </summary>
-        </member>
-        <member name="T:Fast.NET.Core.Enum.HttpRequestActionEnum">
-            <summary>
-            Http请求行为枚举
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Auth">
-            <summary>
-            登录
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Page">
-            <summary>
-            分页查询
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Query">
-            <summary>
-            查询
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Detail">
-            <summary>
-            详情
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Add">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Update">
-            <summary>
-            更新
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Delete">
-            <summary>
-            删除
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Download">
-            <summary>
-            下载
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Upload">
-            <summary>
-            上传
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Export">
-            <summary>
-            导出
-            </summary>
-        </member>
-        <member name="F:Fast.NET.Core.Enum.HttpRequestActionEnum.Import">
-            <summary>
-            导入
-            </summary>
         </member>
         <member name="T:Fast.NET.Core.Extensions.IApplicationBuilderExtension">
             <summary>

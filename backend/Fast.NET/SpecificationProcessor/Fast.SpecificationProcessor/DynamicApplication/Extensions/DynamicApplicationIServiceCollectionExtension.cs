@@ -32,9 +32,9 @@ public static class DynamicApplicationIServiceCollectionExtension
     /// </summary>
     /// <param name="mvcBuilder"><see cref="IMvcBuilder"/>Mvc构建器</param>
     /// <returns><see cref="IMvcBuilder"/>Mvc构建器</returns>
-    public static IMvcBuilder AddDynamicApiControllers(this IMvcBuilder mvcBuilder)
+    public static IMvcBuilder AddDynamicApplication(this IMvcBuilder mvcBuilder)
     {
-        mvcBuilder.Services.AddDynamicApiControllers();
+        mvcBuilder.Services.AddDynamicApplication();
 
         return mvcBuilder;
     }
@@ -44,12 +44,12 @@ public static class DynamicApplicationIServiceCollectionExtension
     /// </summary>
     /// <param name="services"><see cref="IServiceCollection"/></param>
     /// <returns><see cref="IServiceCollection"/></returns>
-    public static IServiceCollection AddDynamicApiControllers(this IServiceCollection services)
+    public static IServiceCollection AddDynamicApplication(this IServiceCollection services)
     {
         var partManager =
             services.FirstOrDefault(f => f.ServiceType == typeof(ApplicationPartManager))?.ImplementationInstance as
                 ApplicationPartManager ?? throw new InvalidOperationException(
-                $"`{nameof(AddDynamicApiControllers)}` must be invoked after `{nameof(MvcServiceCollectionExtensions.AddControllers)}`.");
+                $"`{nameof(AddDynamicApplication)}` must be invoked after `{nameof(MvcServiceCollectionExtensions.AddControllers)}`.");
 
         // 解决项目类型为 <Project Sdk="Microsoft.NET.Sdk"> 不能加载 API 问题，默认支持 <Project Sdk="Microsoft.NET.Sdk.Web">
         foreach (var assembly in InternalPenetrates.Assemblies)

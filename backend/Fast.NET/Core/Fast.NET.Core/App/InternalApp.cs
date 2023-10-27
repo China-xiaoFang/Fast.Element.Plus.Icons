@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET.Core;
@@ -48,9 +49,9 @@ internal static class InternalApp
     internal static IWebHostEnvironment WebHostEnvironment;
 
     /// <summary>
-    /// 获取主机环境
+    /// 获取泛型主机环境
     /// </summary>
-    internal static IWebHostEnvironment HostEnvironment;
+    internal static IHostEnvironment HostEnvironment;
 
     /// <summary>
     /// 未托管的对象集合

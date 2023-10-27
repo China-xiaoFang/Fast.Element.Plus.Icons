@@ -153,5 +153,17 @@
             <param name="metadata"><see cref="T:Fast.SpecificationProcessor.DataValidation.ValidationMetadata"/> 验证信息元数据</param>
             <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
+        <member name="M:Fast.Test.Api.Services.ITestService.Test">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Services.TestService.Test">
+            <summary>
+            测试
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

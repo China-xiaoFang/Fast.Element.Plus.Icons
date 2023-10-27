@@ -9,7 +9,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageOutputPath>$(SolutionDir)..\..\nupkgs</PackageOutputPath>
-		<Version>3.0.9-test.1.20231024.1</Version>
+		<Version>3.1.1</Version>
 		<PackageVersion>$(Version)</PackageVersion>
 		<Authors>1.8K仔</Authors>
 		<Description>一个快速构建项目的 .NET 框架。</Description>
@@ -41,8 +41,14 @@
 		<NoWarn>1701;1702;1591;NU1803</NoWarn>
 	</PropertyGroup>
 
+	<!-- 这个包主要是为了加载应用启动入口所有引用的程序集和包 -->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)README.zh.md" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)..\..\LICENSE" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)..\..\Fast.png" Pack="true" PackagePath="\" />
 		<None Include="$(SolutionDir)Directory.Build.props" Pack="true" PackagePath="\" />

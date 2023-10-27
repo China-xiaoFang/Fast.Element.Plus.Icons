@@ -436,6 +436,66 @@
             枚举对象的值  
             </summary>  
         </member>
+        <member name="T:Fast.IaaS.Definition.UserAgentInfo">
+            <summary>
+            <see cref="T:Fast.IaaS.Definition.UserAgentInfo"/> 用户代理信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.Device">
+            <summary>
+            设备
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.OS">
+            <summary>
+            操作系统（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.UserAgentInfo.Browser">
+            <summary>
+            浏览器（版本）
+            </summary>
+        </member>
+        <member name="T:Fast.IaaS.Definition.WanNetIPInfo">
+            <summary>
+            <see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/> 公网IP信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Ip">
+            <summary>
+            Ip地址
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Province">
+            <summary>
+            省份
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.ProvinceZipCode">
+            <summary>
+            省份邮政编码
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.CityZipCode">
+            <summary>
+            城市邮政编码
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Address">
+            <summary>
+            地理信息
+            </summary>
+        </member>
+        <member name="P:Fast.IaaS.Definition.WanNetIPInfo.Operator">
+            <summary>
+            运营商
+            </summary>
+        </member>
         <member name="T:Fast.IaaS.Extensions.AssemblyExtension">
             <summary>
             <see cref="T:System.Reflection.Assembly"/> 拓展类
@@ -1026,14 +1086,6 @@
             <param name="refererHeaderKey">默认从 “Referer” 获取</param>
             <returns><see cref="T:System.String"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.UserAgent(Microsoft.AspNetCore.Http.HttpContext,System.String)">
-            <summary>
-            请求 UserAgent 信息
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
-            <returns><see cref="T:System.String"/></returns>
-        </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.LanIpv4(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             局域网 IPv4 地址
@@ -1089,6 +1141,39 @@
                 return200StatusCodes = [401, 403]
                 adaptStatusCodes = [[401, 200], [403, 200]]
             </remarks>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgent(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            请求用户代理字符串（User-Agent）
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="userAgentHeaderKey">默认从 “User-Agent” 获取</param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RequestUserAgentInfo(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            请求用户代理信息（User-Agent）
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:Fast.IaaS.Definition.UserAgentInfo"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RemoteIpv4Info(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            远程 Ipv4 地址信息
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="ip"><see cref="T:System.String"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+            <returns><see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.RemoteIpv4InfoAsync(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            远程 Ipv4 地址信息
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="ip"><see cref="T:System.String"/> 要的IP地址信息，默认为 null，如果为 null，默认获取当前远程的 Ipv4 地址</param>
+            <returns><see cref="T:Fast.IaaS.Definition.WanNetIPInfo"/></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
         <member name="T:Fast.IaaS.Extensions.IDictionaryExtension">
             <summary>
@@ -1818,6 +1903,86 @@
             YYYY | YYYY-MM | YYYYMM | YYYY-MM-DD | YYYYMMDD | YYYY-MM-DD HH:MM:SS | YYYY-MM-DD HH:MM:SS.FFF
             </remarks>
         </member>
+        <member name="T:Fast.IaaS.LinqBuilder.Builders.LinqExpression">
+            <summary>
+            <see cref="T:Fast.IaaS.LinqBuilder.Builders.LinqExpression"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.Create``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            创建 Linq/Lambda 表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.Create``1(System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            创建 Linq/Lambda 表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.And``1">
+            <summary>
+            创建 And 表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.IndexAnd``1">
+            <summary>
+            创建 And 表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.Or``1">
+            <summary>
+            创建 Or 表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Builders.LinqExpression.IndexOr``1">
+            <summary>
+            创建 Or 表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="T:Fast.IaaS.LinqBuilder.Visitors.ParameterReplaceExpressionVisitor">
+            <summary>
+            处理 Lambda 参数不一致问题
+            </summary>
+        </member>
+        <member name="F:Fast.IaaS.LinqBuilder.Visitors.ParameterReplaceExpressionVisitor.parameterExpressionSetter">
+            <summary>
+            参数表达式映射集合
+            </summary>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Visitors.ParameterReplaceExpressionVisitor.#ctor(System.Collections.Generic.Dictionary{System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="parameterExpressionSetter">参数表达式映射集合</param>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Visitors.ParameterReplaceExpressionVisitor.ReplaceParameters(System.Collections.Generic.Dictionary{System.Linq.Expressions.ParameterExpression,System.Linq.Expressions.ParameterExpression},System.Linq.Expressions.Expression)">
+            <summary>
+            替换表达式参数
+            </summary>
+            <param name="parameterExpressionSetter">参数表达式映射集合</param>
+            <param name="expression">表达式</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:Fast.IaaS.LinqBuilder.Visitors.ParameterReplaceExpressionVisitor.VisitParameter(System.Linq.Expressions.ParameterExpression)">
+            <summary>
+            重写基类参数访问器
+            </summary>
+            <param name="parameterExpression"></param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.IaaS.Utils.AssemblyUtil">
             <summary>
             <see cref="T:System.Reflection.Assembly"/> 工具类
@@ -2109,6 +2274,203 @@
             </summary>
             <param name="len"><see cref="T:System.Int32"/> 验证码长度，默认6位</param>
             <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.IaaS.Utils.VerificationUtil.GenRandomNum(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            生成随机数
+            </summary>
+            <param name="minVal">最小值（包含）</param>
+            <param name="maxVal">最大值（默认不包含）</param>
+            <param name="isInclude">是否包含最大值</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Linq.ExpressionExtension">
+            <summary>
+            <see cref="T:System.Linq.ExpressionExtension"/> 表达式拓展类
+            </summary>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.Compose``1(System.Linq.Expressions.Expression{``0},System.Linq.Expressions.Expression{``0},System.Func{System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression})">
+            <summary>
+            组合两个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="extendExpression">表达式2</param>
+            <param name="mergeWay">组合方式</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            与操作合并两个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            与操作合并两个表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.AndIf``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            根据条件成立再与操作合并两个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="condition">布尔条件</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.AndIf``1(System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            根据条件成立再与操作合并两个表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="condition">布尔条件</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            或操作合并两个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            或操作合并两个表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.OrIf``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            根据条件成立再或操作合并两个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="condition">布尔条件</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.OrIf``1(System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            根据条件成立再或操作合并两个表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式1</param>
+            <param name="condition">布尔条件</param>
+            <param name="extendExpression">表达式2</param>
+            <returns>新的表达式</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.GetExpressionPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            获取Lambda表达式属性名，只限 u=>u.Property 表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="expression">表达式</param>
+            <returns>属性名</returns>
+        </member>
+        <member name="M:System.Linq.ExpressionExtension.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            是否是空集合
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <returns>是否为空集合</returns>
+        </member>
+        <member name="T:System.Linq.IEnumerableExtension">
+            <summary>
+            <see cref="T:System.Linq.IEnumerableExtension"/> IEnumerable 拓展
+            </summary>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            根据条件成立再构建 Where 查询
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="condition">布尔条件</param>
+            <param name="expression">表达式</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}})">
+            <summary>
+            根据条件成立再构建 Where 查询，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="condition">布尔条件</param>
+            <param name="expression">表达式</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}[])">
+            <summary>
+            与操作合并多个表达式
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="expressions">表达式数组</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}}[])">
+            <summary>
+            与操作合并多个表达式，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="expressions">表达式数组</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.ValueTuple{System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}}}[])">
+            <summary>
+            根据条件成立再构建 WhereOr 查询
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="conditionExpressions">条件表达式</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Linq.IQueryable{``0},System.ValueTuple{System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}}}[])">
+            <summary>
+            根据条件成立再构建 WhereOr 查询，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="conditionExpressions">条件表达式</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Func{``0,System.Boolean})">
+            <summary>
+            根据条件成立再构建 Where 查询
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="condition">布尔条件</param>
+            <param name="expression">表达式</param>
+            <returns>新的集合对象</returns>
+        </member>
+        <member name="M:System.Linq.IEnumerableExtension.Where``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Func{``0,System.Int32,System.Boolean})">
+            <summary>
+            根据条件成立再构建 Where 查询，支持索引器
+            </summary>
+            <typeparam name="TSource">泛型类型</typeparam>
+            <param name="sources">集合对象</param>
+            <param name="condition">布尔条件</param>
+            <param name="expression">表达式</param>
+            <returns>新的集合对象</returns>
         </member>
     </members>
 </doc>
