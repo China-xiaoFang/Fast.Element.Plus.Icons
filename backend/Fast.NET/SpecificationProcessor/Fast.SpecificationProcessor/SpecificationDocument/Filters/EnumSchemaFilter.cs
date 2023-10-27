@@ -45,8 +45,7 @@ internal class EnumSchemaFilter : ISchemaFilter
         var type = context.Type;
 
         // 排除其他程序集的枚举
-        // && App.Assemblies.Contains(type.Assembly)
-        if (type.IsEnum)
+        if (type.IsEnum && InternalPenetrates.Assemblies.Contains(type.Assembly))
         {
             model.Enum.Clear();
             var stringBuilder = new StringBuilder();
@@ -55,7 +54,7 @@ internal class EnumSchemaFilter : ISchemaFilter
             var enumValues = Enum.GetValues(type);
 
             // 从配置文件中读取全局配置
-            var convertToNumber = InternalApp.Configuration.GetValue("AppSettings:SpecificationDocumentEnumToNumber", false);
+            var convertToNumber = InternalApp.Configuration.GetValue("SpecificationDocumentSettings:EnumToNumber", false);
 
             // 包含中文情况
             if (Enum.GetNames(type).Any(v => Regex.IsMatch(v, CHINESE_PATTERN)))
