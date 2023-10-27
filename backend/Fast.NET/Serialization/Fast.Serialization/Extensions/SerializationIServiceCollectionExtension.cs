@@ -52,6 +52,8 @@ public static class SerializationIServiceCollectionExtension
             options.JsonSerializerOptions.Converters.Add(new NullableDecimalJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new DoubleJsonConverter());
             options.JsonSerializerOptions.Converters.Add(new NullableDoubleJsonConverter());
+            // 解决 Exception 类型不能被正常序列化和反序列化的问题
+            options.JsonSerializerOptions.Converters.Add(new ExceptionJsonConverter());
             // 忽略只有在 .NET 6 才会存在的循环引用问题
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             // 解决 JSON 乱码问题
