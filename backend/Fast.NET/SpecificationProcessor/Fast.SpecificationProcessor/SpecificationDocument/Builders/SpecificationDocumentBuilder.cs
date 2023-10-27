@@ -166,7 +166,7 @@ public static class SpecificationDocumentBuilder
 
             //// 处理虚拟目录问题
             //var template = $"{_appSettings.VirtualPath}/{routeTemplate}";
-            var template = routeTemplate;
+            var template = $"/{routeTemplate}";
 
             var groupInfo = _specificationDocumentSettings.GroupOpenApiInfos.FirstOrDefault(u => u.Group == group);
             if (groupInfo != null)
