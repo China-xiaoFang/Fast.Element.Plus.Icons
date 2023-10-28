@@ -132,6 +132,13 @@
             <param name="path">配置中对应的Key</param>
             <returns>TOptions</returns>
         </member>
+        <member name="M:Fast.NET.Core.App.GetCurrentStartupUri">
+            <summary>
+            获取当前程序启动Uri信息
+            <remarks>默认获取第一个地址，可能为空，请勿在程序启动过程中使用</remarks>
+            </summary>
+            <returns><see cref="T:System.Uri"/></returns>
+        </member>
         <member name="M:Fast.NET.Core.App.GetThreadId">
             <summary>
             获取当前线程 Id
