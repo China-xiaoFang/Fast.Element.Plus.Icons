@@ -1139,45 +1139,6 @@
             <param name="type">type</param>
             <returns></returns>
         </member>
-        <member name="T:Fast.SpecificationProcessor.Oops">
-            <summary>
-            抛异常静态类
-            </summary>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.Oops.Bah(System.String,System.Object[])">
-            <summary>
-            抛出业务异常信息
-            </summary>
-            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
-            <param name="args">String.Format 参数</param>
-            <returns><see cref="T:Fast.NET.UserFriendlyException"/>异常实例</returns>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.Oops.Oh(System.String,System.Object[])">
-            <summary>
-            抛出字符串异常
-            </summary>
-            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
-            <param name="args">String.Format 参数</param>
-            <returns><see cref="T:System.Exception"/>异常实例</returns>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.Oops.Oh(System.String,System.Type,System.Object[])">
-            <summary>
-            抛出字符串异常
-            </summary>
-            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
-            <param name="exceptionType">具体异常类型</param>
-            <param name="args">String.Format 参数</param>
-            <returns><see cref="T:System.Exception"/>异常实例</returns>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.Oops.Oh``1(System.String,System.Object[])">
-            <summary>
-            抛出字符串异常
-            </summary>
-            <typeparam name="TException">具体异常类型</typeparam>
-            <param name="errorMessage"><see cref="T:System.String"/>异常消息</param>
-            <param name="args">String.Format 参数</param>
-            <returns><see cref="T:System.Exception"/>异常实例</returns>
-        </member>
         <member name="T:Fast.SpecificationProcessor.SpecificationDocument.OperationIdAttribute">
             <summary>
             <see cref="T:Fast.SpecificationProcessor.SpecificationDocument.OperationIdAttribute"/> 配置规范化文档 OperationId 问题
