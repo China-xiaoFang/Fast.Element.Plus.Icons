@@ -161,6 +161,19 @@
             <returns><see cref="T:System.Object"/></returns>
             <exclude />
         </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.SignInToSwagger(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            设置规范化文档自动登录
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="accessToken"></param>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.SignOutToSwagger(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            设置规范化文档退出登录
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+        </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
             <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类
@@ -1028,13 +1041,6 @@
             <param name="attributeType"><see cref="T:System.Type"/></param>
             <returns><see cref="T:System.Object"/></returns>
         </member>
-        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.GetControllerActionDescriptor(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            获取 控制器/Action 描述器
-            </summary>
-            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
-            <returns><see cref="T:Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor"/></returns>
-        </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.SignInToSwagger(Microsoft.AspNetCore.Http.HttpContext,System.String)">
             <summary>
             设置规范化文档自动登录
@@ -1047,6 +1053,13 @@
             设置规范化文档退出登录
             </summary>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+        </member>
+        <member name="M:Fast.IaaS.Extensions.HttpContextExtension.GetControllerActionDescriptor(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取 控制器/Action 描述器
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor"/></returns>
         </member>
         <member name="M:Fast.IaaS.Extensions.HttpContextExtension.ReadBodyContentAsync(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>

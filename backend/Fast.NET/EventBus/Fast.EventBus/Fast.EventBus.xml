@@ -161,6 +161,19 @@
             <returns><see cref="T:System.Object"/></returns>
             <exclude />
         </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.SignInToSwagger(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            设置规范化文档自动登录
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="accessToken"></param>
+        </member>
+        <member name="M:Fast.NET.InternalHttpContextExtension.SignOutToSwagger(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            设置规范化文档退出登录
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+        </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
             <see cref="T:System.Reflection.MethodInfo"/> 内部拓展类

@@ -70,4 +70,30 @@ internal static class InternalHttpContextExtension
     {
         return httpContext.GetEndpoint()?.Metadata.GetMetadata(attributeType);
     }
+
+    /// <summary>
+    /// 设置规范化文档自动登录
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="accessToken"></param>
+    internal static void SignInToSwagger(this HttpContext httpContext, string accessToken)
+    {
+        if (httpContext != null)
+        {
+            // 设置 Swagger 刷新自动授权
+            httpContext.Response.Headers["access-token"] = accessToken;
+        }
+    }
+
+    /// <summary>
+    /// 设置规范化文档退出登录
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    internal static void SignOutToSwagger(this HttpContext httpContext)
+    {
+        if (httpContext != null)
+        {
+            httpContext.Response.Headers["access-token"] = "invalid_token";
+        }
+    }
 }

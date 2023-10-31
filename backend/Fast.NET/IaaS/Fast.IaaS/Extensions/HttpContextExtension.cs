@@ -63,25 +63,13 @@ public static class HttpContextExtension
     }
 
     /// <summary>
-    /// 获取 控制器/Action 描述器
-    /// </summary>
-    /// <param name="httpContext"><see cref="HttpContext"/></param>
-    /// <returns><see cref="ControllerActionDescriptor"/></returns>
-    public static ControllerActionDescriptor GetControllerActionDescriptor(this HttpContext httpContext)
-    {
-        return httpContext.GetEndpoint()?.Metadata?.FirstOrDefault(u => u is ControllerActionDescriptor) as
-            ControllerActionDescriptor;
-    }
-
-    /// <summary>
     /// 设置规范化文档自动登录
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="accessToken"></param>
     public static void SignInToSwagger(this HttpContext httpContext, string accessToken)
     {
-        // 设置 Swagger 刷新自动授权
-        httpContext.Response.Headers["access-token"] = accessToken;
+        InternalHttpContextExtension.SignInToSwagger(httpContext, accessToken);
     }
 
     /// <summary>
@@ -90,7 +78,18 @@ public static class HttpContextExtension
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     public static void SignOutToSwagger(this HttpContext httpContext)
     {
-        httpContext.Response.Headers["access-token"] = "invalid_token";
+        InternalHttpContextExtension.SignOutToSwagger(httpContext);
+    }
+
+    /// <summary>
+    /// 获取 控制器/Action 描述器
+    /// </summary>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns><see cref="ControllerActionDescriptor"/></returns>
+    public static ControllerActionDescriptor GetControllerActionDescriptor(this HttpContext httpContext)
+    {
+        return httpContext.GetEndpoint()?.Metadata?.FirstOrDefault(u => u is ControllerActionDescriptor) as
+            ControllerActionDescriptor;
     }
 
     /// <summary>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Fast.CorsAccessor</name>
+        <name>Fast.JwtBearer</name>
     </assembly>
     <members>
         <member name="T:Fast.NET.InternalSuppressSnifferAttribute">
@@ -428,107 +428,296 @@
             <returns></returns>
             <exclude />
         </member>
-        <member name="T:Fast.CorsAccessor.Extensions.CorsAccessorIApplicationBuilderExtension">
+        <member name="T:Fast.JwtBearer.Extensions.JwtBearerIServiceCollectionExtension">
             <summary>
-            <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 跨域中间件拓展类
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> JWT 授权服务拓展类
             </summary>
         </member>
-        <member name="M:Fast.CorsAccessor.Extensions.CorsAccessorIApplicationBuilderExtension.UseCorsAccessor(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder})">
+        <member name="M:Fast.JwtBearer.Extensions.JwtBearerIServiceCollectionExtension.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
             <summary>
-            添加跨域中间件
+            添加 JWT 授权
             </summary>
-            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
-            <param name="corsPolicyBuilderHandler"></param>
-            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
+            <param name="services"></param>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> 配置项，建议通过框架自带的 App.Configuration 传入，否则会在内部自动解析 IConfiguration 性能会很低</param>
+            <param name="enableGlobalAuthorize"></param>
+            <returns></returns>
         </member>
-        <member name="T:Fast.CorsAccessor.Extensions.CorsAccessorIServiceCollectionExtension">
+        <member name="M:Fast.JwtBearer.Extensions.JwtBearerIServiceCollectionExtension.AddJwt``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
             <summary>
-            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 跨域访问服务拓展类
+            添加 JWT 授权
             </summary>
+            <typeparam name="TAuthorizationHandler"></typeparam>
+            <param name="services"></param>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> 配置项，建议通过框架自带的 App.Configuration 传入，否则会在内部自动解析 IConfiguration 性能会很低</param>
+            <param name="enableGlobalAuthorize"></param>
+            <returns></returns>
         </member>
-        <member name="M:Fast.CorsAccessor.Extensions.CorsAccessorIServiceCollectionExtension.AddCorsAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Action{Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions},System.Action{Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder})">
+        <member name="T:Fast.JwtBearer.Handlers.AppAuthorizationHandler">
             <summary>
-            配置跨域
-            </summary>
-            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 服务集合</param>
-            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> 配置项</param>
-            <param name="corsOptionsHandler"></param>
-            <param name="corsPolicyBuilderHandler"></param>
-            <returns>服务集合</returns>
-        </member>
-        <member name="T:Fast.CorsAccessor.Internal.Penetrates">
-            <summary>
-            <see cref="T:Fast.CorsAccessor.Internal.Penetrates"/> 常量、公共方法配置类
+            授权策略执行程序
             </summary>
         </member>
-        <member name="F:Fast.CorsAccessor.Internal.Penetrates._defaultExposedHeaders">
-            <summary>
-            默认跨域导出响应头 Key
-            </summary>
-            <remarks>解决 ajax，XMLHttpRequest，axios 不能获取请求头问题</remarks>
+        <member name="M:Fast.JwtBearer.Handlers.AppAuthorizationHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>Makes a decision if authorization is allowed.</summary>
+            <param name="context">The authorization information.</param>
         </member>
-        <member name="M:Fast.CorsAccessor.Internal.Penetrates.SetCorsPolicy(Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder,Fast.CorsAccessor.Options.CorsAccessorSettingsOptions,System.Boolean)">
+        <member name="M:Fast.JwtBearer.Handlers.AppAuthorizationHandler.AuthorizeHandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
             <summary>
-            设置跨域策略
+            授权处理
             </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder"/></param>
-            <param name="corsAccessorSettings"><see cref="T:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions"/></param>
-            <param name="isMiddleware"><see cref="T:System.Boolean"/></param>
+            <param name="context"></param>
+            <returns></returns>
         </member>
-        <member name="T:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions">
+        <member name="M:Fast.JwtBearer.Handlers.AppAuthorizationHandler.PipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">
             <summary>
-            跨域配置选项
+            验证管道
             </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <returns></returns>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.PolicyName">
+        <member name="M:Fast.JwtBearer.Handlers.AppAuthorizationHandler.PolicyPipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
             <summary>
-            策略名称
+            策略验证管道
             </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <param name="requirement"></param>
+            <returns></returns>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.WithOrigins">
+        <member name="T:Fast.JwtBearer.Options.JWTSettingsOptions">
             <summary>
-            允许来源域名，没有配置则允许所有来源
-            </summary>
-        </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.WithHeaders">
-            <summary>
-            请求表头，没有配置则允许所有表头
-            </summary>
-        </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.WithExposedHeaders">
-            <summary>
-            设置客户端可获取的响应标头
+            <see cref="T:Fast.JwtBearer.Options.JWTSettingsOptions"/> Jwt 配置
             </summary>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.WithMethods">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidateIssuerSigningKey">
             <summary>
-            设置跨域允许请求谓词，没有配置则允许所有
+            验证签发方密钥
             </summary>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.AllowCredentials">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.IssuerSigningKey">
             <summary>
-            是否允许跨域请求中的凭据
+            签发方密钥
             </summary>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.SetPreflightMaxAge">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidateIssuer">
             <summary>
-            设置预检过期时间
+            验证签发方
             </summary>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.FixedClientToken">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidIssuer">
             <summary>
-            修正前端无法获取 Token 问题
+            签发方
             </summary>
         </member>
-        <member name="P:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.SignalRSupport">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidateAudience">
             <summary>
-            启用 SignalR 跨域支持
+            验证签收方
             </summary>
         </member>
-        <member name="M:Fast.CorsAccessor.Options.CorsAccessorSettingsOptions.PostConfigure">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidAudience">
             <summary>
-            后期配置
+            签收方
             </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ValidateLifetime">
+            <summary>
+            验证生存期
+            </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ClockSkew">
+            <summary>
+            过期时间容错值，解决服务器端时间不同步问题（秒）
+            </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ExpiredTime">
+            <summary>
+            过期时间（分钟）
+            </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.Algorithm">
+            <summary>
+            加密算法
+            </summary>
+        </member>
+        <member name="T:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider">
+            <summary>
+            授权策略提供器
+            </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider.FallbackPolicyProvider">
+            <summary>
+            默认回退策略
+            </summary>
+        </member>
+        <member name="M:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Authorization.AuthorizationOptions})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider.GetDefaultPolicyAsync">
+            <summary>
+            获取默认策略
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider.GetFallbackPolicyAsync">
+            <summary>
+            获取回退策略
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider.GetPolicyAsync(System.String)">
+            <summary>
+            获取策略
+            </summary>
+            <param name="policyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.JwtBearer.Requirements.AppAuthorizeRequirement">
+            <summary>
+            策略对应的需求
+            </summary>
+        </member>
+        <member name="M:Fast.JwtBearer.Requirements.AppAuthorizeRequirement.#ctor(System.String[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="policies"></param>
+        </member>
+        <member name="P:Fast.JwtBearer.Requirements.AppAuthorizeRequirement.Policies">
+            <summary>
+            策略
+            </summary>
+        </member>
+        <member name="T:Fast.JwtBearer.Utils.JwtCryptoUtil">
+            <summary>
+            <see cref="T:Fast.JwtBearer.Utils.JwtCryptoUtil"/> Jwt加密解密工具类
+            </summary>
+        </member>
+        <member name="F:Fast.JwtBearer.Utils.JwtCryptoUtil.DateTypeClaimTypes">
+            <summary>
+            日期类型的 Claim 类型
+            </summary>
+        </member>
+        <member name="F:Fast.JwtBearer.Utils.JwtCryptoUtil.RefreshTokenClaims">
+            <summary>
+            刷新 Token 身份标识
+            </summary>
+        </member>
+        <member name="P:Fast.JwtBearer.Utils.JwtCryptoUtil.JwtSettings">
+            <summary>
+            JWT 配置
+            </summary>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.GenerateToken(System.Collections.Generic.IDictionary{System.String,System.Object},System.Nullable{System.Int64})">
+            <summary>
+            生成 Token
+            </summary>
+            <param name="payload"></param>
+            <param name="expiredTime">过期时间（分钟）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.GenerateRefreshToken(System.String,System.Int32)">
+            <summary>
+            生成刷新 Token
+            </summary>
+            <param name="accessToken"></param>
+            <param name="expiredTime">刷新 Token 有效期（分钟）</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String,System.Nullable{System.Int64},System.Int64)">
+            <summary>
+            通过过期Token 和 刷新Token 换取新的 Token
+            </summary>
+            <param name="httpContext"></param>
+            <param name="expiredToken"></param>
+            <param name="refreshToken"></param>
+            <param name="expiredTime">过期时间（分钟）</param>
+            <param name="clockSkew">刷新token容差值，秒做单位</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext,System.Nullable{System.Int64},System.Int32,System.String,System.Int64)">
+            <summary>
+            自动刷新 Token 信息
+            </summary>
+            <param name="context"></param>
+            <param name="httpContext"></param>
+            <param name="expiredTime">新 Token 过期时间（分钟）</param>
+            <param name="refreshTokenExpiredTime">新刷新 Token 有效期（分钟）</param>
+            <param name="tokenPrefix"></param>
+            <param name="clockSkew"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Validate(System.String)">
+            <summary>
+            验证 Token
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.ValidateJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,Microsoft.IdentityModel.JsonWebTokens.JsonWebToken@,System.String,System.String)">
+            <summary>
+            验证 Token
+            </summary>
+            <param name="httpContext"></param>
+            <param name="token"></param>
+            <param name="headerKey"></param>
+            <param name="tokenPrefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.ReadJwtToken(System.String)">
+            <summary>
+            读取 Token，不含验证
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.SecurityReadJwtToken(System.String)">
+            <summary>
+            读取 Token，不含验证
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.GetJwtBearerToken(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String)">
+            <summary>
+            获取 JWT Bearer Token
+            </summary>
+            <param name="httpContext"></param>
+            <param name="headerKey"></param>
+            <param name="tokenPrefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.CreateTokenValidationParameters(Fast.JwtBearer.Options.JWTSettingsOptions)">
+            <summary>
+            生成Token验证参数
+            </summary>
+            <param name="jwtSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider">
+            <summary>
+            <see cref="T:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider"/> Jwt验证提供器
+            </summary>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            授权处理
+            <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider.PermissionHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
+            <summary>
+            权限处理
+            <remarks>这个会返回 403，校验失败</remarks>
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
+            <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
         </member>
     </members>
 </doc>
