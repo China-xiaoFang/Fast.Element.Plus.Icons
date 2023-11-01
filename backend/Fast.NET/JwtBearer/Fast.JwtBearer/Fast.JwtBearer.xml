@@ -308,6 +308,32 @@
             <returns><see cref="T:System.Boolean"/></returns>
             <exclude />
         </member>
+        <member name="T:Fast.NET.DepsLibrary">
+            <summary>
+            <see cref="T:Fast.NET.DepsLibrary"/> .deps.json 文件中 libraries 节点的Model
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Type">
+            <summary>
+            类型
+            <remarks>"package"是引用的包，"project"是本地引用的项目</remarks>
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Name">
+            <summary>
+            程序集名称
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Version">
+            <summary>
+            程序集版本
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Serviceable">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Fast.NET.Reflect">
             <summary>
             内部反射静态类
@@ -450,6 +476,28 @@
         <member name="M:Fast.JwtBearer.Handlers.AppAuthorizationHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
             <summary>Makes a decision if authorization is allowed.</summary>
             <param name="context">The authorization information.</param>
+        </member>
+        <member name="T:Fast.JwtBearer.Handlers.IJwtBearerHandle">
+            <summary>
+            <see cref="T:Fast.JwtBearer.Handlers.IJwtBearerHandle"/> Jwt验证提供器
+            </summary>
+        </member>
+        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+            <summary>
+            授权处理
+            <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.PermissionHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
+            <summary>
+            权限处理
+            <remarks>这个会返回 403，校验失败</remarks>
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
+            <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>
+            <returns><see cref="T:System.Boolean"/></returns>
         </member>
         <member name="T:Fast.JwtBearer.Options.JWTSettingsOptions">
             <summary>
@@ -662,28 +710,6 @@
             </summary>
             <param name="jwtSettings"></param>
             <returns></returns>
-        </member>
-        <member name="T:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider">
-            <summary>
-            <see cref="T:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider"/> Jwt验证提供器
-            </summary>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
-            <summary>
-            授权处理
-            <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
-            </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.SpecificationProcessor.UnifyResult.IJwtBearerProvider.PermissionHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
-            <summary>
-            权限处理
-            <remarks>这个会返回 403，校验失败</remarks>
-            </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
-            <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
         </member>
     </members>
 </doc>

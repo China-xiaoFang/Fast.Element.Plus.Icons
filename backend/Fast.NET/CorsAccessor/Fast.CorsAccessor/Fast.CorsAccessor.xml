@@ -308,6 +308,32 @@
             <returns><see cref="T:System.Boolean"/></returns>
             <exclude />
         </member>
+        <member name="T:Fast.NET.DepsLibrary">
+            <summary>
+            <see cref="T:Fast.NET.DepsLibrary"/> .deps.json 文件中 libraries 节点的Model
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Type">
+            <summary>
+            类型
+            <remarks>"package"是引用的包，"project"是本地引用的项目</remarks>
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Name">
+            <summary>
+            程序集名称
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Version">
+            <summary>
+            程序集版本
+            </summary>
+        </member>
+        <member name="P:Fast.NET.DepsLibrary.Serviceable">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Fast.NET.Reflect">
             <summary>
             内部反射静态类

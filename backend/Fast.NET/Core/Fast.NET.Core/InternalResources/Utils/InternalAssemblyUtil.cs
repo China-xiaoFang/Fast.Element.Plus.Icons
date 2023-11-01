@@ -14,7 +14,7 @@
 
 
 using System.Reflection;
-using Microsoft.Extensions.DependencyModel;
+using System.Text.Json;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
@@ -48,11 +48,60 @@ internal static class InternalAssemblyUtil
         // 非独立发布/非单文件发布
         if (!string.IsNullOrWhiteSpace(entryAssembly?.Location))
         {
-            // TODO：这里引用了一个包，想办法手写去掉
+            // 获取程序入口文件的 .deps.json 文件
+            var depsJsonFilePath = $"{entryAssembly.Location[..^".dll".Length]}.deps.json";
+
+            // 判断文件是否存在
+            if (!File.Exists(depsJsonFilePath))
+            {
+                throw new Exception($"Cannot find {entryAssembly.GetName().Name}.deps.json file.");
+            }
+
+            // 读取文件
+            var depsJsonContent = File.ReadAllText(depsJsonFilePath);
+
+            // 解析 JSON字符串，并获取 "libraries" 节点的值
+            var depsJsonRoot = JsonDocument.Parse(depsJsonContent).RootElement;
+            var librariesContent = depsJsonRoot.GetProperty("libraries").EnumerateObject();
+
+            var depsLibraryList = new List<DepsLibrary>();
+
+            // 处理 "libraries" 节点的值
+            foreach (var library in librariesContent)
+            {
+                // "Azure.Core/1.25.0"
+                var libraryName = library.Name;
+                var libraryNameArr = libraryName.Split("/");
+
+                // 根据Key，获取Name 和 Version
+                var name = libraryNameArr.Length >= 1 ? libraryNameArr[0] : null;
+                var version = libraryNameArr.Length >= 2 ? libraryNameArr[1] : null;
+
+                string type = null;
+                if (library.Value.TryGetProperty("type", out var typeObj))
+                {
+                    type = typeObj.ToString();
+                }
+
+                var serviceable = false;
+                if (library.Value.TryGetProperty("serviceable", out var serviceableObj))
+                {
+                    serviceable = serviceableObj.GetBoolean();
+                }
+
+                // 放入集合中
+                depsLibraryList.Add(new DepsLibrary(type, name, version, serviceable));
+            }
+
+            /*
+             * 这里获取不到下面这两个：
+             *  Microsoft.AspNetCore.App.Runtime.win-x64
+             *  Microsoft.NETCore.App.Runtime.win-x64
+             */
+
             // 读取项目程序集 或 Fast 官方发布的包，或手动添加引用的dll，或配置特定的包前缀
-            return DependencyContext.Default?.RuntimeLibraries
-                .Where(wh => (wh.Type == "project" && !excludeAssemblyNames.Any(a => wh.Name.EndsWith(a))) ||
-                             (wh.Type == "package" && (wh.Name.StartsWith(nameof(Fast)))))
+            return depsLibraryList.Where(wh => (wh.Type == "project" && !excludeAssemblyNames.Any(a => wh.Name.EndsWith(a))) ||
+                                               (wh.Type == "package" && (wh.Name.StartsWith(nameof(Fast)))))
                 .Select(sl => Reflect.GetAssembly(sl.Name));
         }
 

@@ -1,4 +1,4 @@
-// Apache开源许可证
+﻿// Apache开源许可证
 //
 // 版权所有 © 2018-2023 1.8K仔
 //
@@ -12,30 +12,41 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Microsoft.AspNetCore.Authorization;
-
 // ReSharper disable once CheckNamespace
-namespace Fast.SpecificationProcessor.UnifyResult;
+
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="IJwtBearerProvider"/> Jwt验证提供器
+/// <see cref="DepsLibrary"/> .deps.json 文件中 libraries 节点的Model
 /// </summary>
-public interface IJwtBearerProvider
+internal class DepsLibrary
 {
-    /// <summary>
-    /// 授权处理
-    /// <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
-    /// </summary>
-    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
-    /// <returns><see cref="bool"/></returns>
-    Task<bool> AuthorizeHandle(AuthorizationHandlerContext context);
+    public DepsLibrary(string type, string name, string version, bool serviceable)
+    {
+        Type = type;
+        Name = name;
+        Version = version;
+        Serviceable = serviceable;
+    }
 
     /// <summary>
-    /// 权限处理
-    /// <remarks>这个会返回 403，校验失败</remarks>
+    /// 类型
+    /// <remarks>"package"是引用的包，"project"是本地引用的项目</remarks>
     /// </summary>
-    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
-    /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
-    /// <returns><see cref="bool"/></returns>
-    Task<bool> PermissionHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement);
+    public string Type { get; }
+
+    /// <summary>
+    /// 程序集名称
+    /// </summary>
+    public string Name { get; }
+
+    /// <summary>
+    /// 程序集版本
+    /// </summary>
+    public string Version { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool Serviceable { get; }
 }

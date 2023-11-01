@@ -14,7 +14,6 @@
 
 using Fast.JwtBearer.Utils;
 using Fast.NET;
-using Fast.SpecificationProcessor.UnifyResult;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,16 +45,17 @@ internal abstract class AppAuthorizationHandler : IAuthorizationHandler
                 var pendingRequirements = context.PendingRequirements;
 
                 // 获取 JWT 处理类
-                var jwtBearerProvider = httpContext?.RequestServices.GetService<IJwtBearerProvider>();
+                var jwtBearerHandle = httpContext?.RequestServices.GetService<IJwtBearerHandle>();
 
-                if (jwtBearerProvider != null)
+                if (jwtBearerHandle != null)
                 {
-                    if (await jwtBearerProvider.AuthorizeHandle(context))
+                    // 授权检测
+                    if (await jwtBearerHandle.AuthorizeHandle(context))
                     {
                         // 权限检测
                         foreach (var requirement in pendingRequirements)
                         {
-                            if (await jwtBearerProvider.PermissionHandle(context, requirement))
+                            if (await jwtBearerHandle.PermissionHandle(context, requirement))
                             {
                                 context.Succeed(requirement);
                             }
