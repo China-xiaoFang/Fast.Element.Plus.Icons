@@ -886,12 +886,14 @@
             </summary>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="accessToken"></param>
+            <exclude />
         </member>
         <member name="M:Fast.NET.InternalHttpContextExtension.SignOutToSwagger(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             设置规范化文档退出登录
             </summary>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalMethodInfoExtension">
             <summary>
@@ -1031,27 +1033,42 @@
             <summary>
             <see cref="T:Fast.NET.DepsLibrary"/> .deps.json 文件中 libraries 节点的Model
             </summary>
+            <exclude />
+        </member>
+        <member name="M:Fast.NET.DepsLibrary.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="name"></param>
+            <param name="version"></param>
+            <param name="serviceable"></param>
+            <exclude />
         </member>
         <member name="P:Fast.NET.DepsLibrary.Type">
             <summary>
             类型
             <remarks>"package"是引用的包，"project"是本地引用的项目</remarks>
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.DepsLibrary.Name">
             <summary>
             程序集名称
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.DepsLibrary.Version">
             <summary>
             程序集版本
             </summary>
+            <exclude />
         </member>
         <member name="P:Fast.NET.DepsLibrary.Serviceable">
             <summary>
             
             </summary>
+            <exclude />
         </member>
         <member name="T:Fast.NET.Reflect">
             <summary>

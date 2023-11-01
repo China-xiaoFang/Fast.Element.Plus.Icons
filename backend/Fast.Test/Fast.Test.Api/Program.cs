@@ -1,5 +1,6 @@
 using Fast.CorsAccessor.Extensions;
 using Fast.DependencyInjection.Extensions;
+using Fast.JwtBearer.Extensions;
 using Fast.Logging.Extensions;
 using Fast.Mapster.Extensions;
 using Fast.NET.Core;
@@ -33,6 +34,8 @@ builder.Services.AddDependencyInjection();
 
 // ÃÌº”∂‘œÛ”≥…‰
 builder.Services.AddObjectMapper();
+
+builder.Services.AddJwt();
 
 builder.Services.AddControllers();
 

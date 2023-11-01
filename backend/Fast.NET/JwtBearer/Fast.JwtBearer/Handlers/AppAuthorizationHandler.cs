@@ -23,7 +23,7 @@ namespace Fast.JwtBearer.Handlers;
 /// <summary>
 /// 授权策略执行程序
 /// </summary>
-internal abstract class AppAuthorizationHandler : IAuthorizationHandler
+internal class AppAuthorizationHandler : IAuthorizationHandler
 {
     /// <summary>Makes a decision if authorization is allowed.</summary>
     /// <param name="context">The authorization information.</param>

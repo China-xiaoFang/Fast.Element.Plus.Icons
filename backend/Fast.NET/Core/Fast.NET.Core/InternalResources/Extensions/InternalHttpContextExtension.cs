@@ -76,6 +76,7 @@ internal static class InternalHttpContextExtension
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="accessToken"></param>
+    /// <exclude />
     internal static void SignInToSwagger(this HttpContext httpContext, string accessToken)
     {
         if (httpContext != null)
@@ -89,6 +90,7 @@ internal static class InternalHttpContextExtension
     /// 设置规范化文档退出登录
     /// </summary>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <exclude />
     internal static void SignOutToSwagger(this HttpContext httpContext)
     {
         if (httpContext != null)

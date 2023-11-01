@@ -19,9 +19,18 @@ namespace Fast.NET;
 /// <summary>
 /// <see cref="DepsLibrary"/> .deps.json 文件中 libraries 节点的Model
 /// </summary>
+/// <exclude />
 internal class DepsLibrary
 {
-    public DepsLibrary(string type, string name, string version, bool serviceable)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="name"></param>
+    /// <param name="version"></param>
+    /// <param name="serviceable"></param>
+    /// <exclude />
+    internal DepsLibrary(string type, string name, string version, bool serviceable)
     {
         Type = type;
         Name = name;
@@ -33,20 +42,24 @@ internal class DepsLibrary
     /// 类型
     /// <remarks>"package"是引用的包，"project"是本地引用的项目</remarks>
     /// </summary>
+    /// <exclude />
     public string Type { get; }
 
     /// <summary>
     /// 程序集名称
     /// </summary>
+    /// <exclude />
     public string Name { get; }
 
     /// <summary>
     /// 程序集版本
     /// </summary>
+    /// <exclude />
     public string Version { get; }
 
     /// <summary>
     /// 
     /// </summary>
+    /// <exclude />
     public bool Serviceable { get; }
 }
