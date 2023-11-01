@@ -16,6 +16,7 @@ using Fast.JwtBearer.Utils;
 using Fast.NET;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fast.JwtBearer.Handlers;
@@ -29,7 +30,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
     /// <param name="context">The authorization information.</param>
     public async Task HandleAsync(AuthorizationHandlerContext context)
     {
-        var httpContext = context.Resource as DefaultHttpContext;
+        var httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
 
         // 判断是否授权
         if (context.User.Identity?.IsAuthenticated == true)

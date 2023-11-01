@@ -658,7 +658,7 @@
             <param name="expiredTime">刷新 Token 有效期（分钟）</param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.DefaultHttpContext,System.String,System.String,System.Nullable{System.Int64},System.Int64)">
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Nullable{System.Int64},System.Int64)">
             <summary>
             通过过期Token 和 刷新Token 换取新的 Token
             </summary>

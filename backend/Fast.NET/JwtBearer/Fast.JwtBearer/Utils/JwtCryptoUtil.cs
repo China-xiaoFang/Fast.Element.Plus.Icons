@@ -23,6 +23,7 @@ using Fast.NET;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
@@ -147,7 +148,7 @@ public class JwtCryptoUtil
     /// <param name="expiredTime">过期时间（分钟）</param>
     /// <param name="clockSkew">刷新token容差值，秒做单位</param>
     /// <returns></returns>
-    public static string Exchange(DefaultHttpContext httpContext, string expiredToken, string refreshToken,
+    public static string Exchange(HttpContext httpContext, string expiredToken, string refreshToken,
         long? expiredTime = null, long clockSkew = 5)
     {
         // 交换刷新Token 必须原Token 已过期
@@ -253,7 +254,7 @@ public class JwtCryptoUtil
             return false;
 
         // 交换新的 Token
-        var accessToken = Exchange(context.Resource as DefaultHttpContext, expiredToken, refreshToken, expiredTime, clockSkew);
+        var accessToken = Exchange((context.Resource as AuthorizationFilterContext)?.HttpContext, expiredToken, refreshToken, expiredTime, clockSkew);
         if (string.IsNullOrWhiteSpace(accessToken))
             return false;
 
