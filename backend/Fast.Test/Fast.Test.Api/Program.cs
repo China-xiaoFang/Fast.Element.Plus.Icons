@@ -39,8 +39,6 @@ builder.Services.AddJwt();
 
 builder.Services.AddControllers();
 
-var a = App.EffectiveTypes;
-
 // ÎÄµµ
 builder.AddSpecificationDocuments();
 
