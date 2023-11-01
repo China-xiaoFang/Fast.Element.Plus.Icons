@@ -24,8 +24,7 @@ namespace Fast.JwtBearer.Handlers;
 /// <summary>
 /// 授权策略执行程序
 /// </summary>
-[InternalSuppressSniffer]
-public abstract class AppAuthorizationHandler : IAuthorizationHandler
+internal abstract class AppAuthorizationHandler : IAuthorizationHandler
 {
     /// <summary>Makes a decision if authorization is allowed.</summary>
     /// <param name="context">The authorization information.</param>
@@ -86,63 +85,5 @@ public abstract class AppAuthorizationHandler : IAuthorizationHandler
         {
             httpContext?.SignOutToSwagger();
         }
-    }
-
-    /// <summary>
-    /// 授权处理
-    /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
-    protected async Task AuthorizeHandleAsync(AuthorizationHandlerContext context)
-    {
-        // 获取 HttpContext 上下文
-        var httpContext = context.Resource as DefaultHttpContext;
-
-        // 获取所有未成功验证的需求
-        var pendingRequirements = context.PendingRequirements;
-
-        // 调用子类管道
-        var pipeline = await PipelineAsync(context, httpContext);
-        if (pipeline)
-        {
-            // 通过授权验证
-            foreach (var requirement in pendingRequirements)
-            {
-                // 验证策略管道
-                var policyPipeline = await PolicyPipelineAsync(context, httpContext, requirement);
-                if (policyPipeline)
-                    context.Succeed(requirement);
-                else
-                    context.Fail();
-            }
-        }
-        else
-        {
-            context.Fail();
-        }
-    }
-
-    /// <summary>
-    /// 验证管道
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="httpContext"></param>
-    /// <returns></returns>
-    public async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
-    {
-        return await Task.FromResult(true);
-    }
-
-    /// <summary>
-    /// 策略验证管道
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="httpContext"></param>
-    /// <param name="requirement"></param>
-    /// <returns></returns>
-    public async Task<bool> PolicyPipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext,
-        IAuthorizationRequirement requirement)
-    {
-        return await Task.FromResult(true);
     }
 }

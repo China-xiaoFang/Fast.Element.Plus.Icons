@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.JwtBearer.Handlers;
 using Fast.JwtBearer.Options;
 using Fast.JwtBearer.Providers;
 using Fast.JwtBearer.Utils;
@@ -57,58 +58,11 @@ public static class JwtBearerIServiceCollectionExtension
         // 读取配置
         JwtCryptoUtil.JwtSettings = configuration.GetSection("JWTSettings").Get<JWTSettingsOptions>();
 
-        // 添加默认授权
-        var authenticationBuilder = services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = JwtCryptoUtil.CreateTokenValidationParameters(JwtCryptoUtil.JwtSettings);
-        });
-
-        //启用全局授权
-        if (enableGlobalAuthorize)
-        {
-            services.Configure<MvcOptions>(options => { options.Filters.Add(new AuthorizeFilter()); });
-        }
-
-        return authenticationBuilder;
-    }
-
-    /// <summary>
-    /// 添加 JWT 授权
-    /// </summary>
-    /// <typeparam name="TAuthorizationHandler"></typeparam>
-    /// <param name="services"></param>
-    /// <param name="configuration"><see cref="IConfiguration"/> 配置项，建议通过框架自带的 App.Configuration 传入，否则会在内部自动解析 IConfiguration 性能会很低</param>
-    /// <param name="enableGlobalAuthorize"></param>
-    /// <returns></returns>
-    public static AuthenticationBuilder AddJwt<TAuthorizationHandler>(this IServiceCollection services,
-        IConfiguration configuration = null, bool enableGlobalAuthorize = false)
-        where TAuthorizationHandler : class, IAuthorizationHandler
-    {
-        // 处理 IConfiguration
-        if (configuration == null)
-        {
-            // 构建新的服务对象
-            var serviceProvider = services.BuildServiceProvider();
-            configuration = serviceProvider.GetService<IConfiguration>();
-            // 释放服务对象
-            serviceProvider.Dispose();
-        }
-
-        // 配置验证
-        services.AddOptions<JWTSettingsOptions>().BindConfiguration("JWTSettings").ValidateDataAnnotations();
-
-        // 读取配置
-        JwtCryptoUtil.JwtSettings = configuration.GetSection("JWTSettings").Get<JWTSettingsOptions>();
-
         // 注册授权策略提供器
         services.TryAddSingleton<IAuthorizationPolicyProvider, AppAuthorizationPolicyProvider>();
 
         // 注册策略授权处理程序
-        services.TryAddSingleton<IAuthorizationHandler, TAuthorizationHandler>();
+        services.TryAddSingleton<IAuthorizationHandler, AppAuthorizationHandler>();
 
         //启用全局授权
         if (enableGlobalAuthorize)
