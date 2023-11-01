@@ -15,7 +15,6 @@
 using Fast.JwtBearer.Utils;
 using Fast.NET;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -38,6 +37,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
             // 禁止使用刷新 Token 进行单独校验
             if (JwtCryptoUtil.RefreshTokenClaims.All(a => context.User.Claims.Any(c => c.Type == a)))
             {
+                httpContext?.SignOutToSwagger();
                 context.Fail();
             }
             else
@@ -50,27 +50,18 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
 
                 if (jwtBearerHandle != null)
                 {
-                    // 授权检测
-                    if (await jwtBearerHandle.AuthorizeHandle(context))
+                    // 权限检测
+                    foreach (var requirement in pendingRequirements)
                     {
-                        // 权限检测
-                        foreach (var requirement in pendingRequirements)
+                        if (await jwtBearerHandle.AuthorizeHandle(context, requirement))
                         {
-                            if (await jwtBearerHandle.PermissionHandle(context, requirement))
-                            {
-                                context.Succeed(requirement);
-                            }
-                            else
-                            {
-                                // 授权失败，403
-                                context.Fail();
-                            }
+                            context.Succeed(requirement);
                         }
-                    }
-                    else
-                    {
-                        // 授权失败，401
-                        context.Fail();
+                        else
+                        {
+                            // 鉴权失败，返回 403 状态码
+                            context.Fail();
+                        }
                     }
                 }
                 else

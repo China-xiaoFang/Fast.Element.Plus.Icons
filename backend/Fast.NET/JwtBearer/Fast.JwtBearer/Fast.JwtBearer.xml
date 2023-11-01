@@ -499,18 +499,10 @@
             <see cref="T:Fast.JwtBearer.Handlers.IJwtBearerHandle"/> Jwt验证提供器
             </summary>
         </member>
-        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
             <summary>
             授权处理
-            <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
-            </summary>
-            <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
-            <returns><see cref="T:System.Boolean"/></returns>
-        </member>
-        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.PermissionHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement)">
-            <summary>
-            权限处理
-            <remarks>这个会返回 403，校验失败</remarks>
+            <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
             <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>

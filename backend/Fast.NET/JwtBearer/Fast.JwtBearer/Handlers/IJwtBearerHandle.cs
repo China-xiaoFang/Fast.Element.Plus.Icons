@@ -23,18 +23,10 @@ public interface IJwtBearerHandle
 {
     /// <summary>
     /// 授权处理
-    /// <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可</remarks>
-    /// </summary>
-    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
-    /// <returns><see cref="bool"/></returns>
-    Task<bool> AuthorizeHandle(AuthorizationHandlerContext context);
-
-    /// <summary>
-    /// 权限处理
-    /// <remarks>这个会返回 403，校验失败</remarks>
+    /// <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
     /// </summary>
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
     /// <returns><see cref="bool"/></returns>
-    Task<bool> PermissionHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement);
+    Task<bool> AuthorizeHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement);
 }
