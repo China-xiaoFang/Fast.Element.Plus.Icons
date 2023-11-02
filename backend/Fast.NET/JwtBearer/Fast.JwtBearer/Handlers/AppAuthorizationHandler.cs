@@ -63,6 +63,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
                     }
                     catch (Exception ex)
                     {
+                        isAuthorizeSuccess = false;
                         authorizeException = ex;
                     }
 
@@ -80,6 +81,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
                             }
                             catch (Exception ex)
                             {
+                                isPermissionSuccess = false;
                                 permissionException = ex;
                             }
 
