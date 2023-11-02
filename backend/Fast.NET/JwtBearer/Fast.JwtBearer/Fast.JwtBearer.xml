@@ -502,32 +502,33 @@
         <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             授权处理
-            <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
+            <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false或抛出异常，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeFailHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.AuthorizeFailHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
             <summary>
             授权失败处理
             <remarks>如果返回 null，则走默认处理 AuthorizationHandlerContext.Fail()</remarks>
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="exception"><see cref="T:System.Exception"/></param>
             <returns></returns>
         </member>
         <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.PermissionHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
             权限判断处理
-            <remarks>这里只需要判断你的权限逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
+            <remarks>这里只需要判断你的权限逻辑即可，如果返回 false或抛出异常 则抛出 HttpStatusCode = 403 状态码</remarks>
             </summary>
             <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
             <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.PermissionFailHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext)">
+        <member name="M:Fast.JwtBearer.Handlers.IJwtBearerHandle.PermissionFailHandle(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Authorization.IAuthorizationRequirement,Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
             <summary>
             权限判断失败处理
             <remarks>如果返回 null，则走默认处理 AuthorizationHandlerContext.Fail()</remarks>
@@ -535,6 +536,7 @@
             <param name="context"><see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext"/></param>
             <param name="requirement"><see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement"/></param>
             <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="exception"><see cref="T:System.Exception"/></param>
             <returns></returns>
         </member>
         <member name="T:Fast.JwtBearer.Options.JWTSettingsOptions">

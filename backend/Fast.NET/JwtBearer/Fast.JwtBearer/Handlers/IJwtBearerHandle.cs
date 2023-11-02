@@ -24,7 +24,7 @@ public interface IJwtBearerHandle
 {
     /// <summary>
     /// 授权处理
-    /// <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
+    /// <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false或抛出异常，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
     /// </summary>
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
@@ -37,12 +37,13 @@ public interface IJwtBearerHandle
     /// </summary>
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="exception"><see cref="Exception"/></param>
     /// <returns></returns>
-    Task<object> AuthorizeFailHandle(AuthorizationHandlerContext context, HttpContext httpContext);
+    Task<object> AuthorizeFailHandle(AuthorizationHandlerContext context, HttpContext httpContext, Exception exception);
 
     /// <summary>
     /// 权限判断处理
-    /// <remarks>这里只需要判断你的权限逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
+    /// <remarks>这里只需要判断你的权限逻辑即可，如果返回 false或抛出异常 则抛出 HttpStatusCode = 403 状态码</remarks>
     /// </summary>
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
@@ -58,7 +59,8 @@ public interface IJwtBearerHandle
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
     /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <param name="exception"><see cref="Exception"/></param>
     /// <returns></returns>
     Task<object> PermissionFailHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement,
-        HttpContext httpContext);
+        HttpContext httpContext, Exception exception);
 }
