@@ -589,9 +589,25 @@
             过期时间（分钟）
             </summary>
         </member>
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.RefreshTokenExpireTime">
+            <summary>
+            过期时间（分钟）
+            </summary>
+        </member>
         <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.Algorithm">
             <summary>
             加密算法
+            HS256
+            HS384
+            HS512
+            PS256
+            PS384
+            PS512
+            ES256
+            ES256K
+            ES384
+            ES512
+            EdDSA
             </summary>
         </member>
         <member name="T:Fast.JwtBearer.Providers.AppAuthorizationPolicyProvider">
@@ -673,12 +689,11 @@
             <param name="expiredTime">过期时间（分钟）</param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.GenerateRefreshToken(System.String,System.Int32)">
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.GenerateRefreshToken(System.String)">
             <summary>
             生成刷新 Token
             </summary>
             <param name="accessToken"></param>
-            <param name="expiredTime">刷新 Token 有效期（分钟）</param>
             <returns></returns>
         </member>
         <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Nullable{System.Int64},System.Int64)">
@@ -692,14 +707,13 @@
             <param name="clockSkew">刷新token容差值，秒做单位</param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext,System.Nullable{System.Int64},System.Int32,System.String,System.Int64)">
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext,System.Nullable{System.Int64},System.String,System.Int64)">
             <summary>
             自动刷新 Token 信息
             </summary>
             <param name="context"></param>
             <param name="httpContext"></param>
             <param name="expiredTime">新 Token 过期时间（分钟）</param>
-            <param name="refreshTokenExpiredTime">新刷新 Token 有效期（分钟）</param>
             <param name="tokenPrefix"></param>
             <param name="clockSkew"></param>
             <returns></returns>

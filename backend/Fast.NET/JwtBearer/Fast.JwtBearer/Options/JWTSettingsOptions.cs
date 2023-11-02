@@ -65,7 +65,23 @@ public sealed class JWTSettingsOptions
     public long? ExpiredTime { get; set; }
 
     /// <summary>
+    /// 过期时间（分钟）
+    /// </summary>
+    public long? RefreshTokenExpireTime { get; set; }
+
+    /// <summary>
     /// 加密算法
+    /// HS256
+    /// HS384
+    /// HS512
+    /// PS256
+    /// PS384
+    /// PS512
+    /// ES256
+    /// ES256K
+    /// ES384
+    /// ES512
+    /// EdDSA
     /// </summary>
     public string Algorithm { get; set; }
 }

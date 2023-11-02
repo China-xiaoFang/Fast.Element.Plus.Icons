@@ -104,7 +104,7 @@ public class JwtCryptoUtil
         if (!string.IsNullOrWhiteSpace(JwtSettings?.IssuerSigningKey))
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings?.IssuerSigningKey));
-            credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            credentials = new SigningCredentials(securityKey, JwtSettings?.Algorithm ?? SecurityAlgorithms.HmacSha256);
         }
 
         var tokenHandler = new JsonWebTokenHandler();
@@ -117,9 +117,8 @@ public class JwtCryptoUtil
     /// 生成刷新 Token
     /// </summary>
     /// <param name="accessToken"></param>
-    /// <param name="expiredTime">刷新 Token 有效期（分钟）</param>
     /// <returns></returns>
-    public static string GenerateRefreshToken(string accessToken, int expiredTime = 43200)
+    public static string GenerateRefreshToken(string accessToken)
     {
         // 分割Token
         var tokenParagraphs = accessToken.Split('.', StringSplitOptions.RemoveEmptyEntries);
@@ -136,7 +135,7 @@ public class JwtCryptoUtil
             {"k", tokenParagraphs[1].Substring(s, l)}
         };
 
-        return GenerateToken(payload, expiredTime);
+        return GenerateToken(payload, JwtSettings?.RefreshTokenExpireTime);
     }
 
     /// <summary>
@@ -148,8 +147,8 @@ public class JwtCryptoUtil
     /// <param name="expiredTime">过期时间（分钟）</param>
     /// <param name="clockSkew">刷新token容差值，秒做单位</param>
     /// <returns></returns>
-    public static string Exchange(HttpContext httpContext, string expiredToken, string refreshToken,
-        long? expiredTime = null, long clockSkew = 5)
+    public static string Exchange(HttpContext httpContext, string expiredToken, string refreshToken, long? expiredTime = null,
+        long clockSkew = 5)
     {
         // 交换刷新Token 必须原Token 已过期
         var (_isValid, _, _) = Validate(expiredToken);
@@ -224,12 +223,10 @@ public class JwtCryptoUtil
     /// <param name="context"></param>
     /// <param name="httpContext"></param>
     /// <param name="expiredTime">新 Token 过期时间（分钟）</param>
-    /// <param name="refreshTokenExpiredTime">新刷新 Token 有效期（分钟）</param>
     /// <param name="tokenPrefix"></param>
     /// <param name="clockSkew"></param>
     /// <returns></returns>
-    public static bool AutoRefreshToken(AuthorizationHandlerContext context, HttpContext httpContext,
-        long? expiredTime = null, int refreshTokenExpiredTime = 43200, string tokenPrefix = "Bearer ", long clockSkew = 5)
+    public static bool AutoRefreshToken(AuthorizationHandlerContext context, HttpContext httpContext, long? expiredTime = null,string tokenPrefix = "Bearer ", long clockSkew = 5)
     {
         // 如果验证有效，则跳过刷新
         if (context.User.Identity?.IsAuthenticated == true)
@@ -254,7 +251,8 @@ public class JwtCryptoUtil
             return false;
 
         // 交换新的 Token
-        var accessToken = Exchange((context.Resource as AuthorizationFilterContext)?.HttpContext, expiredToken, refreshToken, expiredTime, clockSkew);
+        var accessToken = Exchange((context.Resource as AuthorizationFilterContext)?.HttpContext, expiredToken, refreshToken,
+            expiredTime, clockSkew);
         if (string.IsNullOrWhiteSpace(accessToken))
             return false;
 
@@ -279,7 +277,7 @@ public class JwtCryptoUtil
         // 返回新的 Token
         httpContext.Response.Headers[accessTokenKey] = accessToken;
         // 返回新的 刷新Token
-        httpContext.Response.Headers[xAccessTokenKey] = GenerateRefreshToken(accessToken, refreshTokenExpiredTime);
+        httpContext.Response.Headers[xAccessTokenKey] = GenerateRefreshToken(accessToken);
 
         // 处理 axios 问题
         httpContext.Response.Headers.TryGetValue(accessControlExposeKey, out var aches);
@@ -301,7 +299,7 @@ public class JwtCryptoUtil
 
         // 加密Key
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.IssuerSigningKey));
-        var cress = new SigningCredentials(key, JwtSettings.Algorithm);
+        var cress = new SigningCredentials(key, JwtSettings?.Algorithm ?? SecurityAlgorithms.HmacSha256);
 
         // 创建Token验证参数
         var tokenValidationParameters = CreateTokenValidationParameters(JwtSettings);
