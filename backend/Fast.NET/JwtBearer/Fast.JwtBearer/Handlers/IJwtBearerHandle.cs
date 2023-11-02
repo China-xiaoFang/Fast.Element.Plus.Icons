@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Fast.JwtBearer.Handlers;
 
@@ -23,10 +24,41 @@ public interface IJwtBearerHandle
 {
     /// <summary>
     /// 授权处理
-    /// <remarks>这里已经判断了是否授权，只需要处理其余的逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
+    /// <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
+    /// </summary>
+    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns><see cref="bool"/></returns>
+    Task<bool> AuthorizeHandle(AuthorizationHandlerContext context, HttpContext httpContext);
+
+    /// <summary>
+    /// 授权失败处理
+    /// <remarks>如果返回 null，则走默认处理 AuthorizationHandlerContext.Fail()</remarks>
+    /// </summary>
+    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns></returns>
+    Task<object> AuthorizeFailHandle(AuthorizationHandlerContext context, HttpContext httpContext);
+
+    /// <summary>
+    /// 权限判断处理
+    /// <remarks>这里只需要判断你的权限逻辑即可，如果返回 false 则抛出 HttpStatusCode = 403 状态码</remarks>
     /// </summary>
     /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
     /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
-    /// <returns><see cref="bool"/></returns>
-    Task<bool> AuthorizeHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement);
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns></returns>
+    Task<bool> PermissionHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement,
+        HttpContext httpContext);
+
+    /// <summary>
+    /// 权限判断失败处理
+    /// <remarks>如果返回 null，则走默认处理 AuthorizationHandlerContext.Fail()</remarks>
+    /// </summary>
+    /// <param name="context"><see cref="AuthorizationHandlerContext"/></param>
+    /// <param name="requirement"><see cref="IAuthorizationRequirement"/></param>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
+    /// <returns></returns>
+    Task<object> PermissionFailHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement,
+        HttpContext httpContext);
 }

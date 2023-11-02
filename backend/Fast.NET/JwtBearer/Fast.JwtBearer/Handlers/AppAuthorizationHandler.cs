@@ -15,6 +15,8 @@
 using Fast.JwtBearer.Utils;
 using Fast.NET;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,7 +31,8 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
     /// <param name="context">The authorization information.</param>
     public async Task HandleAsync(AuthorizationHandlerContext context)
     {
-        var httpContext = (context.Resource as AuthorizationFilterContext)?.HttpContext;
+        var filterContext = context.Resource as AuthorizationFilterContext;
+        var httpContext = filterContext?.HttpContext;
 
         // 判断是否授权
         if (context.User.Identity?.IsAuthenticated == true)
@@ -37,6 +40,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
             // 禁止使用刷新 Token 进行单独校验
             if (JwtCryptoUtil.RefreshTokenClaims.All(a => context.User.Claims.Any(c => c.Type == a)))
             {
+                // 退出 Swagger 登录
                 httpContext?.SignOutToSwagger();
                 context.Fail();
             }
@@ -50,16 +54,49 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
 
                 if (jwtBearerHandle != null)
                 {
-                    // 权限检测
-                    foreach (var requirement in pendingRequirements)
+                    // 授权检测
+                    if (await jwtBearerHandle.AuthorizeHandle(context, httpContext))
                     {
-                        if (await jwtBearerHandle.AuthorizeHandle(context, requirement))
+                        foreach (var requirement in pendingRequirements)
                         {
-                            context.Succeed(requirement);
+                            // 权限检测
+                            if (await jwtBearerHandle.PermissionHandle(context, requirement, httpContext))
+                            {
+                                context.Succeed(requirement);
+                            }
+                            else
+                            {
+                                var result = await jwtBearerHandle.PermissionFailHandle(context, requirement, httpContext);
+
+                                if (result != null)
+                                {
+                                    // 存在自定义处理结果，则返回 403 状态码
+                                    httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                                    filterContext.Result = new JsonResult(result);
+                                    // 退出 Swagger 登录
+                                    httpContext?.SignOutToSwagger();
+                                }
+                                else
+                                {
+                                    // 权限判断失败，返回 403 状态码
+                                    context.Fail();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var result = await jwtBearerHandle.AuthorizeFailHandle(context, httpContext);
+
+                        if (result != null)
+                        {
+                            // 存在自定义处理结果，则返回 401 状态码
+                            httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                            filterContext.Result = new JsonResult(result);
                         }
                         else
                         {
-                            // 鉴权失败，返回 403 状态码
+                            // 授权失败，返回 403 状态码
                             context.Fail();
                         }
                     }
@@ -75,6 +112,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
         }
         else
         {
+            // 退出 Swagger 登录
             httpContext?.SignOutToSwagger();
         }
     }
