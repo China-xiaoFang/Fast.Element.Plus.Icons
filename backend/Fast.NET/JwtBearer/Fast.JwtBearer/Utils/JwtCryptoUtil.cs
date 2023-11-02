@@ -148,7 +148,7 @@ public class JwtCryptoUtil
     /// <param name="clockSkew">刷新token容差值，秒做单位</param>
     /// <returns></returns>
     public static string Exchange(HttpContext httpContext, string expiredToken, string refreshToken, long? expiredTime = null,
-        long clockSkew = 5)
+        long? clockSkew = null)
     {
         // 交换刷新Token 必须原Token 已过期
         var (_isValid, _, _) = Validate(expiredToken);
@@ -172,7 +172,7 @@ public class JwtCryptoUtil
         {
             var refreshTime = new DateTimeOffset(long.Parse(cachedValue), TimeSpan.Zero);
             // 处理并发时容差值
-            if ((nowTime - refreshTime).TotalSeconds > clockSkew)
+            if ((nowTime - refreshTime).TotalSeconds > (clockSkew ?? JwtSettings?.ClockSkew ?? 5))
                 return default;
         }
 
@@ -226,7 +226,8 @@ public class JwtCryptoUtil
     /// <param name="tokenPrefix"></param>
     /// <param name="clockSkew"></param>
     /// <returns></returns>
-    public static bool AutoRefreshToken(AuthorizationHandlerContext context, HttpContext httpContext, long? expiredTime = null,string tokenPrefix = "Bearer ", long clockSkew = 5)
+    public static bool AutoRefreshToken(AuthorizationHandlerContext context, HttpContext httpContext, long? expiredTime = null,
+        string tokenPrefix = "Bearer ", long? clockSkew = null)
     {
         // 如果验证有效，则跳过刷新
         if (context.User.Identity?.IsAuthenticated == true)

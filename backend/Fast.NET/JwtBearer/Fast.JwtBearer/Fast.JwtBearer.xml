@@ -696,7 +696,7 @@
             <param name="accessToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Nullable{System.Int64},System.Int64)">
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.Exchange(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Nullable{System.Int64},System.Nullable{System.Int64})">
             <summary>
             通过过期Token 和 刷新Token 换取新的 Token
             </summary>
@@ -707,7 +707,7 @@
             <param name="clockSkew">刷新token容差值，秒做单位</param>
             <returns></returns>
         </member>
-        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext,System.Nullable{System.Int64},System.String,System.Int64)">
+        <member name="M:Fast.JwtBearer.Utils.JwtCryptoUtil.AutoRefreshToken(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.HttpContext,System.Nullable{System.Int64},System.String,System.Nullable{System.Int64})">
             <summary>
             自动刷新 Token 信息
             </summary>
