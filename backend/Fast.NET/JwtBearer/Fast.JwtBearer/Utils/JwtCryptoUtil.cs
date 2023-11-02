@@ -228,7 +228,7 @@ public class JwtCryptoUtil
     /// <param name="tokenPrefix"></param>
     /// <param name="clockSkew"></param>
     /// <returns></returns>
-    public static bool AutoRefreshToken(AuthorizationHandlerContext context, DefaultHttpContext httpContext,
+    public static bool AutoRefreshToken(AuthorizationHandlerContext context, HttpContext httpContext,
         long? expiredTime = null, int refreshTokenExpiredTime = 43200, string tokenPrefix = "Bearer ", long clockSkew = 5)
     {
         // 如果验证有效，则跳过刷新
@@ -385,7 +385,7 @@ public class JwtCryptoUtil
     /// <param name="headerKey"></param>
     /// <param name="tokenPrefix"></param>
     /// <returns></returns>
-    public static string GetJwtBearerToken(DefaultHttpContext httpContext, string headerKey = "Authorization",
+    public static string GetJwtBearerToken(HttpContext httpContext, string headerKey = "Authorization",
         string tokenPrefix = "Bearer ")
     {
         // 判断请求报文头中是否有 "Authorization" 报文头
