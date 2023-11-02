@@ -60,12 +60,12 @@ public sealed class JWTSettingsOptions
     public long? ClockSkew { get; set; }
 
     /// <summary>
-    /// 过期时间（分钟）
+    /// Token 过期时间（分钟）
     /// </summary>
-    public long? ExpiredTime { get; set; }
+    public long? TokenExpiredTime { get; set; }
 
     /// <summary>
-    /// 过期时间（分钟）
+    /// 刷新Token 过期时间（分钟）
     /// </summary>
     public long? RefreshTokenExpireTime { get; set; }
 

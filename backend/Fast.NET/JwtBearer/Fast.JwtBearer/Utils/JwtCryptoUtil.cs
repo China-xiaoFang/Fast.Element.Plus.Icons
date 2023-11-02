@@ -79,7 +79,7 @@ public class JwtCryptoUtil
 
         if (!payload.ContainsKey(JwtRegisteredClaimNames.Exp))
         {
-            var minute = expiredTime ?? JwtSettings?.ExpiredTime ?? 20;
+            var minute = expiredTime ?? JwtSettings?.TokenExpiredTime ?? 20;
             payload.Add(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes(minute).ToUnixTimeSeconds());
         }
 

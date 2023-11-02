@@ -584,14 +584,14 @@
             过期时间容错值，解决服务器端时间不同步问题（秒）
             </summary>
         </member>
-        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.ExpiredTime">
+        <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.TokenExpiredTime">
             <summary>
-            过期时间（分钟）
+            Token 过期时间（分钟）
             </summary>
         </member>
         <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.RefreshTokenExpireTime">
             <summary>
-            过期时间（分钟）
+            刷新Token 过期时间（分钟）
             </summary>
         </member>
         <member name="P:Fast.JwtBearer.Options.JWTSettingsOptions.Algorithm">
