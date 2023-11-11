@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Fast.DependencyInjection</name>
+        <name>Fast.Consul</name>
     </assembly>
     <members>
         <member name="T:Fast.NET.InternalSuppressSnifferAttribute">
@@ -672,202 +672,114 @@
             <param name="timeout"><see cref="T:System.Int32"/> 请求超时时间，默认60秒</param>
             <returns></returns>
         </member>
-        <member name="T:Fast.DependencyInjection.App.InternalApp">
+        <member name="T:Fast.Consul.Extensions.ConsulIServiceCollectionExtension">
             <summary>
-            <see cref="T:Fast.DependencyInjection.App.InternalApp"/> 内部 App 上下文
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> Consul服务拓展类
             </summary>
         </member>
-        <member name="F:Fast.DependencyInjection.App.InternalApp.InternalServices">
+        <member name="M:Fast.Consul.Extensions.ConsulIServiceCollectionExtension.AddConsulService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            应用服务
+            配置Consul服务
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 服务集合</param>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> 配置项</param>
+            <returns>服务集合</returns>
+        </member>
+        <member name="T:Fast.Consul.Internal.Penetrates">
+            <summary>
+            <see cref="T:Fast.Consul.Internal.Penetrates"/> 常量，公共方法配置类
             </summary>
         </member>
-        <member name="F:Fast.DependencyInjection.App.InternalApp.RootServices">
+        <member name="P:Fast.Consul.Internal.Penetrates.ConsulSettings">
             <summary>
-            根服务
+            Consul配置
             </summary>
         </member>
-        <member name="T:Fast.DependencyInjection.Scoped">
+        <member name="T:Fast.Consul.KeyValue.Dto.ConsulKeyValueResponseDto">
             <summary>
-            <see cref="T:Fast.DependencyInjection.Scoped"/> 创建作用域静态类
+            Consul Key/Value 响应Dto
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.Scoped.Create(System.Action{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+        <member name="T:Fast.Consul.KeyValue.IKeyValueService">
             <summary>
-            创建一个作用域范围
+            <see cref="T:Fast.Consul.KeyValue.IKeyValueService"/> Key/Value 服务接口
             </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
         </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateAsync(System.Func{Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.DependencyInjection.IServiceScope,System.Threading.Tasks.Task},Microsoft.Extensions.DependencyInjection.IServiceScopeFactory)">
+        <member name="M:Fast.Consul.KeyValue.IKeyValueService.GetKeyValue``1(System.String,System.String)">
             <summary>
-            创建一个作用域范围（异步）
+            读取 Consul 配置
             </summary>
-            <param name="handler"></param>
-            <param name="scopeFactory"></param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Scoped.CreateScope(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory@)">
-            <summary>
-            创建一个作用域
-            </summary>
-            <param name="scopeFactory"></param>
+            <typeparam name="T"></typeparam>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
             <returns></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="T:Fast.DependencyInjection.IDependency">
+        <member name="M:Fast.Consul.KeyValue.IKeyValueService.GetKeyValue(System.String,System.String)">
             <summary>
-            依赖关系接口
+            读取 Consul 配置
             </summary>
-        </member>
-        <member name="T:Fast.DependencyInjection.IScopedDependency">
-            <summary>
-            作用域服务注册依赖
-            </summary>
-        </member>
-        <member name="T:Fast.DependencyInjection.ISingletonDependency">
-            <summary>
-            单例服务注册依赖
-            </summary>
-        </member>
-        <member name="T:Fast.DependencyInjection.ITransientDependency">
-            <summary>
-            瞬时服务注册依赖
-            </summary>
-        </member>
-        <member name="T:Fast.DependencyInjection.Extensions.DependencyInjectionIApplicationBuilderExtension">
-            <summary>
-            <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 依赖注入中间件拓展类
-            </summary>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIApplicationBuilderExtension.UseDependencyInjection(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
-            <summary>
-            添加依赖注入中间件
-            </summary>
-            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
-            <returns><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></returns>
-        </member>
-        <member name="T:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension">
-            <summary>
-            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 依赖注入拓展类
-            </summary>
-        </member>
-        <member name="F:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.TypeNamedCollection">
-            <summary>
-            类型名称集合
-            </summary>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
-            <summary>
-            添加依赖注入
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></param>
-            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.MvcBuilder"/></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加依赖注入
-            </summary>
-            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
-            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.AddInnerDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            添加扫描注入
-            </summary>
-            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></param>
-            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.RegisterService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Collections.Generic.IEnumerable{System.Type})">
-            <summary>
-            注册服务
-            </summary>
-            <param name="services">服务集合</param>
-            <param name="dependencyType"></param>
-            <param name="type">类型</param>
-            <param name="canInjectInterfaces">能被注册的接口</param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.Register(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Type,System.Type)">
-            <summary>
-            注册类型
-            </summary>
-            <param name="services">服务</param>
-            <param name="dependencyType"></param>
-            <param name="type">类型</param>
-            <param name="inter">接口</param>
-        </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.FixedGenericType(System.Type)">
-            <summary>
-            修复泛型类型注册类型问题
-            </summary>
-            <param name="type">类型</param>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
             <returns></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.RegisterNamedService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Fast.Consul.KeyValue.IKeyValueService.EditKeyValue(System.String,System.String,System.String)">
             <summary>
-            注册命名服务（接口多实现）
+            编辑 Consul 配置
             </summary>
-            <typeparam name="TDependency"></typeparam>
-            <param name="services"></param>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
+            <param name="data"><see cref="T:System.String"/> JSON 格式字符串</param>
+            <returns><see cref="T:System.Boolean"/> 是否成功</returns>
         </member>
-        <member name="M:Fast.DependencyInjection.Extensions.DependencyInjectionIServiceCollectionExtension.TryGetServiceLifetime(System.Type)">
+        <member name="T:Fast.Consul.KeyValue.KeyValueService">
             <summary>
-            根据依赖接口类型解析 ServiceLifetime 对象
+            <see cref="T:Fast.Consul.KeyValue.KeyValueService"/> Key/Value 服务
             </summary>
-            <param name="dependencyType"></param>
+        </member>
+        <member name="M:Fast.Consul.KeyValue.KeyValueService.GetKeyValue``1(System.String,System.String)">
+            <summary>
+            读取 Consul 配置
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
             <returns></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="T:Fast.DependencyInjection.INamedServiceProvider`1">
+        <member name="M:Fast.Consul.KeyValue.KeyValueService.GetKeyValue(System.String,System.String)">
             <summary>
-            <see cref="T:Fast.DependencyInjection.INamedServiceProvider`1"/> 命名服务提供器
+            读取 Consul 配置
             </summary>
-            <typeparam name="TService">目标服务接口</typeparam>
-        </member>
-        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetService``1(System.String)">
-            <summary>
-            根据服务名称获取服务
-            </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
             <returns></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:Fast.DependencyInjection.INamedServiceProvider`1.GetRequiredService``1(System.String)">
+        <member name="M:Fast.Consul.KeyValue.KeyValueService.EditKeyValue(System.String,System.String,System.String)">
             <summary>
-            根据服务名称获取服务
+            编辑 Consul 配置
             </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns></returns>
+            <param name="settingPath"><see cref="T:System.String"/> 路径</param>
+            <param name="dcName"><see cref="T:System.String"/> 数据中心名称</param>
+            <param name="data"><see cref="T:System.String"/> JSON 格式字符串</param>
+            <returns><see cref="T:System.Boolean"/> 是否成功</returns>
         </member>
-        <member name="T:Fast.DependencyInjection.NamedServiceProvider`1">
+        <member name="T:Fast.Consul.Options.ConsulSettingsOptions">
             <summary>
-            <see cref="T:Fast.DependencyInjection.NamedServiceProvider`1"/> 命名服务提供器默认实现
-            </summary>
-            <typeparam name="TService">目标服务接口</typeparam>
-        </member>
-        <member name="F:Fast.DependencyInjection.NamedServiceProvider`1._serviceProvider">
-            <summary>
-            服务提供器
+            Consul配置选项
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.#ctor(System.IServiceProvider)">
+        <member name="P:Fast.Consul.Options.ConsulSettingsOptions.Address">
             <summary>
-            
+            Consul 客户端地址
             </summary>
         </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetService``1(System.String)">
+        <member name="M:Fast.Consul.Options.ConsulSettingsOptions.#ctor">
             <summary>
-            根据服务名称获取服务
+            后期配置
             </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.DependencyInjection.NamedServiceProvider`1.GetRequiredService``1(System.String)">
-            <summary>
-            根据服务名称获取服务
-            </summary>
-            <typeparam name="ILifetime">服务生存周期接口，<see cref="T:Fast.DependencyInjection.ITransientDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/>，<see cref="T:Fast.DependencyInjection.IScopedDependency"/></typeparam>
-            <param name="serviceName"><see cref="T:System.String"/> 服务名称</param>
-            <returns></returns>
         </member>
     </members>
 </doc>

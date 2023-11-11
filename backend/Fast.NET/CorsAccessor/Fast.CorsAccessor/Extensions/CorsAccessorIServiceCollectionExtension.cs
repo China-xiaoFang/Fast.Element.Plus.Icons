@@ -33,9 +33,19 @@ public static class CorsAccessorIServiceCollectionExtension
     /// <param name="corsOptionsHandler"></param>
     /// <param name="corsPolicyBuilderHandler"></param>
     /// <returns>服务集合</returns>
-    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration,
+    public static IServiceCollection AddCorsAccessor(this IServiceCollection services, IConfiguration configuration = null,
         Action<CorsOptions> corsOptionsHandler = default, Action<CorsPolicyBuilder> corsPolicyBuilderHandler = default)
     {
+        // 处理 IConfiguration
+        if (configuration == null)
+        {
+            // 构建新的服务对象
+            var serviceProvider = services.BuildServiceProvider();
+            configuration = serviceProvider.GetService<IConfiguration>();
+            // 释放服务对象
+            serviceProvider.Dispose();
+        }
+
         // 获取跨域配置选项
         var corsAccessorSettings = configuration.GetSection("CorsAccessorSettings").Get<CorsAccessorSettingsOptions>();
 
