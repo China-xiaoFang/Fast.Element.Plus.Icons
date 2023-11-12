@@ -36,6 +36,16 @@ public static class ObjectExtension
     }
 
     /// <summary>
+    /// 将一个Object对象转为 字典
+    /// </summary>
+    /// <param name="obj"><see cref="object"/></param>
+    /// <returns><see cref="IDictionary{TKey,TValue}"/></returns>
+    public static IDictionary<string, object> ToDictionary(this object obj)
+    {
+        return InternalObjectExtension.ToDictionary(obj);
+    }
+
+    /// <summary>
     /// 将一个对象转换为指定类型
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -111,35 +121,6 @@ public static class ObjectExtension
         }
 
         return dictionary.ToQueryString(isToLower: isToLower);
-    }
-
-    /// <summary>
-    /// 将一个Object对象转为 字典
-    /// </summary>
-    /// <param name="obj"><see cref="object"/></param>
-    /// <returns><see cref="IDictionary{TKey,TValue}"/></returns>
-    public static IDictionary<string, object> ToDictionary(this object obj)
-    {
-        var dictionary = new Dictionary<string, object>();
-
-        var t = obj.GetType(); // 获取对象对应的类， 对应的类型
-
-        var pi = t.GetProperties(BindingFlags.Public | BindingFlags.Instance); // 获取当前type公共属性
-
-        foreach (var p in pi)
-        {
-            var m = p.GetGetMethod();
-
-            if (m == null || !m.IsPublic)
-                continue;
-            // 进行判NULL处理
-            if (m.Invoke(obj, parameters: Array.Empty<object>()) != null)
-            {
-                dictionary.Add(p.Name, m.Invoke(obj, parameters: Array.Empty<object>())); // 向字典添加元素
-            }
-        }
-
-        return dictionary;
     }
 
     /// <summary>

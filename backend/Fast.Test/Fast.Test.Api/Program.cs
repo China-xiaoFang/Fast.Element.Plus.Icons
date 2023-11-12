@@ -1,14 +1,15 @@
 using Fast.CorsAccessor.Extensions;
 using Fast.DependencyInjection.Extensions;
+using Fast.JwtBearer.Extensions;
 using Fast.Logging.Extensions;
 using Fast.Mapster.Extensions;
-using Fast.NET.Core;
 using Fast.NET.Core.Extensions;
 using Fast.Serialization.Extensions;
 using Fast.SpecificationProcessor.DataValidation.Extensions;
 using Fast.SpecificationProcessor.DynamicApplication.Extensions;
 using Fast.SpecificationProcessor.SpecificationDocument.Extensions;
 using Fast.SpecificationProcessor.UnifyResult.Extensions;
+using Fast.SqlSugar.Extensions;
 using Fast.Test.Api;
 
 var builder = WebApplication.CreateBuilder(args).Initialize();
@@ -34,9 +35,11 @@ builder.Services.AddDependencyInjection();
 // 添加对象映射
 builder.Services.AddObjectMapper();
 
-builder.Services.AddControllers();
+builder.Services.AddJwt();
 
-var a = App.EffectiveTypes;
+builder.Services.AddSqlSugar(builder.Configuration);
+
+builder.Services.AddControllers();
 
 // 文档
 builder.AddSpecificationDocuments();

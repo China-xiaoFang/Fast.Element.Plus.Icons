@@ -12,9 +12,8 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using System.Collections.Concurrent;
+using Fast.SpecificationProcessor.Internal;
 using Fast.SpecificationProcessor.SpecificationDocument.Builders;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -25,21 +24,6 @@ namespace Fast.SpecificationProcessor.SpecificationDocument.Filters;
 /// </summary>
 internal class TagsOrderDocumentFilter : IDocumentFilter
 {
-    private readonly ConcurrentDictionary<string, (string, int, Type)> controllerOrderCollection;
-
-    public TagsOrderDocumentFilter(IMemoryCache memoryCache)
-    {
-        // 从内存缓存中读取控制器排序字典
-        controllerOrderCollection =
-            memoryCache.Get<ConcurrentDictionary<string, (string, int, Type)>>(
-                "Fast.DynamicApplication.ControllerOrderCollection");
-
-        // 读取完成后，立即删除
-        memoryCache.Remove("Fast.DynamicApplication.ControllerOrderCollection");
-
-        controllerOrderCollection ??= new ConcurrentDictionary<string, (string, int, Type)>();
-    }
-
     /// <summary>
     /// 配置拦截
     /// </summary>
@@ -47,7 +31,7 @@ internal class TagsOrderDocumentFilter : IDocumentFilter
     /// <param name="context"></param>
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        swaggerDoc.Tags = controllerOrderCollection
+        swaggerDoc.Tags = Penetrates.ControllerOrderCollection
             .Where(u => SpecificationDocumentBuilder.GetControllerGroups(u.Value.Item3).Any(c => c.Group == context.DocumentName))
             .OrderByDescending(u => u.Value.Item2).ThenBy(u => u.Key).Select(c => new OpenApiTag
             {

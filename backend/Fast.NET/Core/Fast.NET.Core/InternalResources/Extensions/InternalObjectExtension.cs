@@ -13,6 +13,7 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.ComponentModel;
+using System.Reflection;
 
 // ReSharper disable once CheckNamespace
 namespace Fast.NET;
@@ -107,5 +108,35 @@ internal static class InternalObjectExtension
         }
 
         return obj;
+    }
+
+    /// <summary>
+    /// 将一个Object对象转为 字典
+    /// </summary>
+    /// <param name="obj"><see cref="object"/></param>
+    /// <returns><see cref="IDictionary{TKey,TValue}"/></returns>
+    /// <exclude />
+    internal static IDictionary<string, object> ToDictionary(this object obj)
+    {
+        var dictionary = new Dictionary<string, object>();
+
+        var t = obj.GetType(); // 获取对象对应的类， 对应的类型
+
+        var pi = t.GetProperties(BindingFlags.Public | BindingFlags.Instance); // 获取当前type公共属性
+
+        foreach (var p in pi)
+        {
+            var m = p.GetGetMethod();
+
+            if (m == null || !m.IsPublic)
+                continue;
+            // 进行判NULL处理
+            if (m.Invoke(obj, parameters: Array.Empty<object>()) != null)
+            {
+                dictionary.Add(p.Name, m.Invoke(obj, parameters: Array.Empty<object>())); // 向字典添加元素
+            }
+        }
+
+        return dictionary;
     }
 }

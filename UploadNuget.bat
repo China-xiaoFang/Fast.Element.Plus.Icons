@@ -35,33 +35,38 @@ echo.
 REM 开启变量延迟
 setlocal enabledelayedexpansion
 
+echo 请选择您 Visual Studio 的安装目录
+
+REM 换行
+echo.
+
 REM 设置要编译和生成的 .sln 项目文件路径。使用 %~dp0 变量来获取 当前批处理文件所在的目录
 set solution_file=%~dp0backend\Fast.NET\Fast.NET.sln
 
-REM 设置多个可选择的 MSBuild.exe 文件路径
-set "msbuild_path[1]=C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
-set "msbuild_path[2]=D:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe"
+REM 设置多个可选择的 devenv.com 文件路径
+set "devenv_path[1]=C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.com"
+set "devenv_path[2]=D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.com"
 
 REM 定义一个标签
-:MSBuildExeInput
+:DevenvExceptionInput
 
-echo 选择 MSBuild.exe 文件：
-echo [1] !msbuild_path[1]!
-echo [2] !msbuild_path[2]!
+echo 请选择您 Visual Studio 的安装目录（包含 devenv.com 文件）：
+echo [1] !devenv_path[1]!
+echo [2] !devenv_path[2]!
 
 REM 换行
 echo.
 
 REM 数据数字
-choice /c 12 /n /m "输入当前计算机所存在的 MSBuild.exe 文件路径的编号："
+choice /c 12 /n /m "输入当前计算机所存在的 devenv.com 文件路径的编号："
 
-REM 获取输入的值，得到 MSBuild.exe 文件路径
-set "msbuild_path=!msbuild_path[%errorlevel%]!"
+REM 获取输入的值，得到 devenv.com 文件路径
+set "devenv_path=!devenv_path[%errorlevel%]!"
 
 REM 判断是否输入正确
-if not defined msbuild_path (
+if not defined devenv_path (
 	echo 输入有误，请重新输入。
-	goto MSBuildExeInput
+	goto DevenvExceptionInput
 )
 
 REM 换行
@@ -84,7 +89,7 @@ echo.
 REM 数据数字
 choice /c 12 /n /m "输入当前需要生成的模式："
 
-REM 获取输入的值，得到 MSBuild.exe 文件路径
+REM 获取输入的值，得到生成模式
 set "build_mode=!build_mode[%errorlevel%]!"
 
 REM 判断是否输入正确
@@ -97,30 +102,18 @@ REM 换行
 echo.
 
 REM 输出执行命令
-echo "%msbuild_path%" /nologo /verbosity:minimal /t:Clean,Build "%solution_file%" /p:Configuration=%build_mode% 
+echo "%devenv_path%" "%solution_file%" /Rebuild "%build_mode%|Any CPU"
 
 REM 换行
 echo.
 
-REM 编译生成项目，指定 Debug 模式
-REM /nologo 禁用 MSBuild 的 Logo 输出
-REM /verbosity:minimal 减少详情输出
-REM /t:Clean,Build 先清理，再生成
-REM /p:Configuration=Debug 指定 Debug 生成
-"%msbuild_path%" -noLogo -verbosity:minimal -target:Clean;Compile;Build "%solution_file%" -property:Configuration=%build_mode%
+echo 等待重新生成中......
 
-REM 判断是否编译生成成功
-if %errorlevel% equ 0 (
-	REM 换行
-	echo.
+REM 换行
+echo.
 
-	echo 编译，生成成功...... 
-) else (
-	REM 换行
-	echo.
-
-	echo 编译，生成失败...... 
-)
+REM 编译生成项目，指定生成模式，先清理，再生成
+"%devenv_path%" "%solution_file%" /Rebuild "%build_mode%|Any CPU"
 
 REM 换行
 echo.
@@ -136,7 +129,7 @@ echo 当前上传的所有 NuGet 包信息：
 REM 获取 nupkgs 文件夹中所有的包文件
 set "nuget_file_list="
 for /f "delims=" %%a in ('dir /b /s "%~dp0nupkgs"') do (
-	REM 这里好像可以自动上传 .snupkg 符号包，所以手动排除
+	REM 这里可以自动上传 .snupkg 符号包，所以手动排除
 	if not "%%~xa"==".snupkg" (
 		set "nuget_file_list=!nuget_file_list! "%%a""
 	)
@@ -184,7 +177,6 @@ echo.
 
 REM 输出上传结果
 echo 上传成功 %success_count% 个，失败 %error_count% 个，失败列表：
-
 
 REM 循环遍历失败文件列表
 for %%f in (%error_file%) do (

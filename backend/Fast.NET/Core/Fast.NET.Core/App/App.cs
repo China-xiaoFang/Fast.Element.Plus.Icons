@@ -19,6 +19,8 @@ using Fast.NET.Core.Attributes;
 using Fast.NET.Core.Extensions;
 using Fast.NET.Core.Filters;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -209,6 +211,23 @@ public static class App
     public static TOptions GetConfig<TOptions>(string path)
     {
         return Configuration.GetSection(path).Get<TOptions>();
+    }
+
+    /// <summary>
+    /// 获取当前程序启动Uri信息
+    /// <remarks>默认获取第一个地址，可能为空，请勿在程序启动过程中使用</remarks>
+    /// </summary>
+    /// <returns><see cref="Uri"/></returns>
+    public static Uri GetCurrentStartupUri()
+    {
+        var addresses = GetService<IServer>()?.Features?.Get<IServerAddressesFeature>()?.Addresses?.FirstOrDefault();
+
+        if (string.IsNullOrEmpty(addresses))
+        {
+            return default;
+        }
+
+        return new Uri(addresses);
     }
 
     /// <summary>
