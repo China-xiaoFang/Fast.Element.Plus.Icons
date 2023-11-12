@@ -239,6 +239,7 @@
             </summary>
             <param name="obj"><see cref="T:System.Object"/></param>
             <returns><see cref="T:System.Collections.Generic.IDictionary`2"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalStringExtension">
             <summary>
@@ -768,7 +769,7 @@
         </member>
         <member name="T:Fast.Consul.Options.ConsulSettingsOptions">
             <summary>
-            Consul配置选项
+            <see cref="T:Fast.Consul.Options.ConsulSettingsOptions"/> Consul配置选项
             </summary>
         </member>
         <member name="P:Fast.Consul.Options.ConsulSettingsOptions.Address">

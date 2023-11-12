@@ -3,13 +3,13 @@ using Fast.DependencyInjection.Extensions;
 using Fast.JwtBearer.Extensions;
 using Fast.Logging.Extensions;
 using Fast.Mapster.Extensions;
-using Fast.NET.Core;
 using Fast.NET.Core.Extensions;
 using Fast.Serialization.Extensions;
 using Fast.SpecificationProcessor.DataValidation.Extensions;
 using Fast.SpecificationProcessor.DynamicApplication.Extensions;
 using Fast.SpecificationProcessor.SpecificationDocument.Extensions;
 using Fast.SpecificationProcessor.UnifyResult.Extensions;
+using Fast.SqlSugar.Extensions;
 using Fast.Test.Api;
 
 var builder = WebApplication.CreateBuilder(args).Initialize();
@@ -36,6 +36,8 @@ builder.Services.AddDependencyInjection();
 builder.Services.AddObjectMapper();
 
 builder.Services.AddJwt();
+
+builder.Services.AddSqlSugar(builder.Configuration);
 
 builder.Services.AddControllers();
 

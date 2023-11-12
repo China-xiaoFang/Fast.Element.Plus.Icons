@@ -115,6 +115,7 @@ internal static class InternalObjectExtension
     /// </summary>
     /// <param name="obj"><see cref="object"/></param>
     /// <returns><see cref="IDictionary{TKey,TValue}"/></returns>
+    /// <exclude />
     internal static IDictionary<string, object> ToDictionary(this object obj)
     {
         var dictionary = new Dictionary<string, object>();

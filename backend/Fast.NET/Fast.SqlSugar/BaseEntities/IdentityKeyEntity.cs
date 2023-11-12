@@ -1,4 +1,4 @@
-// Apache开源许可证
+﻿// Apache开源许可证
 //
 // 版权所有 © 2018-2023 1.8K仔
 //
@@ -12,23 +12,22 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.Consul.Options;
+using Fast.SqlSugar.IBaseEntities;
+using SqlSugar;
+
+namespace Fast.SqlSugar.BaseEntities;
 
 /// <summary>
-/// <see cref="ConsulSettingsOptions"/> Consul配置选项
+/// <see cref="IdentityKeyEntity"/> 自增Id主键实体
+/// <remarks>主键Id为 Long 类型</remarks>
 /// </summary>
-public sealed class ConsulSettingsOptions
+public class IdentityKeyEntity : IPrimaryKeyEntity<int>, IDataBaseEntity
 {
     /// <summary>
-    /// Consul 客户端地址
+    /// 主键Id
+    /// 通过特性设置主键和自增列
+    /// <remarks>自增Id</remarks>
     /// </summary>
-    public string Address { get; set; }
-
-    /// <summary>
-    /// 后期配置
-    /// </summary>
-    public ConsulSettingsOptions()
-    {
-        Address = "http://127.0.0.1:8500";
-    }
+    [SugarColumn(IsIdentity = true, ColumnDescription = "Id主键", IsPrimaryKey = true)]
+    public int Id { get; set; }
 }

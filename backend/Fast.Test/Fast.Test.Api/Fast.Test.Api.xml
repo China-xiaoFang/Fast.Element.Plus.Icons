@@ -80,6 +80,109 @@
             释放非托管资源
             </summary>
         </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.GetConnectionSettings``1(SqlSugar.ISqlSugarClient)">
+            <summary>
+            根据实体类型获取连接字符串
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="sqlSugarClient"><see cref="T:SqlSugar.ISqlSugarClient"/> 默认库SqlSugar客户端</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.ExecuteAsync(System.String,SqlSugar.SugarParameter[],System.TimeSpan,System.String)">
+            <summary>
+            执行Sql
+            </summary>
+            <param name="sql"><see cref="T:System.String"/> 未处理的Sql语句</param>
+            <param name="parameters"><see cref="T:SqlSugar.SugarParameter"/> Sql参数</param>
+            <param name="executionTime"><see cref="T:System.TimeSpan"/> 执行时间</param>
+            <param name="handlerSql"><see cref="T:System.String"/> 参数化处理后的Sql语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.ExecuteTimeoutAsync(System.String,System.Int32,System.String,System.String,SqlSugar.SugarParameter[],System.TimeSpan,System.String,System.String)">
+            <summary>
+            执行Sql超时
+            </summary>
+            <param name="fileName"><see cref="T:System.String"/> 文件名称</param>
+            <param name="fileLine"><see cref="T:System.Int32"/> 文件行数</param>
+            <param name="methodName"><see cref="T:System.String"/> 方法名称</param>
+            <param name="sql"><see cref="T:System.String"/> 未处理的Sql语句</param>
+            <param name="parameters"><see cref="T:SqlSugar.SugarParameter"/> Sql参数</param>
+            <param name="executionTime"><see cref="T:System.TimeSpan"/> 执行时间</param>
+            <param name="handlerSql"><see cref="T:System.String"/> 参数化处理后的Sql语句</param>
+            <param name="message"><see cref="T:System.String"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.ExecuteDiffLogAsync(SqlSugar.DiffType,System.String,System.String,System.String,System.Collections.Generic.List{System.Collections.Generic.List{SqlSugar.DiffLogColumnInfo}},System.Collections.Generic.List{System.Collections.Generic.List{SqlSugar.DiffLogColumnInfo}},System.String,SqlSugar.SugarParameter[],System.Nullable{System.TimeSpan},System.String)">
+            <summary>
+            执行Sql差异
+            </summary>
+            <param name="diffType"><see cref="T:SqlSugar.DiffType"/> 差异类型</param>
+            <param name="diffDescription"><see cref="T:System.String"/> 差异描述</param>
+            <param name="tableName"><see cref="T:System.String"/> 表名称</param>
+            <param name="tableDescription"><see cref="T:System.String"/> 表描述</param>
+            <param name="beforeColumnList"><see cref="T:System.String"/> 执行前列信息</param>
+            <param name="afterColumnList"><see cref="T:System.String"/> 执行后列信息</param>
+            <param name="sql"><see cref="T:System.String"/> 未处理的Sql语句</param>
+            <param name="parameters"><see cref="T:SqlSugar.SugarParameter"/> Sql参数</param>
+            <param name="executionTime"><see cref="T:System.TimeSpan"/> 执行时间</param>
+            <param name="handlerSql"><see cref="T:System.String"/> 参数化处理后的Sql语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.ExecuteErrorAsync(System.String,System.Int32,System.String,System.String,SqlSugar.SugarParameter[],System.String,System.String)">
+            <summary>
+            执行Sql错误
+            </summary>
+            <param name="fileName"><see cref="T:System.String"/> 文件名称</param>
+            <param name="fileLine"><see cref="T:System.Int32"/> 文件行数</param>
+            <param name="methodName"><see cref="T:System.String"/> 方法名称</param>
+            <param name="sql"><see cref="T:System.String"/> 未处理的Sql语句</param>
+            <param name="parameters"><see cref="T:SqlSugar.SugarParameter"/> Sql参数</param>
+            <param name="handlerSql"><see cref="T:System.String"/> 参数化处理后的Sql语句</param>
+            <param name="message"><see cref="T:System.String"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.AssignTenantId">
+            <summary>
+            指派租户Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.AssignDepartmentId">
+            <summary>
+            指派部门Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.AssignDepartmentName">
+            <summary>
+            指派部门名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.AssignUserId">
+            <summary>
+            指派用户Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.AssignUserName">
+            <summary>
+            指派用户名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.IsSuperAdmin">
+            <summary>
+            是否为超级管理员
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Test.Api.Handlers.SqlSugarEntityHandler.IsAdmin">
+            <summary>
+            是否为管理员
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Fast.Test.Api.RestfulResult`1">
             <summary>
             RESTful风格---返回格式

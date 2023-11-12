@@ -44,6 +44,7 @@ Special thanks to [Furion](https://gitee.com/dotnetchina/Furion) author [MonkSou
 | Module name | Status | Version | Description | Remarks |
 | ------ | --- | ---- | --- | --- |
 | [Fast.Cache](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Cache/Fast.Cache) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Cache.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Cache) | Fast.NET Framework cache module library | a The Redis cache library commonly used by rookies who have been working in the .NET industry for 5 years is packaged based on [CSRedisCore](https://github.com/2881099/csredis) |
+| [Fast.Consul](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Consul/Fast.Consul) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Consul.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Consul) | Fast.NET 框架Consul模块库 | Some [Consul](https://github.com/hashicorp/consul) commonly used remote service request encapsulation |
 | [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET.NET/Core/Fast.NET.Core) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.NET.Core.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.NET.Core) | Fast.NET Framework Core Module Library | Because Fast.Core already has a Nuget package, it was renamed [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET.NET/Core/Fast.NET.Core) |
 | [Fast.CorsAccessor](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/CorsAccessor/Fast.CorsAccessor) | ✅ |[![nuget](https://img.shields.io/nuget/v/Fast.CorsAccessor.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.CorsAccessor) | Fast.NET framework cross-domain processing module library | |
 | [Fast.DependencyInjection](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/DependencyInjection/Fast.DependencyInjection) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.DependencyInjection.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.DependencyInjection) | Fast.NET Framework Dependency Injection Module Library | Based on part of the source code of [Furion v4](https://gitee.com/dotnetchina/Furion) |
@@ -53,6 +54,7 @@ Special thanks to [Furion](https://gitee.com/dotnetchina/Furion) author [MonkSou
 | [Fast.Mapster](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Mapster/Fast.Mapster) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Mapster.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Mapster) | Fast.NET Framework Object Mapping Module Library | Based on [Mapster](https://github.com/MapsterMapper/Mapster) packaging |
 | [Fast.Serialization](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Serialization/Fast.Serialization) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Serialization.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Serialization) | Fast.NET Framework Serialization Module Library | Based on [System.Text.Json](https://learn.microsoft.com/zh-cn/dotnet/api/system.text.json) packaging |
 | [Fast.SpecificationProcessor](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/SpecificationProcessor/Fast.SpecificationProcessor) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.SpecificationProcessor.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.SpecificationProcessor) | Fast.NET Framework Specification Processor Module Library | Quote [Furion v4](https://gitee.com/dotnetchina/Furion) source code |
+| [Fast.SqlSugar](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/SqlSugar/Fast.SqlSugar) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.SqlSugar.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.SqlSugar) | Fast.NET Framework SqlSugar module library | Based on [SqlSugar](https://gitee.com/dotnetchina/SqlSugar) package |
 
 ## Recent plans
 
@@ -71,6 +73,7 @@ Special thanks to [Furion](https://gitee.com/dotnetchina/Furion) author [MonkSou
 - [✅] Normalized return module
 - [✅] Log module
 - [✅] Event bus
+- [✅] SqlSugar
 - [⚠️] ...
 
 > Status description

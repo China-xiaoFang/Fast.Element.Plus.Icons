@@ -958,6 +958,7 @@
             </summary>
             <param name="obj"><see cref="T:System.Object"/></param>
             <returns><see cref="T:System.Collections.Generic.IDictionary`2"/></returns>
+            <exclude />
         </member>
         <member name="T:Fast.NET.InternalStringExtension">
             <summary>

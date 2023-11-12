@@ -1,5 +1,7 @@
 ﻿using Fast.SpecificationProcessor.DynamicApplication;
+using Fast.SqlSugar.Repository;
 using Fast.Test.Api.Controllers;
+using Fast.Test.Api.Entities;
 using Fast.Test.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +17,16 @@ public class AuthApplication : IDynamicApplication
 
     public ILogger<WeatherForecastController> Logger1 { get; }
 
-    public AuthApplication(ILogger<WeatherForecastController> logger, ITestService testService)
+    private readonly ISqlSugarRepository<Entity1> _testRepository1;
+    private readonly ISqlSugarRepository<Entity2> _testRepository2;
+
+    public AuthApplication(ILogger<WeatherForecastController> logger, ITestService testService,
+        ISqlSugarRepository<Entity1> testRepository1, ISqlSugarRepository<Entity2> testRepository2)
     {
         Logger1 = logger;
         _testService = testService;
+        _testRepository1 = testRepository1;
+        _testRepository2 = testRepository2;
     }
 
     /// <summary>

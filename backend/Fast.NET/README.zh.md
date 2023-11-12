@@ -44,9 +44,9 @@
 | 模块名称 | 状态 | 版本 | 说明 | 备注 |
 | ------  | --- | ---- | --- | --- |
 | [Fast.Cache](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Cache/Fast.Cache) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Cache.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Cache) | Fast.NET 框架缓存模块库 | 一个在 .NET 行业中从业5年的小菜鸟常用的 Redis 缓存库，基于 [CSRedisCore](https://github.com/2881099/csredis) 封装 |
-| [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET.NET/Core/Fast.NET.Core) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.NET.Core.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.NET.Core) | Fast.NET 框架核心模块库 | 因 Fast.Core 已存在 Nuget 包，故改名 [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET.NET/Core/Fast.NET.Core) |
+| [Fast.Consul](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Consul/Fast.Consul) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Consul.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Consul) | Fast.NET 框架Consul模块库 | 一些 [Consul](https://github.com/hashicorp/consul) 常用的远程服务请求封装 |
+| [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Core/Fast.NET.Core) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.NET.Core.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.NET.Core) | Fast.NET 框架核心模块库 | 因 Fast.Core 已存在 Nuget 包，故改名 [Fast.NET.Core](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET.NET/Core/Fast.NET.Core) |
 | [Fast.CorsAccessor](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/CorsAccessor/Fast.CorsAccessor) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.CorsAccessor.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.CorsAccessor) | Fast.NET 框架跨域处理模块库 | |
-| [Fast.DataValidation](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/DataValidation/Fast.DataValidation) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.DataValidation.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.DataValidation) | Fast.NET 框架数据验证模块库 | 基于 [Furion v4](https://gitee.com/dotnetchina/Furion) 部分源码 |
 | [Fast.DependencyInjection](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/DependencyInjection/Fast.DependencyInjection) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.DependencyInjection.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.DependencyInjection) | Fast.NET 框架依赖注入模块库 | 基于 [Furion v4](https://gitee.com/dotnetchina/Furion) 部分源码 |
 | [Fast.EventBus](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/EventBus/Fast.EventBus) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.EventBus.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.EventBus) | Fast.NET 框架事件总线模块库 | 引用 [Furion v4](https://gitee.com/dotnetchina/Furion) 源码 |
 | [Fast.IaaS](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/IaaS/Fast.IaaS) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.IaaS.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.IaaS) | Fast.NET 框架基础设施模块库 | 一个在 .NET 行业中从业5年的小菜鸟常用的拓展工具类 |
@@ -54,6 +54,7 @@
 | [Fast.Mapster](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Mapster/Fast.Mapster) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Mapster.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Mapster) | Fast.NET 框架对象映射模块库 | 基于 [Mapster](https://github.com/MapsterMapper/Mapster) 封装 |
 | [Fast.Serialization](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/Serialization/Fast.Serialization) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.Serialization.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.Serialization) | Fast.NET 框架序列化模块库 | 基于 [System.Text.Json](https://learn.microsoft.com/zh-cn/dotnet/api/system.text.json) 封装 |
 | [Fast.SpecificationProcessor](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/SpecificationProcessor/Fast.SpecificationProcessor) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.SpecificationProcessor.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.SpecificationProcessor) | Fast.NET 框架规范化处理模块库 | 基于 [Furion v4](https://gitee.com/dotnetchina/Furion) 源码 |
+| [Fast.SqlSugar](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET/SqlSugar/Fast.SqlSugar) | ✅ | [![nuget](https://img.shields.io/nuget/v/Fast.SqlSugar.svg?cacheSeconds=10800)](https://www.nuget.org/packages/Fast.SqlSugar) | Fast.NET 框架SqlSugar模块库 | 基于 [SqlSugar](https://gitee.com/dotnetchina/SqlSugar) 封装 |
 
 ## 近期计划
 
@@ -72,6 +73,7 @@
 - [✅] 规范化返回模块
 - [✅] 日志模块
 - [✅] 事件总线
+- [✅] SqlSugar
 - [⚠️] ...
 
 > 状态说明
