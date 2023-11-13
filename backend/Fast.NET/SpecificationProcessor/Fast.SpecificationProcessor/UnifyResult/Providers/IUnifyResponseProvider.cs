@@ -1,4 +1,4 @@
-﻿// Apache开源许可证
+// Apache开源许可证
 //
 // 版权所有 © 2018-2023 1.8K仔
 //
@@ -12,21 +12,23 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
-using Fast.SqlSugar.IBaseEntities;
-using SqlSugar;
+using Microsoft.AspNetCore.Http;
 
-namespace Fast.SqlSugar.BaseEntities;
+// ReSharper disable once CheckNamespace
+namespace Fast.SpecificationProcessor.UnifyResult;
 
 /// <summary>
-/// <see cref="BaseTEntity"/> 租户Entity基类
+/// <see cref="IUnifyResponseProvider"/> 规范化响应数据提供器
 /// </summary>
-[InternalSuppressSniffer]
-public class BaseTEntity : BaseEntity, IBaseTEntity
+public interface IUnifyResponseProvider
 {
     /// <summary>
-    /// 租户Id
+    /// 响应数据处理
+    /// <remarks>只有响应成功且为正常返回才会调用</remarks>
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsNullable = true, CreateTableFieldSort = 997)]
-    public long TenantId { get; set; }
+    /// <param name="timestamp"><see cref="long"/> 响应时间戳</param>
+    /// <param name="data"><see cref="object"/> 数据</param>
+    /// <param name="httpContext"><see cref="HttpContext"/> 请求上下文</param>
+    /// <returns></returns>
+    Task<object> ResponseDataAsync( long timestamp, object data, HttpContext httpContext);
 }

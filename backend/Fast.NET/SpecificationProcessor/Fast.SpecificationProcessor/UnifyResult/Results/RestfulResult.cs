@@ -12,21 +12,36 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
-using Fast.SqlSugar.IBaseEntities;
-using SqlSugar;
-
-namespace Fast.SqlSugar.BaseEntities;
+namespace Fast.SpecificationProcessor.UnifyResult.Results;
 
 /// <summary>
-/// <see cref="BaseTEntity"/> 租户Entity基类
+/// <see cref="RestfulResult{T}"/> RESTful风格返回格式
 /// </summary>
-[InternalSuppressSniffer]
-public class BaseTEntity : BaseEntity, IBaseTEntity
+/// <typeparam name="T"></typeparam>
+internal class RestfulResult<T>
 {
     /// <summary>
-    /// 租户Id
+    /// 执行成功
     /// </summary>
-    [SugarColumn(ColumnDescription = "租户Id", IsNullable = true, CreateTableFieldSort = 997)]
-    public long TenantId { get; set; }
+    public bool Success { get; set; }
+
+    /// <summary>
+    /// 状态码
+    /// </summary>
+    public int? Code { get; set; }
+
+    /// <summary>
+    /// 错误信息
+    /// </summary>
+    public object Message { get; set; }
+
+    /// <summary>
+    /// 数据
+    /// </summary>
+    public T Data { get; set; }
+
+    /// <summary>
+    /// 时间戳
+    /// </summary>
+    public long Timestamp { get; set; }
 }
