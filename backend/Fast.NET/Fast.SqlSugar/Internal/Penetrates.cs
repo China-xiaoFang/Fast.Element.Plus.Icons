@@ -79,42 +79,20 @@ internal static class Penetrates
         {
             // 转换为动态类型
             var dynamicEntityInfo = (dynamic) entityInfo.EntityValue;
-            dynamic value;
-            switch (propertyName)
+            var value = propertyName switch
             {
-                case nameof(IPrimaryKeyEntity<long>.Id):
-                    value = dynamicEntityInfo.Id;
-                    break;
-                case nameof(IBaseTEntity.TenantId):
-                    value = dynamicEntityInfo.TenantId;
-                    break;
-                case nameof(IBaseEntity.DepartmentId):
-                    value = dynamicEntityInfo.DepartmentId;
-                    break;
-                case nameof(IBaseEntity.DepartmentName):
-                    value = dynamicEntityInfo.DepartmentName;
-                    break;
-                case nameof(IBaseEntity.CreatedUserId):
-                    value = dynamicEntityInfo.CreatedUserId;
-                    break;
-                case nameof(IBaseEntity.CreatedUserName):
-                    value = dynamicEntityInfo.CreatedUserName;
-                    break;
-                case nameof(IBaseEntity.CreatedTime):
-                    value = dynamicEntityInfo.CreatedTime;
-                    break;
-                case nameof(IBaseEntity.UpdatedUserId):
-                    value = dynamicEntityInfo.UpdatedUserId;
-                    break;
-                case nameof(IBaseEntity.UpdatedUserName):
-                    value = dynamicEntityInfo.UpdatedUserName;
-                    break;
-                case nameof(IBaseEntity.UpdatedTime):
-                    value = dynamicEntityInfo.UpdatedTime;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+                nameof(IPrimaryKeyEntity<long>.Id) => dynamicEntityInfo.Id,
+                nameof(IBaseTEntity.TenantId) => dynamicEntityInfo.TenantId,
+                nameof(IBaseEntity.DepartmentId) => dynamicEntityInfo.DepartmentId,
+                nameof(IBaseEntity.DepartmentName) => dynamicEntityInfo.DepartmentName,
+                nameof(IBaseEntity.CreatedUserId) => dynamicEntityInfo.CreatedUserId,
+                nameof(IBaseEntity.CreatedUserName) => dynamicEntityInfo.CreatedUserName,
+                nameof(IBaseEntity.CreatedTime) => dynamicEntityInfo.CreatedTime,
+                nameof(IBaseEntity.UpdatedUserId) => dynamicEntityInfo.UpdatedUserId,
+                nameof(IBaseEntity.UpdatedUserName) => dynamicEntityInfo.UpdatedUserName,
+                nameof(IBaseEntity.UpdatedTime) => dynamicEntityInfo.UpdatedTime,
+                _ => throw new NotImplementedException()
+            };
 
             return emptyList == null || emptyList.Any(empty => empty == value);
         }

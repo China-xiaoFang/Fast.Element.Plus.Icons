@@ -23,7 +23,7 @@ namespace Fast.SqlSugar.BaseEntities;
 /// <remarks>主键Id为 Long 类型</remarks>
 /// </summary>
 [InternalSuppressSniffer]
-public class IdentityKeyEntity : IPrimaryKeyEntity<int>, IDataBaseEntity
+public class IdentityKeyEntity : IPrimaryKeyEntity<int>
 {
     /// <summary>
     /// 主键Id

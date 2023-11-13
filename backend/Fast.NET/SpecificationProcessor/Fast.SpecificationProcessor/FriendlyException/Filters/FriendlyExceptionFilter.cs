@@ -19,7 +19,6 @@ using Fast.SpecificationProcessor.FriendlyException.Contexts;
 using Fast.SpecificationProcessor.FriendlyException.Handlers;
 using Fast.SpecificationProcessor.FriendlyException.Results;
 using Fast.SpecificationProcessor.Internal;
-using Fast.SpecificationProcessor.UnifyResult;
 using Fast.SpecificationProcessor.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

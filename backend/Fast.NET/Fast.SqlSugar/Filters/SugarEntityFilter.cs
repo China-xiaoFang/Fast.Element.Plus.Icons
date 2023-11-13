@@ -182,7 +182,7 @@ internal static class SugarEntityFilter
             {
                 // 新增操作
                 case DataFilterType.InsertByObject:
-                    // 主键（long）赋值雪花Id
+                    // 主键（long）赋值雪花Id，这里一条记录只会匹配一次
                     if (entityInfo.EntityColumnInfo.IsPrimarykey &&
                         entityInfo.EntityColumnInfo.PropertyInfo.PropertyType == typeof(long))
                     {

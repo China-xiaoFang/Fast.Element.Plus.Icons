@@ -30,5 +30,5 @@ public interface IUnifyResponseProvider
     /// <param name="data"><see cref="object"/> 数据</param>
     /// <param name="httpContext"><see cref="HttpContext"/> 请求上下文</param>
     /// <returns></returns>
-    Task<object> ResponseDataAsync( long timestamp, object data, HttpContext httpContext);
+    Task<object> ResponseDataAsync(long timestamp, object data, HttpContext httpContext);
 }

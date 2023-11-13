@@ -23,7 +23,7 @@ namespace Fast.SqlSugar.BaseEntities;
 /// <remarks>主键Id为 Long 类型</remarks>
 /// </summary>
 [InternalSuppressSniffer]
-public class SnowflakeKeyEntity : IPrimaryKeyEntity<long>, IDataBaseEntity
+public class SnowflakeKeyEntity : IPrimaryKeyEntity<long>
 {
     /// <summary>
     /// 主键Id
