@@ -29,6 +29,7 @@ namespace Fast.SqlSugar.Extensions;
 /// <summary>
 /// <see cref="IServiceCollection"/> 拓展类
 /// </summary>
+[InternalSuppressSniffer]
 public static class SqlSugarIServiceCollectionExtension
 {
     /// <summary>

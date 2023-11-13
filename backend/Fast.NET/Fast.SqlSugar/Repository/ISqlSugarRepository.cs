@@ -22,7 +22,6 @@ namespace Fast.SqlSugar.Repository;
 /// <summary>
 /// <see cref="ISqlSugarRepository{TEntity}"/> SqlSugar仓储接口
 /// </summary>
-[InternalSuppressSniffer]
 public interface ISqlSugarRepository<TEntity> : ISqlSugarClient where TEntity : class, new()
 {
     /// <summary>

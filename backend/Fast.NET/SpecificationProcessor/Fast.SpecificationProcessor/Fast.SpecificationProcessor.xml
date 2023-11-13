@@ -2115,6 +2115,16 @@
             <returns>返回 true 跳过处理，否则进行规范化处理</returns>
             <returns><see cref="T:System.Boolean"/></returns>
         </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Contexts.UnifyContext.CheckResponseNonUnify(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.MethodInfo,Fast.SpecificationProcessor.UnifyResult.IUnifyResponseProvider@)">
+            <summary>
+            检查请求响应数据是否进行规范化处理
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="method"><see cref="T:System.Reflection.MethodInfo"/></param>
+            <param name="unifyResponse"><see cref="T:Fast.SpecificationProcessor.UnifyResult.IUnifyResponseProvider"/></param>
+            <returns>返回 true 跳过处理，否则进行规范化处理</returns>
+            <returns><see cref="T:System.Boolean"/></returns>
+        </member>
         <member name="M:Fast.SpecificationProcessor.UnifyResult.Contexts.UnifyContext.CheckStatusCodeNonUnify(Microsoft.AspNetCore.Http.HttpContext,Fast.SpecificationProcessor.UnifyResult.IUnifyResultProvider@)">
             <summary>
             检查短路状态码（>=400）是否进行规范化处理
@@ -2138,6 +2148,26 @@
             <param name="method"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.SpecificationProcessor.UnifyResult.HttpContextExtension">
+            <summary>
+            <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 拓展类
+            </summary>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.HttpContextExtension.UnifyResponseTimestamp(Microsoft.AspNetCore.Http.HttpContext,System.Int64)">
+            <summary>
+            设置规范化响应时间戳
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="timestamp"><see cref="T:System.Int64"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.HttpContextExtension.UnifyResponseTimestamp(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取规范化响应时间戳
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns><see cref="T:System.String"/></returns>
+        </member>
         <member name="T:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIApplicationBuilderExtension">
             <summary>
             <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> 规范化服务拓展类
@@ -2154,6 +2184,36 @@
             <summary>
             <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 规范化服务拓展类
             </summary>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
+            <summary>
+            添加默认规范化结果服务
+            </summary>
+            <param name="mvcBuilder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加默认规范化结果服务
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.String)">
+            <summary>
+            添加默认规范化结果服务
+            </summary>
+            <param name="mvcBuilder"></param>
+            <param name="providerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            添加默认规范化结果服务
+            </summary>
+            <param name="services"></param>
+            <param name="providerName"></param>
+            <returns></returns>
         </member>
         <member name="M:Fast.SpecificationProcessor.UnifyResult.Extensions.UnifyResultIServiceCollectionExtension.AddUnifyResult``1(Microsoft.Extensions.DependencyInjection.IMvcBuilder)">
             <summary>
@@ -2255,6 +2315,21 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.SpecificationProcessor.UnifyResult.IUnifyResponseProvider">
+            <summary>
+            <see cref="T:Fast.SpecificationProcessor.UnifyResult.IUnifyResponseProvider"/> 规范化响应数据提供器
+            </summary>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.IUnifyResponseProvider.ResponseDataAsync(System.Int64,System.Object,Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            响应数据处理
+            <remarks>只有响应成功且为正常返回才会调用</remarks>
+            </summary>
+            <param name="timestamp"><see cref="T:System.Int64"/> 响应时间戳</param>
+            <param name="data"><see cref="T:System.Object"/> 数据</param>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 请求上下文</param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.SpecificationProcessor.UnifyResult.IUnifyResultProvider">
             <summary>
             <see cref="T:Fast.SpecificationProcessor.UnifyResult.IUnifyResultProvider"/> 规范化结果提供器
@@ -2291,6 +2366,85 @@
             <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
             <param name="statusCode"><see cref="T:System.Int32"/> 状态码</param>
             <returns></returns>
+        </member>
+        <member name="T:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider">
+            <summary>
+            规范化RESTful风格返回值
+            </summary>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,Fast.SpecificationProcessor.FriendlyException.Metadatas.ExceptionMetadata)">
+            <summary>
+            异常返回值
+            </summary>
+            <param name="context"><see cref="T:Fast.SpecificationProcessor.FriendlyException.Contexts.ExceptorContext"/></param>
+            <param name="metadata"><see cref="T:Fast.SpecificationProcessor.FriendlyException.Metadatas.ExceptionMetadata"/> 异常元数据</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Object)">
+            <summary>
+            成功返回值
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+            <param name="data"></param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Fast.SpecificationProcessor.DataValidation.ValidationMetadata)">
+            <summary>
+            验证失败返回值
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext"/></param>
+            <param name="metadata"><see cref="T:Fast.SpecificationProcessor.DataValidation.ValidationMetadata"/> 验证信息元数据</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32)">
+            <summary>
+            拦截返回状态码
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="statusCode"><see cref="T:System.Int32"/> 状态码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SpecificationProcessor.UnifyResult.Providers.RestfulResultProvider.GetRestfulResult(System.Int32,System.Boolean,System.Object,System.Object,Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取规范化RESTful风格返回值
+            </summary>
+            <param name="code"><see cref="T:System.Int32"/> 状态码</param>
+            <param name="success"><see cref="T:System.Boolean"/> 执行成功</param>
+            <param name="data"><see cref="T:System.Object"/> 数据</param>
+            <param name="message"><see cref="T:System.String"/> 错误信息</param>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/> 请求上下文</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1">
+            <summary>
+            <see cref="T:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1"/> RESTful风格返回格式
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1.Success">
+            <summary>
+            执行成功
+            </summary>
+        </member>
+        <member name="P:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1.Code">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1.Message">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:Fast.SpecificationProcessor.UnifyResult.Results.RestfulResult`1.Timestamp">
+            <summary>
+            时间戳
+            </summary>
         </member>
     </members>
 </doc>

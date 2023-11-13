@@ -71,7 +71,7 @@ internal static class ExceptorContext
         {
             errors = exception?.InnerException?.Message ?? exception?.Message ?? "Internal Server Error";
         }
-
+        
         return new ExceptionMetadata
         {
             StatusCode = statusCode,

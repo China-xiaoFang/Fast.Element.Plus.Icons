@@ -15,6 +15,7 @@
 using System.Collections;
 using System.Data;
 using System.Reflection;
+using Fast.NET;
 using SqlSugar;
 
 namespace Fast.SqlSugar.Extensions;
@@ -22,6 +23,7 @@ namespace Fast.SqlSugar.Extensions;
 /// <summary>
 /// <see cref="ISqlSugarClient"/> SqlSugar 拓展类
 /// </summary>
+[InternalSuppressSniffer]
 public static class SqlSugarExtension
 {
     /// <summary>
