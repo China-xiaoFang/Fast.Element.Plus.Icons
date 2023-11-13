@@ -12,58 +12,48 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
+// ReSharper disable once CheckNamespace
 
-namespace Fast.SqlSugar.IBaseEntities;
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="IBaseEntity"/> Entity基类接口
+/// <see cref="WanNetIPInfo"/> 公网IP信息
 /// </summary>
-[InternalSuppressSniffer]
-public interface IBaseEntity : IDataBaseEntity
+/// <exclude />
+public class WanNetIPInfo
 {
     /// <summary>
-    /// 部门Id
+    /// Ip地址
     /// </summary>
-    long? DepartmentId { get; set; }
+    public string Ip { get; set; }
 
     /// <summary>
-    /// 部门名称
+    /// 省份
     /// </summary>
-    string DepartmentName { get; set; }
+    public string Province { get; set; }
 
     /// <summary>
-    /// 创建者用户Id
+    /// 省份邮政编码
     /// </summary>
-    long? CreatedUserId { get; set; }
+    public string ProvinceZipCode { get; set; }
 
     /// <summary>
-    /// 创建者用户名称
+    /// 城市
     /// </summary>
-    string CreatedUserName { get; set; }
+    public string City { get; set; }
 
     /// <summary>
-    /// 创建时间
+    /// 城市邮政编码
     /// </summary>
-    DateTime? CreatedTime { get; set; }
+    public string CityZipCode { get; set; }
 
     /// <summary>
-    /// 更新者用户Id
+    /// 地理信息
     /// </summary>
-    long? UpdatedUserId { get; set; }
+    public string Address { get; set; }
 
     /// <summary>
-    /// 更新者用户名称
+    /// 运营商
     /// </summary>
-    string UpdatedUserName { get; set; }
-
-    /// <summary>
-    /// 更新时间
-    /// </summary>
-    DateTime? UpdatedTime { get; set; }
-
-    /// <summary>
-    /// 更新版本控制字段
-    /// </summary>
-    long UpdatedVersion { get; set; }
+    public string Operator => Address[(Province.Length + City.Length)..].Trim();
 }

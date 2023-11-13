@@ -77,65 +77,70 @@ internal class RestfulResultProvider : IUnifyResultProvider
     /// <summary>
     /// 拦截返回状态码
     /// </summary>
-    /// <param name="context"><see cref="HttpContext"/></param>
+    /// <param name="httpContext"><see cref="HttpContext"/></param>
     /// <param name="statusCode"><see cref="int"/> 状态码</param>
     /// <returns></returns>
-    public async Task OnResponseStatusCodes(HttpContext context, int statusCode)
+    public async Task OnResponseStatusCodes(HttpContext httpContext, int statusCode)
     {
-        var jsonSerializerOptions = context.RequestServices.GetService<IOptions<JsonOptions>>().Value?.JsonSerializerOptions;
+        var jsonSerializerOptions = httpContext.RequestServices.GetService<IOptions<JsonOptions>>().Value?.JsonSerializerOptions;
 
         // 设置响应状态码
-        context.Response.StatusCode = statusCode;
+        httpContext.Response.StatusCode = statusCode;
 
         switch (statusCode)
         {
             // 处理 400 状态码
             case StatusCodes.Status400BadRequest:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status400BadRequest, false, null, "400 请求无效", context), jsonSerializerOptions);
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status400BadRequest, false, null, "400 请求无效", httpContext),
+                    jsonSerializerOptions);
                 break;
             // 处理 401 状态码
             case StatusCodes.Status401Unauthorized:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status401Unauthorized, false, null, "401 未经授权", context), jsonSerializerOptions);
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status401Unauthorized, false, null, "401 未经授权", httpContext),
+                    jsonSerializerOptions);
                 break;
             // 处理 403 状态码
             case StatusCodes.Status403Forbidden:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status403Forbidden, false, null, "403 无操作权限", context), jsonSerializerOptions);
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status403Forbidden, false, null, "403 无操作权限", httpContext),
+                    jsonSerializerOptions);
                 break;
             // 处理 404 状态码
             case StatusCodes.Status404NotFound:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status404NotFound, false, null, "404 无效的地址", context), jsonSerializerOptions);
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status404NotFound, false, null, "404 无效的地址", httpContext),
+                    jsonSerializerOptions);
                 break;
             // 处理 405 状态码
             case StatusCodes.Status405MethodNotAllowed:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status404NotFound, false, null, "405 方法不被允许", context), jsonSerializerOptions);
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status404NotFound, false, null, "405 方法不被允许", httpContext),
+                    jsonSerializerOptions);
                 break;
             // 处理 429 状态码
             case StatusCodes.Status429TooManyRequests:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status429TooManyRequests, false, null, "429 频繁请求", context),
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status429TooManyRequests, false, null, "429 频繁请求", httpContext),
                     jsonSerializerOptions);
                 break;
             // 处理 500 状态码
             case StatusCodes.Status500InternalServerError:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "500 服务器内部错误", context),
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "500 服务器内部错误", httpContext),
                     jsonSerializerOptions);
                 break;
             // 处理 502 状态码
             case StatusCodes.Status502BadGateway:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "502 网关错误", context),
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "502 网关错误", httpContext),
                     jsonSerializerOptions);
                 break;
             // 处理 503 状态码
             case StatusCodes.Status503ServiceUnavailable:
-                await context.Response.WriteAsJsonAsync(
-                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "503 服务不可用", context),
+                await httpContext.Response.WriteAsJsonAsync(
+                    GetRestfulResult(StatusCodes.Status500InternalServerError, false, null, "503 服务不可用", httpContext),
                     jsonSerializerOptions);
                 break;
         }

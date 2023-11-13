@@ -12,58 +12,28 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.NET;
+// ReSharper disable once CheckNamespace
 
-namespace Fast.SqlSugar.IBaseEntities;
+namespace Fast.NET;
 
 /// <summary>
-/// <see cref="IBaseEntity"/> Entity基类接口
+/// <see cref="UserAgentInfo"/> 用户代理信息
 /// </summary>
-[InternalSuppressSniffer]
-public interface IBaseEntity : IDataBaseEntity
+/// <exclude />
+public class UserAgentInfo
 {
     /// <summary>
-    /// 部门Id
+    /// 设备
     /// </summary>
-    long? DepartmentId { get; set; }
+    public string Device { get; set; }
 
     /// <summary>
-    /// 部门名称
+    /// 操作系统（版本）
     /// </summary>
-    string DepartmentName { get; set; }
+    public string OS { get; set; }
 
     /// <summary>
-    /// 创建者用户Id
+    /// 浏览器（版本）
     /// </summary>
-    long? CreatedUserId { get; set; }
-
-    /// <summary>
-    /// 创建者用户名称
-    /// </summary>
-    string CreatedUserName { get; set; }
-
-    /// <summary>
-    /// 创建时间
-    /// </summary>
-    DateTime? CreatedTime { get; set; }
-
-    /// <summary>
-    /// 更新者用户Id
-    /// </summary>
-    long? UpdatedUserId { get; set; }
-
-    /// <summary>
-    /// 更新者用户名称
-    /// </summary>
-    string UpdatedUserName { get; set; }
-
-    /// <summary>
-    /// 更新时间
-    /// </summary>
-    DateTime? UpdatedTime { get; set; }
-
-    /// <summary>
-    /// 更新版本控制字段
-    /// </summary>
-    long UpdatedVersion { get; set; }
+    public string Browser { get; set; }
 }

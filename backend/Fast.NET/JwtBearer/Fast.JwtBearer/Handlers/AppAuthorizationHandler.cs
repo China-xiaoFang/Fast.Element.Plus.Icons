@@ -70,7 +70,7 @@ internal class AppAuthorizationHandler : IAuthorizationHandler
             {
                 foreach (var requirement in pendingRequirements)
                 {
-                    var isPermissionSuccess = true;
+                    bool isPermissionSuccess;
                     Exception permissionException = null;
 
                     try

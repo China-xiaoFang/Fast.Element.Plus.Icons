@@ -13,15 +13,46 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.NET;
+using Microsoft.AspNetCore.Http;
 
 namespace Fast.SqlSugar.IBaseEntities;
 
 /// <summary>
-/// <see cref="IBaseEntity"/> Entity基类接口
+/// <see cref="IBaseRecordEntity"/> 记录Entity基类接口
 /// </summary>
 [InternalSuppressSniffer]
-public interface IBaseEntity : IDataBaseEntity
+public interface IBaseRecordEntity : IDataBaseEntity
 {
+    /// <summary>
+    /// 设备
+    /// </summary>
+    string Device { get; set; }
+
+    /// <summary>
+    /// 操作系统（版本）
+    /// </summary>
+    string OS { get; set; }
+
+    /// <summary>
+    /// 浏览器（版本）
+    /// </summary>
+    string Browser { get; set; }
+
+    /// <summary>
+    /// 省份
+    /// </summary>
+    string Province { get; set; }
+
+    /// <summary>
+    /// 城市
+    /// </summary>
+    string City { get; set; }
+
+    /// <summary>
+    /// Ip
+    /// </summary>
+    string Ip { get; set; }
+
     /// <summary>
     /// 部门Id
     /// </summary>
@@ -48,22 +79,8 @@ public interface IBaseEntity : IDataBaseEntity
     DateTime? CreatedTime { get; set; }
 
     /// <summary>
-    /// 更新者用户Id
+    /// 记录表创建
     /// </summary>
-    long? UpdatedUserId { get; set; }
-
-    /// <summary>
-    /// 更新者用户名称
-    /// </summary>
-    string UpdatedUserName { get; set; }
-
-    /// <summary>
-    /// 更新时间
-    /// </summary>
-    DateTime? UpdatedTime { get; set; }
-
-    /// <summary>
-    /// 更新版本控制字段
-    /// </summary>
-    long UpdatedVersion { get; set; }
+    /// <param name="httpContext"><see cref="HttpContext"/> 请求上下文</param>
+    void RecordCreate(HttpContext httpContext);
 }
