@@ -40,10 +40,28 @@ internal class EnumJsonConverter<T> : JsonConverter<T> where T : struct, Enum
         }
         else if (reader.TokenType == JsonTokenType.Number)
         {
-            var enumValueInt = reader.GetInt64();
-            if (Enum.IsDefined(typeToConvert, enumValueInt))
+            // 通过 Type.GetTypeCode() 获取底层类型的 TypeCode，判断是是什么类型的值
+            // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
+            switch (Type.GetTypeCode(typeToConvert))
             {
-                return (T) Enum.ToObject(typeToConvert, enumValueInt);
+                case TypeCode.SByte:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetSByte());
+                case TypeCode.Byte:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetByte());
+                case TypeCode.Int16:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetInt16());
+                case TypeCode.UInt16:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetUInt16());
+                case TypeCode.Int32:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetInt32());
+                case TypeCode.UInt32:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetUInt32());
+                case TypeCode.Int64:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetInt64());
+                case TypeCode.UInt64:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetUInt64());
+                case TypeCode.Boolean:
+                    return (T) Enum.ToObject(typeToConvert, reader.GetBoolean());
             }
         }
 
@@ -78,20 +96,39 @@ internal class NullableEnumJsonConverter<T> : JsonConverter<T?> where T : struct
             return null;
         }
 
+        var underlyingType = Nullable.GetUnderlyingType(typeToConvert) ?? typeToConvert;
+
         if (reader.TokenType == JsonTokenType.String)
         {
-            var enumValueStr = reader.GetString();
-            if (Enum.TryParse(enumValueStr, out T enumValue))
+            if (Enum.TryParse(underlyingType, reader.GetString(), out var enumValueObj))
             {
-                return enumValue;
+                return (T?) enumValueObj;
             }
         }
         else if (reader.TokenType == JsonTokenType.Number)
         {
-            var enumValueInt = reader.GetInt64();
-            if (Enum.IsDefined(typeToConvert, enumValueInt))
+            // 通过 Type.GetTypeCode() 获取底层类型的 TypeCode，判断是是什么类型的值
+            // ReSharper disable once SwitchStatementMissingSomeEnumCasesNoDefault
+            switch (Type.GetTypeCode(underlyingType))
             {
-                return (T) Enum.ToObject(typeToConvert, enumValueInt);
+                case TypeCode.SByte:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetSByte());
+                case TypeCode.Byte:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetByte());
+                case TypeCode.Int16:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetInt16());
+                case TypeCode.UInt16:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetUInt16());
+                case TypeCode.Int32:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetInt32());
+                case TypeCode.UInt32:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetUInt32());
+                case TypeCode.Int64:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetInt64());
+                case TypeCode.UInt64:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetUInt64());
+                case TypeCode.Boolean:
+                    return (T?) Enum.ToObject(underlyingType, reader.GetBoolean());
             }
         }
 
