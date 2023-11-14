@@ -14,16 +14,26 @@
 
 using Fast.NET;
 
-namespace Fast.SqlSugar.Options;
+namespace Fast.SqlSugar.Definition;
 
 /// <summary>
-/// <see cref="SnowflakeSettingsOptions"/> 雪花Id配置
+/// <see cref="SqlSugarEntityInfo"/> SqlSugar 实体信息
 /// </summary>
 [InternalSuppressSniffer]
-public class SnowflakeSettingsOptions
+public sealed class SqlSugarEntityInfo
 {
     /// <summary>
-    /// 工作Id
+    /// 数据库表名称
     /// </summary>
-    public ushort WorkerId { get; set; }
+    public string TableName { get; set; }
+
+    /// <summary>
+    /// 数据库表描述
+    /// </summary>
+    public string TableDescription { get; set; }
+
+    /// <summary>
+    /// 实体类型
+    /// </summary>
+    public Type EntityType { get; set; }
 }

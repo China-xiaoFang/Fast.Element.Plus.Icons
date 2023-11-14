@@ -35,7 +35,7 @@ internal class EnumConverterFactory : JsonConverterFactory
     /// <summary>Creates a converter for a specified type.</summary>
     /// <param name="typeToConvert">The type handled by the converter.</param>
     /// <param name="options">The serialization options to use.</param>
-    /// <returns>A converter for which <typeparamref name="T" /> is compatible with <paramref name="typeToConvert" />.</returns>
+    /// <returns>A converter for which <see cref="Enum"/> is compatible with <paramref name="typeToConvert" />.</returns>
     public override System.Text.Json.Serialization.JsonConverter CreateConverter(Type typeToConvert,
         JsonSerializerOptions options)
     {
@@ -66,7 +66,7 @@ internal class NullableEnumConverterFactory : JsonConverterFactory
     /// <summary>Creates a converter for a specified type.</summary>
     /// <param name="typeToConvert">The type handled by the converter.</param>
     /// <param name="options">The serialization options to use.</param>
-    /// <returns>A converter for which <typeparamref name="T" /> is compatible with <paramref name="typeToConvert" />.</returns>
+    /// <returns>A converter for which <see cref="Enum"/> is compatible with <paramref name="typeToConvert" />.</returns>
     public override System.Text.Json.Serialization.JsonConverter CreateConverter(Type typeToConvert,
         JsonSerializerOptions options)
     {

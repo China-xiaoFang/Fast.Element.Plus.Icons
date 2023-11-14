@@ -979,6 +979,69 @@
             <remarks>雪花Id</remarks>
             </summary>
         </member>
+        <member name="T:Fast.SqlSugar.SqlSugarContext">
+            <summary>
+            <see cref="T:Fast.SqlSugar.SqlSugarContext"/> SqlSugar 上下文
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.SqlSugarContext.ConnectionSettings">
+            <summary>
+            连接字符串配置
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.SqlSugarContext.SnowflakeSettings">
+            <summary>
+            雪花Id配置
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.SqlSugarContext.DefaultConnectionConfig">
+            <summary>
+            默认连接配置
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.SqlSugarContext.CacheSqlSugarEntityList">
+            <summary>
+            内部缓存SqlSugar实体集合
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.SqlSugarContext.SqlSugarEntityList">
+            <summary>
+            SqlSugar实体集合
+            </summary>
+        </member>
+        <member name="M:Fast.SqlSugar.SqlSugarContext.GetConnectionConfig(Fast.SqlSugar.Options.ConnectionSettingsOptions)">
+            <summary>
+            获取连接配置
+            </summary>
+            <param name="connectionSettings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SqlSugar.SqlSugarContext.ParameterFormat(System.String,System.Collections.Generic.IReadOnlyList{SqlSugar.SugarParameter})">
+            <summary>
+            格式化参数拼接成完整的SQL语句
+            </summary>
+            <param name="sql"></param>
+            <param name="pars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SqlSugar.SqlSugarContext.EntityValueCheck(System.String,System.Collections.Generic.ICollection{System.Object},SqlSugar.DataFilterModel)">
+            <summary>
+            Entity Value 检测
+            </summary>
+            <param name="propertyName"><see cref="T:System.String"/> 属性名称</param>
+            <param name="emptyList"><see cref="T:System.Collections.Generic.ICollection`1"/> 空对象检测集合</param>
+            <param name="entityInfo"><see cref="T:SqlSugar.DataFilterModel"/> 实体信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SqlSugar.SqlSugarContext.SetEntityValue(System.String,System.Collections.Generic.ICollection{System.Object},System.Object,SqlSugar.DataFilterModel@)">
+            <summary>
+            设置Entity Value
+            </summary>
+            <param name="fieldName"></param>
+            <param name="emptyList"></param>
+            <param name="setValue"></param>
+            <param name="entityInfo"></param>
+        </member>
         <member name="T:Fast.SqlSugar.DataBaseUtils.DataBaseUtil">
             <summary>
             <see cref="T:Fast.SqlSugar.DataBaseUtils.DataBaseUtil"/> 连接字符串工具类
@@ -1022,6 +1085,26 @@
             <param name="dbType"></param>
             <returns></returns>
         </member>
+        <member name="T:Fast.SqlSugar.Definition.SqlSugarEntityInfo">
+            <summary>
+            <see cref="T:Fast.SqlSugar.Definition.SqlSugarEntityInfo"/> SqlSugar 实体信息
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.Definition.SqlSugarEntityInfo.TableName">
+            <summary>
+            数据库表名称
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.Definition.SqlSugarEntityInfo.TableDescription">
+            <summary>
+            数据库表描述
+            </summary>
+        </member>
+        <member name="P:Fast.SqlSugar.Definition.SqlSugarEntityInfo.EntityType">
+            <summary>
+            实体类型
+            </summary>
+        </member>
         <member name="T:Fast.SqlSugar.Extensions.SqlSugarExtension">
             <summary>
             <see cref="T:SqlSugar.ISqlSugarClient"/> SqlSugar 拓展类
@@ -1030,6 +1113,13 @@
         <member name="M:Fast.SqlSugar.Extensions.SqlSugarExtension.GetSugarTableName(System.Type)">
             <summary>
             获取SugarTable特性中的TableName
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.SqlSugar.Extensions.SqlSugarExtension.GetSugarTableAttribute(System.Type)">
+            <summary>
+            获取SugarTable特性
             </summary>
             <param name="type"></param>
             <returns></returns>
@@ -1329,52 +1419,6 @@
             <summary>
             主键Id
             </summary>
-        </member>
-        <member name="T:Fast.SqlSugar.Internal.Penetrates">
-            <summary>
-            <see cref="T:Fast.SqlSugar.Internal.Penetrates"/> 常量，公共方法配置类
-            </summary>
-        </member>
-        <member name="P:Fast.SqlSugar.Internal.Penetrates.ConnectionSettings">
-            <summary>
-            连接字符串配置
-            </summary>
-        </member>
-        <member name="P:Fast.SqlSugar.Internal.Penetrates.SnowflakeSettings">
-            <summary>
-            雪花Id配置
-            </summary>
-        </member>
-        <member name="P:Fast.SqlSugar.Internal.Penetrates.DefaultConnectionConfig">
-            <summary>
-            默认连接配置
-            </summary>
-        </member>
-        <member name="M:Fast.SqlSugar.Internal.Penetrates.ParameterFormat(System.String,System.Collections.Generic.IReadOnlyList{SqlSugar.SugarParameter})">
-            <summary>
-            格式化参数拼接成完整的SQL语句
-            </summary>
-            <param name="sql"></param>
-            <param name="pars"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.SqlSugar.Internal.Penetrates.EntityValueCheck(System.String,System.Collections.Generic.ICollection{System.Object},SqlSugar.DataFilterModel)">
-            <summary>
-            Entity Value 检测
-            </summary>
-            <param name="propertyName"><see cref="T:System.String"/> 属性名称</param>
-            <param name="emptyList"><see cref="T:System.Collections.Generic.ICollection`1"/> 空对象检测集合</param>
-            <param name="entityInfo"><see cref="T:SqlSugar.DataFilterModel"/> 实体信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:Fast.SqlSugar.Internal.Penetrates.SetEntityValue(System.String,System.Collections.Generic.ICollection{System.Object},System.Object,SqlSugar.DataFilterModel@)">
-            <summary>
-            设置Entity Value
-            </summary>
-            <param name="fieldName"></param>
-            <param name="emptyList"></param>
-            <param name="setValue"></param>
-            <param name="entityInfo"></param>
         </member>
         <member name="T:Fast.SqlSugar.Options.ConnectionSettingsOptions">
             <summary>
@@ -1871,7 +1915,7 @@
         </member>
         <member name="M:Fast.SqlSugar.Repository.SqlSugarRepository`1.#ctor(System.IServiceProvider)">
             <summary>
-            
+            <see cref="T:Fast.SqlSugar.Repository.SqlSugarRepository`1"/> SqlSugar仓储实现
             </summary>
             <param name="serviceProvider"></param>
         </member>

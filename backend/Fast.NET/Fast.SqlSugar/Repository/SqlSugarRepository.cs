@@ -13,10 +13,8 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Linq.Expressions;
-using Fast.SqlSugar.DataBaseUtils;
 using Fast.SqlSugar.Filters;
 using Fast.SqlSugar.Handlers;
-using Fast.SqlSugar.Internal;
 using Fast.SqlSugar.Options;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
@@ -34,10 +32,10 @@ public sealed class SqlSugarRepository<TEntity> : SqlSugarClient, ISqlSugarRepos
     private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
-    /// 
+    /// <see cref="SqlSugarRepository{TEntity}"/> SqlSugar仓储实现
     /// </summary>
     /// <param name="serviceProvider"></param>
-    public SqlSugarRepository(IServiceProvider serviceProvider) : base(Penetrates.DefaultConnectionConfig)
+    public SqlSugarRepository(IServiceProvider serviceProvider) : base(SqlSugarContext.DefaultConnectionConfig)
     {
         _serviceProvider = serviceProvider;
 
@@ -49,34 +47,22 @@ public sealed class SqlSugarRepository<TEntity> : SqlSugarClient, ISqlSugarRepos
         if (connectionSettings != null)
         {
             DataBaseInfo = connectionSettings;
-            if (connectionSettings.ConnectionId != Penetrates.DefaultConnectionConfig.ConfigId)
+            if (connectionSettings.ConnectionId != SqlSugarContext.DefaultConnectionConfig.ConfigId)
             {
-                // 得到连接字符串
-                var connectionStr = DataBaseUtil.GetConnectionStr(connectionSettings);
-
-                var newConnectionConfig = new ConnectionConfig
-                {
-                    ConfigId = Penetrates.ConnectionSettings.ConnectionId, // 此链接标志，用以后面切库使用
-                    ConnectionString = connectionStr, // 核心库连接字符串
-                    DbType = Penetrates.ConnectionSettings.DbType,
-                    IsAutoCloseConnection = true, // 开启自动释放模式和EF原理一样我就不多解释了
-                    InitKeyType = InitKeyType.Attribute, // 从特性读取主键和自增列信息
-                    //InitKeyType = InitKeyType.SystemTable // 从数据库读取主键和自增列信息
-                    ConfigureExternalServices = DataBaseUtil.GetSugarExternalServices(Penetrates.ConnectionSettings.DbType)
-                };
+                var newConnectionConfig = SqlSugarContext.GetConnectionConfig(connectionSettings);
 
                 // 重新初始化Context
                 InitContext(newConnectionConfig);
 
                 // 加载过滤器
-                SugarEntityFilter.LoadSugarFilter(Context, Penetrates.ConnectionSettings.CommandTimeOut,
-                    Penetrates.ConnectionSettings.SugarSqlExecMaxSeconds, Penetrates.ConnectionSettings.DiffLog,
+                SugarEntityFilter.LoadSugarFilter(Context, SqlSugarContext.ConnectionSettings.CommandTimeOut,
+                    SqlSugarContext.ConnectionSettings.SugarSqlExecMaxSeconds, SqlSugarContext.ConnectionSettings.DiffLog,
                     sqlSugarEntityHandler);
             }
         }
         else
         {
-            DataBaseInfo = Penetrates.ConnectionSettings;
+            DataBaseInfo = SqlSugarContext.ConnectionSettings;
         }
     }
 

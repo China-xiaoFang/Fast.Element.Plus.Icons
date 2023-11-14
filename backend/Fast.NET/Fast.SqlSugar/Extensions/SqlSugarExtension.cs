@@ -43,6 +43,16 @@ public static class SqlSugarExtension
     }
 
     /// <summary>
+    /// 获取SugarTable特性
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public static SugarTable GetSugarTableAttribute(this Type type)
+    {
+        return type.GetCustomAttribute<SugarTable>();
+    }
+
+    /// <summary>
     /// 转为DataTable
     /// </summary>
     /// <typeparam name="T"></typeparam>
