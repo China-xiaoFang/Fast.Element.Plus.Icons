@@ -1903,6 +1903,24 @@
             <param name="whereExpression"></param>
             <returns></returns>
         </member>
+        <member name="M:Fast.SqlSugar.Repository.ISqlSugarRepository`1.LogicDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            自定义条件逻辑删除记录
+            <remarks>注意，实体必须继承 <see cref="T:Fast.SqlSugar.IBaseEntities.IBaseDeletedEntity"/></remarks>
+            </summary>
+            <param name="whereExpression"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Fast.SqlSugar.Repository.ISqlSugarRepository`1.LogicDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            自定义条件逻辑删除记录
+            <remarks>注意，实体必须继承 <see cref="T:Fast.SqlSugar.IBaseEntities.IBaseDeletedEntity"/></remarks>
+            </summary>
+            <param name="whereExpression"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
         <member name="T:Fast.SqlSugar.Repository.SqlSugarRepository`1">
             <summary>
             <see cref="T:Fast.SqlSugar.Repository.SqlSugarRepository`1"/> SqlSugar仓储实现
@@ -2326,6 +2344,24 @@
             </summary>
             <param name="whereExpression"></param>
             <returns></returns>
+        </member>
+        <member name="M:Fast.SqlSugar.Repository.SqlSugarRepository`1.LogicDelete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            自定义条件逻辑删除记录
+            <remarks>注意，实体必须继承 <see cref="T:Fast.SqlSugar.IBaseEntities.IBaseDeletedEntity"/></remarks>
+            </summary>
+            <param name="whereExpression"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Fast.SqlSugar.Repository.SqlSugarRepository`1.LogicDeleteAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            自定义条件逻辑删除记录
+            </summary>
+            <param name="whereExpression"></param>
+            <remarks>注意，实体必须继承 <see cref="T:Fast.SqlSugar.IBaseEntities.IBaseDeletedEntity"/></remarks>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
     </members>
 </doc>

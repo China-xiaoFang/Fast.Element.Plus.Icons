@@ -15,6 +15,7 @@
 using System.Linq.Expressions;
 using Fast.SqlSugar.Filters;
 using Fast.SqlSugar.Handlers;
+using Fast.SqlSugar.IBaseEntities;
 using Fast.SqlSugar.Options;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
@@ -665,6 +666,66 @@ public sealed class SqlSugarRepository<TEntity> : SqlSugarClient, ISqlSugarRepos
     public async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> whereExpression)
     {
         return await Deleteable<TEntity>().Where(whereExpression).ExecuteCommandAsync();
+    }
+
+    /// <summary>
+    /// 自定义条件逻辑删除记录
+    /// <remarks>注意，实体必须继承 <see cref="IBaseDeletedEntity"/></remarks>
+    /// </summary>
+    /// <param name="whereExpression"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public int LogicDelete(Expression<Func<TEntity, bool>> whereExpression)
+    {
+        // 获取 TEntity 的类型
+        var entityType = typeof(TEntity);
+
+        // 判断是否继承了 IBaseDeletedEntity
+        if (!entityType.GetInterfaces().Contains(typeof(IBaseDeletedEntity)))
+            throw new InvalidOperationException(
+                $"{nameof(TEntity)} does not inherit {nameof(IBaseDeletedEntity)} interface, Logical deletion cannot be used.");
+
+        // 反射创建实体
+        var deletedEntity = Activator.CreateInstance<TEntity>();
+
+        // 获取 IsDeleted 字段属性
+        var isDeletedProperty = entityType.GetProperty(nameof(IBaseDeletedEntity.IsDeleted));
+
+        // 设置 IsDeleted 字段属性值
+        isDeletedProperty!.SetValue(deletedEntity, true);
+
+        // 执行逻辑删除
+        return Updateable<TEntity>().SetColumns(_ => deletedEntity, true).Where(whereExpression).ExecuteCommand();
+    }
+
+    /// <summary>
+    /// 自定义条件逻辑删除记录
+    /// </summary>
+    /// <param name="whereExpression"></param>
+    /// <remarks>注意，实体必须继承 <see cref="IBaseDeletedEntity"/></remarks>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
+    public async Task<int> LogicDeleteAsync(Expression<Func<TEntity, bool>> whereExpression)
+    {
+        // 获取 TEntity 的类型
+        var entityType = typeof(TEntity);
+
+        // 判断是否继承了 IBaseDeletedEntity
+        if (!entityType.GetInterfaces().Contains(typeof(IBaseDeletedEntity)))
+            throw new InvalidOperationException(
+                $"{nameof(TEntity)} does not inherit {nameof(IBaseDeletedEntity)} interface, Logical deletion cannot be used.");
+
+        // 反射创建实体
+        var deletedEntity = Activator.CreateInstance<TEntity>();
+
+        // 获取 IsDeleted 字段属性
+        var isDeletedProperty = entityType.GetProperty(nameof(IBaseDeletedEntity.IsDeleted));
+
+        // 设置 IsDeleted 字段属性值
+        isDeletedProperty!.SetValue(deletedEntity, true);
+
+        // 执行逻辑删除
+        return await Updateable<TEntity>().SetColumns(_ => deletedEntity, true).Where(whereExpression).ExecuteCommandAsync();
     }
 
     #endregion
