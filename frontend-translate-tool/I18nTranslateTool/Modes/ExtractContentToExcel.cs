@@ -59,6 +59,15 @@ internal class ExtractContentToExcel
         var tsObjectRegex = new Regex(@"\[""(.*?)""\]: ""(.*?)""");
 
         /*
+         * 匹配页面引用地址
+         * import { detailForm } from "./detailForm.vue";
+         * import { detailForm } from "@/views/login/index.vue";
+         * import detailForm from "./detailForm.vue";
+         * import detailForm from "@/views/login/index.vue";
+         */
+        var importFromRegex = new Regex(@"import\s+(?:\{(?:[\s\S]+?)\}|(\w+))\s+from\s+[""']([^""']+?\.vue)[""']");
+
+        /*
          * sourceFilePath：源文件路径
          * translateFilePath：翻译文件路径带参数化的
          * prefix：vue中使用的i18n前缀
@@ -67,7 +76,8 @@ internal class ExtractContentToExcel
          */
         var translateList =
             new List<(string sourceFilePath, string translateFilePath, string prefix, List<string> keyList,
-                IDictionary<string, IDictionary<string, string>> langDictionary)>();
+                IDictionary<string, IDictionary<string, string>> langDictionary, string componentPath, List<string>
+                refComponentList)>();
 
         // 更改颜色
         Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -90,11 +100,72 @@ internal class ExtractContentToExcel
             // 输出当前执行的文件信息
             Console.WriteLine(@$"{fileItem}  {prefix}");
 
+            // 引用组件的文件路径
+            var refComponentList = new List<string>();
+
+            // 组件名称
+            var componentPath = "";
+
             // 当前文件需要翻译的Key
             var keyList = new List<string>();
 
             // 读取文件内容
             var fileContent = File.ReadAllText(fileItem, Encoding.UTF8);
+
+            // 只有路径是 views 的路径才会执行
+            if (fileItem.StartsWith($"{srcPath}\\views"))
+            {
+                // 页面路由地址
+                componentPath = Path.GetRelativePath($"{srcPath}\\views", fileItem);
+
+                // 默认引用自己
+                refComponentList.Add($"views\\{componentPath}");
+
+                // 判断是否已 .vue 结尾，如果是则剔除
+                if (componentPath.EndsWith(".vue"))
+                {
+                    componentPath = componentPath[..^".vue".Length];
+                }
+
+                // 判断是否已 /index 结尾，如果是则剔除
+                if (componentPath.EndsWith("\\index"))
+                {
+                    componentPath = componentPath[..^"\\index".Length];
+                }
+
+                // 拼接前缀
+                componentPath = $"\\{componentPath}";
+
+                // 查找对应的页面引用地址
+                var importFromMatch = importFromRegex.Match(fileContent);
+
+                // 匹配页面组件引用路径
+                while (importFromMatch.Success)
+                {
+                    // 获取组件路径
+                    var curComponentPath = importFromMatch.Groups[2].Value;
+
+                    // 获取下一个匹配项
+                    importFromMatch = importFromMatch.NextMatch();
+
+                    // 判断是否已 "@/" 开头，如果是，则删除
+                    if (curComponentPath.StartsWith("@/"))
+                    {
+                        curComponentPath = curComponentPath[2..];
+                        // 这里的根目录就是 src 目录，组装
+                        curComponentPath = Path.Combine(srcPath, curComponentPath);
+                    }
+                    else
+                    {
+                        // 不是 @/ 开头，那就是相对路径，则根目录就是当前文件所存在的目录
+                        curComponentPath = Path.GetFullPath(curComponentPath, Path.GetDirectoryName(fileItem));
+                    }
+
+                    // 这里只获取相对路径
+                    var refComponentTargetPath = Path.GetRelativePath(srcPath, curComponentPath);
+                    refComponentList.Add(refComponentTargetPath);
+                }
+            }
 
             var match = i18nRegex.Match(fileContent);
 
@@ -175,7 +246,8 @@ internal class ExtractContentToExcel
                 }
 
                 // 放入集合中
-                translateList.Add((fileItem, curTranslateFilePath, prefix, keyList, langDictionary));
+                translateList.Add((fileItem, curTranslateFilePath, prefix, keyList, langDictionary, componentPath,
+                    refComponentList));
             }
         }
 
@@ -194,6 +266,8 @@ internal class ExtractContentToExcel
                 var excelRow = new Dictionary<string, string>
                 {
                     {"页面文件路径", item.sourceFilePath},
+                    {"页面文件路由", item.componentPath.Replace("\\", "/")},
+                    {"页面文件引用相关组件", string.Join(",", item.refComponentList.Select(sl => sl.Replace("\\", "/")))},
                     {"翻译文件路径（参数化）", item.translateFilePath},
                     {"翻译使用前缀", item.prefix},
                     {"zh-cn", keyItem},
