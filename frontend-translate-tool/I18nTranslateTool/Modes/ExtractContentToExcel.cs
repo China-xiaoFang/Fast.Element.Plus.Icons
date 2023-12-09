@@ -79,16 +79,16 @@ internal class ExtractContentToExcel
             var targetPath = Path.GetRelativePath(srcPath, fileItem);
             // 去掉文件后缀
             targetPath = targetPath.Substring(0, targetPath.LastIndexOf(".", StringComparison.Ordinal));
-
-            // 获取在vue中使用的前缀
-            var prefix = targetPath.EndsWith("index")
+            // 去掉文件最后的index，因为index在vue中默认就是根目录
+            targetPath = targetPath.EndsWith("index")
                 ? targetPath.Substring(0, targetPath.LastIndexOf("\\", StringComparison.Ordinal))
                 : targetPath;
-            // 替换 \ 为 .
-            prefix = prefix.Replace("\\", ".");
+
+            // 替换 \ 为 . 获取在vue中使用的前缀
+            var prefix = targetPath.Replace("\\", ".");
 
             // 输出当前执行的文件信息
-            Console.WriteLine(@$"{fileItem}  {targetPath}");
+            Console.WriteLine(@$"{fileItem}  {prefix}");
 
             // 当前文件需要翻译的Key
             var keyList = new List<string>();
