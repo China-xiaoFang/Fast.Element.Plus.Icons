@@ -67,7 +67,7 @@ internal class ConsoleUtils
             {
                 // 更改颜色
                 Console.ForegroundColor = ConsoleColor.Red;
-                
+
                 // 错误输出
                 Console.WriteLine("Invalid input, please re-enter!（无效的输入，请重新输入！）");
 

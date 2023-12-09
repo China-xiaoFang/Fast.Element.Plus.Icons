@@ -224,7 +224,7 @@ internal class ExtractContentToExcel
             }
         }
 
-        var filePath = $"{translateFilePath}\\{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+        var filePath = $"{translateFilePath}\\{projectName}-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
 
         // 如果翻译文件目录不存在，则创建
         FileUtil.TryCreateDirectory(filePath);
