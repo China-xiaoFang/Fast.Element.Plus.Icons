@@ -79,13 +79,13 @@ internal class ExtractContentToExcel
             var targetPath = Path.GetRelativePath(srcPath, fileItem);
             // 去掉文件后缀
             targetPath = targetPath.Substring(0, targetPath.LastIndexOf(".", StringComparison.Ordinal));
-            // 去掉文件最后的index，因为index在vue中默认就是根目录
-            targetPath = targetPath.EndsWith("index")
+
+            // 获取在vue中使用的前缀，掉文件最后的index，因为index在vue中默认就是根目录
+            var prefix = targetPath.EndsWith("index")
                 ? targetPath.Substring(0, targetPath.LastIndexOf("\\", StringComparison.Ordinal))
                 : targetPath;
-
-            // 替换 \ 为 . 获取在vue中使用的前缀
-            var prefix = targetPath.Replace("\\", ".");
+            // 替换 \ 为 .
+            prefix = prefix.Replace("\\", ".");
 
             // 输出当前执行的文件信息
             Console.WriteLine(@$"{fileItem}  {prefix}");
