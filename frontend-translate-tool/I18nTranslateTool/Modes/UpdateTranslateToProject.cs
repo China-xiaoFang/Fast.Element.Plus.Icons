@@ -51,11 +51,11 @@ internal class UpdateTranslateToProject
             // 先组装默认数据
             var excelRow = new Dictionary<string, string>
             {
-                {"页面文件路径", row["页面文件路径"].ToString()},
-                {"页面文件路由", row["页面文件路由"].ToString() ?? ""},
-                {"页面文件引用相关组件", row["页面文件引用相关组件"].ToString() ?? ""},
-                {"翻译文件路径（参数化）", row["翻译文件路径（参数化）"].ToString()},
-                {"翻译使用前缀", row["翻译使用前缀"].ToString()},
+                {"页面文件路径", row["页面文件路径"]?.ToString() ?? ""},
+                {"页面文件路由", row["页面文件路由"]?.ToString() ?? ""},
+                {"页面文件引用相关组件", row["页面文件引用相关组件"]?.ToString() ?? ""},
+                {"翻译文件路径（参数化）", row["翻译文件路径（参数化）"]?.ToString() ?? ""},
+                {"翻译使用前缀", row["翻译使用前缀"]?.ToString() ?? ""},
             };
 
             // 循环语言包
@@ -80,8 +80,6 @@ internal class UpdateTranslateToProject
 
             // 这里会删除语言包本身的文件夹，所以删除完成后立即创建一个
             Directory.CreateDirectory(langItemPath);
-
-            var refComponentPathList = new List<string>();
 
             // 使用 "翻译文件路径（参数化）" 进行分组
             foreach (var fileItem in excelDictionary.GroupBy(gb => gb["翻译文件路径（参数化）"]))
@@ -188,17 +186,20 @@ export default {");
 
         foreach (var autoLoadItem in autoLoadList)
         {
+            // 这里需要递归查找对应引用组件相关的关系，比如A组件引用了B，B组件引用了C，则A需要加载 B，C 的语言包，不能只加载 B 的语言包
+            var curRefComponentPathList = FindRefComponentRoutePathList(autoLoadItem.routePath, autoLoadList);
             var valueStr = "";
-            foreach (var refComponentPathItem in autoLoadItem.refComponentPathList)
+            // 去重
+            foreach (var refComponentPathItem in curRefComponentPathList.Distinct())
             {
                 if (refComponentPathItem.EndsWith(".vue"))
                 {
-                    valueStr += $"\"{refComponentPathItem[..^3]}ts\", ";
+                    valueStr += $"\"./${{lang}}/{refComponentPathItem[..^3]}ts\", ";
                 }
 
                 if (refComponentPathItem.EndsWith(".ts"))
                 {
-                    valueStr += $"\"{refComponentPathItem[..^2]}ts\", ";
+                    valueStr += $"\"./${{lang}}/{refComponentPathItem[..^2]}ts\", ";
                 }
             }
 
@@ -220,5 +221,94 @@ export default {");
 
         // 消息提示
         Console.WriteLine($"{langPath}\\autoLoad.ts");
+    }
+
+    /// <summary>
+    /// 递归查找引用组件路由信息集合
+    /// </summary>
+    /// <param name="routePath"></param>
+    /// <param name="refComponentPathList"></param>
+    /// <returns></returns>
+    static List<string> FindRefComponentRoutePathList(string routePath,
+        List<(string routePath, List<string> refComponentPathList)> refComponentPathList)
+    {
+        var result = new List<string>();
+
+        // 查找当前路由引用的组件
+        var curRefComponentPathList = refComponentPathList.FirstOrDefault(f => f.routePath == routePath);
+
+        // 循环查找当前引用组件的关系
+        if (curRefComponentPathList.routePath != null)
+        {
+            var index = 0;
+            // 循环当前所有引用组件
+            foreach (var refComponentPathItem in curRefComponentPathList.refComponentPathList)
+            {
+                // 这里的 refComponentPathItem 为 views/**/*.vue
+                var curRoutePath = refComponentPathItem;
+
+                // 判断是否已 views 开头，如果是则剔除
+                if (curRoutePath.StartsWith("views"))
+                {
+                    curRoutePath = curRoutePath[5..];
+                }
+
+                // 判断是否已 .vue 结尾，如果是则剔除
+                if (curRoutePath.EndsWith(".vue"))
+                {
+                    curRoutePath = curRoutePath[..^".vue".Length];
+                }
+
+                // 判断是否已 /index 结尾，如果是则剔除
+                if (curRoutePath.EndsWith("/index"))
+                {
+                    curRoutePath = curRoutePath[..^"/index".Length];
+                }
+
+                var curFindInfo1 = refComponentPathList.FirstOrDefault(f => f.routePath == curRoutePath);
+                if (curFindInfo1.routePath != null && curFindInfo1.refComponentPathList.Count > 0)
+                {
+                    result.AddRange(curFindInfo1.refComponentPathList);
+                }
+
+                if (index > 0)
+                {
+                    // 查找当前组件对应的引用
+                    foreach (var findItem in FindRefComponentRoutePathList(curRoutePath, refComponentPathList))
+                    {
+                        // 这里的 findItem 为 views/**/*.vue
+                        var curFindItem = findItem;
+
+                        // 判断是否已 views 开头，如果是则剔除
+                        if (curFindItem.StartsWith("views"))
+                        {
+                            curFindItem = curFindItem[5..];
+                        }
+
+                        // 判断是否已 .vue 结尾，如果是则剔除
+                        if (curFindItem.EndsWith(".vue"))
+                        {
+                            curFindItem = curFindItem[..^".vue".Length];
+                        }
+
+                        // 判断是否已 /index 结尾，如果是则剔除
+                        if (curFindItem.EndsWith("/index"))
+                        {
+                            curFindItem = curFindItem[..^"/index".Length];
+                        }
+
+                        var curFindInfo2 = refComponentPathList.FirstOrDefault(f => f.routePath == curFindItem);
+                        if (curFindInfo2.routePath != null && curFindInfo2.refComponentPathList.Count > 0)
+                        {
+                            result.AddRange(curFindInfo2.refComponentPathList);
+                        }
+                    }
+                }
+
+                index++;
+            }
+        }
+
+        return result;
     }
 }
