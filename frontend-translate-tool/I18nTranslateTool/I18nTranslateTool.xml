@@ -43,6 +43,14 @@
             <param name="projectName"><see cref="T:System.String"/> 项目名称</param>
             <param name="translateFilePath"><see cref="T:System.String"/> 翻译文件存放位置</param>
         </member>
+        <member name="M:I18nTranslateTool.Modes.UpdateTranslateToProject.FindRefComponentRoutePathList(System.String,System.Collections.Generic.List{System.ValueTuple{System.String,System.Collections.Generic.List{System.String}}})">
+            <summary>
+            递归查找引用组件路由信息集合
+            </summary>
+            <param name="routePath"></param>
+            <param name="refComponentPathList"></param>
+            <returns></returns>
+        </member>
         <member name="T:I18nTranslateTool.Utils.ConsoleUtils">
             <summary>
             <see cref="T:I18nTranslateTool.Utils.ConsoleUtils"/> 控制台工具类
