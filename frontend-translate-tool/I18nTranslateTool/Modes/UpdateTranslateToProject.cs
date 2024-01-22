@@ -110,7 +110,7 @@ internal class UpdateTranslateToProject
 
                 // 获取当前文件的所有翻译数据
                 var langObjectList = excelDictionary.Where(wh => wh["翻译文件路径（参数化）"] == fileItem.Key)
-                    .Select(sl => (sl["zh-cn"], sl[langItem])).ToList();
+                    .Select(sl => (sl["zh-CN"], sl[langItem])).ToList();
 
                 var langContent = new StringBuilder();
 

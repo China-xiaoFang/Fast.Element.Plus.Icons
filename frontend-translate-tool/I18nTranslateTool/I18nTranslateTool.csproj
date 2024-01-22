@@ -12,7 +12,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="MiniExcel" Version="1.31.2" />
+	  <PackageReference Include="MiniExcel" Version="1.31.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Fast.IaaS" Version="3.4.17.6" />
 	</ItemGroup>
 
 </Project>

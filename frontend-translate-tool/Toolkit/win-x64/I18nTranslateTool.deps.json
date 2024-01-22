@@ -9,8 +9,8 @@
     ".NETCoreApp,Version=v8.0/win-x64": {
       "I18nTranslateTool/1.0.0": {
         "dependencies": {
-          "Fast.IaaS": "3.4.0",
-          "MiniExcel": "1.31.2",
+          "Fast.IaaS": "3.4.17.6",
+          "MiniExcel": "1.31.3",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "8.0.0"
         },
         "runtime": {
@@ -737,19 +737,19 @@
           }
         }
       },
-      "Fast.IaaS/3.4.0": {
+      "Fast.IaaS/3.4.17.6": {
         "runtime": {
           "lib/net8.0/Fast.IaaS.dll": {
-            "assemblyVersion": "3.4.0.0",
-            "fileVersion": "3.4.0.0"
+            "assemblyVersion": "3.4.17.6",
+            "fileVersion": "3.4.17.6"
           }
         }
       },
-      "MiniExcel/1.31.2": {
+      "MiniExcel/1.31.3": {
         "runtime": {
           "lib/netstandard2.0/MiniExcel.dll": {
-            "assemblyVersion": "1.31.2.0",
-            "fileVersion": "1.31.2.0"
+            "assemblyVersion": "1.31.3.0",
+            "fileVersion": "1.31.3.0"
           }
         }
       }
@@ -766,19 +766,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Fast.IaaS/3.4.0": {
+    "Fast.IaaS/3.4.17.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-D5aOeZ/bMOym7hTfnVNevlZDbtnfPdALbXo90CCS61vKvfVNuB8RkqGZW4hTG5fqtNaaN2oe+50pq4Ceay8+Dw==",
-      "path": "fast.iaas/3.4.0",
-      "hashPath": "fast.iaas.3.4.0.nupkg.sha512"
+      "sha512": "sha512-qgACkluPKEUgdlw14ungfWH/c5mHufZV4UxU47J16X/bminKMTO/xP60zfwOeIXA5euZNL/Aknn162QNHP7LzQ==",
+      "path": "fast.iaas/3.4.17.6",
+      "hashPath": "fast.iaas.3.4.17.6.nupkg.sha512"
     },
-    "MiniExcel/1.31.2": {
+    "MiniExcel/1.31.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-sL1/KSswZDRWiqGZTDZJb4UcEFk3aBhEY+rmOFeid9TrOIDKAL50zZgUkY2vGR6QAyksPKznDeah8ZIvgEnUjQ==",
-      "path": "miniexcel/1.31.2",
-      "hashPath": "miniexcel.1.31.2.nupkg.sha512"
+      "sha512": "sha512-XnGF7oq3bFAzvvZrAiAPtpeQxWkFy7Xk/Vaom97bnj8hlF5TcP6rxS43RdO5wA8nUkRYfBmQe9chhhv0jwwj4A==",
+      "path": "miniexcel/1.31.3",
+      "hashPath": "miniexcel.1.31.3.nupkg.sha512"
     }
   },
   "runtimes": {
