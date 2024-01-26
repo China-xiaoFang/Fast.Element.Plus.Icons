@@ -201,6 +201,11 @@ export default {");
                 {
                     valueStr += $"\"./${{lang}}/{refComponentPathItem[..^2]}ts\", ";
                 }
+
+                if (refComponentPathItem.EndsWith(".tsx"))
+                {
+                    valueStr += $"\"./${{lang}}/{refComponentPathItem[..^2]}ts\", ";
+                }
             }
 
             // 去掉多余的 , 

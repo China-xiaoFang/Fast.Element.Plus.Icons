@@ -39,9 +39,10 @@ internal class ExtractContentToExcel
 
         // 获取前端项目文件夹中 src 文件夹的所有文件信息
         var srcDirectoryList = Directory.GetFiles(srcPath, "*", SearchOption.AllDirectories)
-            // 只获取 .vue 和 .ts 的文件
+            // 只获取 .vue .ts .tsx 的文件
             .Where(wh => wh.EndsWith(".vue", StringComparison.OrdinalIgnoreCase) ||
-                         wh.EndsWith(".ts", StringComparison.OrdinalIgnoreCase))
+                         wh.EndsWith(".ts", StringComparison.OrdinalIgnoreCase) ||
+                         wh.EndsWith(".tsx", StringComparison.OrdinalIgnoreCase))
             // 这里剔除前端所在的翻译文件夹路径
             .Where(wh => !wh.StartsWith(langPath));
 
