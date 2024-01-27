@@ -39,18 +39,19 @@ internal class ExtractContentToExcel
 
         // 获取前端项目文件夹中 src 文件夹的所有文件信息
         var srcDirectoryList = Directory.GetFiles(srcPath, "*", SearchOption.AllDirectories)
-            // 只获取 .vue 和 .ts 的文件
+            // 只获取 .vue .ts .tsx 的文件
             .Where(wh => wh.EndsWith(".vue", StringComparison.OrdinalIgnoreCase) ||
-                         wh.EndsWith(".ts", StringComparison.OrdinalIgnoreCase))
+                         wh.EndsWith(".ts", StringComparison.OrdinalIgnoreCase) ||
+                         wh.EndsWith(".tsx", StringComparison.OrdinalIgnoreCase))
             // 这里剔除前端所在的翻译文件夹路径
             .Where(wh => !wh.StartsWith(langPath));
 
-        // 获取 lang 文件夹中的语言，只获取文件夹名称，并且默认剔除 zh-cn，因为项目默认的就是 zh-cn
+        // 获取 lang 文件夹中的语言，只获取文件夹名称，并且默认剔除 zh-CN，因为项目默认的就是 zh-CN
         var langList = Directory.GetDirectories(langPath, "*", SearchOption.TopDirectoryOnly)
-            .Select(sl => sl.Split(Path.DirectorySeparatorChar).Last()).Where(wh => wh != "zh-cn").ToList();
+            .Select(sl => sl.Split(Path.DirectorySeparatorChar).Last()).Where(wh => wh != "zh-CN").ToList();
 
         // 匹配 $t 和 t 对应的文案（包含单引号）
-        var i18nRegex = new Regex(@"(\$t\([""](.+?)[""]\))|(t\([""](.+?)[""]\))");
+        var i18nRegex = new Regex(@"(\$t\(['""](.+?)['""]\))|(t\(['""](.+?)['""]\))");
 
         // 匹配TypeScript默认导出的对象
         var tsDefaultExportRegex = new Regex(@"export\s+default\s*{([\s\S]+?)}");
@@ -270,7 +271,7 @@ internal class ExtractContentToExcel
                     {"页面文件引用相关组件", string.Join(",", item.refComponentList.Select(sl => sl.Replace("\\", "/")))},
                     {"翻译文件路径（参数化）", item.translateFilePath},
                     {"翻译使用前缀", item.prefix},
-                    {"zh-cn", keyItem},
+                    {"zh-CN", keyItem},
                 };
 
                 // 循环语言包
