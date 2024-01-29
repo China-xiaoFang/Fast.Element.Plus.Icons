@@ -1,41 +1,17 @@
-[中](https://gitee.com/Net-18K/Fast.NET) | **En**
+[中](https://gitee.com/Net-18K/Fast.Admin) | **En**
 
-# Fast.NET (v3)
+# Fast.Admin
 
-A `newcomer` who has been working in `.NET` industry for `N years`.
-
-### Framework introduction
-
-A rapid construction project that combines the strengths of hundreds of experts and focuses on `Web Api` applications, providing out-of-the-box functionality and keeping up with the latest cutting-edge technology of the `.NET` framework.
-
-| Name | Details |
-| --- | ---- |
-| [Fast.NET](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET) | Framework underlying tool class |
-| [Fast.MicroGateway](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.MicroGateway) | Microservice Gateway |
-| [Fast.Admin](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.Admin) | Framework core management system API |
-| [Fast.Web](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/frontend) | Framework Web side |
-
-### Technology selection
-
-- `Fast.NET` v3 version is developed using `C#10` and `.NET6` `.NET7` `.NET8`.
+- A rapid construction project that combines the strengths of hundreds of experts, focuses on `Web Api` applications, provides out-of-the-box functionality, and keeps up with the latest cutting-edge technology of the `.NET` framework.
+- Use [Fast.NET](https://gitee.com/Net-18K/Fast.NET) as the bottom layer of the framework.
+- Developed using `C#10` and `.NET6`.
+- Supports seamless upgrade to `.NET7` `.NET8`.
 
 #### Project Features:
 
 - **Integrating the strengths of hundreds of schools**: Integrating hundreds of useful functions into one.
 - **Out-of-the-box**: Provides many black technologies, no additional configuration or development work is required, and projects can be built quickly.
 - **Stay up-to-date with cutting-edge technology**: Adopt the latest technologies and frameworks to always stay abreast of the latest trends and developments in the industry.
-
-### Background of the project
-
-In the past, `.NET` did not have a good open source environment and community in China. As more and more programmers use `.NET` in China, the domestic open source environment and community are gradually getting better and better.
-
-Various `.NET` open source frameworks have also emerged in response to the times.
-
-As a newbie who has been working in the `.NET` industry for N years, I have also used many open source frameworks, so I want to make a small contribution to `.NET` open source based on my own work experience and experience. Small contribution.
-
-So `Fast.NET` (v3) was born.
-
-**Continue to gather the strengths of hundreds of experts to improve and enrich the infrastructure of this framework, adding a choice to the .NET ecosystem! **
 
 ## Branch description
 
@@ -47,11 +23,11 @@ So `Fast.NET` (v3) was born.
 
 ## Update log
 
-Update log [Click to view](https://gitee.com/Net-18K/Fast.NET/commits/master)
+Update log [Click to view](https://gitee.com/Net-18K/Fast.Admin/commits/master)
 
 ## protocol
 
-[Fast.NET](https://gitee.com/Net-18K/Fast.NET) Follow [Apache-2.0](https://gitee.com/Net-18K/Fast.NET/blob/master/LICENSE ) Open source license, everyone is welcome to submit `PR` or `Issue`.
+[Fast.Admin](https://gitee.com/Net-18K/Fast.Admin) Follow [Apache-2.0](https://gitee.com/Net-18K/Fast.Admin/blob/master/LICENSE) Open source license, everyone is welcome to submit `PR` or `Issue`.
 
 ```
 Apache Open Source License
@@ -68,6 +44,10 @@ THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIE
 In no event shall the author or copyright holder be liable for any claim, damages or other liability,
 WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE, IN CONNECTION WITH THE SOFTWARE OR ITS USE OR OTHER DEALINGS.
 ```
+
+`
+Since it is still in the development stage and all functions are not very stable, the Apache-2.0 open source protocol is used for the time being. After all functions are stable, the MIT open source license will be adopted.
+`
 
 ## team member
 

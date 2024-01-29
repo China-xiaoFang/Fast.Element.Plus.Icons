@@ -1,41 +1,17 @@
-**中** | [En](https://github.com/Net-18K/Fast.NET)
+**中** | [En](https://github.com/Net-18K/Fast.Admin)
 
-# Fast.NET（v3）
+# Fast.Admin
 
-一个 `.NET` 行业中从业 `N年` 的 `小菜鸟`。
-
-### 框架介绍
-
-一个快速构建项目，集百家所长，专注于 `Web Api` 应用，提供开箱即用的功能，并紧跟最新的前沿技术的 `.NET` 框架。
-
-| 名称 | 详情 |
-| --- | ---- |
-| [Fast.NET](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.NET) | 框架底层工具类 |
-| [Fast.MicroGateway](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.MicroGateway) | 微服务网关 |
-| [Fast.Admin](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/Fast.Admin) | 框架核心管理系统Api |
-| [Fast.Web](https://gitee.com/Net-18K/Fast.NET/tree/master/backend/frontend) | 框架Web端 |
-
-### 技术选择
-
-- `Fast.NET` v3 版本采用 `C#10` 和 `.NET6` `.NET7` `.NET8` 进行开发。
+- 一个快速构建项目，集百家所长，专注于 `Web Api` 应用，提供开箱即用的功能，并紧跟最新的前沿技术的 `.NET` 框架。
+- 采用 [Fast.NET](https://gitee.com/Net-18K/Fast.NET) 作为框架的底层。
+- 采用 `C#10` 和 `.NET6` 进行开发。
+- 支持无缝升级 `.NET7` `.NET8`。
 
 #### 项目特点：
 
 - **集百家所长**：集百家好用功能于一体。
 - **开箱即用**：提供众多黑科技，无需额外的配置或开发工作，可以快速构建项目。
 - **紧随前沿技术**：采用最新的技术和框架，始终保持与行业的最新趋势和发展同步。
-
-### 项目背景
-
-过去 `.NET` 在国内并没有很好的开源环境和社区，随着国内使用 `.NET` 的程序猿越来越多，慢慢的国内的开源环境和社区也越来越好。
-
-各种 `.NET` 开源框架，也应时代而生。
-
-本人作为在 `.NET` 行业中从业 `N年` 的 `小菜鸟`，也用过了很多开源的框架，所以想基于自己的工作经验和经历，为 `.NET` 开源做出一份小小的贡献。
-
-所以 `Fast.NET`（v3）诞生了。
-
-**持续集百家所长，完善与丰富本框架基础设施，为.NET生态增加一种选择！**
 
 ## 分支说明
 
@@ -47,11 +23,11 @@
 
 ## 更新日志
 
-更新日志 [点击查看](https://gitee.com/Net-18K/Fast.NET/commits/master)
+更新日志 [点击查看](https://gitee.com/Net-18K/Fast.Admin/commits/master)
 
 ## 协议
 
-[Fast.NET](https://gitee.com/Net-18K/Fast.NET) 遵循 [Apache-2.0](https://gitee.com/Net-18K/Fast.NET/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
+[Fast.Admin](https://gitee.com/Net-18K/Fast.Admin) 遵循 [Apache-2.0](https://gitee.com/Net-18K/Fast.Admin/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
 
 ```
 Apache开源许可证
@@ -68,6 +44,10 @@ Apache开源许可证
 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 ```
+
+`
+由于目前还属于开发阶段，所有功能皆不是很稳定，所以暂且使用 Apache-2.0 开源协议。后续等所有功能都稳定后，会采用 MIT 开源协议。
+`
 
 ## 团队成员
 
