@@ -12,6 +12,7 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.Admin.Core.Authentication.Dto;
 using Fast.Admin.Core.Entity.System.Account;
 
 namespace Fast.Admin.Core.Authentication;
@@ -20,69 +21,28 @@ namespace Fast.Admin.Core.Authentication;
 /// <see cref="IUser"/> 授权用户信息
 /// <remarks>作用域注册，保证当前请求管道中是唯一的，并且只会加载一次</remarks>
 /// </summary>
-public interface IUser
+public interface IUser : IAuthUserInfo
 {
     /// <summary>
-    /// 租户Id
+    /// 设置授权用户
     /// </summary>
-    long TenantId { get; }
+    /// <param name="authUserInfo"><see cref="SysTenantAccountModel"/> 租户系统账户信息</param>
+    internal void SetAuthUser(AuthUserInfo authUserInfo);
 
     /// <summary>
-    /// 租户编号
+    /// 统一登录
     /// </summary>
-    string TenantNo { get; }
-
-    /// <summary>
-    /// 用户Id
-    /// </summary>
-    long UserId { get; }
-
-    /// <summary>
-    /// 用户账号
-    /// </summary>
-    string Account { get; }
-
-    /// <summary>
-    /// 用户工号
-    /// </summary>
-    string JobNumber { get; }
-
-    /// <summary>
-    /// 用户名称
-    /// </summary>
-    string UserName { get; }
-
-    /// <summary>
-    /// 部门Id
-    /// </summary>
-    long DepartmentId { get; }
-
-    /// <summary>
-    /// 部门名称
-    /// </summary>
-    string DepartmentName { get; }
-
-    /// <summary>
-    /// 是否超级管理员
-    /// </summary>
-    bool IsSuperAdmin { get; }
-
-    /// <summary>
-    /// 是否系统管理员
-    /// </summary>
-    bool IsSystemAdmin { get; }
-
-    /// <summary>
-    /// App 运行环境
-    /// </summary>
-    AppEnvironmentEnum AppEnvironment { get; }
+    /// <param name="sysTenantAccount"><see cref="SysTenantAccountModel"/> 租户系统账户信息</param>
+    /// <param name="appEnvironment"><see cref="AppEnvironmentEnum"/> 登录环境</param>
+    /// <returns></returns>
+    Task Login(SysTenantAccountModel sysTenantAccount, AppEnvironmentEnum appEnvironment);
 
     /// <summary>
     /// 刷新登录信息
     /// </summary>
     /// <param name="authUserInfo"><see cref="SysTenantAccountModel"/> 租户系统账户信息</param>
     /// <returns></returns>
-    Task Refresh(SysTenantAccountModel authUserInfo);
+    Task Refresh(AuthUserInfo authUserInfo);
 
     /// <summary>
     /// 统一退出登录

@@ -21,6 +21,11 @@
             <see cref="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput"/> 获取登录用户信息
             </summary>
         </member>
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.TenantNo">
+            <summary>
+            工号
+            </summary>
+        </member>
         <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Account">
             <summary>
             账号

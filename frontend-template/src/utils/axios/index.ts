@@ -6,6 +6,7 @@ import { useConfig } from "@/stores/config";
 import { useUserInfo } from "@/stores/userInfo";
 import { getAxiosDefaultConfig } from "@/utils/axios/config";
 import { downloadFile } from "@/utils";
+import base64 from "@/utils/base64";
 
 const pendingMap = new Map();
 
@@ -35,7 +36,11 @@ function createAxios<Data = any, T = ApiPromise<Data>>(axiosConfig: AxiosRequest
         timeout: import.meta.env.VITE_AXIOS_API_TIMEOUT,
         headers: {
             // 携带浏览器语言环境表示
-            "fast-lang": configStore.lang.defaultLang,
+            "Fast-Lang": configStore.lang.defaultLang,
+            // 携带接口来源
+            "Fast-Api-Origin": "Web",
+            // 携带请求来源
+            "Fast-App-Origin": window.location.origin,
         },
         responseType: "json",
     });
@@ -67,8 +72,12 @@ function createAxios<Data = any, T = ApiPromise<Data>>(axiosConfig: AxiosRequest
 
             if (config.headers) {
                 // Token 处理
-                const { token, refreshToken } = userInfoStore.resolveToken();
-                token && (config.headers["Authorization"] = token);
+                const { token, refreshToken, tokenData } = userInfoStore.resolveToken();
+                if (token) {
+                    config.headers["Authorization"] = token;
+                    config.headers["Fast-TenantNo"] = tokenData["TenantNo"] && base64.toBase64(tokenData["TenantNo"]);
+                    config.headers["Fast-JobNumber"] = tokenData["JobNumber"] && base64.toBase64(tokenData["JobNumber"]);
+                }
                 // 刷新 Token
                 refreshToken && (config.headers["X-Authorization"] = refreshToken);
 

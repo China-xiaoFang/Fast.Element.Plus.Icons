@@ -4,68 +4,227 @@
         <name>Fast.Admin.Core</name>
     </assembly>
     <members>
+        <member name="T:Fast.Admin.Core.Authentication.Dto.AuthUserInfo">
+            <summary>
+            <see cref="T:Fast.Admin.Core.Authentication.Dto.AuthUserInfo"/> 授权用户信息
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.TenantNo">
+            <summary>
+            租户编号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Account">
+            <summary>
+            用户账号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.JobNumber">
+            <summary>
+            用户工号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.DepartmentId">
+            <summary>
+            部门Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.DepartmentName">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.IsSuperAdmin">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.IsSystemAdmin">
+            <summary>
+            是否系统管理员
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginDevice">
+            <summary>
+            最后登录设备
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginOS">
+            <summary>
+            最后登录操作系统（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginBrowser">
+            <summary>
+            最后登录浏览器（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginProvince">
+            <summary>
+            最后登录省份
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginCity">
+            <summary>
+            最后登录城市
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginIp">
+            <summary>
+            最后登录Ip
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.LastLoginTime">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.AppEnvironment">
+            <summary>
+            App 运行环境
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.AppOrigin">
+            <summary>
+            App来源
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo">
+            <summary>
+            <see cref="T:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo"/> 授权用户信息
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.TenantId">
+            <summary>
+            租户Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.TenantNo">
+            <summary>
+            租户编号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.UserId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Account">
+            <summary>
+            用户账号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.JobNumber">
+            <summary>
+            用户工号
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.DepartmentId">
+            <summary>
+            部门Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.DepartmentName">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.IsSuperAdmin">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.IsSystemAdmin">
+            <summary>
+            是否系统管理员
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginDevice">
+            <summary>
+            最后登录设备
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginOS">
+            <summary>
+            最后登录操作系统（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginBrowser">
+            <summary>
+            最后登录浏览器（版本）
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginProvince">
+            <summary>
+            最后登录省份
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginCity">
+            <summary>
+            最后登录城市
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginIp">
+            <summary>
+            最后登录Ip
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.LastLoginTime">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.AppEnvironment">
+            <summary>
+            App 运行环境
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.AppOrigin">
+            <summary>
+            App来源
+            </summary>
+        </member>
         <member name="T:Fast.Admin.Core.Authentication.IUser">
             <summary>
             <see cref="T:Fast.Admin.Core.Authentication.IUser"/> 授权用户信息
             <remarks>作用域注册，保证当前请求管道中是唯一的，并且只会加载一次</remarks>
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.TenantId">
+        <member name="M:Fast.Admin.Core.Authentication.IUser.SetAuthUser(Fast.Admin.Core.Authentication.Dto.AuthUserInfo)">
             <summary>
-            租户Id
+            设置授权用户
             </summary>
+            <param name="authUserInfo"><see cref="T:Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel"/> 租户系统账户信息</param>
         </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.TenantNo">
+        <member name="M:Fast.Admin.Core.Authentication.IUser.Login(Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel,Fast.IaaS.AppEnvironmentEnum)">
             <summary>
-            租户编号
+            统一登录
             </summary>
+            <param name="sysTenantAccount"><see cref="T:Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel"/> 租户系统账户信息</param>
+            <param name="appEnvironment"><see cref="T:Fast.IaaS.AppEnvironmentEnum"/> 登录环境</param>
+            <returns></returns>
         </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.UserId">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.Account">
-            <summary>
-            用户账号
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.JobNumber">
-            <summary>
-            用户工号
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.UserName">
-            <summary>
-            用户名称
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.DepartmentId">
-            <summary>
-            部门Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.DepartmentName">
-            <summary>
-            部门名称
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.IsSuperAdmin">
-            <summary>
-            是否超级管理员
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.IsSystemAdmin">
-            <summary>
-            是否系统管理员
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.IUser.AppEnvironment">
-            <summary>
-            App 运行环境
-            </summary>
-        </member>
-        <member name="M:Fast.Admin.Core.Authentication.IUser.Refresh(Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel)">
+        <member name="M:Fast.Admin.Core.Authentication.IUser.Refresh(Fast.Admin.Core.Authentication.Dto.AuthUserInfo)">
             <summary>
             刷新登录信息
             </summary>
@@ -84,103 +243,21 @@
             <remarks>作用域注册，保证当前请求管道中是唯一的，并且只会加载一次</remarks>
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.TenantId">
-            <summary>
-            租户Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.TenantNo">
-            <summary>
-            租户编号
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.UserId">
-            <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.Account">
-            <summary>
-            用户账号
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.JobNumber">
-            <summary>
-            用户工号
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.UserName">
-            <summary>
-            用户名称
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.DepartmentId">
-            <summary>
-            部门Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.DepartmentName">
-            <summary>
-            部门名称
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.IsSuperAdmin">
-            <summary>
-            是否超级管理员
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.IsSystemAdmin">
-            <summary>
-            是否系统管理员
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginDevice">
-            <summary>
-            最后登录设备
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginOS">
-            <summary>
-            最后登录操作系统（版本）
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginBrowser">
-            <summary>
-            最后登录浏览器（版本）
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginProvince">
-            <summary>
-            最后登录省份
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginCity">
-            <summary>
-            最后登录城市
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginIp">
-            <summary>
-            最后登录Ip
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.LastLoginTime">
-            <summary>
-            最后登录时间
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Core.Authentication.User.AppEnvironment">
-            <summary>
-            App 运行环境
-            </summary>
-        </member>
-        <member name="M:Fast.Admin.Core.Authentication.User.SetAuthUser(Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel)">
+        <member name="M:Fast.Admin.Core.Authentication.User.SetAuthUser(Fast.Admin.Core.Authentication.Dto.AuthUserInfo)">
             <summary>
             设置授权用户
             </summary>
-            <param name="authUserInfo"><see cref="T:Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel"/> 租户系统账户信息</param>
+            <param name="authUserInfo"><see cref="T:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo"/> 授权用户信息</param>
         </member>
-        <member name="M:Fast.Admin.Core.Authentication.User.Refresh(Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel)">
+        <member name="M:Fast.Admin.Core.Authentication.User.Login(Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel,Fast.IaaS.AppEnvironmentEnum)">
+            <summary>
+            统一登录
+            </summary>
+            <param name="sysTenantAccount"><see cref="T:Fast.Admin.Core.Entity.System.Account.SysTenantAccountModel"/> 租户系统账户信息</param>
+            <param name="appEnvironment"><see cref="T:Fast.IaaS.AppEnvironmentEnum"/> 登录环境</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Core.Authentication.User.Refresh(Fast.Admin.Core.Authentication.Dto.AuthUserInfo)">
             <summary>
             刷新登录信息
             </summary>
@@ -220,13 +297,13 @@
         <member name="F:Fast.Admin.Core.Constants.CacheConst.TenantDatabaseInfo">
             <summary>
             租户数据库信息
-            <remarks>{0}，租户编号 {1}，数据库名类型</remarks>
+            <remarks>{0}租户编号，{1}数据库名类型</remarks>
             </summary>
         </member>
         <member name="F:Fast.Admin.Core.Constants.CacheConst.AuthUserInfo">
             <summary>
             授权用户信息
-            <remarks>{0}，租户编号</remarks>
+            <remarks>{0}租户编号, {1}登录环境，{2}工号</remarks>
             </summary>
         </member>
         <member name="F:Fast.Admin.Core.Constants.CacheConst.ExpiredToken">
@@ -252,6 +329,11 @@
         <member name="T:Fast.Admin.Core.Constants.ClaimConst">
             <summary>
             <see cref="T:Fast.Admin.Core.Constants.ClaimConst"/> 授权声明常量
+            </summary>
+        </member>
+        <member name="F:Fast.Admin.Core.Constants.ClaimConst.ApiOrigin">
+            <summary>
+            Api来源
             </summary>
         </member>
         <member name="F:Fast.Admin.Core.Constants.ClaimConst.AppOrigin">

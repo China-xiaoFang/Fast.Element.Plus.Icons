@@ -51,6 +51,7 @@ public class AuthService : IAuthService, ITransientDependency
         var tenantId = _user.TenantId;
 
         var tenantAccount = await _repository.Queryable<SysTenantAccountModel>().Includes(e => e.SysAccount)
+            .Includes(e => e.SysTenant)
             .Where(wh => wh.TenantId == tenantId && wh.UserId == userId).FirstAsync();
 
         if (tenantAccount == null)
@@ -69,6 +70,7 @@ public class AuthService : IAuthService, ITransientDependency
 
         var result = new GetLoginUserInfoOutput
         {
+            TenantNo = tenantAccount.SysTenant.TenantNo,
             Account = tenantAccount.SysAccount.Account,
             JobNumber = user.JobNumber,
             UserName = tenantAccount.SysAccount.UserName,

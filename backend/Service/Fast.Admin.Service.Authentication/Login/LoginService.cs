@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Fast.Admin.Core.Authentication;
 using Fast.Admin.Core.Constants;
 using Fast.Admin.Core.Entity.Log.Entities;
 using Fast.Admin.Core.Entity.System.Account;
@@ -282,88 +283,63 @@ public class LoginService : ILoginService, ITransientDependency
             throw new UserFriendlyException("租户用户账号非正常状态！");
         }
 
-        try
+        var httpContext = FastContext.HttpContext;
+
+        var dateTime = DateTime.Now;
+
+        // 获取设备信息
+        var userAgentInfo = httpContext.RequestUserAgentInfo();
+
+        // 获取Ip信息
+        var ip = httpContext.RemoteIpv4();
+
+        // 获取万网Ip信息
+        var wanNetIpInfo = await httpContext.RemoteIpv4InfoAsync(ip);
+
+        // 更新最后登录时间
+        sysTenantAccount.LastLoginDevice = userAgentInfo.Device;
+        sysTenantAccount.LastLoginOS = userAgentInfo.OS;
+        sysTenantAccount.LastLoginBrowser = userAgentInfo.Browser;
+        sysTenantAccount.LastLoginProvince = wanNetIpInfo.Province;
+        sysTenantAccount.LastLoginCity = wanNetIpInfo.City;
+        sysTenantAccount.LastLoginIp = ip;
+        sysTenantAccount.LastLoginTime = dateTime;
+
+        tenUser.LastLoginDevice = userAgentInfo.Device;
+        tenUser.LastLoginOS = userAgentInfo.OS;
+        tenUser.LastLoginBrowser = userAgentInfo.Browser;
+        tenUser.LastLoginProvince = wanNetIpInfo.Province;
+        tenUser.LastLoginCity = wanNetIpInfo.City;
+        tenUser.LastLoginIp = ip;
+        tenUser.LastLoginTime = dateTime;
+
+        // 更新数据
+        _repository.Updateable(sysTenantAccount);
+        db.Updateable(tenUser);
+
+        sysTenantAccount.SysAccount = account;
+        sysTenantAccount.SysTenant = tenant;
+
+        // 登录
+        await FastContext.GetService<IUser>().Login(sysTenantAccount, AppEnvironmentEnum.Web);
+
+        // 添加访问日志
+        var sysLogVisModel = new SysLogVisModel
         {
-            var httpContext = FastContext.HttpContext;
+            Id = YitIdHelper.NextId(),
+            Account = account.Account,
+            JobNumber = sysTenantAccount.JobNumber,
+            VisitType = VisitTypeEnum.Login,
+            VisTime = dateTime,
+            TenantId = tenant.Id
+        };
+        sysLogVisModel.RecordCreate(httpContext);
 
-            var dateTime = DateTime.Now;
+        // 获取日志库连接配置
+        var logConnectionConfig = await _sqlSugarEntityService.GetLogSqlSugarClient();
 
-            // 获取设备信息
-            var userAgentInfo = httpContext.RequestUserAgentInfo();
-
-            // 获取Ip信息
-            var ip = httpContext.RemoteIpv4();
-
-            // 获取万网Ip信息
-            var wanNetIpInfo = await httpContext.RemoteIpv4InfoAsync(ip);
-
-            // 更新最后登录时间
-            sysTenantAccount.LastLoginDevice = userAgentInfo.Device;
-            sysTenantAccount.LastLoginOS = userAgentInfo.OS;
-            sysTenantAccount.LastLoginBrowser = userAgentInfo.Browser;
-            sysTenantAccount.LastLoginProvince = wanNetIpInfo.Province;
-            sysTenantAccount.LastLoginCity = wanNetIpInfo.City;
-            sysTenantAccount.LastLoginIp = ip;
-            sysTenantAccount.LastLoginTime = dateTime;
-
-            tenUser.LastLoginDevice = userAgentInfo.Device;
-            tenUser.LastLoginOS = userAgentInfo.OS;
-            tenUser.LastLoginBrowser = userAgentInfo.Browser;
-            tenUser.LastLoginProvince = wanNetIpInfo.Province;
-            tenUser.LastLoginCity = wanNetIpInfo.City;
-            tenUser.LastLoginIp = ip;
-            tenUser.LastLoginTime = dateTime;
-
-            // 更新数据
-            _repository.Updateable(sysTenantAccount);
-            db.Updateable(tenUser);
-
-            // 添加访问日志
-            var sysLogVisModel = new SysLogVisModel
-            {
-                Id = YitIdHelper.NextId(),
-                Account = account.Account,
-                JobNumber = sysTenantAccount.JobNumber,
-                VisitType = VisitTypeEnum.Login,
-                VisTime = dateTime,
-                TenantId = tenant.Id
-            };
-            sysLogVisModel.RecordCreate(httpContext);
-
-            // 获取日志库连接配置
-            var logConnectionConfig = await _sqlSugarEntityService.GetLogSqlSugarClient();
-
-            // 事件总线执行日志
-            await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddVisLog,
-                logConnectionConfig, sysLogVisModel));
-
-            sysTenantAccount.SysAccount = account;
-            sysTenantAccount.SysTenant = tenant;
-
-            // 生成 Token 令牌，默认20分钟
-            var accessToken = _jwtBearerCryptoService.GenerateToken(new Dictionary<string, object>
-            {
-                {nameof(ClaimConst.TenantNo), sysTenantAccount.SysTenant.TenantNo},
-                {nameof(ClaimConst.JobNumber), sysTenantAccount.JobNumber},
-                {nameof(sysTenantAccount.LastLoginIp), sysTenantAccount.LastLoginIp},
-                {nameof(sysTenantAccount.LastLoginTime), sysTenantAccount.LastLoginTime},
-            });
-
-            // 生成刷新Token，有效期24小时
-            var refreshToken = _jwtBearerCryptoService.GenerateRefreshToken(accessToken);
-
-            // 设置Token令牌
-            httpContext.Response.Headers["access-token"] = accessToken;
-
-            // 设置刷新Token令牌
-            httpContext.Response.Headers["x-access-token"] = refreshToken;
-
-            // 设置Swagger自动登录
-            httpContext.SignInToSwagger(accessToken);
-        }
-        catch (Exception ex)
-        {
-            throw new UnauthorizedAccessException($"401 登录鉴权失败：{ex.Message}");
-        }
+        // 事件总线执行日志
+        await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddVisLog,
+            logConnectionConfig, sysLogVisModel));
     }
 }

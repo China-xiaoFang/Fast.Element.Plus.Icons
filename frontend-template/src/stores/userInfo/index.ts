@@ -18,10 +18,14 @@ export const useUserInfo = defineStore("userInfo", {
             supperAdmin: false,
             // 是否为管理员
             admin: false,
+            // 租户编号
+            tenantNo: "",
             // 用户名称
             userName: "",
             // 用户昵称
             nickName: "",
+            // 用户工号
+            jobNumber: "",
             // 头像
             avatar: "",
             // 最后登录时间
@@ -79,7 +83,10 @@ export const useUserInfo = defineStore("userInfo", {
          * @param refreshToken 可以传入，也可以直接获取 pinia 中的
          * @returns
          */
-        resolveToken(token: string | null = null, refreshToken: string | null = null): { token: string | null; refreshToken: string | null } {
+        resolveToken(
+            token: string | null = null,
+            refreshToken: string | null = null
+        ): { token: string | null; refreshToken: string | null; tokenData: anyObj | null } {
             token ??= this.token;
             refreshToken ??= this.refreshToken;
             if (token) {
@@ -90,11 +97,11 @@ export const useUserInfo = defineStore("userInfo", {
                 // 获取 Token 的过期时间
                 var exp = new Date(jwtToken.exp * 1000);
                 if (new Date() >= exp) {
-                    return { token: `Bearer ${token}`, refreshToken: `Bearer ${refreshToken}` };
+                    return { token: `Bearer ${token}`, refreshToken: `Bearer ${refreshToken}`, tokenData: jwtToken };
                 }
-                return { token: `Bearer ${token}`, refreshToken: null };
+                return { token: `Bearer ${token}`, refreshToken: null, tokenData: jwtToken };
             }
-            return { token: null, refreshToken: null };
+            return { token: null, refreshToken: null, tokenData: null };
         },
         /**
          * 刷新用户信息
@@ -102,9 +109,9 @@ export const useUserInfo = defineStore("userInfo", {
         async refreshUserInfo() {
             const userInfo = await authApi.getLoginUserInfo();
             if (userInfo.success) {
-                this.userName = userInfo.data.userName;
+                (this.tenantNo = userInfo.data.tenantNo), (this.userName = userInfo.data.userName);
                 this.nickName = userInfo.data.nickName;
-                this.avatar = userInfo.data.avatar;
+                (this.jobNumber = userInfo.data.jobNumber), (this.avatar = userInfo.data.avatar);
                 this.lastLoginTime = userInfo.data.lastLoginTime;
             } else {
                 throw new Error(userInfo.message);
@@ -127,7 +134,8 @@ export const useUserInfo = defineStore("userInfo", {
             this.removeToken();
             // 调用退出登录的接口
             loginApi.logout().finally(() => {
-                router.go(0);
+                // next({ path: "/login", query: })
+                router.push({ path: "/login", query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } });
             });
         },
     },

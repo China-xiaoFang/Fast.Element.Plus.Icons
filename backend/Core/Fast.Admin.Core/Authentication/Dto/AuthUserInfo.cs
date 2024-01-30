@@ -12,85 +12,62 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-using Fast.Admin.Core.Enum.Common;
-using Fast.Admin.Core.Enum.System;
-
-namespace Fast.Admin.Service.Authentication.Auth.Dto;
+namespace Fast.Admin.Core.Authentication.Dto;
 
 /// <summary>
-/// <see cref="GetLoginUserInfoOutput"/> 获取登录用户信息
+/// <see cref="AuthUserInfo"/> 授权用户信息
 /// </summary>
-public class GetLoginUserInfoOutput
+public class AuthUserInfo : IAuthUserInfo
 {
     /// <summary>
-    /// 工号
+    /// 租户Id
+    /// </summary>
+    public long TenantId { get; set; }
+
+    /// <summary>
+    /// 租户编号
     /// </summary>
     public string TenantNo { get; set; }
 
     /// <summary>
-    /// 账号
+    /// 用户Id
+    /// </summary>
+    public long UserId { get; set; }
+
+    /// <summary>
+    /// 用户账号
     /// </summary>
     public string Account { get; set; }
 
     /// <summary>
-    /// 工号
+    /// 用户工号
     /// </summary>
     public string JobNumber { get; set; }
 
     /// <summary>
-    /// 姓名
+    /// 用户名称
     /// </summary>
     public string UserName { get; set; }
 
     /// <summary>
-    /// 昵称
-    /// </summary>
-    public string NickName { get; set; }
-
-    /// <summary>
-    /// 头像
-    /// </summary>
-    public string Avatar { get; set; }
-
-    /// <summary>
-    /// 生日
-    /// </summary>
-    public DateTime? Birthday { get; set; }
-
-    /// <summary>
-    /// 性别
-    /// </summary>
-    public GenderEnum Sex { get; set; }
-
-    /// <summary>
-    /// 邮箱
-    /// </summary>
-    public string Email { get; set; }
-
-    /// <summary>
-    /// 手机
-    /// </summary>
-    public string Mobile { get; set; }
-
-    /// <summary>
-    /// 电话
-    /// </summary>
-    public string Tel { get; set; }
-
-    /// <summary>
-    /// 主部门Id
+    /// 部门Id
     /// </summary>
     public long DepartmentId { get; set; }
 
     /// <summary>
-    /// 主部门名称
+    /// 部门名称
     /// </summary>
     public string DepartmentName { get; set; }
 
     /// <summary>
-    /// 管理员类型
+    /// 是否超级管理员
     /// </summary>
-    public AdminTypeEnum AdminType { get; set; }
+    public bool IsSuperAdmin { get; set; }
+
+    /// <summary>
+    /// 是否系统管理员
+    /// </summary>
+    public bool IsSystemAdmin { get; set; }
 
     /// <summary>
     /// 最后登录设备
@@ -126,4 +103,14 @@ public class GetLoginUserInfoOutput
     /// 最后登录时间
     /// </summary>
     public DateTime? LastLoginTime { get; set; }
+
+    /// <summary>
+    /// App 运行环境
+    /// </summary>
+    public AppEnvironmentEnum AppEnvironment { get; set; }
+
+    /// <summary>
+    /// App来源
+    /// </summary>
+    public string AppOrigin { get; set; }
 }

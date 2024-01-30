@@ -9,7 +9,7 @@ import langAutoLoadMap from "@/lang/autoLoad";
 import { mergeMessage } from "@/lang/index";
 import { useConfig } from "@/stores/config";
 import { useUserInfo } from "@/stores/userInfo";
-import { genNonceStr, getGreet } from "@/utils";
+import { getUrlParams, genNonceStr, getGreet } from "@/utils";
 import { i18n } from "@/lang";
 
 const modules = import.meta.glob("/src/views/**/**.vue");
@@ -143,7 +143,7 @@ router.beforeEach(async (to, from, next) => {
                     setTimeout(() => {
                         ElNotification({
                             title: "欢迎",
-                            message: `${getGreet()}，${userInfoStore.nickName ?? userInfoStore.userName}，${i18n.global.t("router.欢迎回来")}`,
+                            message: `${getGreet()}${userInfoStore.nickName ?? userInfoStore.userName}`,
                             type: "success",
                             duration: 1000,
                         });
@@ -152,15 +152,17 @@ router.beforeEach(async (to, from, next) => {
                     NProgress.done();
                     userInfoStore.logout();
                 }
-            }
 
-            const redirect = decodeURIComponent((from.query.redirect as string) || "");
-            if (redirect) {
-                // 设置 replace: true, 因此导航将不会留下历史记录
-                next({ path: redirect, replace: true });
-                // next({ ...to, replace: true })
+                const redirect = decodeURIComponent((from.query.redirect as string) || "");
+                if (redirect) {
+                    const _query = getUrlParams(redirect);
+                    // 设置 replace: true, 因此导航将不会留下历史记录
+                    next({ path: redirect, replace: true, query: _query });
+                    // next({ ...to, replace: true })
+                } else {
+                    next({ ...to, replace: true });
+                }
             } else {
-                // next({ ...to, replace: true });
                 next();
             }
         }
@@ -170,7 +172,7 @@ router.beforeEach(async (to, from, next) => {
             // 免登录白名单路由，直接进入
             next();
         } else {
-            ElMessage.warning(i18n.global.t("router.请登录"));
+            ElMessage.warning(i18n.global.t("router.permission.请登录"));
             // 非免登录白名单路由，重定向到登录页面
             next({ path: "/login", query: { redirect: encodeURIComponent(to.fullPath) } });
             NProgress.done();

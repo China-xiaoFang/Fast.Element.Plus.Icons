@@ -9,6 +9,13 @@ import { GenderEnum } from "./gender-enum";
  */
 export interface GetLoginUserInfoOutput {
     /**
+     * 租户编号
+     * @type {string}
+     * @memberof GetLoginUserInfoOutput
+     */
+    tenantNo: string;
+
+    /**
      * 账号
      *
      * @type {string}

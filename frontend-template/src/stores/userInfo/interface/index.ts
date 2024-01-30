@@ -32,6 +32,12 @@ export interface UserInfo {
      */
     admin: boolean;
     /**
+     * 租户编号
+     * @type {string}
+     * @memberof UserInfo
+     */
+    tenantNo: string;
+    /**
      * 用户名称
      * @type {string}
      * @memberof UserInfo
@@ -43,6 +49,12 @@ export interface UserInfo {
      * @memberof UserInfo
      */
     nickName: string;
+    /**
+     * 用户工号
+     * @type {string}
+     * @memberof UserInfo
+     */
+    jobNumber: string;
     /**
      * 头像
      * @type {string}

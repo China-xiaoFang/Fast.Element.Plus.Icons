@@ -32,25 +32,25 @@ public class CacheConst
 
     /// <summary>
     /// 租户数据库信息
-    /// <remarks>{0}，租户编号 {1}，数据库名类型</remarks>
+    /// <remarks>{0}租户编号，{1}数据库名类型</remarks>
     /// </summary>
     public const string TenantDatabaseInfo = "{0}:Database:{1}";
 
     /// <summary>
     /// 授权用户信息
-    /// <remarks>{0}，租户编号</remarks>
+    /// <remarks>{0}租户编号, {1}登录环境，{2}工号</remarks>
     /// </summary>
-    public const string AuthUserInfo = "{0}:Auth:";
+    public const string AuthUserInfo = "{0}:Auth:{1}:{2}";
 
     /// <summary>
     /// 过期 Token 缓存
     /// </summary>
-    public const string ExpiredToken = "{0}:Expired:Token:";
+    public const string ExpiredToken = "{0}:Expired:Token:{1}";
 
     /// <summary>
     /// 过期 RefreshToken 缓存
     /// </summary>
-    public const string ExpiredRefreshToken = "{0}:Expired:RefreshToken:";
+    public const string ExpiredRefreshToken = "{0}:Expired:RefreshToken:{1}";
 
     /// <summary>
     /// 输入错误密码次数

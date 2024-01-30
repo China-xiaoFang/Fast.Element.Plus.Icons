@@ -127,7 +127,7 @@ public class SysLogSqlEventSubscriber : IEventSubscriber
         var db = new SqlSugarClient(source.ConnectionConfig);
 
         // 保存数据
-        await db.InsertableByObject(source.Payload).ExecuteCommandAsync();
+        await db.InsertableByObject(source.Payload).SplitTable().ExecuteCommandAsync();
     }
 
     /// <summary>

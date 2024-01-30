@@ -1,6 +1,6 @@
 ﻿// Apache开源许可证
 //
-// 版权所有 © 2018-2024 1.8K仔
+// 版权所有 © 2018-2023 1.8K仔
 //
 // 特此免费授予获得本软件及其相关文档文件（以下简称“软件”）副本的任何人以处理本软件的权利，
 // 包括但不限于使用、复制、修改、合并、发布、分发、再许可、销售软件的副本，
@@ -12,32 +12,14 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.Admin.Core.Constants;
+/**
+ * 前缀：router.permission
+ * 使用方式：
+ * i18n.global.t("router.permission.Fast.NET")
+ * t("router.permission.Fast.NET")
+ * $t("router.permission.Fast.NET")
+ */
 
-/// <summary>
-/// <see cref="ClaimConst"/> 授权声明常量
-/// </summary>
-public class ClaimConst
-{
-    /// <summary>
-    /// Api来源
-    /// </summary>
-    public const string ApiOrigin = "Fast-Api-Origin";
-
-    /// <summary>
-    /// App来源
-    /// </summary>
-    public const string AppOrigin = "Fast-App-Origin";
-
-    /// <summary>
-    /// 租户编号
-    /// <remarks>Base64 加密的字符串</remarks>
-    /// </summary>
-    public const string TenantNo = "Fast-TenantNo";
-
-    /// <summary>
-    /// 用户工号
-    /// <remarks>Base64 加密的字符串</remarks>
-    /// </summary>
-    public const string JobNumber = "Fast-JobNumber";
-}
+export default {
+    ["请登录"]: "Please sign in",
+};

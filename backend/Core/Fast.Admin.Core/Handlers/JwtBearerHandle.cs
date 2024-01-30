@@ -13,7 +13,11 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using Fast.Admin.Core.Authentication;
+using Fast.Admin.Core.Authentication.Dto;
+using Fast.Admin.Core.Constants;
 using Fast.JwtBearer.Handlers;
+using Fast.JwtBearer.Services;
+using Fast.UnifyResult.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +28,13 @@ namespace Fast.Admin.Core.Handlers;
 /// </summary>
 public class JwtBearerHandle : IJwtBearerHandle
 {
+    private readonly IJwtBearerCryptoService _jwtBearerCryptoService;
+
+    public JwtBearerHandle(IJwtBearerCryptoService jwtBearerCryptoService)
+    {
+        _jwtBearerCryptoService = jwtBearerCryptoService;
+    }
+
     /// <summary>
     /// 授权处理
     /// <remarks>这里已经判断了 Token 是否有效，并且已经处理了自动刷新 Token。只需要处理其余的逻辑即可。如果返回 false或抛出异常，搭配 AuthorizeFailHandle 则抛出 HttpStatusCode = 401 状态码，否则走默认处理 AuthorizationHandlerContext.Fail() 会返回 HttpStatusCode = 403 状态码</remarks>
@@ -37,7 +48,41 @@ public class JwtBearerHandle : IJwtBearerHandle
         var _cache = httpContext.RequestServices.GetService<ICache>();
         // 尝试解析 IUser，当前请求生命周期，只会解析一次
         var _user = httpContext.RequestServices.GetService<IUser>();
-        return false;
+
+        // 由于生命周期的问题，这里的Token不能直接获取
+        var token = _jwtBearerCryptoService.GetJwtBearerToken(httpContext);
+
+        // 判断 Token 是否过期，采用 "{JobNumber}:{Token后面10位字符}"，进行缓存过期容错值
+        if (await _cache.ExistsAsync(CacheConst.GetCacheKey(CacheConst.ExpiredToken, _user.TenantNo,
+                $"{_user.JobNumber}:{token[^10..]}")))
+        {
+            throw new UserFriendlyException("Token 已过期！");
+        }
+
+        // Token 过期了，读取 RefreshToken
+        var refreshToken = _jwtBearerCryptoService.GetJwtBearerToken(httpContext, "X-Authorization");
+
+        if (!refreshToken.IsEmpty())
+        {
+            // 判断 刷新Token 是否过期，采用 "{JobNumber}:{Token后面10位字符}"，进行缓存过期容错值
+            if (await _cache.ExistsAsync(CacheConst.GetCacheKey(CacheConst.ExpiredToken, _user.TenantNo,
+                    $"{_user.JobNumber}:{refreshToken[^10..]}")))
+            {
+                throw new UserFriendlyException("Refresh Token 已过期！");
+            }
+        }
+
+        // 获取缓存Key
+        var cacheKey = CacheConst.GetCacheKey(CacheConst.AuthUserInfo, _user.TenantNo, _user.AppEnvironment.ToString(),
+            _user.JobNumber);
+
+        // 获取缓存信息
+        var authUserInfo = _cache.Get<AuthUserInfo>(cacheKey);
+
+        // 设置授权用户
+        _user.SetAuthUser(authUserInfo);
+
+        return true;
     }
 
     /// <summary>
@@ -51,7 +96,8 @@ public class JwtBearerHandle : IJwtBearerHandle
     public async Task<object> AuthorizeFailHandle(AuthorizationHandlerContext context, HttpContext httpContext,
         Exception exception)
     {
-        return null;
+        return await Task.FromResult(UnifyContext.GetRestfulResult(StatusCodes.Status401Unauthorized, false, null,
+            exception?.Message ?? "401 未经授权", httpContext));
     }
 
     /// <summary>
@@ -65,6 +111,22 @@ public class JwtBearerHandle : IJwtBearerHandle
     public async Task<bool> PermissionHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement,
         HttpContext httpContext)
     {
+        // 获取 IUser
+        var _user = httpContext.RequestServices.GetService<IUser>();
+
+        // 超级管理员有所有的权限
+        if (_user.IsSuperAdmin)
+        {
+            return true;
+        }
+
+        // 系统管理员要判断部分菜单是否存在权限
+        // TODO:一些权限判断
+        if (_user.IsSystemAdmin)
+        {
+            return true;
+        }
+
         return false;
     }
 
@@ -80,6 +142,6 @@ public class JwtBearerHandle : IJwtBearerHandle
     public async Task<object> PermissionFailHandle(AuthorizationHandlerContext context, IAuthorizationRequirement requirement,
         HttpContext httpContext, Exception exception)
     {
-        return null;
+        return await Task.FromResult<object>(null);
     }
 }
