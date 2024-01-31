@@ -14,7 +14,7 @@
 
 using Fast.Admin.Core.Enum.Common;
 using Fast.Admin.Core.Enum.Db;
-using Fast.Admin.Core.Enum.Http;
+using Fast.IaaS;
 
 namespace Fast.Admin.Core.Entity.Log.Entities;
 

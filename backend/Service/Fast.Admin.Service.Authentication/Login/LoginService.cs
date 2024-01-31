@@ -1,10 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 using Fast.Admin.Core.Authentication;
-using Fast.Admin.Core.Constants;
 using Fast.Admin.Core.Entity.Log.Entities;
 using Fast.Admin.Core.Entity.System.Account;
 using Fast.Admin.Core.Entity.System.Tenant;
-using Fast.Admin.Core.Enum.Common;
 using Fast.Admin.Core.Enum.Login;
 using Fast.Admin.Core.EventSubscriber.Sources;
 using Fast.Admin.Core.EventSubscriber.SysLogSql;
@@ -12,13 +10,10 @@ using Fast.Admin.Core.Services;
 using Fast.Admin.Entity.Tenant.Organization;
 using Fast.Admin.Service.Authentication.Login.Dto;
 using Fast.Cache;
-using Fast.DependencyInjection;
 using Fast.EventBus;
-using Fast.IaaS;
 using Fast.JwtBearer.Services;
 using Fast.NET.Core;
 using Fast.SqlSugar.IBaseEntities;
-using SqlSugar;
 using Yitter.IdGenerator;
 
 namespace Fast.Admin.Service.Authentication.Login;

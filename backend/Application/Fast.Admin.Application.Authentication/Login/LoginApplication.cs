@@ -17,7 +17,6 @@ using Fast.Admin.Service.Authentication.Login;
 using Fast.Admin.Service.Authentication.Login.Dto;
 using Fast.NET.Core;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Admin.Application.Authentication.Login;
 
@@ -39,7 +38,7 @@ public class LoginApplication : IDynamicApplication
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost("/login"), AllowAnonymous]
+    [HttpPost("/login"), ApiInfo("登录", HttpRequestActionEnum.Auth), AllowAnonymous]
     public async Task<LoginOutput> Login(LoginInput input)
     {
         return await _loginService.Login(input);
@@ -50,7 +49,7 @@ public class LoginApplication : IDynamicApplication
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost("/tenantLogin"), AllowAnonymous]
+    [HttpPost("/tenantLogin"), ApiInfo("租户登录", HttpRequestActionEnum.Auth), AllowAnonymous]
     public async Task TenantLogin(TenantLoginInput input)
     {
         await _loginService.TenantLogin(input);
@@ -60,7 +59,7 @@ public class LoginApplication : IDynamicApplication
     /// 退出登录
     /// </summary>
     /// <returns></returns>
-    [HttpPost("/logout"), AllowAnonymous]
+    [HttpPost("/logout"), ApiInfo("退出登录", HttpRequestActionEnum.Auth), AllowAnonymous]
     public async Task Logout()
     {
         await FastContext.GetService<IUser>().Logout();

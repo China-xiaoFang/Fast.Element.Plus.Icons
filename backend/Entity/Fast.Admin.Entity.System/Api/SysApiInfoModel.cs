@@ -1,4 +1,4 @@
-﻿using Fast.Admin.Core.Enum.Http;
+﻿using Fast.IaaS;
 
 namespace Fast.Admin.Entity.System.Api;
 
@@ -10,22 +10,34 @@ namespace Fast.Admin.Entity.System.Api;
 public class SysApiInfoModel : BaseEntity
 {
     /// <summary>
+    /// 接口分组Id
+    /// </summary>
+    [SugarColumn(ColumnDescription = "接口分组Id", IsNullable = false)]
+    public long ApiGroupId { get; set; }
+
+    /// <summary>
+    /// 模块名称
+    /// </summary>
+    [SugarColumn(ColumnDescription = "模块名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    public string ModuleName { get; set; }
+
+    /// <summary>
     /// 接口地址
     /// </summary>
     [SugarColumn(ColumnDescription = "接口地址", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
-    public string ApiUrl { get; set; }
+    public string Url { get; set; }
 
     /// <summary>
     /// 接口名称
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
-    public string ApiName { get; set; }
+    [SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
+    public string Name { get; set; }
 
     /// <summary>
     /// 接口请求方式
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口请求方式", ColumnDataType = "Nvarchar(10)", IsNullable = false)]
-    public string ApiMethod { get; set; }
+    [SugarColumn(ColumnDescription = "接口请求方式", ColumnDataType = "tinyint", IsNullable = false)]
+    public HttpRequestMethodEnum Method { get; set; }
 
     /// <summary>
     /// 接口操作方式
@@ -34,14 +46,8 @@ public class SysApiInfoModel : BaseEntity
     public HttpRequestActionEnum ApiAction { get; set; }
 
     /// <summary>
-    /// 接口分组Id
+    /// 鉴权按钮编码集合
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口分组Id", IsNullable = false)]
-    public long ApiGroupId { get; set; }
-
-    /// <summary>
-    /// 排序
-    /// </summary>
-    [SugarColumn(ColumnDescription = "排序", IsNullable = false)]
-    public int Sort { get; set; }
+    [SugarColumn(ColumnDescription = "鉴权按钮编码集合", ColumnDataType = "Nvarchar(MAX)", IsNullable = true, IsJson = true)]
+    public List<string> AuthButtonCodeList { get; set; }
 }

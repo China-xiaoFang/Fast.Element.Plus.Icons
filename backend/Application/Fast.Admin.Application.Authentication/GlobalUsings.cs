@@ -14,3 +14,12 @@
 
 global using Fast.Admin.Core.Constants;
 global using Fast.DynamicApplication;
+global using Fast.IaaS;
+global using ApiInfoAttribute = Fast.IaaS.ApiInfoAttribute;
+global using HttpGetAttribute = Fast.IaaS.HttpGetAttribute;
+global using HttpPostAttribute = Fast.IaaS.HttpPostAttribute;
+global using HttpPutAttribute = Fast.IaaS.HttpPutAttribute;
+global using HttpDeleteAttribute = Fast.IaaS.HttpDeleteAttribute;
+global using HttpPatchAttribute = Fast.IaaS.HttpPatchAttribute;
+global using HttpHeadAttribute = Fast.IaaS.HttpHeadAttribute;
+global using HttpOptionsAttribute = Fast.IaaS.HttpOptionsAttribute;

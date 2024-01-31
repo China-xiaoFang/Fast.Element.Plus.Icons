@@ -16,10 +16,6 @@ using Fast.Admin.Core.Authentication;
 using Fast.Admin.Core.Entity.System.Account;
 using Fast.Admin.Entity.Tenant.Organization;
 using Fast.Admin.Service.Authentication.Auth.Dto;
-using Fast.DependencyInjection;
-using Fast.IaaS;
-using Fast.SqlSugar.Repository;
-using SqlSugar;
 
 namespace Fast.Admin.Service.Authentication.Auth;
 

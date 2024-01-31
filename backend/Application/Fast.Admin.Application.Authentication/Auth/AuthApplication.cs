@@ -1,7 +1,6 @@
 ﻿using Fast.Admin.Service.Authentication.Auth;
 using Fast.Admin.Service.Authentication.Auth.Dto;
 using Fast.JwtBearer.Attributes;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Admin.Application.Authentication.Auth;
 
@@ -22,7 +21,7 @@ public class AuthApplication : IDynamicApplication
     /// 获取登录用户信息
     /// </summary>
     /// <returns></returns>
-    [HttpGet("/getLoginUserInfo"), SkipPermission]
+    [HttpGet("/getLoginUserInfo"), ApiInfo("获取登录用户信息", HttpRequestActionEnum.Auth), SkipPermission]
     public async Task<GetLoginUserInfoOutput> GetLoginUserInfo()
     {
         return await _authService.GetLoginUserInfo();

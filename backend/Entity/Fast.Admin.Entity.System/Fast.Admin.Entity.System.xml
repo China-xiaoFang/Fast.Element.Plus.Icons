@@ -9,19 +9,19 @@
             系统接口分组信息表Model类
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.ApiGroupName">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.Name">
             <summary>
-            接口分组名称
+            分组名称
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.ApiParentGroupName">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.Title">
             <summary>
-            接口父级分组名称
+            分组标题
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.Sort">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.Description">
             <summary>
-            排序
+            分组描述
             </summary>
         </member>
         <member name="T:Fast.Admin.Entity.System.Api.SysApiInfoModel">
@@ -29,17 +29,27 @@
             系统接口信息表Model类
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ApiUrl">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ApiGroupId">
+            <summary>
+            接口分组Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ModuleName">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.Url">
             <summary>
             接口地址
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ApiName">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.Name">
             <summary>
             接口名称
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ApiMethod">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.Method">
             <summary>
             接口请求方式
             </summary>
@@ -49,14 +59,9 @@
             接口操作方式
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.ApiGroupId">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.AuthButtonCodeList">
             <summary>
-            接口分组Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.Sort">
-            <summary>
-            排序
+            鉴权按钮编码集合
             </summary>
         </member>
         <member name="T:Fast.Admin.Entity.System.Config.SysConfigModel">

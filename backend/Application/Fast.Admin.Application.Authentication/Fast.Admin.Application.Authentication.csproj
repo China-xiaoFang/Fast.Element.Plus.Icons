@@ -8,8 +8,4 @@
 		<ProjectReference Include="$(SolutionDir)\Service\Fast.Admin.Service.Authentication\Fast.Admin.Service.Authentication.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Fast.DynamicApplication" Version="3.4.18.3" />
-	</ItemGroup>
-
 </Project>

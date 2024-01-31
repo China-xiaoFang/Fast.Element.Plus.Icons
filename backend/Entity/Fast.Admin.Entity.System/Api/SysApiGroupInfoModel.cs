@@ -8,20 +8,20 @@
 public class SysApiGroupInfoModel : BaseEntity
 {
     /// <summary>
-    /// 接口分组名称
+    /// 分组名称
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口分组名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
-    public string ApiGroupName { get; set; }
+    [SugarColumn(ColumnDescription = "分组名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    public string Name { get; set; }
 
     /// <summary>
-    /// 接口父级分组名称
+    /// 分组标题
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口父级分组名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
-    public string ApiParentGroupName { get; set; }
+    [SugarColumn(ColumnDescription = "分组标题", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
+    public string Title { get; set; }
 
     /// <summary>
-    /// 排序
+    /// 分组描述
     /// </summary>
-    [SugarColumn(ColumnDescription = "排序", IsNullable = false)]
-    public int Sort { get; set; }
+    [SugarColumn(ColumnDescription = "分组描述", ColumnDataType = "Nvarchar(MAX)", IsNullable = true)]
+    public string Description { get; set; }
 }
