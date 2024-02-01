@@ -22,7 +22,6 @@ using Fast.Admin.Core.EventSubscriber.Sources;
 using Fast.Admin.Core.EventSubscriber.SysLogSql;
 using Fast.Admin.Core.Services;
 using Fast.EventBus;
-using Fast.SqlSugar.Attributes;
 using Fast.SqlSugar.Handlers;
 using Fast.SqlSugar.Options;
 using SqlSugar;

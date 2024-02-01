@@ -6,7 +6,7 @@
     <members>
         <member name="T:Fast.Admin.Application.Authentication.Auth.AuthApplication">
             <summary>
-            鉴权
+            <see cref="T:Fast.Admin.Application.Authentication.Auth.AuthApplication"/> 授权
             </summary>
         </member>
         <member name="M:Fast.Admin.Application.Authentication.Auth.AuthApplication.GetLoginUserInfo">
@@ -17,7 +17,7 @@
         </member>
         <member name="T:Fast.Admin.Application.Authentication.Login.LoginApplication">
             <summary>
-            登录
+            <see cref="T:Fast.Admin.Application.Authentication.Login.LoginApplication"/> 授权登录
             </summary>
         </member>
         <member name="M:Fast.Admin.Application.Authentication.Login.LoginApplication.Login(Fast.Admin.Service.Authentication.Login.Dto.LoginInput)">

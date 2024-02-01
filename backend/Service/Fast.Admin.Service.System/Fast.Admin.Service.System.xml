@@ -4,6 +4,18 @@
         <name>Fast.Admin.Service.System</name>
     </assembly>
     <members>
+        <member name="T:Fast.Admin.Service.System.CodeFirst.DataSource.SysMenuDataSource">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.CodeFirst.DataSource.SysMenuDataSource"/> 系统菜单数据源
+            <remarks>模块，菜单，按钮</remarks>
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.System.CodeFirst.DataSource.SysMenuDataSource.Involve(SqlSugar.ISqlSugarClient)">
+            <summary>
+            初始化的模块，菜单，按钮数据
+            </summary>
+            <param name="db"></param>
+        </member>
         <member name="T:Fast.Admin.Service.System.CodeFirst.ISystemCodeFirstService">
             <summary>
             <see cref="T:Fast.Admin.Service.System.CodeFirst.ISystemCodeFirstService"/> 系统库CodeFirst
@@ -24,6 +36,263 @@
             <summary>
             初始化系统核心库
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoDetailOutput">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoDetailOutput"/> 系统接口分组详情输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoDetailOutput.Name">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoDetailOutput.Title">
+            <summary>
+            分组标题
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoDetailOutput.Description">
+            <summary>
+            分组描述
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoPagedOutput">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoPagedOutput"/> 系统接口分组信息分页输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoPagedOutput.Name">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoPagedOutput.Title">
+            <summary>
+            分组标题
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiGroupInfo.Dto.QuerySysApiGroupInfoPagedOutput.Description">
+            <summary>
+            分组描述
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService"/> 系统接口分组服务接口
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Selector(Fast.SqlSugar.PagedInput)">
+            <summary>
+            接口分组分页选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Paged(Fast.SqlSugar.PagedInput)">
+            <summary>
+            接口分组分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Detail(System.Int64)">
+            <summary>
+            接口分组详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Refresh">
+            <summary>
+            刷新接口分组和接口信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService"/> 系统接口分组服务
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Selector(Fast.SqlSugar.PagedInput)">
+            <summary>
+            接口分组分页选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Paged(Fast.SqlSugar.PagedInput)">
+            <summary>
+            接口分组分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Detail(System.Int64)">
+            <summary>
+            接口分组详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Refresh">
+            <summary>
+            刷新接口分组和接口信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput"/> 系统接口信息详情输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.ApiGroupId">
+            <summary>
+            接口分组Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.ModuleName">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.Url">
+            <summary>
+            接口地址
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.Name">
+            <summary>
+            接口名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.Method">
+            <summary>
+            接口请求方式
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.ApiAction">
+            <summary>
+            接口操作方式
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput.ButtonList">
+            <summary>
+            按钮集合
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput"/> 系统接口信息分页输入
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput.ApiGroupId">
+            <summary>
+            接口分组Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput.Method">
+            <summary>
+            接口请求方式
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput.ApiAction">
+            <summary>
+            接口操作方式
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput"/> 系统接口信息分页输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.ApiGroupId">
+            <summary>
+            接口分组Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.ModuleName">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.Url">
+            <summary>
+            接口地址
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.Name">
+            <summary>
+            接口名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.Method">
+            <summary>
+            接口请求方式
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.ApiAction">
+            <summary>
+            接口操作方式
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.ButtonList">
+            <summary>
+            按钮集合
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.QuerySysApiInfoButtonDto">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.QuerySysApiInfoButtonDto"/> 系统接口信息按钮Dto
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.QuerySysApiInfoButtonDto.ButtonCode">
+            <summary>
+            按钮编码
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput.QuerySysApiInfoButtonDto.ButtonName">
+            <summary>
+            按钮名称
+            </summary>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.ISysApiInfoService">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.ISysApiInfoService"/> 系统接口信息服务接口
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiInfo.ISysApiInfoService.Paged(Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput)">
+            <summary>
+            接口信息分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiInfo.ISysApiInfoService.Detail(System.Int64)">
+            <summary>
+            接口信息详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Fast.Admin.Service.System.SysApiInfo.SysApiInfoService">
+            <summary>
+            <see cref="T:Fast.Admin.Service.System.SysApiInfo.SysApiInfoService"/> 系统接口信息服务
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiInfo.SysApiInfoService.Paged(Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput)">
+            <summary>
+            接口信息分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiInfo.SysApiInfoService.Detail(System.Int64)">
+            <summary>
+            接口信息详情
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>

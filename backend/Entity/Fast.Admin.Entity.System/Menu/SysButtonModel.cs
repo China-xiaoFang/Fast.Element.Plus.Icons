@@ -27,12 +27,6 @@ public class SysButtonModel : BaseEntity
     public long MenuId { get; set; }
 
     /// <summary>
-    /// 接口Id
-    /// </summary>
-    [SugarColumn(ColumnDescription = "接口Id", IsNullable = false)]
-    public long ApiId { get; set; }
-
-    /// <summary>
     /// 排序
     /// </summary>
     [SugarColumn(ColumnDescription = "排序", IsNullable = false)]

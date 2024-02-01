@@ -18,19 +18,19 @@ public class SysApiInfoModel : BaseEntity
     /// <summary>
     /// 模块名称
     /// </summary>
-    [SugarColumn(ColumnDescription = "模块名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    [SugarSearchValue,SugarColumn(ColumnDescription = "模块名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
     public string ModuleName { get; set; }
 
     /// <summary>
     /// 接口地址
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口地址", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    [SugarSearchValue,SugarColumn(ColumnDescription = "接口地址", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
     public string Url { get; set; }
 
     /// <summary>
     /// 接口名称
     /// </summary>
-    [SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
+    [SugarSearchValue,SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
     public string Name { get; set; }
 
     /// <summary>
@@ -46,8 +46,14 @@ public class SysApiInfoModel : BaseEntity
     public HttpRequestActionEnum ApiAction { get; set; }
 
     /// <summary>
-    /// 鉴权按钮编码集合
+    /// 系统接口分组信息
     /// </summary>
-    [SugarColumn(ColumnDescription = "鉴权按钮编码集合", ColumnDataType = "Nvarchar(MAX)", IsNullable = true, IsJson = true)]
-    public List<string> AuthButtonCodeList { get; set; }
+    [Navigate(NavigateType.OneToOne, nameof(ApiGroupId), nameof(Id))]
+    public SysApiGroupInfoModel SysApiGroupInfo { get; set; }
+
+    /// <summary>
+    /// 系统接口按钮权限集合
+    /// </summary>
+    [Navigate(NavigateType.OneToMany, nameof(SysApiButtonModel.ApiId), nameof(Id))]
+    public List<SysApiButtonModel> SysButtonApiList { get; set; }
 }

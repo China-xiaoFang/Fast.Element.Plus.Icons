@@ -361,7 +361,7 @@ export interface FTableProps<TInput = any, TOutput = any> {
      * 请求表格数据的api
      * @param params
      */
-    requestApi?: (params: PageInput | TInput) => Promise<ApiPromise<PageResult<TOutput>> | Promise<any>>;
+    requestApi?: (params: PagedInput | TInput) => Promise<ApiPromise<PagedResult<TOutput>> | Promise<any>>;
     /**
      * 返回数据的回调函数，可以对数据进行处理 ==> 非必传
      * @param data
@@ -374,7 +374,7 @@ export interface FTableProps<TInput = any, TOutput = any> {
     /**
      * 初始化请求参数 ==> 非必传（默认为{}）
      */
-    initParam?: PageInput | TInput;
+    initParam?: PagedInput | TInput;
     /**
      * 搜索列配置
      */
@@ -452,11 +452,11 @@ export interface FTableState<TInput = any, TOutput = any> {
     /**
      * 分页数据
      */
-    tablePagination: PageResult<TOutput>;
+    tablePagination: PagedResult<TOutput>;
     /**
      * 搜索参数
      */
-    searchParam: PageInput | TInput;
+    searchParam: PagedInput | TInput;
     /**
      * 显示搜索
      */

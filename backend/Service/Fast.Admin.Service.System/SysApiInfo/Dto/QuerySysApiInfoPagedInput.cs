@@ -12,30 +12,25 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.Admin.Core.Enum.System;
+namespace Fast.Admin.Service.System.SysApiInfo.Dto;
 
 /// <summary>
-/// 模块查看类型枚举
+/// <see cref="QuerySysApiInfoPagedInput"/> 系统接口信息分页输入
 /// </summary>
-[FastEnum("模块查看类型枚举")]
-public enum ModuleViewTypeEnum
+public class QuerySysApiInfoPagedInput : PagedInput
 {
     /// <summary>
-    /// 超级管理员
+    /// 接口分组Id
     /// </summary>
-    [Description("超级管理员")]
-    SuperAdmin = 1,
+    public long? ApiGroupId { get; set; }
 
     /// <summary>
-    /// 系统管理员
-    /// 只有超级管理员和管理员可以查看
+    /// 接口请求方式
     /// </summary>
-    [Description("系统管理员")]
-    SystemAdmin = 2,
+    public HttpRequestMethodEnum? Method { get; set; }
 
     /// <summary>
-    /// 全部
+    /// 接口操作方式
     /// </summary>
-    [Description("全部")]
-    All = 3
+    public HttpRequestActionEnum? ApiAction { get; set; }
 }

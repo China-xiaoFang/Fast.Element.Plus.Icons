@@ -13,26 +13,20 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 using System.Reflection;
-using System.Xml.Linq;
-using Fast.Admin.Core.Constants;
 using Fast.Admin.Core.Entity.System.Account;
 using Fast.Admin.Core.Entity.System.App;
 using Fast.Admin.Core.Entity.System.Database;
 using Fast.Admin.Core.Entity.System.Tenant;
-using Fast.Admin.Core.Enum.Common;
 using Fast.Admin.Core.Enum.Db;
-using Fast.Admin.Core.Enum.System;
 using Fast.Admin.Entity.System.Api;
-using Fast.DependencyInjection;
+using Fast.Admin.Entity.System.Menu;
+using Fast.Admin.Service.System.CodeFirst.DataSource;
 using Fast.DynamicApplication;
-using Fast.IaaS;
 using Fast.NET.Core;
-using Fast.SqlSugar;
 using Fast.SqlSugar.Extensions;
 using Fast.SqlSugar.Options;
 using Mapster;
 using Microsoft.Extensions.Configuration;
-using SqlSugar;
 using Yitter.IdGenerator;
 
 namespace Fast.Admin.Service.System.CodeFirst;
@@ -161,102 +155,138 @@ public class SystemCodeFirstService : ISystemCodeFirstService, ITransientDepende
         };
         await db.Insertable(sysCodeLogDatabaseModel).ExecuteCommandAsync();
 
-        // 读取 SwaggerSettings:GroupOpenApiInfos 节点的内容
-        var swaggerGroupOpenApiInfos = FastContext.Configuration.GetSection("SwaggerSettings:GroupOpenApiInfos")
-            .Get<List<IDictionary<string, object>>>();
+        // 系统菜单
+        await SysMenuDataSource.Involve(db);
 
-        var addSysApiGroupInfoModelList = new List<SysApiGroupInfoModel>();
-        var addSysApiInfoModelList = new List<SysApiInfoModel>();
+        #region 系统接口
 
-        var iDynamicApplicationType = typeof(IDynamicApplication);
-
-        var allApplicationTypeList = FastContext.EffectiveTypes
-            .Where(wh => iDynamicApplicationType.IsAssignableFrom(wh) && !wh.IsInterface).Select(sl =>
-                new {ApiDescriptionSettings = sl.GetCustomAttribute<ApiDescriptionSettingsAttribute>(), Type = sl}).ToList();
-
-        // 循环
-        foreach (var groupOpenApiInfo in swaggerGroupOpenApiInfos)
         {
-            var sysApiGroupInfoModel =
-                addSysApiGroupInfoModelList.FirstOrDefault(f => f.Name == groupOpenApiInfo["Group"].ToString());
-            if (sysApiGroupInfoModel == null)
+            // 读取 SwaggerSettings:GroupOpenApiInfos 节点的内容
+            var swaggerGroupOpenApiInfos = FastContext.Configuration.GetSection("SwaggerSettings:GroupOpenApiInfos")
+                .Get<List<IDictionary<string, object>>>();
+
+            var addSysApiGroupInfoModelList = new List<SysApiGroupInfoModel>();
+            var addSysApiInfoModelList = new List<SysApiInfoModel>();
+            var addSysApiButtonModelList = new List<SysApiButtonModel>();
+
+            // 查询所有的按钮信息
+            var sysButtonList = await db.Queryable<SysButtonModel>().ToListAsync();
+
+            var iDynamicApplicationType = typeof(IDynamicApplication);
+
+            var allApplicationTypeList = FastContext.EffectiveTypes
+                .Where(wh => iDynamicApplicationType.IsAssignableFrom(wh) && !wh.IsInterface).Select(sl =>
+                    new {ApiDescriptionSettings = sl.GetCustomAttribute<ApiDescriptionSettingsAttribute>(), Type = sl}).ToList();
+
+            // 循环
+            foreach (var groupOpenApiInfo in swaggerGroupOpenApiInfos)
             {
-                if (groupOpenApiInfo["Group"].ToString() == "Default")
+                var sysApiGroupInfoModel =
+                    addSysApiGroupInfoModelList.FirstOrDefault(f => f.Name == groupOpenApiInfo["Group"].ToString());
+                if (sysApiGroupInfoModel == null)
                 {
-                    sysApiGroupInfoModel = new SysApiGroupInfoModel
+                    if (groupOpenApiInfo["Group"].ToString() == "Default")
                     {
-                        Id = 10086,
-                        Name = "Default",
-                        Title = groupOpenApiInfo["Title"].ToString(),
-                        Description = groupOpenApiInfo["Description"].ToString(),
-                    };
-                }
-                else
-                {
-                    sysApiGroupInfoModel = new SysApiGroupInfoModel
-                    {
-                        Id = YitIdHelper.NextId(),
-                        Name = groupOpenApiInfo["Group"].ToString(),
-                        Title = groupOpenApiInfo["Title"].ToString(),
-                        Description = groupOpenApiInfo["Description"].ToString(),
-                    };
-                }
-
-                // 放入添加集合
-                addSysApiGroupInfoModelList.Add(sysApiGroupInfoModel);
-            }
-
-            // 查找对应的接口信息
-            var curApplicationTypeList = allApplicationTypeList.Where(wh => wh.ApiDescriptionSettings.Groups?.Length >= 1 &&
-                                                                            wh.ApiDescriptionSettings.Groups.First() ==
-                                                                            sysApiGroupInfoModel.Name);
-
-            var httpMethodAttributeType = typeof(HttpMethodAttribute);
-            foreach (var applicationType in curApplicationTypeList)
-            {
-                // 查找当前类型所有的方法
-                foreach (var methodInfo in applicationType.Type.GetMethods())
-                {
-                    foreach (var attribute in methodInfo.GetCustomAttributes()
-                                 .Where(wh => httpMethodAttributeType.IsInstanceOfType(wh)))
-                    {
-                        if (attribute is HttpMethodAttribute httpMethodAttribute)
+                        sysApiGroupInfoModel = new SysApiGroupInfoModel
                         {
-                            var apiInfoAttribute = methodInfo.GetCustomAttribute<ApiInfoAttribute>();
-                            addSysApiInfoModelList.Add(new SysApiInfoModel
+                            Id = 10086,
+                            Name = "Default",
+                            Title = groupOpenApiInfo["Title"].ToString(),
+                            Description = groupOpenApiInfo["Description"].ToString(),
+                        };
+                    }
+                    else
+                    {
+                        sysApiGroupInfoModel = new SysApiGroupInfoModel
+                        {
+                            Id = YitIdHelper.NextId(),
+                            Name = groupOpenApiInfo["Group"].ToString(),
+                            Title = groupOpenApiInfo["Title"].ToString(),
+                            Description = groupOpenApiInfo["Description"].ToString(),
+                        };
+                    }
+
+                    // 放入添加集合
+                    addSysApiGroupInfoModelList.Add(sysApiGroupInfoModel);
+                }
+
+                // 查找对应的接口信息
+                var curApplicationTypeList = allApplicationTypeList.Where(wh => wh.ApiDescriptionSettings.Groups?.Length >= 1 &&
+                                                                                wh.ApiDescriptionSettings.Groups.First() ==
+                                                                                sysApiGroupInfoModel.Name);
+
+                var httpMethodAttributeType = typeof(HttpMethodAttribute);
+                foreach (var applicationType in curApplicationTypeList)
+                {
+                    // 查找当前类型所有的方法
+                    foreach (var methodInfo in applicationType.Type.GetMethods())
+                    {
+                        foreach (var attribute in methodInfo.GetCustomAttributes()
+                                     .Where(wh => httpMethodAttributeType.IsInstanceOfType(wh)))
+                        {
+                            if (attribute is HttpMethodAttribute httpMethodAttribute)
                             {
-                                Id = YitIdHelper.NextId(),
-                                ApiGroupId = sysApiGroupInfoModel.Id,
-                                ModuleName = applicationType.ApiDescriptionSettings.Name,
-                                Url = httpMethodAttribute.Template,
-                                Name = apiInfoAttribute?.ApiName,
-                                Method = httpMethodAttribute.Method,
-                                ApiAction = apiInfoAttribute?.ApiAction ?? HttpRequestActionEnum.None,
-                                AuthButtonCodeList = httpMethodAttribute.Tags.ToList()
-                            });
+                                var apiInfoAttribute = methodInfo.GetCustomAttribute<ApiInfoAttribute>();
+                                var sysApiInfo = new SysApiInfoModel
+                                {
+                                    Id = YitIdHelper.NextId(),
+                                    ApiGroupId = sysApiGroupInfoModel.Id,
+                                    ModuleName = applicationType.ApiDescriptionSettings.Name,
+                                    Url = httpMethodAttribute.Template,
+                                    Name = apiInfoAttribute?.ApiName,
+                                    Method = httpMethodAttribute.Method,
+                                    ApiAction = apiInfoAttribute?.ApiAction ?? HttpRequestActionEnum.None,
+                                };
+                                addSysApiInfoModelList.Add(sysApiInfo);
+
+                                if (httpMethodAttribute.Tags.Any())
+                                {
+                                    foreach (var tag in httpMethodAttribute.Tags)
+                                    {
+                                        var sysButtonInfo = sysButtonList.FirstOrDefault(f => f.ButtonCode == tag);
+
+                                        if (sysButtonInfo != null)
+                                        {
+                                            addSysApiButtonModelList.Add(new SysApiButtonModel
+                                            {
+                                                ApiId = sysApiInfo.Id, ButtonId = sysButtonInfo.Id
+                                            });
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+
+            await db.Insertable(addSysApiGroupInfoModelList).ExecuteCommandAsync();
+            await db.Insertable(addSysApiInfoModelList).ExecuteCommandAsync();
+            await db.Insertable(addSysApiButtonModelList).ExecuteCommandAsync();
         }
 
-        await db.Insertable(addSysApiGroupInfoModelList).ExecuteCommandAsync();
-        await db.Insertable(addSysApiInfoModelList).ExecuteCommandAsync();
+        #endregion
 
-        // 获取系统日志库连接配置
-        var logDb = new SqlSugarClient(
-            SqlSugarContext.GetConnectionConfig(sysCodeLogDatabaseModel.Adapt<ConnectionSettingsOptions>()));
+        #region 日志库
 
-        // 创建系统日志库
-        logDb.DbMaintenance.CreateDatabase();
+        {
+            // 获取系统日志库连接配置
+            var logDb = new SqlSugarClient(
+                SqlSugarContext.GetConnectionConfig(sysCodeLogDatabaseModel.Adapt<ConnectionSettingsOptions>()));
 
-        // 初始化系统日志库的表
-        logDb.CodeFirst.InitTables(SqlSugarContext.SqlSugarEntityList
-            .Where(wh => !wh.IsSplitTable && wh.SugarDbType != null &&
-                         (FastDbTypeEnum) wh.SugarDbType == FastDbTypeEnum.SysCoreLog).Select(sl => sl.EntityType).ToArray());
-        logDb.CodeFirst.SplitTables().InitTables(SqlSugarContext.SqlSugarEntityList
-            .Where(wh => wh.IsSplitTable && wh.SugarDbType != null &&
-                         (FastDbTypeEnum) wh.SugarDbType == FastDbTypeEnum.SysCoreLog).Select(sl => sl.EntityType).ToArray());
+            // 创建系统日志库
+            logDb.DbMaintenance.CreateDatabase();
+
+            // 初始化系统日志库的表
+            logDb.CodeFirst.InitTables(SqlSugarContext.SqlSugarEntityList
+                .Where(wh => !wh.IsSplitTable && wh.SugarDbType != null &&
+                             (FastDbTypeEnum) wh.SugarDbType == FastDbTypeEnum.SysCoreLog).Select(sl => sl.EntityType).ToArray());
+            logDb.CodeFirst.SplitTables().InitTables(SqlSugarContext.SqlSugarEntityList
+                .Where(wh => wh.IsSplitTable && wh.SugarDbType != null &&
+                             (FastDbTypeEnum) wh.SugarDbType == FastDbTypeEnum.SysCoreLog).Select(sl => sl.EntityType).ToArray());
+        }
+
+        #endregion
 
         // 初始化Admin核心库信息
         var sysAdminCoreDatabaseModel = new SysTenantMainDatabaseModel

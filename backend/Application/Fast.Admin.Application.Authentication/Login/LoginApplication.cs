@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Fast.Admin.Application.Authentication.Login;
 
 /// <summary>
-/// 登录
+/// <see cref="LoginApplication"/> 授权登录
 /// </summary>
 [ApiDescriptionSettings(ApiGroupConst.Auth, Name = "login", Order = 100)]
 public class LoginApplication : IDynamicApplication

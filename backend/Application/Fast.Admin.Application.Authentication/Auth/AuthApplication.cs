@@ -5,7 +5,7 @@ using Fast.JwtBearer.Attributes;
 namespace Fast.Admin.Application.Authentication.Auth;
 
 /// <summary>
-/// 鉴权
+/// <see cref="AuthApplication"/> 授权
 /// </summary>
 [ApiDescriptionSettings(ApiGroupConst.Auth, Name = "auth", Order = 101)]
 public class AuthApplication : IDynamicApplication

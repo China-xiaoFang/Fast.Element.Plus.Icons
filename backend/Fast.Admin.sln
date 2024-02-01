@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Web", "Fast.Admin.Web\Fast.Admin.Web.csproj", "{9EB08B96-BE47-4F8D-B1C2-2969857504FF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FB202CF9-0DC4-4DC0-8AB8-74CD9C2D11A4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Core", "01_Core", "{FB202CF9-0DC4-4DC0-8AB8-74CD9C2D11A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Core", "Core\Fast.Admin.Core\Fast.Admin.Core.csproj", "{DB7243EE-FC68-4800-A48C-D9048599F876}"
 EndProject
@@ -15,27 +15,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Core.Entity.Syst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Core.Entity.Log", "Core\Fast.Admin.Core.Entity.Log\Fast.Admin.Core.Entity.Log.csproj", "{B285AB5E-B32E-486A-8549-865C4D70A79A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entity", "Entity", "{C49209DA-E3D2-4BD1-9895-36F8D76185C4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02_Entity", "02_Entity", "{C49209DA-E3D2-4BD1-9895-36F8D76185C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Entity.System", "Entity\Fast.Admin.Entity.System\Fast.Admin.Entity.System.csproj", "{7708EDAC-C110-4B1E-95C4-53724C15E3F5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Entity.Tenant", "Entity\Fast.Admin.Entity.Tenant\Fast.Admin.Entity.Tenant.csproj", "{86397E79-1544-41AA-89B0-9B0292FBB939}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{091FA43B-BD96-4BC3-BB6F-607023AD767D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03_Service", "03_Service", "{091FA43B-BD96-4BC3-BB6F-607023AD767D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Service.System", "Service\Fast.Admin.Service.System\Fast.Admin.Service.System.csproj", "{443B9940-0ECA-4E47-ABE7-724FAB9E98C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Service.Authentication", "Service\Fast.Admin.Service.Authentication\Fast.Admin.Service.Authentication.csproj", "{50C18448-FC27-42E2-BBD3-1F8BF4C83800}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{36DABD09-A167-4CE7-A6C4-2F301D850E6D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04_Application", "04_Application", "{36DABD09-A167-4CE7-A6C4-2F301D850E6D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Application.Authentication", "Application\Fast.Admin.Application.Authentication\Fast.Admin.Application.Authentication.csproj", "{8FA275E2-44FB-4C04-9ACB-D1245B707996}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Admin.Service.Tenant", "Service\Fast.Admin.Service.Tenant\Fast.Admin.Service.Tenant.csproj", "{5AE8E394-92DA-4DFA-BFE6-F7C66AD84758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Service.Tenant", "Service\Fast.Admin.Service.Tenant\Fast.Admin.Service.Tenant.csproj", "{5AE8E394-92DA-4DFA-BFE6-F7C66AD84758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Admin.Application.Tenant", "Application\Fast.Admin.Application.Tenant\Fast.Admin.Application.Tenant.csproj", "{1CA622AA-56FF-43D3-BBC3-5BFD8C59A9B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Application.Tenant", "Application\Fast.Admin.Application.Tenant\Fast.Admin.Application.Tenant.csproj", "{1CA622AA-56FF-43D3-BBC3-5BFD8C59A9B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fast.Admin.Application.System", "Application\Fast.Admin.Application.System\Fast.Admin.Application.System.csproj", "{A8CF4075-0145-4072-A2DC-D9A737C09203}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fast.Admin.Application.System", "Application\Fast.Admin.Application.System\Fast.Admin.Application.System.csproj", "{A8CF4075-0145-4072-A2DC-D9A737C09203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -16,7 +16,6 @@ using Fast.Admin.Core.Constants;
 using Fast.Admin.Core.Entity.System.Database;
 using Fast.Admin.Core.Enum.Common;
 using Fast.Admin.Core.Enum.Db;
-using Fast.SqlSugar.Commons;
 using Fast.SqlSugar.Options;
 using Mapster;
 using Microsoft.Extensions.Logging;

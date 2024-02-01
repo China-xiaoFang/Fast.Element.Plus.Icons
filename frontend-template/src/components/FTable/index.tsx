@@ -26,7 +26,7 @@ export default defineComponent({
             default: true
         },
         requestApi: {
-            type: Function as PropType<(params: PageInput | any) => Promise<ApiPromise<PageResult<any>> | Promise<any>>>,
+            type: Function as PropType<(params: PagedInput | any) => Promise<ApiPromise<PagedResult<any>> | Promise<any>>>,
             require: false
         },
         dataCallback: {
@@ -38,7 +38,7 @@ export default defineComponent({
             default: true,
         },
         initParam: {
-            type: Object as PropType<PageInput | any>,
+            type: Object as PropType<PagedInput | any>,
             default: {},
         },
         searchFormColumns: {
@@ -301,7 +301,7 @@ export default defineComponent({
                 orgColumn = column;
             }
             const enField = orgColumn?.sortableField ?? orgColumn?.prop ?? orgColumn?.property;
-            const fieldIndex = state.searchParam.sortList.findIndex((f: PageSortInput) => f.enField === enField);
+            const fieldIndex = state.searchParam.sortList.findIndex((f: PagedSortInput) => f.enField === enField);
             if (!column.multiOrder) {
                 // 如果是空的，删除排序
                 state.searchParam.sortList.splice(fieldIndex, 1);
@@ -406,13 +406,13 @@ export default defineComponent({
                     let pageData: never[];
                     // 解析 API 接口返回的分页数据（如果有分页更新分页信息）
                     if (props.pagination) {
-                        let pageResult = apiResult.data as PageResult<never>;
-                        pageData = pageResult.rows;
+                        let PagedResult = apiResult.data as PagedResult<never>;
+                        pageData = PagedResult.rows;
                         // 更新分页信息
                         Object.assign(state.tablePagination, {
-                            pageIndex: pageResult.pageIndex,
-                            pageSize: pageResult.pageSize,
-                            totalRows: pageResult.totalRows
+                            pageIndex: PagedResult.pageIndex,
+                            pageSize: PagedResult.pageSize,
+                            totalRows: PagedResult.totalRows
                         });
                     } else {
                         pageData = apiResult.data as never[];

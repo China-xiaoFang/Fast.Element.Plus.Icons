@@ -12,30 +12,39 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.Admin.Core.Enum.System;
+using Fast.Admin.Entity.System.Menu;
+using Fast.SqlSugar.IBaseEntities;
+
+namespace Fast.Admin.Entity.System.Api;
 
 /// <summary>
-/// 模块查看类型枚举
+/// 系统接口按钮表Model类
 /// </summary>
-[FastEnum("模块查看类型枚举")]
-public enum ModuleViewTypeEnum
+[SugarTable("Sys_Api_Button", "系统接口按钮表")]
+[SugarDbType]
+public class SysApiButtonModel : IDatabaseEntity
 {
     /// <summary>
-    /// 超级管理员
+    /// 接口Id
     /// </summary>
-    [Description("超级管理员")]
-    SuperAdmin = 1,
+    [SugarColumn(ColumnDescription = "接口Id", IsNullable = false)]
+    public long ApiId { get; set; }
 
     /// <summary>
-    /// 系统管理员
-    /// 只有超级管理员和管理员可以查看
+    /// 按钮Id
     /// </summary>
-    [Description("系统管理员")]
-    SystemAdmin = 2,
+    [SugarColumn(ColumnDescription = "按钮Id", IsNullable = false)]
+    public long ButtonId { get; set; }
 
     /// <summary>
-    /// 全部
+    /// 系统接口信息
     /// </summary>
-    [Description("全部")]
-    All = 3
+    [Navigate(NavigateType.OneToOne, nameof(ApiId), nameof(SysApiInfoModel.Id))]
+    public SysApiInfoModel SysApiInfo { get; set; }
+
+    /// <summary>
+    /// 系统按钮信息
+    /// </summary>
+    [Navigate(NavigateType.OneToOne, nameof(ButtonId), nameof(SysButtonModel.Id))]
+    public SysButtonModel SysButton { get; set; }
 }

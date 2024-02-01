@@ -150,7 +150,7 @@ export function dateTimeFix(date: string | Date | null | undefined) {
  * @param order
  * @returns
  */
-export function arrayDynamicSort(sortList: PageSortInput[]): (a: any, b: any) => number {
+export function arrayDynamicSort(sortList: PagedSortInput[]): (a: any, b: any) => number {
     return function (a: any, b: any) {
         if (sortList && sortList.length > 0) {
             for (let condition of sortList) {

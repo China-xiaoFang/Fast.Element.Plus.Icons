@@ -274,12 +274,6 @@
             只有超级管理员和管理员可以查看
             </summary>
         </member>
-        <member name="F:Fast.Admin.Core.Enum.System.ModuleViewTypeEnum.Admin">
-            <summary>
-            管理员
-            只要是管理员都可以查看
-            </summary>
-        </member>
         <member name="F:Fast.Admin.Core.Enum.System.ModuleViewTypeEnum.All">
             <summary>
             全部

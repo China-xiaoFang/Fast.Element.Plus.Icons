@@ -4,6 +4,31 @@
         <name>Fast.Admin.Entity.System</name>
     </assembly>
     <members>
+        <member name="T:Fast.Admin.Entity.System.Api.SysApiButtonModel">
+            <summary>
+            系统接口按钮表Model类
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiButtonModel.ApiId">
+            <summary>
+            接口Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiButtonModel.ButtonId">
+            <summary>
+            按钮Id
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiButtonModel.SysApiInfo">
+            <summary>
+            系统接口信息
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiButtonModel.SysButton">
+            <summary>
+            系统按钮信息
+            </summary>
+        </member>
         <member name="T:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel">
             <summary>
             系统接口分组信息表Model类
@@ -22,6 +47,11 @@
         <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.Description">
             <summary>
             分组描述
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiGroupInfoModel.SysApiInfoList">
+            <summary>
+            系统接口信息
             </summary>
         </member>
         <member name="T:Fast.Admin.Entity.System.Api.SysApiInfoModel">
@@ -59,9 +89,14 @@
             接口操作方式
             </summary>
         </member>
-        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.AuthButtonCodeList">
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.SysApiGroupInfo">
             <summary>
-            鉴权按钮编码集合
+            系统接口分组信息
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Api.SysApiInfoModel.SysButtonApiList">
+            <summary>
+            系统接口按钮权限集合
             </summary>
         </member>
         <member name="T:Fast.Admin.Entity.System.Config.SysConfigModel">
@@ -197,11 +232,6 @@
         <member name="P:Fast.Admin.Entity.System.Menu.SysButtonModel.MenuId">
             <summary>
             菜单Id
-            </summary>
-        </member>
-        <member name="P:Fast.Admin.Entity.System.Menu.SysButtonModel.ApiId">
-            <summary>
-            接口Id
             </summary>
         </member>
         <member name="P:Fast.Admin.Entity.System.Menu.SysButtonModel.Sort">

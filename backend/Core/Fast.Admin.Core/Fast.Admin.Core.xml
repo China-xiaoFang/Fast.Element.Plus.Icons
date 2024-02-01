@@ -617,7 +617,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Fast.Admin.Core.Handlers.SqlSugarEntityHandler.GetConnectionSettings``1(SqlSugar.ISqlSugarClient,Fast.SqlSugar.Attributes.SugarDbTypeAttribute,System.Type)">
+        <member name="M:Fast.Admin.Core.Handlers.SqlSugarEntityHandler.GetConnectionSettings``1(SqlSugar.ISqlSugarClient,Fast.SqlSugar.SugarDbTypeAttribute,System.Type)">
             <summary>根据实体类型获取连接字符串</summary>
             <typeparam name="TEntity"></typeparam>
             <param name="sqlSugarClient"><see cref="T:SqlSugar.ISqlSugarClient" /> 默认库SqlSugar客户端</param>
@@ -697,6 +697,31 @@
         <member name="M:Fast.Admin.Core.Handlers.SqlSugarEntityHandler.IsAdmin">
             <summary>是否为管理员</summary>
             <returns></returns>
+        </member>
+        <member name="T:Fast.Admin.Core.Outputs.ElSelectorOutput">
+            <summary>
+            <see cref="T:Fast.Admin.Core.Outputs.ElSelectorOutput"/> Element-Plus 下拉框通用输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Label">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Data">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Children">
+            <summary>
+            子节点
+            </summary>
         </member>
         <member name="T:Fast.Admin.Core.Providers.UnifyResponseProvider">
             <summary>

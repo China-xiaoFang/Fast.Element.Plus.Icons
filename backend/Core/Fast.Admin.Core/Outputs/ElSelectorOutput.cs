@@ -12,30 +12,30 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
-namespace Fast.Admin.Core.Enum.System;
+namespace Fast.Admin.Core.Outputs;
 
 /// <summary>
-/// 模块查看类型枚举
+/// <see cref="ElSelectorOutput"/> Element-Plus 下拉框通用输出
 /// </summary>
-[FastEnum("模块查看类型枚举")]
-public enum ModuleViewTypeEnum
+public class ElSelectorOutput
 {
     /// <summary>
-    /// 超级管理员
+    /// 显示
     /// </summary>
-    [Description("超级管理员")]
-    SuperAdmin = 1,
+    public string Label { get; set; }
 
     /// <summary>
-    /// 系统管理员
-    /// 只有超级管理员和管理员可以查看
+    /// 值
     /// </summary>
-    [Description("系统管理员")]
-    SystemAdmin = 2,
+    public dynamic Value { get; set; }
 
     /// <summary>
-    /// 全部
+    /// 附加数据
     /// </summary>
-    [Description("全部")]
-    All = 3
+    public object Data { get; set; }
+
+    /// <summary>
+    /// 子节点
+    /// </summary>
+    public List<ElSelectorOutput> Children { get; set; }
 }

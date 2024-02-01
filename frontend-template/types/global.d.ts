@@ -75,111 +75,111 @@ type ApiPromise<T = any> = Promise<ApiResponse<T>>;
 
 /**
  * 分页返回结果
- * @interface PageResult
+ * @interface PagedResult
  */
-interface PageResult<T = any> {
+interface PagedResult<T = any> {
     /**
      * 当前页
      * @type {number}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     pageIndex: number;
     /**
      * 当前页码
      * @type {number}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     pageSize: number;
     /**
      * 总页数
      * @type {number}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     totalPage?: number;
     /**
      * 总条数
      * @type {number}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     totalRows: number;
     /**
      * Data
      * @type {Array<T>}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     rows?: Array<T> | null;
     /**
      * 是否有上一页
      * @type {boolean}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     hasPrevPages?: boolean;
     /**
      * 是否有下一页
      * @type {boolean}
-     * @memberof PageResult
+     * @memberof PagedResult
      */
     hasNextPages?: boolean;
 }
 
 /**
  * 通用分页排序
- * @interface PageSortInput
+ * @interface PagedSortInput
  */
-interface PageSortInput {
+interface PagedSortInput {
     /**
      * 排序字段英文
      * @type {string}
-     * @memberof PageSortInput
+     * @memberof PagedSortInput
      */
     enField?: string | null;
     /**
      * 排序字段中文
      * @type {string}
-     * @memberof PageSortInput
+     * @memberof PagedSortInput
      */
     cnField?: string | null;
     /**
      * 排序方法
      * @type {string}
-     * @memberof PageSortInput
+     * @memberof PagedSortInput
      */
     mode?: "ascending" | "descending" | null;
 }
 
 /**
  * 通用搜索输入
- * @interface PageInput
+ * @interface PagedInput
  */
-interface PageInput {
+interface PagedInput {
     /**
      * 当前页面索引值，默认为1
      * @type {number}
-     * @memberof PageInput
+     * @memberof PagedInput
      */
     pageIndex?: number;
     /**
      * 页码容量
      * @type {number}
-     * @memberof PageInput
+     * @memberof PagedInput
      */
     pageSize?: number;
     /**
      * 搜索值
      * @type {string}
-     * @memberof PageInput
+     * @memberof PagedInput
      */
     searchValue?: string;
     /**
      * 搜索时间
      * @type {Array<Date>}
-     * @memberof PageInput
+     * @memberof PagedInput
      */
     searchTimeList?: Array<Date>;
     /**
      * 排序集合
-     * @type {Array<PageSortInput>}
-     * @memberof PageInput
+     * @type {Array<PagedSortInput>}
+     * @memberof PagedInput
      */
-    sortList?: Array<PageSortInput>;
+    pageSortList?: Array<PagedSortInput>;
 }
