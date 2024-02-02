@@ -169,17 +169,23 @@ interface PagedInput {
      * @type {string}
      * @memberof PagedInput
      */
-    searchValue?: string;
+    searchValue?: string | null;
     /**
      * 搜索时间
      * @type {Array<Date>}
      * @memberof PagedInput
      */
-    searchTimeList?: Array<Date>;
+    searchTimeList?: Array<Date> | null;
     /**
      * 排序集合
      * @type {Array<PagedSortInput>}
      * @memberof PagedInput
      */
-    pageSortList?: Array<PagedSortInput>;
+    pageSortList?: Array<PagedSortInput> | null;
+    /**
+     * 启用分页
+     * @type {boolean}
+     * @memberof PagedInput
+     */
+    enablePaged?: boolean;
 }

@@ -5,11 +5,6 @@
  */
 export enum AdminTypeEnum {
     /**
-     * 系统默认账号
-     * @memberof AdminTypeEnum
-     */
-    Default = 0,
-    /**
      * 超级管理员
      * @memberof AdminTypeEnum
      */
@@ -20,13 +15,8 @@ export enum AdminTypeEnum {
      */
     SystemAdmin = 2,
     /**
-     * 租户管理员
-     * @memberof AdminTypeEnum
-     */
-    TenantAdmin = 3,
-    /**
      * 普通账号
      * @memberof AdminTypeEnum
      */
-    None = 4,
+    None = 3,
 }

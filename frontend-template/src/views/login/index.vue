@@ -78,7 +78,7 @@ import { editDefaultLang } from "@/lang";
 import { Md5 } from "ts-md5";
 import { Local } from "@/utils/storage";
 import * as loginApi from "@/api/login";
-import { LoginMethodEnum } from "@/api/modules/login-method-enum";
+import { LoginMethodEnum } from "@/api/modules";
 import AccountForm from "./modules/account.vue";
 import MobileForm from "./modules/mobile.vue";
 import EmailForm from "./modules/email.vue";
@@ -277,3 +277,4 @@ const handleRowDblclick = (row: any, column: any, event: MouseEvent) => {
     }
 }
 </style>
+@/api/modules/enums/login-method-enum

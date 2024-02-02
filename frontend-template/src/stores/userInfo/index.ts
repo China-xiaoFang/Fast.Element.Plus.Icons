@@ -14,24 +14,38 @@ export const useUserInfo = defineStore("userInfo", {
             token: "",
             // Refresh Token
             refreshToken: "",
-            // 是否为超级管理员
-            supperAdmin: false,
-            // 是否为管理员
-            admin: false,
-            // 租户编号
-            tenantNo: "",
-            // 用户名称
-            userName: "",
-            // 用户昵称
-            nickName: "",
-            // 用户工号
-            jobNumber: "",
-            // 头像
-            avatar: "",
-            // 最后登录时间
-            lastLoginTime: null,
             // 动态生成路由
             asyncRouterGen: false,
+            tenantId: null,
+            tenantNo: null,
+            userId: null,
+            account: null,
+            jobNumber: null,
+            userName: null,
+            nickName: null,
+            avatar: null,
+            birthday: null,
+            sex: null,
+            email: null,
+            mobile: null,
+            tel: null,
+            departmentId: null,
+            departmentName: null,
+            isSuperAdmin: null,
+            isSystemAdmin: null,
+            lastLoginDevice: null,
+            lastLoginOS: null,
+            lastLoginBrowser: null,
+            lastLoginProvince: null,
+            lastLoginCity: null,
+            lastLoginIp: null,
+            lastLoginTime: null,
+            appEnvironment: null,
+            appOrigin: null,
+            roleNameList: null,
+            buttonCodeList: null,
+            moduleList: null,
+            menuList: null,
         };
     },
     actions: {
@@ -109,10 +123,7 @@ export const useUserInfo = defineStore("userInfo", {
         async refreshUserInfo() {
             const userInfo = await authApi.getLoginUserInfo();
             if (userInfo.success) {
-                (this.tenantNo = userInfo.data.tenantNo), (this.userName = userInfo.data.userName);
-                this.nickName = userInfo.data.nickName;
-                (this.jobNumber = userInfo.data.jobNumber), (this.avatar = userInfo.data.avatar);
-                this.lastLoginTime = userInfo.data.lastLoginTime;
+                this.$state = { ...this.$state, ...userInfo.data };
             } else {
                 throw new Error(userInfo.message);
             }

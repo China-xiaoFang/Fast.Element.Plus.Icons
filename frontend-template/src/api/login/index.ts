@@ -8,7 +8,7 @@ import { LoginInput, LoginOutput, TenantLoginInput } from "@/api/modules";
  */
 export const login = (input: LoginInput) => {
     return axios<LoginOutput>({
-        url: "login",
+        url: "/login",
         method: "post",
         data: input,
     });
@@ -21,7 +21,7 @@ export const login = (input: LoginInput) => {
  */
 export const tenantLogin = (input: TenantLoginInput) => {
     return axios({
-        url: "tenantLogin",
+        url: "/tenantLogin",
         method: "post",
         data: input,
     });
@@ -33,7 +33,7 @@ export const tenantLogin = (input: TenantLoginInput) => {
  */
 export const logout = () => {
     return axios({
-        url: "logout",
+        url: "/logout",
         method: "post",
     });
 };

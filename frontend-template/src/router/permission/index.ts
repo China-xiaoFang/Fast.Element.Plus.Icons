@@ -134,6 +134,8 @@ router.beforeEach(async (to, from, next) => {
                     // 刷新用户信息
                     await userInfoStore.refreshUserInfo();
 
+                    debugger;
+
                     // TODO：动态添加路由
 
                     // 确保路由添加完成

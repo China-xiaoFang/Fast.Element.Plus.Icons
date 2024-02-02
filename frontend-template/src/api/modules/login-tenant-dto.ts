@@ -1,4 +1,4 @@
-import { AdminTypeEnum } from "./admin-type-enum";
+import { AdminTypeEnum } from "./enums/admin-type-enum";
 
 /**
  *
@@ -115,5 +115,5 @@ export interface LoginTenantDto {
      * @type {string}
      * @memberof LoginTenantDto
      */
-    chShortName?: string | null;
+    chName?: string | null;
 }

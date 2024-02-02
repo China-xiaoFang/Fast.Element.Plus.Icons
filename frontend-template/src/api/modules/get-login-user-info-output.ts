@@ -1,22 +1,41 @@
-import { AdminTypeEnum } from "./admin-type-enum";
-import { GenderEnum } from "./gender-enum";
+import { AppEnvironmentEnum } from "./enums/app-environment-enum";
+import { GenderEnum } from "./enums/gender-enum";
+import { GetLoginMenuInfoDto } from "./get-login-menu-info-dto";
+import { GetLoginModuleInfoDto } from "./get-login-module-info-dto";
 
 /**
- * Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput 获取登录用户信息
+ * Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput 获取登录用户信息输出
  *
  * @export
  * @interface GetLoginUserInfoOutput
  */
 export interface GetLoginUserInfoOutput {
     /**
+     * 租户Id
+     *
+     * @type {number}
+     * @memberof GetLoginUserInfoOutput
+     */
+    tenantId?: number;
+
+    /**
      * 租户编号
+     *
      * @type {string}
      * @memberof GetLoginUserInfoOutput
      */
-    tenantNo: string;
+    tenantNo?: string | null;
 
     /**
-     * 账号
+     * 用户Id
+     *
+     * @type {number}
+     * @memberof GetLoginUserInfoOutput
+     */
+    userId?: number;
+
+    /**
+     * 用户账号
      *
      * @type {string}
      * @memberof GetLoginUserInfoOutput
@@ -24,7 +43,7 @@ export interface GetLoginUserInfoOutput {
     account?: string | null;
 
     /**
-     * 工号
+     * 用户工号
      *
      * @type {string}
      * @memberof GetLoginUserInfoOutput
@@ -32,7 +51,7 @@ export interface GetLoginUserInfoOutput {
     jobNumber?: string | null;
 
     /**
-     * 姓名
+     * 用户名称
      *
      * @type {string}
      * @memberof GetLoginUserInfoOutput
@@ -94,7 +113,7 @@ export interface GetLoginUserInfoOutput {
     tel?: string | null;
 
     /**
-     * 主部门Id
+     * 部门Id
      *
      * @type {number}
      * @memberof GetLoginUserInfoOutput
@@ -102,7 +121,7 @@ export interface GetLoginUserInfoOutput {
     departmentId?: number;
 
     /**
-     * 主部门名称
+     * 部门名称
      *
      * @type {string}
      * @memberof GetLoginUserInfoOutput
@@ -110,10 +129,20 @@ export interface GetLoginUserInfoOutput {
     departmentName?: string | null;
 
     /**
-     * @type {AdminTypeEnum}
+     * 是否超级管理员
+     *
+     * @type {boolean}
      * @memberof GetLoginUserInfoOutput
      */
-    adminType?: AdminTypeEnum;
+    isSuperAdmin?: boolean;
+
+    /**
+     * 是否系统管理员
+     *
+     * @type {boolean}
+     * @memberof GetLoginUserInfoOutput
+     */
+    isSystemAdmin?: boolean;
 
     /**
      * 最后登录设备
@@ -170,4 +199,50 @@ export interface GetLoginUserInfoOutput {
      * @memberof GetLoginUserInfoOutput
      */
     lastLoginTime?: Date | null;
+
+    /**
+     * @type {AppEnvironmentEnum}
+     * @memberof GetLoginUserInfoOutput
+     */
+    appEnvironment?: AppEnvironmentEnum;
+
+    /**
+     * App来源
+     *
+     * @type {string}
+     * @memberof GetLoginUserInfoOutput
+     */
+    appOrigin?: string | null;
+
+    /**
+     * 角色名称集合
+     *
+     * @type {Array<string>}
+     * @memberof GetLoginUserInfoOutput
+     */
+    roleNameList?: Array<string> | null;
+
+    /**
+     * 按钮编码集合
+     *
+     * @type {Array<string>}
+     * @memberof GetLoginUserInfoOutput
+     */
+    buttonCodeList?: Array<string> | null;
+
+    /**
+     * 模块集合
+     *
+     * @type {Array<GetLoginModuleInfoDto>}
+     * @memberof GetLoginUserInfoOutput
+     */
+    moduleList?: Array<GetLoginModuleInfoDto> | null;
+
+    /**
+     * 菜单集合
+     *
+     * @type {Array<GetLoginMenuInfoDto>}
+     * @memberof GetLoginUserInfoOutput
+     */
+    menuList?: Array<GetLoginMenuInfoDto> | null;
 }

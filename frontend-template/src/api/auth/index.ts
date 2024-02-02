@@ -7,7 +7,7 @@ import { GetLoginUserInfoOutput } from "@/api/modules";
  */
 export const getLoginUserInfo = () => {
     return axios<GetLoginUserInfoOutput>({
-        url: "getLoginUserInfo",
+        url: "/getLoginUserInfo",
         method: "get",
     });
 };
