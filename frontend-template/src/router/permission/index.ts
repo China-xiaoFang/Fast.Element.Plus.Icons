@@ -11,6 +11,7 @@ import { useConfig } from "@/stores/config";
 import { useUserInfo } from "@/stores/userInfo";
 import { getUrlParams, genNonceStr, getGreet } from "@/utils";
 import { i18n } from "@/lang";
+import { GetLoginMenuInfoDto, MenuTypeEnum } from "@/api/modules";
 
 const modules = import.meta.glob("/src/views/**/**.vue");
 
@@ -53,6 +54,38 @@ const loadComponentName = (name: string) => {
     } else {
         return genNonceStr(8);
     }
+};
+
+/**
+ * 扁平化路由
+ * @param menuList
+ * @returns
+ */
+const flatteningMenu = (menuList: GetLoginMenuInfoDto[]): RouteRecordRaw[] => {
+    let routeList: RouteRecordRaw[] = [];
+
+    menuList.map((item) => {
+        if (item.menuType == MenuTypeEnum.Menu || item.menuType == MenuTypeEnum.Internal) {
+            routeList.push({
+                path: item.router,
+                // 这里由于 keep-alive 必须设置 name 的问题，所以根据组件的地址，生成固定的 name，需要在每个页面增加 name，不然 keep-alive 会失效
+                name: loadComponentName(item.menuName),
+                component: loadComponent(item.component),
+                meta: {
+                    keepAlive: true,
+                    title: item.menuTitle,
+                    addTab: true,
+                    affix: false,
+                    authForbidView: true,
+                },
+            });
+        }
+
+        // 判断是否存在子节点
+        if (item.children && item.children.length > 0) {
+            routeList.push(flatteningMenu(item.children));
+        }
+    });
 };
 
 /** 白名单路由Path集合 */

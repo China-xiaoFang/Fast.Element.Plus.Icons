@@ -22,12 +22,11 @@ declare module "vue-router" {
         authForbidView?: boolean;
         /**
          * 路由类型
-         * @description 可选值 "module" | "tab" | "iframe"
-         * @description "module" 模块
+         * @description 可选值 "tab" | "iframe"
          * @description "tab" 标签，也就是实际的路由页面
          * @description "iframe" iframe 页面
          */
-        type?: string;
+        type?: "tab" | "iframe";
     };
     export default RouteMeta;
 }
