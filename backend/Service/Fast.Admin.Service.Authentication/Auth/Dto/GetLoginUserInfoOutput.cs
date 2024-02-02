@@ -12,115 +12,168 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using System.Collections;
+using System.Text.Json.Serialization;
+using Fast.Admin.Core.Authentication.Dto;
+using Fast.Admin.Core.Enum.Menus;
+
 namespace Fast.Admin.Service.Authentication.Auth.Dto;
 
 /// <summary>
-/// <see cref="GetLoginUserInfoOutput"/> 获取登录用户信息
+/// <see cref="GetLoginUserInfoOutput"/> 获取登录用户信息输出
 /// </summary>
-public class GetLoginUserInfoOutput
+public class GetLoginUserInfoOutput : AuthUserInfo
 {
     /// <summary>
-    /// 工号
+    /// 角色Id集合
     /// </summary>
-    public string TenantNo { get; set; }
+    [JsonIgnore]
+    public override List<long> RoleIdList { get; set; }
 
     /// <summary>
-    /// 账号
+    /// 菜单编码集合
     /// </summary>
-    public string Account { get; set; }
+    [JsonIgnore]
+    public override List<string> MenuCodeList { get; set; }
 
     /// <summary>
-    /// 工号
+    /// 模块集合
     /// </summary>
-    public string JobNumber { get; set; }
+    public List<GetLoginModuleInfoDto> ModuleList { get; set; }
 
     /// <summary>
-    /// 姓名
+    /// 菜单集合
     /// </summary>
-    public string UserName { get; set; }
+    public List<GetLoginMenuInfoDto> MenuList { get; set; }
 
     /// <summary>
-    /// 昵称
+    /// <see cref="GetLoginModuleInfoDto"/> 获取登录模块信息
     /// </summary>
-    public string NickName { get; set; }
+    public class GetLoginModuleInfoDto
+    {
+        /// <summary>
+        /// 模块Id
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// 模块名称
+        /// </summary>
+        public string ModuleName { get; set; }
+
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 是否为默认打开的
+        /// <remarks>只能存在一个</remarks>
+        /// </summary>
+        public YesOrNotEnum IsDefault { get; set; }
+    }
 
     /// <summary>
-    /// 头像
+    /// <see cref="GetLoginMenuInfoDto"/> 获取登录菜单信息
     /// </summary>
-    public string Avatar { get; set; }
+    public class GetLoginMenuInfoDto : ITreeNode<long>
+    {
+        /// <summary>
+        /// 菜单Id
+        /// </summary>
+        public long Id { get; set; }
 
-    /// <summary>
-    /// 生日
-    /// </summary>
-    public DateTime? Birthday { get; set; }
+        /// <summary>
+        /// 菜单编码
+        /// </summary>
+        public string MenuCode { get; set; }
 
-    /// <summary>
-    /// 性别
-    /// </summary>
-    public GenderEnum Sex { get; set; }
+        /// <summary>
+        /// 菜单名称
+        /// </summary>
+        public string MenuName { get; set; }
 
-    /// <summary>
-    /// 邮箱
-    /// </summary>
-    public string Email { get; set; }
+        /// <summary>
+        /// 菜单标题
+        /// </summary>
+        public string MenuTitle { get; set; }
 
-    /// <summary>
-    /// 手机
-    /// </summary>
-    public string Mobile { get; set; }
+        /// <summary>
+        /// 父级Id
+        /// </summary>
+        public long ParentId { get; set; }
 
-    /// <summary>
-    /// 电话
-    /// </summary>
-    public string Tel { get; set; }
+        /// <summary>
+        /// 模块Id
+        /// </summary>
+        public long ModuleId { get; set; }
 
-    /// <summary>
-    /// 主部门Id
-    /// </summary>
-    public long DepartmentId { get; set; }
+        /// <summary>
+        /// 菜单类型
+        /// </summary>
+        public MenuTypeEnum MenuType { get; set; }
 
-    /// <summary>
-    /// 主部门名称
-    /// </summary>
-    public string DepartmentName { get; set; }
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
 
-    /// <summary>
-    /// 管理员类型
-    /// </summary>
-    public AdminTypeEnum AdminType { get; set; }
+        /// <summary>
+        /// 路由地址
+        /// </summary>
+        public string Router { get; set; }
 
-    /// <summary>
-    /// 最后登录设备
-    /// </summary>
-    public string LastLoginDevice { get; set; }
+        /// <summary>
+        /// 组件地址
+        /// </summary>
+        public string Component { get; set; }
 
-    /// <summary>
-    /// 最后登录操作系统（版本）
-    /// </summary>
-    public string LastLoginOS { get; set; }
+        /// <summary>
+        /// 内链/外链地址
+        /// </summary>
+        public string Link { get; set; }
 
-    /// <summary>
-    /// 最后登录浏览器（版本）
-    /// </summary>
-    public string LastLoginBrowser { get; set; }
+        /// <summary>
+        /// 是否显示
+        /// </summary>
+        public YesOrNotEnum Visible { get; set; }
 
-    /// <summary>
-    /// 最后登录省份
-    /// </summary>
-    public string LastLoginProvince { get; set; }
+        /// <summary>
+        /// 子节点
+        /// </summary>
+        public List<GetLoginMenuInfoDto> Children { get; set; }
 
-    /// <summary>
-    /// 最后登录城市
-    /// </summary>
-    public string LastLoginCity { get; set; }
+        /// <summary>获取节点id</summary>
+        /// <returns></returns>
+        public long GetId()
+        {
+            return Id;
+        }
 
-    /// <summary>
-    /// 最后登录Ip
-    /// </summary>
-    public string LastLoginIp { get; set; }
+        /// <summary>获取节点父id</summary>
+        /// <returns></returns>
+        public long GetPid()
+        {
+            return ParentId;
+        }
 
-    /// <summary>
-    /// 最后登录时间
-    /// </summary>
-    public DateTime? LastLoginTime { get; set; }
+        /// <summary>获取排序字段</summary>
+        /// <returns></returns>
+        public long Sort()
+        {
+            return 0;
+        }
+
+        /// <summary>设置Children</summary>
+        /// <param name="children"></param>
+        public void SetChildren(IList children)
+        {
+            Children = (List<GetLoginMenuInfoDto>) children;
+        }
+    }
 }

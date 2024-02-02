@@ -35,6 +35,13 @@ public class SysModuleModel : BaseEntity
     public ModuleViewTypeEnum ViewType { get; set; }
 
     /// <summary>
+    /// 是否为默认打开的
+    /// <remarks>只能存在一个</remarks>
+    /// </summary>
+    [SugarColumn(ColumnDescription = "是否为默认打开的", ColumnDataType = "tinyint", IsNullable = false)]
+    public YesOrNotEnum IsDefault { get; set; }
+
+    /// <summary>
     /// 是否为系统模块
     /// </summary>
     [SugarColumn(ColumnDescription = "是否为系统模块", ColumnDataType = "tinyint", IsNullable = false)]

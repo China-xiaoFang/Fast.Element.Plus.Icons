@@ -54,7 +54,8 @@ public class SysApiGroupInfoApplication : IDynamicApplication
     /// 刷新接口分组和接口信息
     /// </summary>
     /// <returns></returns>
-    [HttpPost("/sysApiGroupInfo/refresh", "SysApiInfo:Manage"), ApiInfo("刷新接口分组和接口信息", HttpRequestActionEnum.BatchUpdate)]
+    [HttpPost("/sysApiGroupInfo/refresh", "SysApiInfo:Paged", "SysApiInfo:Manage"),
+     ApiInfo("刷新接口分组和接口信息", HttpRequestActionEnum.BatchUpdate)]
     public async Task Refresh()
     {
         await _sysApiGroupInfoService.Refresh();

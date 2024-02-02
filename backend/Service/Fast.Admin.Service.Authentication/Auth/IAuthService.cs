@@ -25,6 +25,5 @@ public interface IAuthService
     /// 获取登录用户信息
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="UserFriendlyException"></exception>
     Task<GetLoginUserInfoOutput> GetLoginUserInfo();
 }

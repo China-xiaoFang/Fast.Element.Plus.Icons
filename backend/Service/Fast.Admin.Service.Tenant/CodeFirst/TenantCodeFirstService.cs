@@ -1,18 +1,11 @@
-﻿using Fast.Admin.Core.Constants;
-using Fast.Admin.Core.Entity.System.Account;
+﻿using Fast.Admin.Core.Entity.System.Account;
 using Fast.Admin.Core.Entity.System.Database;
 using Fast.Admin.Core.Entity.System.Tenant;
-using Fast.Admin.Core.Enum.Common;
 using Fast.Admin.Core.Enum.Db;
-using Fast.Admin.Core.Enum.System;
 using Fast.Admin.Entity.Tenant.Organization;
-using Fast.DependencyInjection;
-using Fast.IaaS;
-using Fast.SqlSugar;
 using Fast.SqlSugar.Extensions;
 using Fast.SqlSugar.Options;
 using Mapster;
-using SqlSugar;
 using Yitter.IdGenerator;
 
 namespace Fast.Admin.Service.Tenant.CodeFirst;

@@ -41,6 +41,7 @@ internal class SysMenuDataSource
             Color = "#9933FA",
             Icon = "local-logo",
             ViewType = ModuleViewTypeEnum.SuperAdmin,
+            IsDefault = YesOrNotEnum.Y,
             IsSystem = YesOrNotEnum.Y,
             Sort = 999,
             Status = CommonStatusEnum.Enable
@@ -50,6 +51,7 @@ internal class SysMenuDataSource
         var sysMenu1_1 = new SysMenuModel
         {
             Id = YitIdHelper.NextId(),
+            MenuCode = null,
             MenuName = "接口管理",
             MenuTitle = "",
             ParentId = 0,
@@ -62,13 +64,14 @@ internal class SysMenuDataSource
             Visible = YesOrNotEnum.Y,
             IsSystem = YesOrNotEnum.Y,
             Sort = 999,
-            Status = CommonStatusEnum.Enable
+            Status = CommonStatusEnum.Enable,
         };
         sysMenuList.Add(sysMenu1_1);
 
         var sysMenu1_2 = new SysMenuModel
         {
             Id = YitIdHelper.NextId(),
+            MenuCode = "SysApiInfo:Paged",
             MenuName = "系统接口",
             MenuTitle = "系统接口",
             ParentId = sysMenu1_1.Id,
@@ -88,26 +91,17 @@ internal class SysMenuDataSource
         var sysButton1_2_1 = new SysButtonModel
         {
             Id = YitIdHelper.NextId(),
-            ButtonCode = "SysApiInfo:Paged",
-            ButtonName = "系统接口查询",
+            ButtonCode = "SysApiInfo:Manage",
+            ButtonName = "系统接口管理",
             MenuId = sysMenu1_2.Id,
             Sort = 997
         };
         sysButtonList.Add(sysButton1_2_1);
 
-        var sysButton1_2_2 = new SysButtonModel
-        {
-            Id = YitIdHelper.NextId(),
-            ButtonCode = "SysApiInfo:Manage",
-            ButtonName = "系统接口管理",
-            MenuId = sysMenu1_2.Id,
-            Sort = 996
-        };
-        sysButtonList.Add(sysButton1_2_2);
-
         var sysMenu1_3 = new SysMenuModel
         {
             Id = YitIdHelper.NextId(),
+            MenuCode = null,
             MenuName = "接口文档",
             MenuTitle = "接口文档",
             ParentId = sysMenu1_1.Id,
@@ -119,7 +113,7 @@ internal class SysMenuDataSource
             Link = "http://127.0.0.1:5001",
             Visible = YesOrNotEnum.Y,
             IsSystem = YesOrNotEnum.Y,
-            Sort = 995,
+            Sort = 996,
             Status = CommonStatusEnum.Enable
         };
         sysMenuList.Add(sysMenu1_3);

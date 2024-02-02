@@ -35,4 +35,10 @@ public class TenUserRoleModel : IDatabaseEntity
     /// </summary>
     [SugarColumn(ColumnDescription = "角色Id", IsNullable = false)]
     public long RoleId { get; set; }
+
+    /// <summary>
+    /// 系统接口分组信息
+    /// </summary>
+    [Navigate(NavigateType.OneToOne, nameof(RoleId), nameof(TenRoleModel.Id))]
+    public TenRoleModel TenRole { get; set; }
 }

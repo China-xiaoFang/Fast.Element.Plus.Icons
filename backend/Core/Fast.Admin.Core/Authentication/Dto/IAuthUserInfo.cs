@@ -12,6 +12,8 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.Admin.Core.Enum.Common;
+
 namespace Fast.Admin.Core.Authentication.Dto;
 
 /// <summary>
@@ -48,6 +50,41 @@ public interface IAuthUserInfo
     /// 用户名称
     /// </summary>
     string UserName { get; set; }
+
+    /// <summary>
+    /// 昵称
+    /// </summary>
+    string NickName { get; set; }
+
+    /// <summary>
+    /// 头像
+    /// </summary>
+    string Avatar { get; set; }
+
+    /// <summary>
+    /// 生日
+    /// </summary>
+    DateTime? Birthday { get; set; }
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    GenderEnum Sex { get; set; }
+
+    /// <summary>
+    /// 邮箱
+    /// </summary>
+    string Email { get; set; }
+
+    /// <summary>
+    /// 手机
+    /// </summary>
+    string Mobile { get; set; }
+
+    /// <summary>
+    /// 电话
+    /// </summary>
+    string Tel { get; set; }
 
     /// <summary>
     /// 部门Id
@@ -113,4 +150,24 @@ public interface IAuthUserInfo
     /// App来源
     /// </summary>
     string AppOrigin { get; set; }
+
+    /// <summary>
+    /// 角色Id集合
+    /// </summary>
+    List<long> RoleIdList { get; set; }
+
+    /// <summary>
+    /// 角色名称集合
+    /// </summary>
+    List<string> RoleNameList { get; set; }
+
+    /// <summary>
+    /// 菜单编码集合
+    /// </summary>
+    List<string> MenuCodeList { get; set; }
+
+    /// <summary>
+    /// 按钮编码集合
+    /// </summary>
+    List<string> ButtonCodeList { get; set; }
 }

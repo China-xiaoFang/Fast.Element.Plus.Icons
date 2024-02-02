@@ -12,6 +12,8 @@
 // 在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
+using Fast.Admin.Core.Enum.Common;
+
 namespace Fast.Admin.Core.Authentication.Dto;
 
 /// <summary>
@@ -48,6 +50,41 @@ public class AuthUserInfo : IAuthUserInfo
     /// 用户名称
     /// </summary>
     public string UserName { get; set; }
+
+    /// <summary>
+    /// 昵称
+    /// </summary>
+    public string NickName { get; set; }
+
+    /// <summary>
+    /// 头像
+    /// </summary>
+    public string Avatar { get; set; }
+
+    /// <summary>
+    /// 生日
+    /// </summary>
+    public DateTime? Birthday { get; set; }
+
+    /// <summary>
+    /// 性别
+    /// </summary>
+    public GenderEnum Sex { get; set; }
+
+    /// <summary>
+    /// 邮箱
+    /// </summary>
+    public string Email { get; set; }
+
+    /// <summary>
+    /// 手机
+    /// </summary>
+    public string Mobile { get; set; }
+
+    /// <summary>
+    /// 电话
+    /// </summary>
+    public string Tel { get; set; }
 
     /// <summary>
     /// 部门Id
@@ -113,4 +150,24 @@ public class AuthUserInfo : IAuthUserInfo
     /// App来源
     /// </summary>
     public string AppOrigin { get; set; }
+
+    /// <summary>
+    /// 角色Id集合
+    /// </summary>
+    public virtual List<long> RoleIdList { get; set; }
+
+    /// <summary>
+    /// 角色名称集合
+    /// </summary>
+    public List<string> RoleNameList { get; set; }
+
+    /// <summary>
+    /// 菜单编码集合
+    /// </summary>
+    public virtual List<string> MenuCodeList { get; set; }
+
+    /// <summary>
+    /// 按钮编码集合
+    /// </summary>
+    public virtual List<string> ButtonCodeList { get; set; }
 }

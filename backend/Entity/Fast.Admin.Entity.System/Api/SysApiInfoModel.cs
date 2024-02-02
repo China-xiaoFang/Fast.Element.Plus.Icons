@@ -18,19 +18,19 @@ public class SysApiInfoModel : BaseEntity
     /// <summary>
     /// 模块名称
     /// </summary>
-    [SugarSearchValue,SugarColumn(ColumnDescription = "模块名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    [SugarSearchValue, SugarColumn(ColumnDescription = "模块名称", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
     public string ModuleName { get; set; }
 
     /// <summary>
     /// 接口地址
     /// </summary>
-    [SugarSearchValue,SugarColumn(ColumnDescription = "接口地址", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
+    [SugarSearchValue, SugarColumn(ColumnDescription = "接口地址", ColumnDataType = "Nvarchar(100)", IsNullable = false)]
     public string Url { get; set; }
 
     /// <summary>
     /// 接口名称
     /// </summary>
-    [SugarSearchValue,SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
+    [SugarSearchValue, SugarColumn(ColumnDescription = "接口名称", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
     public string Name { get; set; }
 
     /// <summary>

@@ -244,6 +244,11 @@
             系统菜单表Model类
             </summary>
         </member>
+        <member name="P:Fast.Admin.Entity.System.Menu.SysMenuModel.MenuCode">
+            <summary>
+            菜单编码
+            </summary>
+        </member>
         <member name="P:Fast.Admin.Entity.System.Menu.SysMenuModel.MenuName">
             <summary>
             菜单名称
@@ -309,6 +314,11 @@
             状态
             </summary>
         </member>
+        <member name="P:Fast.Admin.Entity.System.Menu.SysMenuModel.SysButtonList">
+            <summary>
+            系统菜单集合
+            </summary>
+        </member>
         <member name="T:Fast.Admin.Entity.System.Menu.SysModuleModel">
             <summary>
             系统模块表Model类
@@ -332,6 +342,12 @@
         <member name="P:Fast.Admin.Entity.System.Menu.SysModuleModel.ViewType">
             <summary>
             查看类型
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Entity.System.Menu.SysModuleModel.IsDefault">
+            <summary>
+            是否为默认打开的
+            <remarks>只能存在一个</remarks>
             </summary>
         </member>
         <member name="P:Fast.Admin.Entity.System.Menu.SysModuleModel.IsSystem">

@@ -11,6 +11,12 @@ namespace Fast.Admin.Entity.System.Menu;
 public class SysMenuModel : BaseEntity
 {
     /// <summary>
+    /// 菜单编码
+    /// </summary>
+    [SugarColumn(ColumnDescription = "菜单编码", ColumnDataType = "Nvarchar(100)", IsNullable = true)]
+    public string MenuCode { get; set; }
+
+    /// <summary>
     /// 菜单名称
     /// </summary>
     [SugarColumn(ColumnDescription = "菜单名称", ColumnDataType = "Nvarchar(50)", IsNullable = false)]
@@ -87,4 +93,10 @@ public class SysMenuModel : BaseEntity
     /// </summary>
     [SugarColumn(ColumnDescription = "状态", ColumnDataType = "tinyint", IsNullable = false)]
     public CommonStatusEnum Status { get; set; }
+
+    /// <summary>
+    /// 系统菜单集合
+    /// </summary>
+    [Navigate(NavigateType.OneToMany, nameof(SysButtonModel.MenuId), nameof(Id))]
+    public List<SysButtonModel> SysButtonList { get; set; }
 }

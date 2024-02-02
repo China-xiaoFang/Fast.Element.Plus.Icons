@@ -459,5 +459,10 @@
             角色Id
             </summary>
         </member>
+        <member name="P:Fast.Admin.Entity.Tenant.Organization.TenUserRoleModel.TenRole">
+            <summary>
+            系统接口分组信息
+            </summary>
+        </member>
     </members>
 </doc>

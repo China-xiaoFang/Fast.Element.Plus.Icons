@@ -129,9 +129,15 @@ public sealed class User : AuthUserInfo, IUser, IScopedDependency
                 TenantId = sysTenantAccount.TenantId,
                 TenantNo = sysTenantAccount.SysTenant.TenantNo,
                 UserId = sysTenantAccount.UserId,
-                Account = sysTenantAccount.SysAccount.Account,
+                Mobile = sysTenantAccount.SysAccount.Account,
                 JobNumber = sysTenantAccount.JobNumber,
                 UserName = sysTenantAccount.SysAccount.UserName,
+                NickName = sysTenantAccount.NickName,
+                Avatar = sysTenantAccount.Avatar,
+                Birthday = sysTenantAccount.SysAccount.Birthday,
+                Sex = sysTenantAccount.SysAccount.Sex,
+                Email = sysTenantAccount.SysAccount.Email,
+                Tel = sysTenantAccount.SysAccount.Tel,
                 DepartmentId = sysTenantAccount.DepartmentId,
                 DepartmentName = sysTenantAccount.DepartmentName,
                 IsSuperAdmin = sysTenantAccount.AdminType == AdminTypeEnum.SuperAdmin,
@@ -193,7 +199,8 @@ public sealed class User : AuthUserInfo, IUser, IScopedDependency
         SetAuthUser(authUserInfo);
 
         // 获取缓存Key
-        var cacheKey = CacheConst.GetCacheKey(CacheConst.AuthUserInfo, authUserInfo.TenantNo, authUserInfo.AppEnvironment.ToString(),authUserInfo.JobNumber);
+        var cacheKey = CacheConst.GetCacheKey(CacheConst.AuthUserInfo, authUserInfo.TenantNo,
+            authUserInfo.AppEnvironment.ToString(), authUserInfo.JobNumber);
 
         // 设置授权信息缓存
         await _cache.SetAsync(cacheKey, authUserInfo);

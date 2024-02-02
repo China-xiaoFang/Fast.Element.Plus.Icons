@@ -18,113 +18,145 @@
         </member>
         <member name="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput">
             <summary>
-            <see cref="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput"/> 获取登录用户信息
+            <see cref="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput"/> 获取登录用户信息输出
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.TenantNo">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.RoleIdList">
             <summary>
-            工号
+            角色Id集合
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Account">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.MenuCodeList">
             <summary>
-            账号
+            菜单编码集合
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.JobNumber">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.ModuleList">
             <summary>
-            工号
+            模块集合
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.UserName">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.MenuList">
             <summary>
-            姓名
+            菜单集合
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.NickName">
+        <member name="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto">
             <summary>
-            昵称
+            <see cref="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto"/> 获取登录模块信息
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Avatar">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto.Id">
             <summary>
-            头像
+            模块Id
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Birthday">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto.ModuleName">
             <summary>
-            生日
+            模块名称
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Sex">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto.Color">
             <summary>
-            性别
+            颜色
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Email">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto.Icon">
             <summary>
-            邮箱
+            图标
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Mobile">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto.IsDefault">
             <summary>
-            手机
+            是否为默认打开的
+            <remarks>只能存在一个</remarks>
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.Tel">
+        <member name="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto">
             <summary>
-            电话
+            <see cref="T:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto"/> 获取登录菜单信息
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.DepartmentId">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Id">
             <summary>
-            主部门Id
+            菜单Id
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.DepartmentName">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.MenuCode">
             <summary>
-            主部门名称
+            菜单编码
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.AdminType">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.MenuName">
             <summary>
-            管理员类型
+            菜单名称
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginDevice">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.MenuTitle">
             <summary>
-            最后登录设备
+            菜单标题
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginOS">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.ParentId">
             <summary>
-            最后登录操作系统（版本）
+            父级Id
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginBrowser">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.ModuleId">
             <summary>
-            最后登录浏览器（版本）
+            模块Id
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginProvince">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.MenuType">
             <summary>
-            最后登录省份
+            菜单类型
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginCity">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Icon">
             <summary>
-            最后登录城市
+            图标
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginIp">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Router">
             <summary>
-            最后登录Ip
+            路由地址
             </summary>
         </member>
-        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.LastLoginTime">
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Component">
             <summary>
-            最后登录时间
+            组件地址
             </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Link">
+            <summary>
+            内链/外链地址
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.GetId">
+            <summary>获取节点id</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.GetPid">
+            <summary>获取节点父id</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.Sort">
+            <summary>获取排序字段</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto.SetChildren(System.Collections.IList)">
+            <summary>设置Children</summary>
+            <param name="children"></param>
         </member>
         <member name="T:Fast.Admin.Service.Authentication.Auth.IAuthService">
             <summary>
@@ -136,7 +168,6 @@
             获取登录用户信息
             </summary>
             <returns></returns>
-            <exception cref="T:Fast.IaaS.UserFriendlyException"></exception>
         </member>
         <member name="T:Fast.Admin.Service.Authentication.Login.Dto.InputErrorPasswordDto">
             <summary>

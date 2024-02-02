@@ -39,6 +39,41 @@
             用户名称
             </summary>
         </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Mobile">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.Tel">
+            <summary>
+            电话
+            </summary>
+        </member>
         <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.DepartmentId">
             <summary>
             部门Id
@@ -104,6 +139,26 @@
             App来源
             </summary>
         </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.RoleIdList">
+            <summary>
+            角色Id集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.RoleNameList">
+            <summary>
+            角色名称集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.MenuCodeList">
+            <summary>
+            菜单编码集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.AuthUserInfo.ButtonCodeList">
+            <summary>
+            按钮编码集合
+            </summary>
+        </member>
         <member name="T:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo">
             <summary>
             <see cref="T:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo"/> 授权用户信息
@@ -137,6 +192,41 @@
         <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.UserName">
             <summary>
             用户名称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.NickName">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Mobile">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.Tel">
+            <summary>
+            电话
             </summary>
         </member>
         <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.DepartmentId">
@@ -202,6 +292,26 @@
         <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.AppOrigin">
             <summary>
             App来源
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.RoleIdList">
+            <summary>
+            角色Id集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.RoleNameList">
+            <summary>
+            角色名称集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.MenuCodeList">
+            <summary>
+            菜单编码集合
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Authentication.Dto.IAuthUserInfo.ButtonCodeList">
+            <summary>
+            按钮编码集合
             </summary>
         </member>
         <member name="T:Fast.Admin.Core.Authentication.IUser">
