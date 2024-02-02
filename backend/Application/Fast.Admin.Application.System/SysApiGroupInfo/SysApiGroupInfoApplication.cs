@@ -7,7 +7,7 @@ namespace Fast.Admin.Application.System.SysApiGroupInfo;
 /// <summary>
 /// <see cref="SysApiGroupInfoApplication"/> 系统接口分组
 /// </summary>
-[ApiDescriptionSettings(ApiGroupConst.Auth, Name = "sysApiGroupInfo", Order = 100)]
+[ApiDescriptionSettings(ApiGroupConst.System, Name = "sysApiGroupInfo", Order = 100)]
 public class SysApiGroupInfoApplication : IDynamicApplication
 {
     private readonly ISysApiGroupInfoService _sysApiGroupInfoService;

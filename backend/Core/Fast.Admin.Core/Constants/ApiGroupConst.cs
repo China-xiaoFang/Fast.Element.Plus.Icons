@@ -24,4 +24,9 @@ public class ApiGroupConst
     /// 鉴权
     /// </summary>
     public const string Auth = "Auth";
+
+    /// <summary>
+    /// 系统
+    /// </summary>
+    public const string System = "System";
 }

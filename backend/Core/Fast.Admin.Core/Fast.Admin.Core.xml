@@ -391,6 +391,11 @@
             鉴权
             </summary>
         </member>
+        <member name="F:Fast.Admin.Core.Constants.ApiGroupConst.System">
+            <summary>
+            系统
+            </summary>
+        </member>
         <member name="T:Fast.Admin.Core.Constants.CacheConst">
             <summary>
             <see cref="T:Fast.Admin.Core.Constants.CacheConst"/> 缓存常量

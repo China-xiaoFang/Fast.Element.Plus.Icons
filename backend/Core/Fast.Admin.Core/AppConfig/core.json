@@ -56,6 +56,12 @@
         "Title": "鉴权接口",
         "Description": "Fast.Admin 鉴权接口",
         "Version": "1.0.0"
+      },
+      {
+        "Group": "System",
+        "Title": "系统接口",
+        "Description": "Fast.Admin 系统接口",
+        "Version": "1.0.0"
       }
     ]
   }

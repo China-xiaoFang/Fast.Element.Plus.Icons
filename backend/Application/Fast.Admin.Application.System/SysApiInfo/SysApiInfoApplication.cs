@@ -20,7 +20,7 @@ namespace Fast.Admin.Application.System.SysApiInfo;
 /// <summary>
 /// <see cref="SysApiInfoApplication"/> 系统接口信息
 /// </summary>
-[ApiDescriptionSettings(ApiGroupConst.Auth, Name = "sysApiInfo", Order = 100)]
+[ApiDescriptionSettings(ApiGroupConst.System, Name = "sysApiInfo", Order = 100)]
 public class SysApiInfoApplication : IDynamicApplication
 {
     private readonly ISysApiInfoService _sysApiInfoService;
