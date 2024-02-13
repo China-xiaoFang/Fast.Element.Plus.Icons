@@ -177,7 +177,7 @@ public class LoginService : ILoginService, ITransientDependency
             .LeftJoin<SysTenantModel>((t1, t2) => t1.TenantId == t2.Id)
             // 清除租户过滤器
             .ClearFilter<IBaseTEntity>().Where((t1, t2) => t1.AccountId == account.Id && t1.Status == CommonStatusEnum.Enable)
-            .Select<LoginOutput.LoginTenantDto>("[t1].*, [t2].[ChName]").ToListAsync();
+            .Select((t1, t2) => new LoginOutput.LoginTenantDto {Id = t1.Id.SelectAll(), ChName = t2.ChName}).ToListAsync();
 
         if (result.TenantList.Count == 0)
         {

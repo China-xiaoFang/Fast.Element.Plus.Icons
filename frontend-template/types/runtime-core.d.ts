@@ -27,8 +27,12 @@ declare module "vue-router" {
          * @description "iframe" iframe 页面
          */
         type?: "tab" | "iframe";
+        /**
+         * iframe 页面的地址
+         */
+        iframeUrl?: string;
     };
     export default RouteMeta;
 }
 
-export {};
+export { };

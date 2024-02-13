@@ -67,7 +67,7 @@ const flatteningMenu = (menuList: GetLoginMenuInfoDto[]): RouteRecordRaw[] => {
     menuList.map((item) => {
         if (item.menuType == MenuTypeEnum.Menu || item.menuType == MenuTypeEnum.Internal) {
             routeList.push({
-                path: item.router,
+                path: item.router ?? item.link,
                 // 这里由于 keep-alive 必须设置 name 的问题，所以根据组件的地址，生成固定的 name，需要在每个页面增加 name，不然 keep-alive 会失效
                 name: loadComponentName(item.menuName),
                 component: loadComponent(item.component),
@@ -77,15 +77,20 @@ const flatteningMenu = (menuList: GetLoginMenuInfoDto[]): RouteRecordRaw[] => {
                     addTab: true,
                     affix: false,
                     authForbidView: true,
+                    type: item.menuType == MenuTypeEnum.Menu ? "tab" : "iframe",
+                    iframeUrl: item.link
                 },
             });
         }
 
         // 判断是否存在子节点
         if (item.children && item.children.length > 0) {
-            routeList.push(flatteningMenu(item.children));
+            routeList = [...routeList, ...flatteningMenu(item.children)]
+            console.log("添加后的路由", routeList);
         }
     });
+
+    return routeList;
 };
 
 /** 白名单路由Path集合 */
@@ -167,9 +172,13 @@ router.beforeEach(async (to, from, next) => {
                     // 刷新用户信息
                     await userInfoStore.refreshUserInfo();
 
-                    debugger;
+                    // 扁平化路由
+                    const routeList = flatteningMenu(userInfoStore.menuList);
 
-                    // TODO：动态添加路由
+                    // 循环添加到 layout 中
+                    routeList.forEach(rItem => {
+                        router.addRoute("layout", rItem);
+                    });
 
                     // 确保路由添加完成
                     userInfoStore.asyncRouterGen = true;
