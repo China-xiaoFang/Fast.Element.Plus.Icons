@@ -455,7 +455,6 @@ export default defineComponent({
         const refreshTable = () => {
             if (!props.requestAuto) {
                 filterByLocal();
-                // console.log(tableData);
             } else {
                 loadData();
             }

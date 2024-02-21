@@ -101,14 +101,14 @@ internal class SysMenuDataSource
         var sysMenu1_3 = new SysMenuModel
         {
             Id = YitIdHelper.NextId(),
-            MenuCode = null,
+            MenuCode = "SysApiInfo:Docs",
             MenuName = "接口文档",
             MenuTitle = "接口文档",
             ParentId = sysMenu1_1.Id,
             ModuleId = sysModule1.Id,
             MenuType = MenuTypeEnum.Internal,
             Icon = "fa-book",
-            Router = null,
+            Router = "/sysApiInfo/docs",
             Component = null,
             Link = "http://127.0.0.1:5001",
             Visible = YesOrNotEnum.Y,

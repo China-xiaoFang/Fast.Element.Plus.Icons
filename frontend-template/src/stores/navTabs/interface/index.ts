@@ -1,10 +1,12 @@
 /**
  * Stores NavTabs 变量定义
  */
-import type { RouteRecordRaw, RouteLocationNormalized } from "vue-router";
+import { GetLoginModuleInfoDto } from "@/api/modules/get-login-module-info-dto";
+import { GetLoginMenuInfoDto } from "@/api/modules/get-login-menu-info-dto";
+import type { RouteLocationNormalized } from "vue-router";
 
 /**
- * 用户信息
+ * 导航选项卡
  * @interface NavTabs
  */
 export interface NavTabs {
@@ -19,13 +21,19 @@ export interface NavTabs {
      * @type {RouteLocationNormalized}
      * @memberof NavTabs
      */
-    activeRoute: RouteLocationNormalized | null;
+    activeTab: RouteLocationNormalized | null;
     /**
-     * tab列表
+     * 激活的module
+     * @type {GetLoginModuleInfoDto}
+     * @memberof NavTabs
+     */
+    activeModule: GetLoginModuleInfoDto | null;
+    /**
+     * 导航栏tab列表
      * @type {Array<RouteLocationNormalized>}
      * @memberof NavTabs
      */
-    tabsView: RouteLocationNormalized[];
+    navBarTabs: RouteLocationNormalized[];
     /**
      * 当前tab是否全屏
      * @type {boolean}
@@ -33,15 +41,9 @@ export interface NavTabs {
      */
     tabFullScreen: boolean;
     /**
-     * 从后台加载到的菜单路由列表
-     * @type {Array<RouteRecordRaw>}
+     * 从后台加载到的当前选中模块下的菜单列表
+     * @type {Array<GetLoginMenuInfoDto>}
      * @memberof NavTabs
      */
-    tabsViewRoutes: RouteRecordRaw[];
-    /**
-     * 按钮权限节点
-     * @type {Map<string, string[]>}
-     * @memberof NavTabs
-     */
-    authNode: Map<string, string[]>;
+    tabs: GetLoginMenuInfoDto[];
 }

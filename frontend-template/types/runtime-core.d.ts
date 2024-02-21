@@ -2,15 +2,11 @@
  * 解决 Vue-router meta. 没有提示的情况
  */
 declare module "vue-router" {
-    const RouteMeta: {
+    interface RouteMeta {
         /**
          * 页面标题
          */
         title?: string;
-        /**
-         * 是否添加到 Tab
-         */
-        addTab?: boolean;
         /**
          * 是否固定在 Tab 中
          */
@@ -31,8 +27,11 @@ declare module "vue-router" {
          * iframe 页面的地址
          */
         iframeUrl?: string;
-    };
-    export default RouteMeta;
+        /**
+         * 分类
+         */
+        categories?: string[];
+    }
 }
 
-export { };
+export {};

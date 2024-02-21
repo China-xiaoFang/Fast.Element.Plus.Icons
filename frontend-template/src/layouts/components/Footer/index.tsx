@@ -1,14 +1,13 @@
-<script lang="tsx" name="LayoutFooter">
 import { defineComponent } from "vue";
 import { useSiteConfig } from "@/stores/siteConfig";
 
 export default defineComponent({
     name: "LayoutFooter",
-    render() {
+    setup() {
         const siteConfigStore = useSiteConfig();
 
-        return (
-            <el-footer class="footer">
+        return () => (
+            <el-footer class="fast-layout-footer">
                 <div>
                     Copyright
                     {siteConfigStore.state.copyrightValidStartYear !== null && <> @ {siteConfigStore.state.copyrightValidStartYear}</>}
@@ -45,28 +44,3 @@ export default defineComponent({
         );
     },
 });
-</script>
-
-<style scoped lang="scss">
-.footer {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    background-color: var(--fast-bg-color);
-    margin: 5px 0;
-
-    a {
-        font-size: 14px;
-        letter-spacing: 0.5px;
-        text-decoration: none;
-        color: var(--el-text-color-secondary);
-    }
-
-    img {
-        width: 16px;
-        vertical-align: top;
-    }
-}
-</style>

@@ -10,9 +10,7 @@ import { useConfig } from "@/stores/config";
 export function mainHeight(extra = 0): CSSProperties {
     let height = extra;
     const adminLayoutMainExtraHeight: anyObj = {
-        Default: 70,
         Classic: 50,
-        Streamline: 60,
     };
     const configStore = useConfig();
     const navTabsStore = useNavTabs();

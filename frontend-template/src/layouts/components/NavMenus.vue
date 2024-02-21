@@ -49,13 +49,13 @@
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="dropdown-menu-box">
-                    <el-dropdown-item v-if="userInfo.supperAdmin || userInfo.admin" @click="onClickClearCacheHandle('tp')">
+                    <el-dropdown-item v-if="userInfo.isSuperAdmin || userInfo.isSystemAdmin" @click="onClickClearCacheHandle('tp')">
                         {{ t("layouts.components.NavMenus.清理系统缓存") }}
                     </el-dropdown-item>
                     <el-dropdown-item @click="onClickClearCacheHandle('storage')">{{
                         t("layouts.components.NavMenus.清理浏览器缓存")
                     }}</el-dropdown-item>
-                    <el-dropdown-item v-if="userInfo.supperAdmin" @click="onClickClearCacheHandle('all')" divided>
+                    <el-dropdown-item v-if="userInfo.isSuperAdmin" @click="onClickClearCacheHandle('all')" divided>
                         {{ t("layouts.components.NavMenus.一键清理所有") }}
                     </el-dropdown-item>
                 </el-dropdown-menu>

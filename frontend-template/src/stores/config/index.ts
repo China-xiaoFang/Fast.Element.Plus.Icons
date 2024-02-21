@@ -53,7 +53,7 @@ export const useConfig = defineStore(
             // 是否收缩布局(小屏设备)
             shrink: false,
             // 布局方式
-            layoutMode: "Default",
+            layoutMode: "Classic",
             // 切换动画
             mainAnimation: "slide-right",
             // 是否暗黑模式

@@ -22,7 +22,7 @@ const router = useRouter();
 
 const state = reactive({
     loading: true,
-    iframeSrc: router.currentRoute.value.meta.url as string,
+    iframeSrc: router.currentRoute.value.meta.iframeUrl as string,
 });
 
 const hideLoading = () => {

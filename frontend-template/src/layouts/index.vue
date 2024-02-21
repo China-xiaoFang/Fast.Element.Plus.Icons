@@ -9,7 +9,6 @@ import { useConfig } from "@/stores/config";
 // import { useSiteConfig } from "@/stores/siteConfig";
 import { useUserInfo } from "@/stores/userInfo";
 // import { useRoute } from "vue-router";
-import Default from "@/layouts/container/Default/index.vue";
 import Classic from "@/layouts/container/Classic/index.vue";
 import { onMounted, onBeforeMount } from "vue";
 import { Session } from "@/utils/storage";
@@ -21,11 +20,12 @@ import { CACHE_BEFORE_RESIZE_LAYOUT } from "@/stores/constant";
 import { setNavTabsWidth } from "@/layouts/utils";
 
 defineOptions({
-    components: { Default, Classic },
+    components: { Classic },
 });
 
 // const navTabsStore = useNavTabs();
 const configStore = useConfig();
+
 // const route = useRoute();
 // const siteConfigStore = useSiteConfig();
 const userInfoStore = useUserInfo();

@@ -61,7 +61,7 @@ export interface Layout {
     shrink: boolean;
     /**
      * 布局方式
-     * @description 可选值 <"Default" | "Classic">
+     * @description 可选值 <"Classic">
      * @type {string}
      * @memberof Layout
      */

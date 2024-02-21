@@ -1,4 +1,4 @@
-import { defineComponent, SetupContext, onMounted, reactive, toRaw } from "vue";
+import { defineComponent, SetupContext, onMounted, reactive, toRaw, Transition } from "vue";
 import { useEventListener } from "@vueuse/core";
 import styles from "./style/index.module.scss"
 import FIcon from "@/components/FIcon";
@@ -68,9 +68,9 @@ export default defineComponent({
         expose({ show, hide });
 
         return () => (
-            <transition name="el-zoom-in-center" {...attrs}>
+            <Transition name="el-zoom-in-center" {...attrs}>
                 <div
-                    className={[styles["fast-contextMenu"], styles["el-popper"], styles["is-pure"], styles["is-light"], styles["el-dropdown__popper"]]}
+                    className={[styles["f-contextMenu"]]}
                     class="el-popper is-pure is-light el-dropdown__popper"
                     style={`top: ${state.axis.y + 5}px;left: ${state.axis.x - 14}px;width:${props.width}px`}
                     key={Math.random()}
@@ -93,7 +93,7 @@ export default defineComponent({
                         ))}
                     </ul>
                 </div>
-            </transition >
+            </Transition >
         );
     },
 });

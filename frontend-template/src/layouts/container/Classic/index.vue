@@ -1,21 +1,33 @@
 <template>
-    <el-container class="layout-container">
-        <Aside />
-        <el-container class="content-wrapper">
-            <Header />
-            <Main />
-            <Footer />
+    <el-container class="fast-layout-container">
+        <LayoutAside />
+        <el-container class="fast-layout-content-wrapper">
+            <div class="fast-layout-nav-bar">
+                <LayoutHamburger />
+                <LayoutBreadcrumb />
+                <!-- 模块 -->
+                <NavMenus />
+            </div>
+            <LayoutNavBarTab />
+            <LayoutMain />
+            <LayoutFooter />
         </el-container>
     </el-container>
-    <CloseFullScreen v-if="navTabsStore.state.tabFullScreen" />
+    <LayoutCloseFullScreen v-if="navTabsStore.state.tabFullScreen" />
 </template>
 
 <script setup lang="ts">
-import Aside from "@/layouts/components/Aside.vue";
-import Header from "@/layouts/components/Header.vue";
-import Main from "@/layouts/components/Main.vue";
-import Footer from "@/layouts/components/Footer.vue";
-import CloseFullScreen from "@/layouts/components/CloseFullScreen.vue";
+import LayoutAside from "@/layouts/components/Aside";
+
+import LayoutHamburger from "@/layouts/components/Hamburger";
+import LayoutBreadcrumb from "@/layouts/components/Breadcrumb";
+import LayoutNavBarTab from "@/layouts/components/NavBarTab";
+
+import NavMenus from "@/layouts/components/NavMenus.vue";
+
+import LayoutMain from "@/layouts/components/Main";
+import LayoutFooter from "@/layouts/components/Footer";
+import LayoutCloseFullScreen from "@/layouts/components/CloseFullScreen";
 import { useNavTabs } from "@/stores/navTabs";
 
 const navTabsStore = useNavTabs();
