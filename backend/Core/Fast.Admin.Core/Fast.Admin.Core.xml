@@ -676,6 +676,18 @@
             添加操作日志
             </summary>
         </member>
+        <member name="T:Fast.Admin.Core.Handlers.GlobalExceptionHandler">
+            <summary>
+            <see cref="T:Fast.Admin.Core.Handlers.GlobalExceptionHandler"/> 全局异常处理
+            </summary>
+        </member>
+        <member name="M:Fast.Admin.Core.Handlers.GlobalExceptionHandler.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,System.Boolean,System.Boolean)">
+            <summary>异常拦截</summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ExceptionContext" /></param>
+            <param name="isUserFriendlyException"><see cref="T:System.Boolean" /> 是否友好异常</param>
+            <param name="isValidationException"><see cref="T:System.Boolean" /> 是否验证异常</param>
+            <returns></returns>
+        </member>
         <member name="T:Fast.Admin.Core.Handlers.JwtBearerHandle">
             <summary>
             <see cref="T:Fast.Admin.Core.Handlers.JwtBearerHandle"/> Jwt验证提供器

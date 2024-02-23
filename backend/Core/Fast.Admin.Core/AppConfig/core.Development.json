@@ -8,6 +8,8 @@
   },
   "AllowedHosts": "*",
   "AppSettings": {
+    // 请求加密解密
+    "RequestCipher": true,
     // 初始化 Database
     "InitializeDatabase": true
   },
