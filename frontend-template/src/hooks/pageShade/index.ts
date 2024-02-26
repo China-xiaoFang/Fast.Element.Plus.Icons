@@ -8,7 +8,7 @@ import { useEventListener } from "@vueuse/core";
  * 显示页面遮罩
  */
 export const showShade = function (className = "shade", closeCallBack: Function): void {
-    const containerEl = document.querySelector(".layout-container") as HTMLElement;
+    const containerEl = document.querySelector(".fast-layout-container") as HTMLElement;
     const shadeDiv = document.createElement("div");
     shadeDiv.setAttribute("class", "fast-layout-shade " + className);
     containerEl.appendChild(shadeDiv);

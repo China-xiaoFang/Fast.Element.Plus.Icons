@@ -32,6 +32,26 @@ interface anyObj {
 }
 
 /**
+ * 请求加密输入
+ * @interface RequestDecryptInput
+ */
+interface RequestDecryptInput {
+    /**
+     * 请求数据
+     * @type {string}
+     * @memberof RequestDecryptInput
+     */
+    data: string;
+    /**
+     * 时间戳
+     * @description 一定要是毫秒时间戳，13位
+     * @type {number}
+     * @memberof RequestDecryptInput
+     */
+    timestamp: number;
+}
+
+/**
  * Api 响应对象
  * @interface ApiResponse
  */

@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
+import Layout from "@/layouts/index";
 
 /**
  * 动态路由
@@ -9,7 +10,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "layout",
-        component: () => import("@/layouts/index.vue"),
+        component: Layout,
         redirect: "/dashboard",
         children: [
             {
@@ -20,6 +21,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
                     title: "首页",
                     affix: true,
                     keepAlive: true,
+                    menuId: 10086,
                 },
             },
         ],

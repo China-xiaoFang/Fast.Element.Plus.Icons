@@ -79,7 +79,6 @@ export interface Layout {
      * @memberof Layout
      */
     isDark: boolean;
-
     /**
      * 侧边菜单背景色
      * @type {Array<string>}
@@ -140,7 +139,6 @@ export interface Layout {
      * @memberof Layout
      */
     menuShowTopBar: boolean;
-
     /**
      * 顶栏文字色
      * @type {Array<string>}

@@ -186,7 +186,7 @@ export default defineComponent({
                                                     }
                                                     {
                                                         props.column?.link ? (
-                                                            <el-button link type="primary" onClick={props.column.click(row)}>{row[props.column.prop]}</el-button>
+                                                            <el-button link type="primary" onClick={() => props.column.click(row)}>{row[props.column.prop]}</el-button>
                                                         ) : (null)
                                                     }
                                                     {

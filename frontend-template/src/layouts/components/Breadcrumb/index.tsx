@@ -16,7 +16,7 @@ export default defineComponent({
                 </el-breadcrumb-item>
                 <>
                     {
-                        route.meta.categories.map((item: string) => (
+                        route.meta.categories?.map((item: string) => (
                             <el-breadcrumb-item>{{ item }}</el-breadcrumb-item>
                         ))
                     }

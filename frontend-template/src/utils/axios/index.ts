@@ -7,6 +7,7 @@ import { useUserInfo } from "@/stores/userInfo";
 import { getAxiosDefaultConfig } from "@/utils/axios/config";
 import { downloadFile } from "@/utils";
 import base64 from "@/utils/base64";
+import { AES } from "@/utils/crypto";
 
 const pendingMap = new Map();
 
@@ -84,12 +85,44 @@ function createAxios<Data = any, T = ApiPromise<Data>>(axiosConfig: AxiosRequest
                 // TODO：这里待增加设备ID
             }
 
-            // TODO:请求参数加密
+            // 请求参数加密
+            if (import.meta.env.VITE_AXIOS_REQUEST_CIPHER) {
+                let requestData = config.params || config.data;
+                let dataStr = JSON.stringify(requestData);
+                if (dataStr != null && dataStr != "" && dataStr != "{}") {
+                    console.debug(`HTTP request data("${config.url}")`, requestData);
+                    let decryptData = AES.encrypt(dataStr, `${timestamp}`, `FIV${timestamp}`);
+                    // 组装请求格式
+                    requestData = {
+                        data: decryptData,
+                        timestamp: timestamp,
+                    };
+                    switch (config.method.toUpperCase()) {
+                        case "GET":
+                        case "DELETE":
+                        case "HEAD":
+                            config.params = requestData;
+                            break;
+                        case "POST":
+                        case "PUT":
+                        case "PATCH":
+                            config.data = requestData;
+                            break;
+                        case "OPTIONS":
+                        case "CONNECT":
+                        case "TRACE":
+                            throw new Error("This request mode is not supported.");
+                    }
 
-            // GET 请求缓存处理
-            if (config.method.toUpperCase() === "GET") {
-                config.params = config.params || {};
-                config.params._ = timestamp;
+                    // 请求头部增加加密标识
+                    config.headers["Fast-Encipher"] = "true";
+                }
+            } else {
+                // GET 请求缓存处理
+                if (config.method.toUpperCase() === "GET") {
+                    config.params = config.params || {};
+                    config.params._ = timestamp;
+                }
             }
 
             return config;
@@ -162,7 +195,17 @@ function createAxios<Data = any, T = ApiPromise<Data>>(axiosConfig: AxiosRequest
                         return Promise.resolve(data);
                     }
 
-                    // TODO:请求响应解密
+                    // 请求响应解密
+                    if (import.meta.env.VITE_AXIOS_REQUEST_CIPHER) {
+                        if (data.data) {
+                            data.data = AES.decrypt(data.data, `${data.timestamp}`, `FIV${data.timestamp}`);
+                            // 处理 ""xxx"" 这种数据
+                            if (typeof data.data == "string" && data.data.startsWith('"') && data.data.endsWith('"')) {
+                                data.data = data.data.replace(/"/g, "");
+                            }
+                            console.debug(`HTTP response data("${response.config.url}")`, data.data);
+                        }
+                    }
 
                     // 简洁响应
                     return options.simpleDataFormat ? Promise.resolve(data) : Promise.resolve(response);

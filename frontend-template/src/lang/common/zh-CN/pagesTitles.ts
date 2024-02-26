@@ -8,10 +8,5 @@
  */
 
 export default {
-    ["确定关闭？"]: "confirm to close?",
-    ["关闭全屏显示"]: "Turn off full screen display",
-    ["全屏显示"]: "full-screen display",
-    ["关闭"]: "closure",
-    ["取消"]: "Cancel",
-    ["确认"]: "confirm",
+    ["首页"]: "首页",
 };

@@ -1,4 +1,4 @@
-import { defineComponent, ref, reactive, onMounted, watch, onBeforeMount, onUnmounted, nextTick, provide, Transition } from "vue";
+import { defineComponent, ref, reactive, onMounted, watch, onBeforeMount, onUnmounted, nextTick, provide, Transition, KeepAlive } from "vue";
 import { useRoute, type RouteLocationNormalized } from "vue-router";
 import { mainHeight as layoutMainScrollbarStyle } from "@/layouts/utils";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
@@ -86,9 +86,9 @@ export default defineComponent({
                                     mode="out-in"
                                     name={configStore.layout.mainAnimation}
                                 >
-                                    <keep-alive include={state.keepAliveComponentNameList}>
-                                        <component is={Component} key={state.componentKey} />
-                                    </keep-alive>
+                                    <KeepAlive include={state.keepAliveComponentNameList}>
+                                        <Component key={state.componentKey} />
+                                    </KeepAlive>
                                 </Transition>
                             )
                         }}

@@ -31,6 +31,14 @@ declare module "vue-router" {
          * 分类
          */
         categories?: string[];
+        /**
+         * 菜单Id
+         */
+        menuId?: number;
+        /**
+         * 模块Id
+         */
+        moduleId?: number;
     }
 }
 

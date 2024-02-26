@@ -30,6 +30,15 @@ body,
     position: relative;
 }
 
+// 阿里 iconfont Symbol引用css
+.iconfont-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
 .w100 {
     width: 100% !important;
 }
@@ -53,3 +62,50 @@ body,
     border-radius: 6px;
 }
 /* 鼠标置入浮动效果-e */
+
+/* 全局遮罩-s */
+.fast-layout-shade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999990;
+}
+/* 全局遮罩-e */
+
+/* 页面切换动画-s */
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+    will-change: transform;
+    transition: all 0.3s ease;
+}
+// slide-right
+.slide-right-enter-from {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+.slide-right-leave-to {
+    opacity: 0;
+    transform: translateX(20px);
+}
+// slide-left
+.slide-left-enter-from {
+    @extend .slide-right-leave-to;
+}
+.slide-left-leave-to {
+    @extend .slide-right-enter-from;
+}
+/* 页面切换动画-e */
+
+/* NProgress-s */
+#nprogress {
+    .bar,
+    .spinner {
+        z-index: 999999;
+    }
+}
+/* NProgress-e */

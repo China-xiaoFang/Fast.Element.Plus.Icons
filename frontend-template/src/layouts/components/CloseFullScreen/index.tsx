@@ -34,11 +34,11 @@ export default defineComponent({
         return () => (
             <div
                 title={t("layouts.components.CloseFullScreen.退出全屏")}
-                onMouseover={withModifiers(onMouseover, ["stop"])}
-                onMouseout={withModifiers(onMouseout, ["stop"])}
+                onMouseover={() => withModifiers(onMouseover, ["stop"])}
+                onMouseout={() => withModifiers(onMouseout, ["stop"])}
             >
                 <div
-                    onClick={withModifiers(onCloseFullScreen, ["stop"])}
+                    onClick={() => withModifiers(onCloseFullScreen, ["stop"])}
                     class="fast-layout-close-full-screen"
                     style={{ top: state.closeBoxTop + 'px' }}
                 >

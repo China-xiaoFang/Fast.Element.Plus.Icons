@@ -6,6 +6,7 @@ import type { NavTabs } from "./interface";
 import type { RouteLocationNormalized } from "vue-router";
 import { isEmpty } from "lodash-es";
 import { GetLoginMenuInfoDto } from "@/api/modules/get-login-menu-info-dto";
+import { MenuTypeEnum } from "@/api/modules/enums/menu-type-enum";
 
 export const useNavTabs = defineStore(
     "navTabs",
@@ -21,6 +22,7 @@ export const useNavTabs = defineStore(
                     title: "首页",
                     keepAlive: true,
                     affix: true,
+                    menuId: 10086,
                 },
                 query: null,
                 params: null,
@@ -28,6 +30,20 @@ export const useNavTabs = defineStore(
                 fullPath: null,
                 hash: null,
                 redirectedFrom: null,
+            },
+        ];
+        /**
+         * 固定的菜单
+         */
+        const affixMenu: GetLoginMenuInfoDto[] = [
+            {
+                id: 10086,
+                menuCode: "Dashboard",
+                menuName: "首页",
+                menuTitle: "首页",
+                menuType: MenuTypeEnum.Menu,
+                icon: "",
+                router: "/dashboard",
             },
         ];
 
@@ -111,7 +127,7 @@ export const useNavTabs = defineStore(
          * @param data
          */
         const setTabsViewMenus = (data: GetLoginMenuInfoDto[]): void => {
-            state.tabs = data;
+            state.tabs = [...affixMenu, ...data];
         };
 
         /**

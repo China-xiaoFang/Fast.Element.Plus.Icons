@@ -2,6 +2,7 @@ import { computed, defineComponent } from "vue";
 import { useConfig } from "@/stores/config";
 import { useNavTabs } from "@/stores/navTabs";
 import LayoutLogo from "@/layouts/components/Logo";
+import LayoutMenu from "@/layouts/components/Menu";
 
 export default defineComponent({
     name: "LayoutAside",
@@ -17,7 +18,7 @@ export default defineComponent({
                 {
                     !navTabsStore.state.tabFullScreen ? (
                         <el-aside
-                            class={`fast-layout-aside-${configStore.layout.layoutMode} ${configStore.layout.shrink ? 'shrink' : ''}`}
+                            class={["fast-layout-aside", configStore.layout.shrink ? 'shrink' : ""]}
                             style={{ width: menuWidth }}
                         >
                             {
@@ -25,12 +26,11 @@ export default defineComponent({
                                     <LayoutLogo />
                                 ) : (null)
                             }
-                            {/* 这里是菜单 */}
+                            <LayoutMenu />
                         </el-aside>
                     ) : (null)
                 }
             </>
-
         );
     },
 });

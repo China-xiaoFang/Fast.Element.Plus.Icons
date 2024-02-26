@@ -53,4 +53,10 @@ declare interface ImportMetaEnv {
      * @memberof ImportMetaEnv
      */
     readonly VITE_AXIOS_PROXY_URL: string;
+    /**
+     * 接口请求加密
+     * @type {boolean}
+     * @memberof ImportMetaEnv
+     */
+    readonly VITE_AXIOS_REQUEST_CIPHER: boolean;
 }

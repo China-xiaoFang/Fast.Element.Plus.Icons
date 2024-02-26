@@ -73,7 +73,7 @@ export default defineComponent({
          */
         const selectNavTabHandle = (dom: HTMLDivElement) => {
             if (!dom) {
-                return false;
+                return;
             }
             activeBoxStyle.width = dom.clientWidth + "px";
             activeBoxStyle.transform = `translateX(${dom.offsetLeft}px)`;
@@ -187,10 +187,10 @@ export default defineComponent({
                 {
                     navTabsStore.state.navBarTabs.map((item, index) => (
                         <div
-                            onClick={onClickTabHandle(item)}
+                            onClick={() => onClickTabHandle(item)}
                             onContextmenu={withModifiers((event: Event) => onContextMenuHandle(item, event as MouseEvent), ["prevent"])}
                             // onContextmenu={(e) => { e.preventDefault(); onContextMenuHandle(item, e) }}
-                            class={navTabsStore.state.activeIndex == index ? 'fast-layout-nav-tabs-item active' : 'fast-layout-nav-tabs-item'}
+                            class={["fast-layout-nav-tabs-item", navTabsStore.state.activeIndex == index ? "active" : ""]}
                             ref={tabsRefs.value.set}
                             key={index}
                         >
@@ -199,7 +199,7 @@ export default defineComponent({
                                 !item.meta.affix ? (
                                     <Transition
                                         name="el-fade-in"
-                                        onAfterLeave={selectNavTabHandle(tabsRefs.value[navTabsStore.state.activeIndex])}
+                                        onAfterLeave={() => { selectNavTabHandle(tabsRefs.value[navTabsStore.state.activeIndex]) }}
                                     >
                                         <FIcon
                                             class="close-icon"

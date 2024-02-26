@@ -19,8 +19,8 @@ $bg-color: map.merge(
 $border-color: () !default;
 $border-color: map.merge(
     (
-        // "": #f6f6f6,
-        "": #e4e7ed
+        "": #f6f6f6,
+        // "": #e4e7ed
     ),
     $border-color
 );

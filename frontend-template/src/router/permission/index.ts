@@ -81,6 +81,8 @@ const flatteningMenu = (menuList: GetLoginMenuInfoDto[], categories: string[] = 
                     type: item.menuType == MenuTypeEnum.Menu ? "tab" : "iframe",
                     iframeUrl: item.link,
                     categories: routeName,
+                    menuId: item.id,
+                    moduleId: item.moduleId,
                 },
             });
         }
