@@ -36,7 +36,7 @@ export default defineComponent({
                 size="18"
                 onClick={onMenuCollapse}
                 name={configStore.layout.menuCollapse ? 'fa fa-indent' : 'fa fa-dedent'}
-                class={configStore.layout.menuCollapse ? 'unfold' : ''}
+                class={["fast-layout-hamburger", configStore.layout.menuCollapse ? "unfold" : ""]}
                 color={configStore.getColorVal('menuActiveColor')}
             />
         );

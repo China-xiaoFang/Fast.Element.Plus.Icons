@@ -58,15 +58,10 @@ export default defineComponent({
         })
 
         return () => (
-            <el-scrollbar ref={menusRef} style={{ height: menusScrollbarHeight, backgroundColor: configStore.getColorVal("menuBackground") }}>
+            <el-scrollbar ref={menusRef} class="fast-layout-menu-scrollbar" style={{ height: menusScrollbarHeight }}>
                 <el-menu
                     {...attrs}
                     class="fast-layout-menu"
-                    style={{
-                        "--el-menu-bg-color": configStore.getColorVal("menuBackground"),
-                        "--el-menu-text-color": configStore.getColorVal("menuColor"),
-                        "--el-menu-active-color": configStore.getColorVal("menuActiveColor"),
-                    }}
                     collapseTransition={false}
                     uniqueOpened={configStore.layout.menuUniqueOpened}
                     defaultActive={state.defaultActive}

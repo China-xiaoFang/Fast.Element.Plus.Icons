@@ -57,13 +57,13 @@ watch(
 }`;
         const existBindStyleElement = document.head.querySelector("style[fast-style-bind]");
         if (existBindStyleElement) {
-            existBindStyleElement.remove();
+            existBindStyleElement.textContent = styleContent;
+        } else {
+            const bindStyleElement = document.createElement("style");
+            bindStyleElement.setAttribute("fast-style-bind", "true");
+            bindStyleElement.textContent = styleContent;
+            document.head.querySelector("title").insertAdjacentElement("afterend", bindStyleElement);
         }
-
-        const bindStyleElement = document.createElement("style");
-        bindStyleElement.setAttribute("fast-style-bind", "true");
-        bindStyleElement.textContent = styleContent;
-        document.head.querySelector("title").insertAdjacentElement("afterend", bindStyleElement);
     },
     {
         // 深度监听其中对象属性改变

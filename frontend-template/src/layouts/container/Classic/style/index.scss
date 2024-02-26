@@ -41,9 +41,16 @@
     }
 }
 
+.fast-layout-menu-scrollbar {
+    background-color: var(--fast-config-layout-menuBackground);
+}
+
 .fast-layout-menu {
     border: 0;
     padding-bottom: 30px;
+    --el-menu-bg-color: var(--fast-config-layout-menuBackground);
+    --el-menu-text-color: var(--fast-config-layout-menuColor);
+    --el-menu-active-color: var(--fast-config-layout-menuActiveColor);
     .el-sub-menu .icon,
     .el-menu-item .icon {
         vertical-align: middle;
@@ -56,7 +63,7 @@
         color: var(--el-menu-active-color) !important;
     }
     .el-menu-item.is-active {
-        background-color: v-bind('config.getColorVal("menuActiveBackground")');
+        background-color: var(--fast-config-layout-menuActiveBackground);
     }
 }
 
@@ -64,4 +71,217 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+.fast-layout-header {
+    height: auto;
+    padding: 0;
+}
+
+.fast-layout-nav-bar {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    background-color: var(--fast-config-layout-headerBarBackground);
+}
+
+.fast-layout-hamburger {
+    &.unfold {
+        align-self: center;
+        padding-left: var(--ba-main-space);
+    }
+}
+
+.fast-layout-breadcrumb {
+}
+
+.fast-layout-nav-module {
+    border: 0;
+    padding-bottom: 30px;
+    --el-menu-bg-color: var(--fast-config-layout-menuBackground);
+    --el-menu-text-color: var(--fast-config-layout-menuColor);
+    --el-menu-active-color: var(--fast-config-layout-menuActiveColor);
+    .el-menu-item .icon {
+        vertical-align: middle;
+        margin-right: 5px;
+        width: 24px;
+        text-align: center;
+        flex-shrink: 0;
+    }
+    .is-active > .icon {
+        color: var(--el-menu-active-color) !important;
+    }
+    .el-menu-item.is-active {
+        background-color: var(--fast-config-layout-menuActiveBackground);
+    }
+}
+
+.fast-layout-nav-menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
+    background-color: var(--fast-config-layout-headerBarBackground);
+    .fast-layout-nav-menu-item {
+        height: 100%;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        .fast-layout-nav-menu-icon {
+            box-sizing: content-box;
+            color: var(--fast-config-layout-headerBarTabColor);
+        }
+        &:hover {
+            .icon {
+                animation: twinkle 0.3s ease-in-out;
+            }
+        }
+    }
+    .fast-layout-nav-menu-item:hover,
+    .user-info:hover,
+    .fast-layout-nav-menu-item.hover,
+    .user-info.hover {
+        background: var(--fast-config-layout-headerBarHoverBackground);
+    }
+    .dropdown-menu-box {
+        .el-dropdown-menu__item {
+            justify-content: center;
+        }
+    }
+    .user-info {
+        display: flex;
+        height: 100%;
+        padding: 0 10px;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        color: var(--fast-config-layout-headerBarTabColor);
+        .user-name {
+            padding-left: 6px;
+            white-space: nowrap;
+        }
+        .user-info-base {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding-top: 10px;
+            .user-info-other {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+                .user-info-name {
+                    font-size: var(--el-font-size-large);
+                }
+            }
+        }
+        .user-info-footer {
+            padding: 10px 0;
+            margin: 0 -12px -12px -12px;
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+    .pt2 {
+        padding-top: 2px;
+    }
+    @keyframes twinkle {
+        0% {
+            transform: scale(0);
+        }
+        80% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+}
+
+.fast-layout-nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-right: var(--fast-main-space);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        height: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #eaeaea;
+        border-radius: var(--el-border-radius-base);
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--fast-config-layout-headerBarBackground);
+    }
+    &:hover {
+        &::-webkit-scrollbar-thumb:hover {
+            background: #c8c9cc;
+        }
+    }
+    .fast-layout-nav-tabs-item {
+        white-space: nowrap;
+        height: 40px;
+    }
+}
+.fast-layout-nav-tabs.dark {
+    .close-icon {
+        color: var(--fast-config-layout-headerBarTabColor) !important;
+    }
+    .fast-layout-nav-tabs-item.active {
+        .close-icon {
+            color: var(--fast-config-layout-headerBarTabActiveColor) !important;
+        }
+    }
+}
+
+.fast-layout-main {
+    padding: 0 !important;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    .fast-layout-main-scrollbar {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.fast-layout-footer {
+}
+
+.fast-layout-close-full-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: calc(50% - 20px);
+    z-index: 9999999;
+    height: 40px;
+    width: 40px;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+    border-radius: 50%;
+    box-shadow: var(--el-box-shadow-light);
+    transition: all 0.3s ease;
+    .icon {
+        color: rgba($color: #000000, $alpha: 0.6) !important;
+    }
+    &:hover {
+        background-color: rgba($color: #000000, $alpha: 0.3);
+        .icon {
+            color: rgba($color: #ffffff, $alpha: 0.6) !important;
+        }
+    }
+}
+.fast-layout-close-full-screen-on {
+    position: fixed;
+    top: 0;
+    z-index: 9999998;
+    height: 60px;
+    width: 100px;
+    left: calc(50% - 50px);
 }

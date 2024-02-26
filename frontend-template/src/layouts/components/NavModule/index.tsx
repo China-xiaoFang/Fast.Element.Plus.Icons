@@ -67,11 +67,6 @@ export default defineComponent({
                 <el-menu
                     {...attrs}
                     class="fast-layout-nav-module"
-                    style={{
-                        "--el-menu-bg-color": configStore.getColorVal("menuBackground"),
-                        "--el-menu-text-color": configStore.getColorVal("menuColor"),
-                        "--el-menu-active-color": configStore.getColorVal("menuActiveColor"),
-                    }}
                     collapseTransition={false}
                     defaultActive={state.defaultActive}
                 >
