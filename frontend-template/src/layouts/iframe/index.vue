@@ -29,9 +29,3 @@ const hideLoading = () => {
     state.loading = false;
 };
 </script>
-
-<style scoped lang="scss">
-.iframe-main {
-    margin: var(--ba-main-space);
-}
-</style>

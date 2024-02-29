@@ -13,13 +13,17 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 /**
- * 前缀：views.test.test
+ * 前缀：layouts.components.NavBarTab
  * 使用方式：
- * i18n.global.t("views.test.test.Fast.NET")
- * t("views.test.test.Fast.NET")
- * $t("views.test.test.Fast.NET")
+ * i18n.global.t("layouts.components.NavBarTab.Fast.NET")
+ * t("layouts.components.NavBarTab.Fast.NET")
+ * $t("layouts.components.NavBarTab.Fast.NET")
  */
 
 export default {
-    ["你好啊！"]: "你好啊！",
+    ["重新加载"]: "重新加载",
+    ["关闭标签"]: "关闭标签",
+    ["当前标签全屏"]: "当前标签全屏",
+    ["关闭其他标签"]: "关闭其他标签",
+    ["关闭全部标签"]: "关闭全部标签",
 };

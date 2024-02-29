@@ -19,9 +19,9 @@ export default defineComponent({
         return () => (
             <>
                 {
-                    props.menus.map((menu: GetLoginMenuInfoDto) => {
+                    props.menus.map((menu: GetLoginMenuInfoDto) => (
                         menu.children && menu.children.length > 0 ? (
-                            <el-sub-menu index={menu.id}>
+                            <el-sub-menu index={`${menu.id}`}>
                                 {{
                                     title: () => (
                                         <>
@@ -35,12 +35,12 @@ export default defineComponent({
                                 }}
                             </el-sub-menu>
                         ) : (
-                            <el-menu-item index={menu.id} onclick={() => onClickMenu(menu)}>
+                            <el-menu-item index={`${menu.id}`} onclick={() => onClickMenu(menu)}>
                                 <FIcon color={configStore.getColorVal("menuColor")} name={menu.icon ? menu.icon : configStore.layout.menuDefaultIcon} />
                                 <span>{menu.menuName}</span>
                             </el-menu-item>
                         )
-                    })
+                    ))
                 }
             </>
         );

@@ -47,7 +47,7 @@ export default defineComponent({
          */
         const onClickFullScreenHandle = () => {
             if (!screenfull.isEnabled) {
-                ElMessage.warning(t("layouts.components.NavMenus.您的浏览器不支持全屏，请更换浏览器再试~"));
+                ElMessage.warning(t("layouts.components.NavMenu.您的浏览器不支持全屏，请更换浏览器再试~"));
                 return false;
             }
             screenfull.toggle();

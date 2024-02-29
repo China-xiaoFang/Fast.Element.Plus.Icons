@@ -71,7 +71,7 @@ export const useConfig = defineStore(
             // 侧边菜单顶栏背景色
             menuTopBarBackground: ["#fcfcfc", "#1d1e1f"],
             // 侧边菜单宽度(展开时)，单位px
-            menuWidth: 260,
+            menuWidth: 220,
             // 侧边菜单项默认图标
             menuDefaultIcon: "fa fa-circle-o",
             // 是否水平折叠收起菜单

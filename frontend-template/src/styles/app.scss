@@ -46,6 +46,10 @@ body,
     height: 100% !important;
 }
 
+.iframe-main {
+    margin: var(--fast-main-space);
+}
+
 /* 鼠标置入浮动效果-s */
 .suspension {
     transition: all 0.3s ease;
@@ -62,6 +66,23 @@ body,
     border-radius: 6px;
 }
 /* 鼠标置入浮动效果-e */
+
+/* 全局错误页面-s */
+.error-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .error-page-svg {
+        margin-bottom: 50px;
+        width: 400px;
+        .icon {
+            font-size: 400px !important;
+        }
+    }
+}
+/* 全局错误页面-e */
 
 /* 全局遮罩-s */
 .fast-layout-shade {

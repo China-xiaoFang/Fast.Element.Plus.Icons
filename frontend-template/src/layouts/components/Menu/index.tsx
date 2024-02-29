@@ -34,7 +34,7 @@ export default defineComponent({
          * @param currentRoute 
          */
         const currentRouteActive = (currentRoute: RouteLocationNormalizedLoaded) => {
-            state.defaultActive = currentRoute.path
+            state.defaultActive = `${currentRoute.meta.menuId}`;
         }
 
         /**

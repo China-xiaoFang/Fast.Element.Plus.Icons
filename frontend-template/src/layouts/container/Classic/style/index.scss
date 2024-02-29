@@ -4,11 +4,12 @@
 }
 
 .fast-layout-aside {
-    background: var(--ba-bg-color-overlay);
+    background: var(--fast-bg-color-overlay);
     margin: 0;
     height: 100vh;
     overflow: hidden;
     transition: width 0.3s ease;
+    border-right: solid 1px var(--el-color-info-light-8);
     &.shrink {
         position: fixed;
         top: 0;
@@ -19,19 +20,18 @@
 
 .fast-layout-logo {
     width: 100%;
-    height: 50px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     padding: 10px;
-    background: "transparent";
+    background: var(--fast-config-layout-menuTopBarBackground);
     .logo-img {
         width: 28px;
     }
     .website-name {
         display: block;
-        width: 180px;
         padding-left: 4px;
         font-size: var(--el-font-size-extra-large);
         font-weight: 600;
@@ -80,31 +80,45 @@
 
 .fast-layout-nav-bar {
     display: flex;
-    height: 40px;
-    width: 100%;
+    align-items: center;
+    height: 45px;
     background-color: var(--fast-config-layout-headerBarBackground);
+    border-bottom: solid 1px var(--el-color-info-light-8);
 }
 
 .fast-layout-hamburger {
+    align-self: center;
+    padding-left: 16px;
     &.unfold {
         align-self: center;
-        padding-left: var(--ba-main-space);
     }
 }
 
 .fast-layout-breadcrumb {
+    align-self: center;
+    padding-left: 16px;
+    .no-redirect {
+        color: #97a8be;
+        cursor: text;
+    }
+}
+
+.fast-layout-nav-module-scrollbar {
+    flex-grow: 1;
+    margin-right: 16px;
 }
 
 .fast-layout-nav-module {
-    display: flex;
-    border: 0;
-    width: 450px;
-    align-items: center;
-    height: 100%;
-    margin-left: auto;
+    border: none !important;
+    height: 44px;
+    justify-content: flex-end;
     --el-menu-bg-color: var(--fast-config-layout-menuBackground);
     --el-menu-text-color: var(--fast-config-layout-menuColor);
     --el-menu-active-color: var(--fast-config-layout-menuActiveColor);
+    .el-menu-item {
+        height: 44px;
+        line-height: 44px;
+    }
     .el-menu-item .icon {
         vertical-align: middle;
         margin-right: 5px;
@@ -205,10 +219,17 @@
 }
 
 .fast-layout-nav-tabs {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    position: relative;
+    background-color: var(--fast-config-layout-headerBarBackground);
     overflow-x: auto;
     overflow-y: hidden;
     margin-right: var(--fast-main-space);
     scrollbar-width: none;
+    border-bottom: solid 1px var(--el-color-info-light-8);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
 
     &::-webkit-scrollbar {
         height: 5px;
@@ -228,8 +249,40 @@
         }
     }
     .fast-layout-nav-tabs-item {
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        cursor: pointer;
+        z-index: 1;
+        height: 100%;
+        user-select: none;
+        color: var(--fast-config-layout-headerBarTabColor);
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
         white-space: nowrap;
         height: 40px;
+        .close-icon {
+            padding: 2px;
+            margin: 2px 0 0 4px;
+        }
+        .close-icon:hover {
+            background: var(--fast-color-primary-light);
+            color: var(--fast-border-color) !important;
+            border-radius: 50%;
+        }
+        &.active {
+            color: var(--fast-config-layout-headerBarTabActiveColor);
+        }
+        &:hover {
+            background-color: var(--fast-config-layout-headerBarHoverBackground);
+        }
+    }
+    .fast-layout-nav-tabs-active-box {
+        position: absolute;
+        height: 50px;
+        background-color: var(--fast-config-layout-headerBarTabActiveBackground);
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
     }
 }
 .fast-layout-nav-tabs.dark {
@@ -245,6 +298,7 @@
 
 .fast-layout-main {
     padding: 0 !important;
+    margin: var(--fast-main-space);
     overflow: hidden;
     width: 100%;
     height: 100%;

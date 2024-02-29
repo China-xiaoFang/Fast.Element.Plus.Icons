@@ -19,7 +19,7 @@ export default defineComponent({
                     !navTabsStore.state.tabFullScreen ? (
                         <el-aside
                             class={["fast-layout-aside", configStore.layout.shrink ? 'shrink' : ""]}
-                            style={{ width: menuWidth }}
+                            width={menuWidth.value}
                         >
                             {
                                 configStore.layout.menuShowTopBar ? (

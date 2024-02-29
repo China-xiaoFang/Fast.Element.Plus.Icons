@@ -13,13 +13,18 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 /**
- * 前缀：views.test.test
+ * 前缀：layouts.components.NavMenu
  * 使用方式：
- * i18n.global.t("views.test.test.Fast.NET")
- * t("views.test.test.Fast.NET")
- * $t("views.test.test.Fast.NET")
+ * i18n.global.t("layouts.components.NavMenu.Fast.NET")
+ * t("layouts.components.NavMenu.Fast.NET")
+ * $t("layouts.components.NavMenu.Fast.NET")
  */
 
 export default {
-    ["你好啊！"]: "你好啊！",
+    ["您的浏览器不支持全屏，请更换浏览器再试~"]: "您的瀏覽器不支援全屏，請更換瀏覽器再試~",
+    ["清理系统缓存"]: "清理系統快取",
+    ["清理浏览器缓存"]: "清理瀏覽器快取",
+    ["一键清理所有"]: "一鍵清理所有",
+    ["个人资料"]: "個人資料",
+    ["注销"]: "註銷",
 };

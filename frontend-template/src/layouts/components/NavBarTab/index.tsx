@@ -61,7 +61,7 @@ export default defineComponent({
             state.contextMenuItems[4].disabled = state.contextMenuItems[3].disabled = navTabsStore.state.navBarTabs.length == 1 ? true : false;
 
             const { clientX, clientY } = el;
-            fContextMenuRef.value.onShowContextmenu(menu, {
+            fContextMenuRef.value.show(menu, {
                 x: clientX,
                 y: clientY,
             });
@@ -114,7 +114,7 @@ export default defineComponent({
                 });
             }
 
-            fContextMenuRef.value.onHideContextmenu();
+            fContextMenuRef.value.hide();
         };
 
         /**
@@ -214,7 +214,7 @@ export default defineComponent({
                 }
                 <div
                     style={activeBoxStyle}
-                    class="fa-layout-nav-tabs-active-box"
+                    class="fast-layout-nav-tabs-active-box"
                 />
                 <FContextMenu
                     ref={fContextMenuRef}

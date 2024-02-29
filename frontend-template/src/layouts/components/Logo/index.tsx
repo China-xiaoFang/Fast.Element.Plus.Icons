@@ -11,17 +11,15 @@ export default defineComponent({
 
         return () => (
             <div class="fast-layout-logo">
+                <img class="logo-img" src={LogoImg} alt="logo" />
                 {
                     configStore.layout.menuCollapse ? (null) : (
-                        <>
-                            <img class="logo-img" src={LogoImg} alt="logo" />
-                            <div
-                                class="website-name"
-                                style={{ color: configStore.getColorVal('menuActiveColor') }}
-                            >
-                                {siteConfigStore.state.siteName}
-                            </div>
-                        </>
+                        <div
+                            class="website-name"
+                            style={{ color: configStore.getColorVal('menuActiveColor') }}
+                        >
+                            {siteConfigStore.state.siteName}
+                        </div>
                     )
                 }
             </div>

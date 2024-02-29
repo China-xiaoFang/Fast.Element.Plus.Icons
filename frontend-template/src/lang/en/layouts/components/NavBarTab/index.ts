@@ -13,19 +13,17 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 /**
- * 前缀：layouts.components.NavMenus
+ * 前缀：layouts.components.NavBarTab
  * 使用方式：
- * i18n.global.t("layouts.components.NavMenus.Fast.NET")
- * t("layouts.components.NavMenus.Fast.NET")
- * $t("layouts.components.NavMenus.Fast.NET")
+ * i18n.global.t("layouts.components.NavBarTab.Fast.NET")
+ * t("layouts.components.NavBarTab.Fast.NET")
+ * $t("layouts.components.NavBarTab.Fast.NET")
  */
 
 export default {
-    ["首页"]: "front page",
-    ["清理系统缓存"]: "Clear system cache",
-    ["清理浏览器缓存"]: "Clear browser cache",
-    ["一键清理所有"]: "Clean everything with one click",
-    ["个人资料"]: "personal information",
-    ["注销"]: "Log out",
-    ["您的浏览器不支持全屏，请更换浏览器再试~"]: "Your browser does not support full screen, please change the browser and try again~",
+    ["重新加载"]: "Reload",
+    ["关闭标签"]: "close tab",
+    ["当前标签全屏"]: "Current tab full screen",
+    ["关闭其他标签"]: "Close other tabs",
+    ["关闭全部标签"]: "Close all tabs",
 };

@@ -61,7 +61,7 @@ export default defineComponent({
         })
 
         return () => (
-            <el-scrollbar>
+            <el-scrollbar class="fast-layout-nav-module-scrollbar">
                 <el-menu
                     {...attrs}
                     class="fast-layout-nav-module"
