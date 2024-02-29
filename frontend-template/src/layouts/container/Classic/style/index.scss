@@ -96,8 +96,12 @@
 }
 
 .fast-layout-nav-module {
+    display: flex;
     border: 0;
-    padding-bottom: 30px;
+    width: 450px;
+    align-items: center;
+    height: 100%;
+    margin-left: auto;
     --el-menu-bg-color: var(--fast-config-layout-menuBackground);
     --el-menu-text-color: var(--fast-config-layout-menuColor);
     --el-menu-active-color: var(--fast-config-layout-menuActiveColor);
@@ -120,7 +124,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    margin-left: auto;
+    // margin-left: auto;
     background-color: var(--fast-config-layout-headerBarBackground);
     .fast-layout-nav-menu-item {
         height: 100%;
@@ -252,6 +256,20 @@
 }
 
 .fast-layout-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    font-size: 14px;
+    color: var(--el-text-color-secondary);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    background-color: var(--fast-config-layout-footerBackground);
+    border-top: 1px solid var(--el-border-color-light);
+    img {
+        width: 14px;
+        height: 14px;
+    }
 }
 
 .fast-layout-close-full-screen {

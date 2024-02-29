@@ -6,6 +6,10 @@ import { type AxiosResponse } from "axios";
 import * as loginApi from "@/api/login";
 import * as authApi from "@/api/auth";
 import router from "@/router";
+import { fullUrl } from "@/utils";
+import { GenderEnum } from "@/api/modules/enums/gender-enum";
+import manAvatar from "@/assets/images/manAvatar.png";
+import womanAvatar from "@/assets/images/womanAvatar.png";
 
 export const useUserInfo = defineStore("userInfo", {
     state: (): UserInfo => {
@@ -116,6 +120,23 @@ export const useUserInfo = defineStore("userInfo", {
                 return { token: `Bearer ${token}`, refreshToken: null, tokenData: jwtToken };
             }
             return { token: null, refreshToken: null, tokenData: null };
+        },
+        /**
+         * 获取头像
+         * @returns
+         */
+        getAvatar() {
+            if (this.avatar) {
+                return fullUrl(this.avatar);
+            } else {
+                switch (this.sex) {
+                    case GenderEnum.Unknown:
+                    case GenderEnum.Man:
+                        return manAvatar;
+                    case GenderEnum.Woman:
+                        return womanAvatar;
+                }
+            }
         },
         /**
          * 刷新用户信息

@@ -175,9 +175,6 @@ export default defineComponent({
                                             {t("layouts.components.NavMenu.一键清理所有")}
                                         </el-dropdown-item>
                                     ) : null}
-                                    <el-dropdown-item onClick={() => onClickClearCacheHandle("storage")}>
-                                        {t("layouts.components.NavMenu.清理浏览器缓存")}
-                                    </el-dropdown-item>
                                 </>
                             </el-dropdown-menu>
                         ),
@@ -197,7 +194,7 @@ export default defineComponent({
                         reference: () => (
                             <div class={["user-info", state.currentNavMenu === "userInfo" ? "hover" : ""]}>
                                 <el-avatar size={25} fit="fill">
-                                    <img src={fullUrl(userInfo.avatar)} alt="" />
+                                    <img src={userInfo.getAvatar()} alt="" />
                                 </el-avatar>
                                 <div class="user-name">{userInfo.nickName ?? userInfo.userName}</div>
                             </div>
@@ -206,7 +203,7 @@ export default defineComponent({
                             <div>
                                 <div class="user-info-base">
                                     <el-avatar size={70} fit="fill">
-                                        <img src={fullUrl(userInfo.avatar)} alt="" />
+                                        <img src={userInfo.getAvatar()} alt="" />
                                     </el-avatar>
                                     <div class="user-info-other">
                                         <div class="user-info-name">{userInfo.nickName ?? userInfo.userName}</div>

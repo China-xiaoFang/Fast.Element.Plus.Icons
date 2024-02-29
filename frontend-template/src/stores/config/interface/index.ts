@@ -169,4 +169,10 @@ export interface Layout {
      * @memberof Layout
      */
     headerBarHoverBackground: string[];
+    /**
+     * 页脚背景色
+     * @type {Array<string>}
+     * @memberof Layout
+     */
+    footerBackground: string[];
 }

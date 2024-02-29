@@ -20,6 +20,7 @@ export default defineComponent({
             defaultActive: '',
             currentModuleId: null
         })
+
         /**
          * 激活当前路由的模块
          * @param currentRoute 
@@ -63,23 +64,24 @@ export default defineComponent({
         })
 
         return () => (
-            <el-scrollbar>
-                <el-menu
-                    {...attrs}
-                    class="fast-layout-nav-module"
-                    collapseTransition={false}
-                    defaultActive={state.defaultActive}
-                >
-                    {
-                        userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => {
-                            <el-menu-item index={module.id} onclick={() => currentRouteActive(module.id)}>
-                                <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
-                                <span>{module.moduleName}</span>
-                            </el-menu-item>
-                        })
-                    }
-                </el-menu>
-            </el-scrollbar>
+            // <el-scrollbar>
+            <el-menu
+                {...attrs}
+                class="fast-layout-nav-module"
+                mode="horizontal"
+                collapseTransition={false}
+                defaultActive={state.defaultActive}
+            >
+                {
+                    userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => (
+                        <el-menu-item index={module.id} onclick={() => currentRouteActive(module.id)}>
+                            <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
+                            <span>{module.moduleName}</span>
+                        </el-menu-item>
+                    ))
+                }
+            </el-menu>
+            // </el-scrollbar>
         );
     },
 });
