@@ -81,6 +81,17 @@ public class UnifyResponseProvider : IUnifyResponseProvider
         return await Task.FromResult((statusCode, message));
     }
 
+    /// <summary>响应数据验证异常处理</summary>
+    /// <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext" /></param>
+    /// <param name="metadata"><see cref="T:Fast.UnifyResult.Metadatas.ValidationMetadata" /> 验证信息元数据</param>
+    /// <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> 请求上下文</param>
+    /// <returns></returns>
+    public async Task ResponseValidationExceptionAsync(ActionExecutingContext context, ValidationMetadata metadata,
+        HttpContext httpContext)
+    {
+        await Task.CompletedTask;
+    }
+
     /// <summary>
     /// 响应数据处理
     /// <remarks>只有响应成功且为正常返回才会调用</remarks>
