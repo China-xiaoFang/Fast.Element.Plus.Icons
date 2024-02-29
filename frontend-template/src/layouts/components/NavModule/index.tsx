@@ -27,20 +27,17 @@ export default defineComponent({
          */
         const currentRouteActive = (moduleId: number | null) => {
             if (moduleId) {
-                state.defaultActive = `${moduleId}`;
+                state.currentModuleId = moduleId;
             } else {
-                // 判断是否存在历史模块
-                if (state.currentModuleId) {
-                    // 使用历史模块
-                    state.defaultActive = `${state.currentModuleId}`;
-                } else {
+                // 判断是否存在历史模块，如果存在则不改变
+                if (!state.currentModuleId) {
                     // 默认激活第一个模块
-                    state.defaultActive = `${userInfoStore.moduleList[0].id}`;
+                    state.currentModuleId = userInfoStore.moduleList[0].id;
                 }
             }
-            state.currentModuleId = moduleId;
+            state.defaultActive = `${state.currentModuleId}`;
             // 查找当前模块下所有的菜单
-            navTabsStore.setTabsViewMenus(userInfoStore.menuList.filter(f => f.moduleId == moduleId));
+            navTabsStore.setTabsViewMenus(userInfoStore.menuList.filter(f => f.moduleId == state.currentModuleId));
         }
 
         /**
@@ -64,24 +61,24 @@ export default defineComponent({
         })
 
         return () => (
-            // <el-scrollbar>
-            <el-menu
-                {...attrs}
-                class="fast-layout-nav-module"
-                mode="horizontal"
-                collapseTransition={false}
-                defaultActive={state.defaultActive}
-            >
-                {
-                    userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => (
-                        <el-menu-item index={module.id} onclick={() => currentRouteActive(module.id)}>
-                            <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
-                            <span>{module.moduleName}</span>
-                        </el-menu-item>
-                    ))
-                }
-            </el-menu>
-            // </el-scrollbar>
+            <el-scrollbar>
+                <el-menu
+                    {...attrs}
+                    class="fast-layout-nav-module"
+                    mode="horizontal"
+                    collapseTransition={false}
+                    defaultActive={state.defaultActive}
+                >
+                    {
+                        userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => (
+                            <el-menu-item index={module.id} onclick={() => currentRouteActive(module.id)}>
+                                <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
+                                <span>{module.moduleName}</span>
+                            </el-menu-item>
+                        ))
+                    }
+                </el-menu>
+            </el-scrollbar >
         );
     },
 });
