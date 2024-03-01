@@ -12,7 +12,7 @@ export default defineComponent({
         return () => (
             <el-breadcrumb separator="/" class="fast-layout-breadcrumb">
                 <el-breadcrumb-item to={{ path: '/dashboard' }}>
-                    {translateTitle("pagesTitles.首页")}
+                    {translateTitle("pagesTitle.首页")}
                 </el-breadcrumb-item>
                 <>
                     {

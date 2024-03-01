@@ -5,7 +5,6 @@ import { ElMessage } from "element-plus";
 import { useI18n } from "vue-i18n";
 import { useConfig } from "@/stores/config";
 import { useUserInfo } from "@/stores/userInfo";
-import { fullUrl } from "@/utils";
 import { CACHE_USER_INFO } from "@/stores/constant";
 import { Local, Session } from "@/utils/storage";
 import FIcon from "@/components/FIcon";
@@ -79,7 +78,7 @@ export default defineComponent({
 
         return () => (
             <div class="fast-layout-nav-menu">
-                <router-link class="h100" target="_blank" title={t("pagesTitles.首页")} to="/">
+                <router-link class="h100" target="_blank" title={t("pagesTitle.首页")} to="/">
                     <div class="fast-layout-nav-menu-item">
                         <FIcon
                             class="fast-layout-nav-menu-icon"

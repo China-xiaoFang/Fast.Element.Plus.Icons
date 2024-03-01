@@ -71,8 +71,8 @@ export const useNavTabs = defineStore(
             if (typeof route.meta.title == "string") {
                 // 这里使用别名，避免被国际化工具匹配到
                 const { t: translateTitle } = i18n.global;
-                // 这里默认直接使用 pagesTitles. 中的翻译内容
-                route.meta.title = translateTitle(`pagesTitles.${route.meta.title}`);
+                // 这里默认直接使用 pagesTitle. 中的翻译内容
+                route.meta.title = translateTitle(`pagesTitle.${route.meta.title}`);
             }
 
             // 判断是否存在于已经添加的tab中

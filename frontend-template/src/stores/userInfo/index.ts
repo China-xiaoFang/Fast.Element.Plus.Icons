@@ -18,8 +18,6 @@ export const useUserInfo = defineStore("userInfo", {
             token: "",
             // Refresh Token
             refreshToken: "",
-            // 动态生成路由
-            asyncRouterGen: false,
             tenantId: null,
             tenantNo: null,
             userId: null,
@@ -154,8 +152,6 @@ export const useUserInfo = defineStore("userInfo", {
          */
         login(): void {
             ElMessage.success("登录成功");
-            // 确保 getLoginUser 获取用户信息
-            this.asyncRouterGen = false;
             // 进入系统
             router.push({ path: "/" });
         },

@@ -9,7 +9,7 @@
   "AllowedHosts": "*",
   "AppSettings": {
     // 请求加密解密
-    "RequestCipher": false,
+    "RequestCipher": "true",
     // 初始化 Database
     "InitializeDatabase": false
   },

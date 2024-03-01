@@ -3,7 +3,6 @@ import App from "./App.vue";
 import store from "@/stores";
 import { loadLang } from "@/lang";
 import router from "@/router";
-import "@/router/permission";
 import mitt from "mitt";
 
 import { loadPlugins } from "@/plugins";

@@ -21,10 +21,4 @@ export interface UserInfo extends GetLoginUserInfoOutput {
      * @memberof UserInfo
      */
     refreshToken: string;
-    /**
-     * 动态生成路由
-     * @type {boolean}
-     * @memberof UserInfo
-     */
-    asyncRouterGen: boolean;
 }

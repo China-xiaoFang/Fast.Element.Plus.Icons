@@ -160,7 +160,7 @@ internal class SysMenuDataSource
         {
             Id = YitIdHelper.NextId(),
             MenuCode = null,
-            MenuName = "菜单管理",
+            MenuName = "系统管理",
             MenuTitle = "",
             ParentId = 0,
             ModuleId = sysModule3.Id,
@@ -235,6 +235,46 @@ internal class SysMenuDataSource
             Sort = 991
         };
         sysButtonList.Add(sysButton3_6_1);
+
+        var sysMenu3_7 = new SysMenuModel
+        {
+            Id = YitIdHelper.NextId(),
+            MenuCode = "SysConfig:Paged",
+            MenuName = "系统配置",
+            MenuTitle = "系统配置",
+            ParentId = sysMenu3_4.Id,
+            ModuleId = sysModule3.Id,
+            MenuType = MenuTypeEnum.Menu,
+            Icon = "fa-book",
+            Router = "/sysConfig/paged",
+            Component = "sysConfig/index",
+            Link = null,
+            Visible = YesOrNotEnum.Y,
+            IsSystem = YesOrNotEnum.Y,
+            Sort = 990,
+            Status = CommonStatusEnum.Enable
+        };
+        sysMenuList.Add(sysMenu3_7);
+
+        var sysButton3_7_1 = new SysButtonModel
+        {
+            Id = YitIdHelper.NextId(),
+            ButtonCode = "SysConfig:Add",
+            ButtonName = "添加系统配置",
+            MenuId = sysMenu3_7.Id,
+            Sort = 989
+        };
+        sysButtonList.Add(sysButton3_7_1);
+
+        var sysButton3_7_2 = new SysButtonModel
+        {
+            Id = YitIdHelper.NextId(),
+            ButtonCode = "SysConfig:Update",
+            ButtonName = "更新系统配置",
+            MenuId = sysMenu3_7.Id,
+            Sort = 987
+        };
+        sysButtonList.Add(sysButton3_7_2);
 
         #endregion
 
