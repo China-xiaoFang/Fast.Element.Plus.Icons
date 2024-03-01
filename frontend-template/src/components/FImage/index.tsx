@@ -1,6 +1,6 @@
 import { SetupContext, defineComponent, watch, reactive } from "vue";
 import type { Props } from "./interface";
-import styles from "./style/index.module.scss"
+import "./style/index.scss"
 import FIcon from "@/components/FIcon";
 
 export default defineComponent({
@@ -70,7 +70,7 @@ export default defineComponent({
         return () => (
             <el-image
                 {...attrs}
-                className={[styles["el-image-preview"]]}
+                class="f-image"
                 src={state.src}
                 preview-src-list={state.previewList}
                 hide-on-click-modal

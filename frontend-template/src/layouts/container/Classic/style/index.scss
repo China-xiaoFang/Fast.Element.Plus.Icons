@@ -138,7 +138,6 @@
     display: flex;
     align-items: center;
     height: 100%;
-    // margin-left: auto;
     background-color: var(--fast-config-layout-headerBarBackground);
     .fast-layout-nav-menu-item {
         height: 100%;
@@ -219,18 +218,17 @@
 }
 
 .fast-layout-nav-tabs {
-    display: flex;
     height: 30px;
     width: 100%;
-    position: relative;
     background-color: var(--fast-config-layout-headerBarBackground);
     overflow-x: auto;
     overflow-y: hidden;
-    margin-right: var(--fast-main-space);
     scrollbar-width: none;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
     border-bottom: solid 1px var(--el-color-info-light-8);
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-
     &::-webkit-scrollbar {
         height: 5px;
     }
@@ -248,33 +246,81 @@
             background: #c8c9cc;
         }
     }
-    .fast-layout-nav-tabs-item {
+    .fast-layout-nav-tabs-icon {
+        height: 100%;
+        width: 35px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 20px;
         cursor: pointer;
-        z-index: 1;
-        height: 100%;
-        user-select: none;
-        color: var(--fast-config-layout-headerBarTabColor);
-        transition: all 0.2s;
-        -webkit-transition: all 0.2s;
-        white-space: nowrap;
-        height: 40px;
-        .close-icon {
-            padding: 2px;
-            margin: 2px 0 0 4px;
+        .icon {
+            box-sizing: content-box;
+            color: var(--fast-config-layout-headerBarTabColor);
         }
-        .close-icon:hover {
-            background: var(--fast-color-primary-light);
-            color: var(--fast-border-color) !important;
-            border-radius: 50%;
+        &.left {
+            box-shadow: 5px 0 5px -6px #ccc;
         }
-        &.active {
-            color: var(--fast-config-layout-headerBarTabActiveColor);
+        &.right {
+            box-shadow: -5px 0 5px -6px #ccc;
         }
         &:hover {
-            background-color: var(--fast-config-layout-headerBarHoverBackground);
+            background: var(--fast-config-layout-headerBarHoverBackground);
+            .icon {
+                animation: twinkle 0.3s ease-in-out;
+            }
+        }
+    }
+    .fast-layout-nav-tabs-content {
+        flex-grow: 1;
+        white-space: nowrap;
+        .fast-layout-nav-tabs-item {
+            display: inline-block;
+            height: 26px;
+            line-height: 26px;
+            cursor: pointer;
+            border: solid 1px var(--el-color-info-light-8);
+            border-radius: var(--el-border-radius-base);
+            color: var(--fast-config-layout-headerBarTabColor);
+            padding: 0 8px;
+            font-size: 14px;
+            margin-top: 1px;
+            &:first-of-type {
+                margin-left: 5px;
+            }
+            &:last-of-type {
+                margin-right: 5px;
+            }
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+            white-space: nowrap;
+            .close-icon {
+                padding: 2px;
+                margin: 2px 0 0 4px;
+            }
+            .close-icon:hover {
+                background: var(--fast-color-primary-light);
+                color: var(--fast-border-color) !important;
+                border-radius: 50%;
+            }
+            &.active {
+                color: var(--fast-config-layout-headerBarTabActiveColor);
+                &::before {
+                    content: "";
+                    background-color: var(--fast-config-layout-headerBarTabActiveColor);
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    position: relative;
+                    margin-right: 2px;
+                }
+            }
+            &:hover {
+                background-color: var(--fast-config-layout-headerBarHoverBackground);
+            }
         }
     }
     .fast-layout-nav-tabs-active-box {

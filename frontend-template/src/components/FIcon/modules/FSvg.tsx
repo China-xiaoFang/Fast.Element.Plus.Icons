@@ -1,7 +1,7 @@
 import { defineComponent, computed, type CSSProperties } from "vue";
 import type { Props } from "../interface";
-import { isExternal } from "@/utils/validate";
 import "./style/index.scss"
+import { isExternal } from "@/utils/validate";
 
 export default defineComponent({
     name: "FSvg",

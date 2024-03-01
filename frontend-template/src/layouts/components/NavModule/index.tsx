@@ -71,7 +71,7 @@ export default defineComponent({
                 >
                     {
                         userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => (
-                            <el-menu-item index={module.id} onclick={() => currentRouteActive(module.id)}>
+                            <el-menu-item index={module.id} onClick={() => currentRouteActive(module.id)}>
                                 <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
                                 <span>{module.moduleName}</span>
                             </el-menu-item>

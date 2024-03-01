@@ -22,6 +22,11 @@ export default defineComponent({
 
         const fContextMenuRef = ref();
 
+        const activeBoxStyle = reactive({
+            width: '0',
+            transform: 'translateX(0px)',
+        })
+
         const { t } = useI18n();
 
         const state: {
@@ -34,11 +39,6 @@ export default defineComponent({
                 { name: "closeOther", label: t("layouts.components.NavBarTab.关闭其他标签"), icon: "fa fa-minus" },
                 { name: "closeAll", label: t("layouts.components.NavBarTab.关闭全部标签"), icon: "fa fa-stop" },
             ],
-        });
-
-        const activeBoxStyle = reactive({
-            width: "0",
-            transform: "translateX(0px)",
         });
 
         /**
@@ -183,39 +183,55 @@ export default defineComponent({
         });
 
         return () => (
-            <div class="fast-layout-nav-tabs" ref={tabScrollbarRef}>
-                {
-                    navTabsStore.state.navBarTabs.map((item, index) => (
-                        <div
-                            onClick={() => onClickTabHandle(item)}
-                            onContextmenu={withModifiers((event: Event) => onContextMenuHandle(item, event as MouseEvent), ["prevent"])}
-                            // onContextmenu={(e) => { e.preventDefault(); onContextMenuHandle(item, e) }}
-                            class={["fast-layout-nav-tabs-item", navTabsStore.state.activeIndex == index ? "active" : ""]}
-                            ref={tabsRefs.value.set}
-                            key={index}
-                        >
-                            {item.meta.title}
-                            {
-                                !item.meta.affix ? (
-                                    <Transition
-                                        name="el-fade-in"
-                                        onAfterLeave={() => { selectNavTabHandle(tabsRefs.value[navTabsStore.state.activeIndex]) }}
-                                    >
+            <div class="fast-layout-nav-tabs">
+                <div class="fast-layout-nav-tabs-icon left" onClick={() => { console.log(1) }} >
+                    <FIcon name="el-icon-ArrowLeft" />
+                </div>
+                <div ref={tabScrollbarRef} class="fast-layout-nav-tabs-content">
+                    {
+                        navTabsStore.state.navBarTabs.map((item, index) => (
+                            <div
+                                onClick={() => onClickTabHandle(item)}
+                                onAuxClick={(event: MouseEvent) => { console.log('中建点击') }}
+                                onContextmenu={withModifiers((event: Event) => onContextMenuHandle(item, event as MouseEvent), ["prevent"])}
+                                class={["fast-layout-nav-tabs-item", navTabsStore.state.activeIndex == index ? "active" : ""]}
+                                ref={tabsRefs.value.set}
+                                key={index}
+                            >
+                                {item.meta.title}
+                                <Transition
+                                    name="el-fade-in"
+                                    onAfterLeave={() => { selectNavTabHandle(tabsRefs.value[navTabsStore.state.activeIndex]) }}
+                                ></Transition>
+                                {
+                                    !item.meta.affix ? (
                                         <FIcon
                                             class="close-icon"
                                             onClick={withModifiers(() => onClickCloseTabHandle(item), ["stop"])}
                                             size="15"
                                             name="el-icon-Close" />
-                                    </Transition>
-                                ) : (null)
-                            }
-                        </div>
-                    ))
-                }
-                <div
+                                    ) : (
+                                        <FIcon
+                                            class="close-icon"
+                                            onClick={withModifiers(() => onClickCloseTabHandle(item), ["stop"])}
+                                            size="15"
+                                            name="el-icon-Close" />
+                                    )
+                                }
+                            </div>
+                        ))
+                    }
+                </div>
+                <div class="fast-layout-nav-tabs-icon right" onClick={() => { console.log(1) }} >
+                    <FIcon name="el-icon-ArrowRight" />
+                </div>
+                <div class="fast-layout-nav-tabs-icon screenFull" onClick={() => { console.log(1) }} >
+                    <FIcon name="el-icon-FullScreen" />
+                </div>
+                {/* <div
                     style={activeBoxStyle}
                     class="fast-layout-nav-tabs-active-box"
-                />
+                /> */}
                 <FContextMenu
                     ref={fContextMenuRef}
                     items={state.contextMenuItems}

@@ -1,6 +1,6 @@
 import { defineComponent, SetupContext, onMounted, reactive, toRaw, Transition } from "vue";
 import { useEventListener } from "@vueuse/core";
-import styles from "./style/index.module.scss"
+import "./style/index.scss"
 import FIcon from "@/components/FIcon";
 import type { Axis, ContextMenuItem, ContextMenuItemClickEmitArg, Props, Emits } from "./interface";
 import { RouteLocationNormalized } from "vue-router";
@@ -70,8 +70,7 @@ export default defineComponent({
         return () => (
             <Transition name="el-zoom-in-center" {...attrs}>
                 <div
-                    className={[styles["f-contextMenu"]]}
-                    class="el-popper is-pure is-light el-dropdown__popper"
+                    class="el-popper is-pure is-light el-dropdown__popper f-contextMenu"
                     style={`top: ${state.axis.y + 5}px;left: ${state.axis.x - 14}px;width:${props.width}px`}
                     key={Math.random()}
                     v-show={state.show}
@@ -81,7 +80,6 @@ export default defineComponent({
                     <ul class="el-dropdown-menu">
                         {props.items.map((item: any, index: number) => (
                             <li
-                                className={[styles["el-dropdown-menu__item"], item.disabled ? "is-disabled" : ""]}
                                 class={`el-dropdown-menu__item ${item.disabled ? "is-disabled" : ""}`}
                                 tabindex="-1"
                                 onClick={() => onClickContextMenuItemHandle(item)}

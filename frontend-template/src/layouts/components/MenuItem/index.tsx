@@ -35,7 +35,7 @@ export default defineComponent({
                                 }}
                             </el-sub-menu>
                         ) : (
-                            <el-menu-item index={`${menu.id}`} onclick={() => onClickMenu(menu)}>
+                            <el-menu-item index={`${menu.id}`} onClick={() => onClickMenu(menu)}>
                                 <FIcon color={configStore.getColorVal("menuColor")} name={menu.icon ? menu.icon : configStore.layout.menuDefaultIcon} />
                                 <span>{menu.menuName}</span>
                             </el-menu-item>

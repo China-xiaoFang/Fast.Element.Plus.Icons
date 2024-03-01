@@ -1,5 +1,6 @@
 import { SetupContext, defineComponent, ref, reactive, PropType, watch, toRefs } from "vue";
 import type { Props, Emits, State } from "./interface";
+import "./style/index.scss"
 import { ElDialog, ElLoading, ElMessageBox } from "element-plus";
 import FIcon from "@/components/FIcon";
 import { useI18n } from "vue-i18n";
@@ -173,21 +174,20 @@ export default defineComponent({
                 {{
                     header: () => (
                         <>
-                            {attrs.title}
-                            {slots.header && slots.header()}
+                            <div class="f-dialog-header">
+                                {attrs.title}
+                                {slots.header && slots.header()}
+                            </div>
                             {
                                 props.showFullscreen ? (
                                     <el-tooltip
                                         content={state.fullscreen ? t("components.FDialog.关闭全屏显示") : t("components.FDialog.全屏显示")}
                                         placement="bottom"
+                                        showAfter={1000}
                                     >
-                                        <el-button
-                                            class="f-dialog-header-fullscreen"
-                                            link
-                                            onClick={() => state.fullscreen = !state.fullscreen}
-                                        >
+                                        <div class="f-dialog-header-icon" onClick={() => state.fullscreen = !state.fullscreen}>
                                             <FIcon name={state.fullscreen ? "local-fullscreen-exit" : "local-fullscreen"} />
-                                        </el-button>
+                                        </div>
                                     </el-tooltip>
                                 ) : (null)
                             }
@@ -196,14 +196,11 @@ export default defineComponent({
                                     <el-tooltip
                                         content={t("components.FDialog.关闭")}
                                         placement="bottom"
+                                        showAfter={1000}
                                     >
-                                        <el-button
-                                            class="f-dialog-header-close"
-                                            link
-                                            onClick={close}
-                                        >
+                                        <div class="f-dialog-header-icon" onClick={close}>
                                             <FIcon name="el-icon-Close" />
-                                        </el-button>
+                                        </div>
                                     </el-tooltip>
                                 ) : (null)
                             }
@@ -211,7 +208,7 @@ export default defineComponent({
                     ),
                     default: () => (
                         props.scrollbar ? (
-                            <el-scrollbar>
+                            <el-scrollbar class="f-dialog-scrollbar">
                                 {slots.default && slots.default(state)}
                             </el-scrollbar>
                         ) : (

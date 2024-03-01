@@ -70,7 +70,7 @@ export default defineComponent({
         return () => (
             <>
                 {props.columns.length ? (
-                    <div class="el-card table-search">
+                    <div class="el-card f-table-search">
                         <el-form model={props.searchParam} nativeOnSubmit>
                             <Grid ref={gridRef} collapsed={false} gap={[20, 0]} cols={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }}>
                                 {props.columns.slice(0, 4).map((item, index) => (
@@ -88,10 +88,18 @@ export default defineComponent({
                                 ))}
                                 <GridItem suffix>
                                     <div class="operation">
-                                        <el-tooltip content={t("components.FTable.modules.SearchForm.刷新")} placement="top">
+                                        <el-tooltip
+                                            content={t("components.FTable.modules.SearchForm.刷新")}
+                                            placement="top"
+                                            showAfter={1000}
+                                        >
                                             <el-button loading={props.loading} type="primary" icon={Refresh} onClick={props.search}></el-button>
                                         </el-tooltip>
-                                        <el-tooltip content={t("components.FTable.modules.SearchForm.重置")} placement="top">
+                                        <el-tooltip
+                                            content={t("components.FTable.modules.SearchForm.重置")}
+                                            placement="top"
+                                            showAfter={1000}
+                                        >
                                             <el-button loading={props.loading} icon={Delete} onClick={props.reset}></el-button>
                                         </el-tooltip>
                                         {showCollapse && (

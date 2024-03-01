@@ -493,7 +493,7 @@ export default defineComponent({
         });
 
         return () => (
-            <>
+            <div class="f-table">
                 {
                     props.showSearchForm ? (
                         <SearchForm
@@ -564,6 +564,7 @@ export default defineComponent({
                                                             class="f-table-main-header-box-item"
                                                             placement="top"
                                                             content={state.showSearch ? t("components.FTable.隐藏搜索栏") : t("components.FTable.显示搜索栏")}
+                                                            showAfter={1000}
                                                         >
                                                             <el-button
                                                                 loading={state.loading}
@@ -580,6 +581,7 @@ export default defineComponent({
                                                             class="f-table-main-header-box-item"
                                                             placement="top"
                                                             content={t("components.FTable.高级操作")}
+                                                            showAfter={1000}
                                                         >
                                                             <el-dropdown trigger="click" style="margin-left: 12px">
                                                                 {{
@@ -744,7 +746,7 @@ export default defineComponent({
                     }
                     {slots.tableFooter && slots.tableFooter()}
                 </div>
-            </>
+            </div>
         )
     },
 });

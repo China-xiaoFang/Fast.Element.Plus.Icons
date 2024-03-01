@@ -82,7 +82,6 @@ export default defineComponent({
                 <router-link class="h100" target="_blank" title={t("pagesTitles.首页")} to="/">
                     <div class="fast-layout-nav-menu-item">
                         <FIcon
-                            color={configStore.getColorVal("headerBarTabColor")}
                             class="fast-layout-nav-menu-icon"
                             name="el-icon-Monitor"
                             size="18"
@@ -102,7 +101,6 @@ export default defineComponent({
                         default: () => (
                             <div class={["fast-layout-nav-menu-item pt2", state.currentNavMenu === "lang" ? "hover" : ""]}>
                                 <FIcon
-                                    color={configStore.getColorVal("headerBarTabColor")}
                                     class="fast-layout-nav-menu-icon"
                                     name="local-lang"
                                     size="18"
@@ -125,14 +123,12 @@ export default defineComponent({
                 <div class={["fast-layout-nav-menu-item", state.isFullScreen ? "hover" : ""]} onClick={onClickFullScreenHandle}>
                     {state.isFullScreen ? (
                         <FIcon
-                            color={configStore.getColorVal("headerBarTabColor")}
                             class="fast-layout-nav-menu-icon"
                             name="local-full-screen-cancel"
                             size="18"
                         />
                     ) : (
                         <FIcon
-                            color={configStore.getColorVal("headerBarTabColor")}
                             class="fast-layout-nav-menu-icon"
                             name="el-icon-FullScreen"
                             size="18"
@@ -152,7 +148,6 @@ export default defineComponent({
                         default: () => (
                             <div class={["fast-layout-nav-menu-item pt2", state.currentNavMenu === "clear" ? "hover" : ""]}>
                                 <FIcon
-                                    color={configStore.getColorVal("headerBarTabColor")}
                                     class="fast-layout-nav-menu-icon"
                                     name="el-icon-Delete"
                                     size="18"
@@ -223,7 +218,7 @@ export default defineComponent({
                     }}
                 </el-popover>
                 <div class="fast-layout-nav-menu-item" onClick={() => configStore.setLayout("showSettingDrawer", true)}>
-                    <FIcon color={configStore.getColorVal("headerBarTabColor")} class="fast-layout-nav-menu-icon" name="fa fa-cogs" size="18" />
+                    <FIcon  class="fast-layout-nav-menu-icon" name="fa fa-cogs" size="18" />
                 </div>
             </div>
         );
