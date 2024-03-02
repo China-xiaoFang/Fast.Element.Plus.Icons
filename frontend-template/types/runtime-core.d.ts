@@ -17,6 +17,11 @@ declare module "vue-router" {
          */
         authForbidView?: boolean;
         /**
+         * 跳过登录
+         * 默认是 false，为 true 是代表不用登录即可进入该页面
+         */
+        noLogin?: boolean;
+        /**
          * 路由类型
          * @description 可选值 "tab" | "iframe"
          * @description "tab" 标签，也就是实际的路由页面

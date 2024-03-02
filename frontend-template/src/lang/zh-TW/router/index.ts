@@ -13,14 +13,14 @@
 // 无论是因合同、侵权或其他方式引起的，与软件或其使用或其他交易有关。
 
 /**
- * 前缀：layouts
+ * 前缀：router
  * 使用方式：
- * i18n.global.t("layouts.Fast.NET")
- * t("layouts.Fast.NET")
- * $t("layouts.Fast.NET")
+ * i18n.global.t("router.Fast.NET")
+ * t("router.Fast.NET")
+ * $t("router.Fast.NET")
  */
 
 export default {
-    ["请登录"]: "请登录",
-    ["欢迎"]: "欢迎",
+    ["请登录"]: "請登入",
+    ["欢迎"]: "歡迎",
 };

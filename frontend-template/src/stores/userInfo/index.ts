@@ -10,66 +10,48 @@ import { fullUrl } from "@/utils";
 import { GenderEnum } from "@/api/modules/enums/gender-enum";
 import manAvatar from "@/assets/images/manAvatar.png";
 import womanAvatar from "@/assets/images/womanAvatar.png";
+import { reactive } from "vue";
+import { GetLoginUserInfoOutput } from "@/api/modules/get-login-user-info-output";
 
-export const useUserInfo = defineStore("userInfo", {
-    state: (): UserInfo => {
-        return {
+export const useUserInfo = defineStore(
+    "userInfo",
+    () => {
+        const state: UserInfo = reactive({
             // Token
             token: "",
             // Refresh Token
             refreshToken: "",
-            tenantId: null,
-            tenantNo: null,
-            userId: null,
-            account: null,
-            jobNumber: null,
-            userName: null,
-            nickName: null,
-            avatar: null,
-            birthday: null,
-            sex: null,
-            email: null,
-            mobile: null,
-            tel: null,
-            departmentId: null,
-            departmentName: null,
-            isSuperAdmin: null,
-            isSystemAdmin: null,
-            lastLoginDevice: null,
-            lastLoginOS: null,
-            lastLoginBrowser: null,
-            lastLoginProvince: null,
-            lastLoginCity: null,
-            lastLoginIp: null,
-            lastLoginTime: null,
-            appEnvironment: null,
-            appOrigin: null,
-            roleNameList: null,
-            buttonCodeList: null,
-            moduleList: null,
-            menuList: null,
-        };
-    },
-    actions: {
+            // 动态生成路由
+            asyncRouterGen: false,
+        });
+
+        /**
+         * 用户信息
+         */
+        const localUserInfo: GetLoginUserInfoOutput = reactive({});
+
         /**
          * 设置用户信息
-         * @param userInfo
+         * @param info
          */
-        setUserInfo(userInfo: UserInfo): void {
-            this.$state = { ...this.$state, ...userInfo };
-        },
+        const setUserInfo = (userInfo: GetLoginUserInfoOutput): void => {
+            Object.keys(userInfo).forEach((key) => {
+                localUserInfo[key] = userInfo[key];
+            });
+        };
+
         /**
          * 删除 Token
          */
-        removeToken(): void {
-            this.token = "";
-            this.refreshToken = "";
-        },
+        const removeToken = (): void => {
+            (state.token = ""), (state.refreshToken = "");
+        };
+
         /**
          * 设置 Token
          * @param axiosResponse
          */
-        setToken(axiosResponse: AxiosResponse): void {
+        const setToken = (axiosResponse: AxiosResponse): void => {
             // 从请求头部中获取 Token
             const token = axiosResponse.headers["access-token"];
             // 从请求头部中获取 Refresh Token
@@ -77,21 +59,23 @@ export const useUserInfo = defineStore("userInfo", {
             // 判断是否为无效 Token
             if (token === "invalid_token") {
                 // 删除 Token
-                this.removeToken();
+                removeToken();
             } else if (token && refreshToken && refreshToken !== "invalid_token") {
                 // 设置 Token
-                this.token = token;
-                this.refreshToken = refreshToken;
+                state.token = token;
+                state.refreshToken = refreshToken;
             }
-        },
+        };
+
         /**
          * 获取 Token
          * @description 从缓存中获取
          * @returns
          */
-        getToken(): { token: string | null; refreshToken: string | null } {
-            return { token: this.token, refreshToken: this.refreshToken };
-        },
+        const getToken = (): { token: string | null; refreshToken: string | null } => {
+            return { token: state.token, refreshToken: state.refreshToken };
+        };
+
         /**
          * 解析Token
          * @description 如果Token过期，会解析不出来
@@ -99,12 +83,12 @@ export const useUserInfo = defineStore("userInfo", {
          * @param refreshToken 可以传入，也可以直接获取 pinia 中的
          * @returns
          */
-        resolveToken(
+        const resolveToken = (
             token: string | null = null,
             refreshToken: string | null = null
-        ): { token: string | null; refreshToken: string | null; tokenData: anyObj | null } {
-            token ??= this.token;
-            refreshToken ??= this.refreshToken;
+        ): { token: string | null; refreshToken: string | null; tokenData: anyObj | null } => {
+            token ??= state.token;
+            refreshToken ??= state.refreshToken;
             if (token) {
                 // 解析 JwtToken
                 const jwtToken = JSON.parse(
@@ -118,16 +102,17 @@ export const useUserInfo = defineStore("userInfo", {
                 return { token: `Bearer ${token}`, refreshToken: null, tokenData: jwtToken };
             }
             return { token: null, refreshToken: null, tokenData: null };
-        },
+        };
+
         /**
          * 获取头像
          * @returns
          */
-        getAvatar() {
-            if (this.avatar) {
-                return fullUrl(this.avatar);
+        const getAvatar = (): string => {
+            if (localUserInfo.avatar) {
+                return fullUrl(localUserInfo.avatar);
             } else {
-                switch (this.sex) {
+                switch (localUserInfo.sex) {
                     case GenderEnum.Unknown:
                     case GenderEnum.Man:
                         return manAvatar;
@@ -135,39 +120,62 @@ export const useUserInfo = defineStore("userInfo", {
                         return womanAvatar;
                 }
             }
-        },
+        };
+
         /**
          * 刷新用户信息
          */
-        async refreshUserInfo() {
+        const refreshUserInfo = async (): Promise<void> => {
             const userInfo = await authApi.getLoginUserInfo();
             if (userInfo.success) {
-                this.$state = { ...this.$state, ...userInfo.data };
+                setUserInfo(userInfo.data);
             } else {
                 throw new Error(userInfo.message);
             }
-        },
+        };
+
         /**
          * 登录
          */
-        login(): void {
+        const login = (): void => {
             ElMessage.success("登录成功");
+            // 确保 getLoginUser 获取用户信息
+            state.asyncRouterGen = false;
             // 进入系统
             router.push({ path: "/" });
-        },
+        };
+
         /**
          * 退出登录
          */
-        logout(): void {
-            this.removeToken();
+        const logout = (): void => {
+            removeToken();
             // 调用退出登录的接口
             loginApi.logout().finally(() => {
                 // next({ path: "/login", query: })
                 router.push({ path: "/login", query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } });
             });
+        };
+
+        return {
+            state,
+            userInfo: localUserInfo,
+            setUserInfo,
+            removeToken,
+            setToken,
+            getToken,
+            resolveToken,
+            getAvatar,
+            refreshUserInfo,
+            login,
+            logout,
+        };
+    },
+    {
+        persist: {
+            key: STORE_USER_INFO,
+            // 这里是配置 pinia 只需要持久化 token 和 refreshToken 即可，而不是整个 store
+            paths: ["state.token", "state.refreshToken"],
         },
-    },
-    persist: {
-        key: STORE_USER_INFO,
-    },
-});
+    }
+);

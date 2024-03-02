@@ -12,12 +12,12 @@ import LayoutCloseFullScreen from "@/layouts/components/CloseFullScreen";
 import { useConfig } from "@/stores/config";
 import { useNavTabs } from "@/stores/navTabs";
 
-const configStore = useConfig();
-const navTabsStore = useNavTabs();
-
 export default defineComponent({
     name: "LayoutClassic",
     setup() {
+        const configStore = useConfig();
+        const navTabsStore = useNavTabs();
+
         return () => (
             <>
                 <el-container class="fast-layout-container">

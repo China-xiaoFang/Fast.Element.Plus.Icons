@@ -32,12 +32,12 @@ export default defineComponent({
                 // 判断是否存在历史模块，如果存在则不改变
                 if (!state.currentModuleId) {
                     // 默认激活第一个模块
-                    state.currentModuleId = userInfoStore.moduleList[0].id;
+                    state.currentModuleId = userInfoStore.userInfo.moduleList[0].id;
                 }
             }
             state.defaultActive = `${state.currentModuleId}`;
             // 查找当前模块下所有的菜单
-            navTabsStore.setTabsViewMenus(userInfoStore.menuList.filter(f => f.moduleId == state.currentModuleId));
+            navTabsStore.setTabsViewMenus(userInfoStore.userInfo.menuList.filter(f => f.moduleId == state.currentModuleId));
         }
 
         /**
@@ -70,7 +70,7 @@ export default defineComponent({
                     defaultActive={state.defaultActive}
                 >
                     {
-                        userInfoStore.moduleList.map((module: GetLoginModuleInfoDto) => (
+                        userInfoStore.userInfo.moduleList.map((module: GetLoginModuleInfoDto) => (
                             <el-menu-item index={module.id} onClick={() => currentRouteActive(module.id)}>
                                 <FIcon color={configStore.getColorVal("menuColor")} name={module.icon ? module.icon : configStore.layout.menuDefaultIcon} />
                                 <span>{module.moduleName}</span>

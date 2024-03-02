@@ -12,12 +12,12 @@ export default defineComponent({
         return () => (
             <el-breadcrumb separator="/" class="fast-layout-breadcrumb">
                 <el-breadcrumb-item to={{ path: '/dashboard' }}>
-                    {translateTitle("pagesTitle.首页")}
+                    {translateTitle("pageTitle.首页")}
                 </el-breadcrumb-item>
                 <>
                     {
                         route.meta.categories?.map((item: string) => (
-                            <el-breadcrumb-item>{{ item }}</el-breadcrumb-item>
+                            <el-breadcrumb-item>{item}</el-breadcrumb-item>
                         ))
                     }
                 </>

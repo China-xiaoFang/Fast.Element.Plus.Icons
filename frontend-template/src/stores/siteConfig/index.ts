@@ -9,11 +9,11 @@ export const useSiteConfig = defineStore(
         // 站点配置
         const state: SiteConfig = reactive({
             // 站点名称
-            siteName: "Fast.NET",
+            siteName: "Fast.Admin",
             // 版权有效开始年份
             copyrightValidStartYear: 2018,
             // 版权有效结束年份
-            copyrightValidEndYear: 2023,
+            copyrightValidEndYear: 2024,
             // 版权所有
             copyrighted: "Fast.NET",
             // 版权所有相关链接

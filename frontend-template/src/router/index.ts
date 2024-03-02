@@ -6,6 +6,13 @@ import { loading } from "@/hooks/loading";
 import langAutoLoadMap from "@/lang/autoLoad";
 import { mergeMessage } from "@/lang/index";
 import { useConfig } from "@/stores/config";
+import { useSiteConfig } from "@/stores/siteConfig";
+import { useTitle } from "@vueuse/core";
+import { useUserInfo } from "@/stores/userInfo";
+import { i18n } from "@/lang";
+import { ElMessage, ElNotification } from "element-plus";
+import { handleDynamicRoute } from "@/router/utils";
+import { getGreet, getUrlParams } from "@/utils";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.VITE_PUBLIC_PATH),
@@ -42,6 +49,66 @@ router.beforeEach(async (to, from, next) => {
         window.existLoading = true;
     }
 
+    const userInfoStore = useUserInfo();
+
+    // 判断是否存在Token
+    if (!userInfoStore.state.token) {
+        // 判断当前页面是否需要登录
+        if (!to.meta.noLogin) {
+            ElMessage.warning(i18n.global.t("router.请登录"));
+            next({ path: "/login", query: { redirect: encodeURIComponent(to.fullPath) } });
+            return;
+        }
+    } else {
+        // 判断 pinia 中的动态路由生成的状态，必须存在Token才加载
+        if (!userInfoStore.state.asyncRouterGen) {
+            try {
+                // 刷新用户信息
+                await userInfoStore.refreshUserInfo();
+
+                // 加载动态路由
+                handleDynamicRoute();
+
+                // 确保路由添加完成
+                userInfoStore.state.asyncRouterGen = true;
+
+                // 延迟 1 秒显示欢迎信息
+                setTimeout(() => {
+                    ElNotification({
+                        title: i18n.global.t("router.欢迎"),
+                        message: `${getGreet()}${userInfoStore.userInfo.nickName ?? userInfoStore.userInfo.userName}`,
+                        type: "success",
+                        duration: 1000,
+                    });
+                }, 1000);
+
+                // 由于新添加的路由在本次不存在，所以进行重定向
+                next({ ...(to.redirectedFrom ?? to), replace: true });
+                return;
+            } catch (error: any) {
+                // 退出登录
+                userInfoStore.logout();
+                return;
+            }
+        }
+
+        // 判断登录后是否禁止查看该页面
+        if (to.meta.authForbidView) {
+            // 重定向到首页
+            next({ path: "/" });
+            return;
+        }
+
+        // 判断是否存在重定向路径，如果有则跳转
+        const redirect = decodeURIComponent((from.query.redirect as string) || "");
+        if (redirect) {
+            const _query = getUrlParams(redirect);
+            // 设置 replace: true, 因此导航将不会留下历史记录
+            next({ path: redirect, replace: true, query: _query });
+            return;
+        }
+    }
+
     // 按需动态加载页面的语言包
     let loadPath: string[] = [];
 
@@ -73,12 +140,11 @@ router.beforeEach(async (to, from, next) => {
         }
     }
 
-    if (to.meta.authForbidView) {
-        // 重定向到首页
-        next({ path: "/" });
-    } else {
-        next();
-    }
+    // 刷新页面标题
+    const title = useTitle();
+    const siteConfigStore = useSiteConfig();
+    title.value = `${to.meta.title}${siteConfigStore.state.siteName ? " - " + siteConfigStore.state.siteName : ""}`;
+    next();
 });
 
 /**

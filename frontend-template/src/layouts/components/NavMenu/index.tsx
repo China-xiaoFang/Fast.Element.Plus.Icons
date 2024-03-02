@@ -15,7 +15,7 @@ export default defineComponent({
         const { t } = useI18n();
 
         const configStore = useConfig();
-        const userInfo = useUserInfo();
+        const userInfoStore = useUserInfo();
 
         const state = reactive({
             /**
@@ -78,7 +78,7 @@ export default defineComponent({
 
         return () => (
             <div class="fast-layout-nav-menu">
-                <router-link class="h100" target="_blank" title={t("pagesTitle.首页")} to="/">
+                <router-link class="h100" target="_blank" title={t("pageTitle.首页")} to="/">
                     <div class="fast-layout-nav-menu-item">
                         <FIcon
                             class="fast-layout-nav-menu-icon"
@@ -156,7 +156,7 @@ export default defineComponent({
                         dropdown: () => (
                             <el-dropdown-menu class="dropdown-menu-box">
                                 <>
-                                    {userInfo.isSuperAdmin || userInfo.isSystemAdmin ? (
+                                    {userInfoStore.userInfo.isSuperAdmin || userInfoStore.userInfo.isSystemAdmin ? (
                                         <el-dropdown-item onClick={() => onClickClearCacheHandle("tp")}>
                                             {t("layouts.components.NavMenu.清理系统缓存")}
                                         </el-dropdown-item>
@@ -164,7 +164,7 @@ export default defineComponent({
                                     <el-dropdown-item onClick={() => onClickClearCacheHandle("storage")}>
                                         {t("layouts.components.NavMenu.清理浏览器缓存")}
                                     </el-dropdown-item>
-                                    {userInfo.isSuperAdmin ? (
+                                    {userInfoStore.userInfo.isSuperAdmin ? (
                                         <el-dropdown-item divided onClick={() => onClickClearCacheHandle("all")}>
                                             {t("layouts.components.NavMenu.一键清理所有")}
                                         </el-dropdown-item>
@@ -188,27 +188,27 @@ export default defineComponent({
                         reference: () => (
                             <div class={["user-info", state.currentNavMenu === "userInfo" ? "hover" : ""]}>
                                 <el-avatar size={25} fit="fill">
-                                    <img src={userInfo.getAvatar()} alt="" />
+                                    <img src={userInfoStore.getAvatar()} alt="" />
                                 </el-avatar>
-                                <div class="user-name">{userInfo.nickName ?? userInfo.userName}</div>
+                                <div class="user-name">{userInfoStore.userInfo.nickName ?? userInfoStore.userInfo.userName}</div>
                             </div>
                         ),
                         default: () => (
                             <div>
                                 <div class="user-info-base">
                                     <el-avatar size={70} fit="fill">
-                                        <img src={userInfo.getAvatar()} alt="" />
+                                        <img src={userInfoStore.getAvatar()} alt="" />
                                     </el-avatar>
                                     <div class="user-info-other">
-                                        <div class="user-info-name">{userInfo.nickName ?? userInfo.userName}</div>
-                                        <div class="user-info-last-time">{userInfo.lastLoginTime}</div>
+                                        <div class="user-info-name">{userInfoStore.userInfo.nickName ?? userInfoStore.userInfo.userName}</div>
+                                        <div class="user-info-last-time">{userInfoStore.userInfo.lastLoginTime}</div>
                                     </div>
                                 </div>
                                 <div class="user-info-footer">
                                     <el-button onClick={onClickUserInfoHandle} type="primary" plain>
                                         {t("layouts.components.NavMenu.个人资料")}
                                     </el-button>
-                                    <el-button onClick={userInfo.logout} type="danger" plain>
+                                    <el-button onClick={userInfoStore.logout} type="danger" plain>
                                         {t("layouts.components.NavMenu.注销")}
                                     </el-button>
                                 </div>

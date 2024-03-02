@@ -22,4 +22,5 @@
 
 export default {
     ["这是一个空的，什么都没有的页面~"]: "This is an empty page with nothing~",
+    ["回到首页"]: "Back to the homepage",
 };

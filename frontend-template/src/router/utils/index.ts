@@ -141,7 +141,7 @@ export const handleDynamicRoute = () => {
     // 扁平化路由
     let routeList: RouteRecordRaw[] = [];
 
-    userInfoStore.menuList.map((item) => {
+    userInfoStore.userInfo.menuList.map((item) => {
         let routeName = [];
         if (item.menuType == MenuTypeEnum.Menu || item.menuType == MenuTypeEnum.Internal) {
             routeName.push(item.menuName);
