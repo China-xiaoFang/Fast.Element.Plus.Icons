@@ -1,4 +1,4 @@
-import { defineAsyncComponent, defineComponent, h, reactive } from "vue";
+import { defineComponent, h, reactive, resolveComponent } from "vue";
 import { useConfig } from "@/stores/config";
 // import { useNavTabs } from "@/stores/navTabs";
 // import { useSiteConfig } from "@/stores/siteConfig";
@@ -14,9 +14,13 @@ import { CACHE_BEFORE_RESIZE_LAYOUT } from "@/stores/constant";
 import { setNavTabsWidth } from "@/layouts/utils";
 // import { useI18n } from "vue-i18n";
 // import { ElMessage } from "element-plus";
+import LayoutClassic from "@/layouts/container/Classic/index"
 
 export default defineComponent({
     name: "Layout",
+    components: {
+        LayoutClassic
+    },
     setup() {
         // const { t } = useI18n();
 
@@ -32,6 +36,7 @@ export default defineComponent({
         });
 
         onMounted(() => {
+            // console.log("我刷新了");
             setNavTabsWidth();
             useEventListener(window, "resize", setNavTabsWidth);
         });
@@ -70,6 +75,8 @@ export default defineComponent({
             }
         };
 
-        return () => h(defineAsyncComponent(() => import(`@/layouts/container/${configStore.layout.layoutMode}/index.tsx`)))
+        return () => (
+            h(resolveComponent(`Layout${configStore.layout.layoutMode}`))
+        )
     },
 });

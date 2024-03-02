@@ -20,7 +20,7 @@ export default defineComponent({
             componentKey: string;
             keepAliveComponentNameList: string[];
         } = reactive({
-            componentKey: route.path,
+            componentKey: route.meta.menuId.toString(),
             keepAliveComponentNameList: [],
         });
 
@@ -36,15 +36,15 @@ export default defineComponent({
 
         onBeforeMount(() => {
             proxy.eventBus.on("onTabViewRefresh", (menu: RouteLocationNormalized) => {
-                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.keepalive !== name);
+                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.menuId.toString() !== name);
                 state.componentKey = "";
                 nextTick(() => {
                     state.componentKey = menu.path;
-                    addKeepAliveComponentName(menu.meta.keepalive as string);
+                    addKeepAliveComponentName(menu.meta.menuId.toString() as string);
                 });
             });
             proxy.eventBus.on("onTabViewClose", (menu: RouteLocationNormalized) => {
-                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.keepalive !== name);
+                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.menuId.toString() !== name);
             });
         });
 
@@ -55,8 +55,8 @@ export default defineComponent({
 
         onMounted(() => {
             // 确保刷新页面时也能正确取得当前路由 keepalive 参数
-            if (typeof navTabsStore.state.activeTab?.meta.keepalive == "string") {
-                addKeepAliveComponentName(navTabsStore.state.activeTab?.meta.keepalive);
+            if (navTabsStore.state.activeTab.meta.keepAlive) {
+                addKeepAliveComponentName(navTabsStore.state.activeTab.meta.menuId.toString());
             }
         });
 
@@ -64,8 +64,8 @@ export default defineComponent({
             () => route.path,
             () => {
                 state.componentKey = route.path;
-                if (typeof navTabsStore.state.activeTab?.meta.keepalive == "string") {
-                    addKeepAliveComponentName(navTabsStore.state.activeTab?.meta.keepalive);
+                if (navTabsStore.state.activeTab.meta.keepAlive) {
+                    addKeepAliveComponentName(navTabsStore.state.activeTab.meta.menuId.toString());
                 }
             }
         );
