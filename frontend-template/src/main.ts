@@ -1,4 +1,8 @@
 import { createApp } from "vue";
+import "element-plus/dist/index.css";
+import "element-plus/theme-chalk/display.css";
+import "font-awesome/css/font-awesome.min.css";
+import "@/styles/index.scss";
 import App from "./App.vue";
 import store from "@/stores";
 import { loadLang } from "@/lang";
@@ -7,11 +11,6 @@ import mitt from "mitt";
 
 import { loadPlugins } from "@/plugins";
 import { loadDirectives } from "@/directives";
-
-import "element-plus/dist/index.css";
-import "element-plus/theme-chalk/display.css";
-import "font-awesome/css/font-awesome.min.css";
-import "@/styles/index.scss";
 
 async function start() {
     const app = createApp(App);

@@ -1,4 +1,4 @@
-import { SetupContext, computed, defineComponent, nextTick, onMounted, reactive, ref } from "vue";
+import { SetupContext, defineComponent, nextTick, onMounted, reactive, ref } from "vue";
 import { useRoute, onBeforeRouteUpdate, type RouteLocationNormalizedLoaded } from 'vue-router'
 import { useConfig } from "@/stores/config";
 import { useNavTabs } from "@/stores/navTabs";
@@ -15,18 +15,6 @@ export default defineComponent({
 
         const state = reactive({
             defaultActive: '',
-        })
-
-        const menusScrollbarHeight = computed(() => {
-            let menuTopBarHeight = 0
-            if (configStore.layout.menuShowTopBar) {
-                menuTopBarHeight = 50
-            }
-            if (configStore.layout.layoutMode == 'Default') {
-                return 'calc(100vh - ' + (32 + menuTopBarHeight) + 'px)'
-            } else {
-                return 'calc(100vh - ' + menuTopBarHeight + 'px)'
-            }
         })
 
         /**
@@ -58,7 +46,7 @@ export default defineComponent({
         })
 
         return () => (
-            <el-scrollbar ref={menusRef} class="fast-layout-menu-scrollbar" style={{ height: menusScrollbarHeight }}>
+            <el-scrollbar ref={menusRef} class="fast-layout-menu-scrollbar">
                 <el-menu
                     {...attrs}
                     class="fast-layout-menu"

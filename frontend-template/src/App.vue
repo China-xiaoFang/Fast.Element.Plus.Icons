@@ -73,9 +73,3 @@ watch(
     }
 );
 </script>
-
-<style lang="scss">
-:root {
-    --aaaa: v-bind("configStore");
-}
-</style>
