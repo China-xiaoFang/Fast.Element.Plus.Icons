@@ -64,14 +64,21 @@ export const onClickMenu = (menu: GetLoginMenuInfoDto) => {
 const modules = import.meta.glob("/src/views/**/**.vue");
 
 /** 加载组件 */
-const loadComponent = (component: string) => {
-    if (component) {
-        if (component.includes("/")) {
-            return modules[`/src/views/${component}.vue`];
-        }
-        return modules[`/src/views/${component}/index.vue`];
-    } else {
-        return () => import(/* @vite-ignore */ `/src/views/common/empty/index.vue`);
+const loadComponent = (component: string, menuType: MenuTypeEnum) => {
+    switch (menuType) {
+        case MenuTypeEnum.Menu:
+            if (component) {
+                if (component.includes("/")) {
+                    return modules[`/src/views/${component}.vue`];
+                }
+                return modules[`/src/views/${component}/index.vue`];
+            } else {
+                return () => import("@/views/common/empty/index.vue");
+            }
+        case MenuTypeEnum.Internal:
+            return () => import("@/layouts/iframe/index.vue");
+        default:
+            return () => import("@/views/common/empty/index.vue");
     }
 };
 
@@ -102,21 +109,21 @@ const flatteningMenu = (menuList: GetLoginMenuInfoDto[], categories: string[] = 
     let routeList: RouteRecordRaw[] = [];
 
     menuList.map((item) => {
-        let routeName = [];
         if (item.menuType == MenuTypeEnum.Menu || item.menuType == MenuTypeEnum.Internal) {
-            routeName.push(item.menuName);
+            categories.push(item.menuName);
+            const path = item.menuType == MenuTypeEnum.Menu ? item.router : `/iframe${item.router}`;
             routeList.push({
-                path: item.menuType == MenuTypeEnum.Menu ? item.router : `/iframe${item.router}`,
+                path: path,
                 // 这里由于 keep-alive 必须设置 name 的问题，所以根据组件的地址，生成固定的 name，需要在每个页面增加 name，不然 keep-alive 会失效
-                name: loadComponentName(item.menuName),
-                component: item.menuType == MenuTypeEnum.Menu ? loadComponent(item.component) : () => import("@/layouts/iframe/index.vue"),
+                name: loadComponentName(path),
+                component: loadComponent(item.component, item.menuType),
                 meta: {
                     keepAlive: item.menuType == MenuTypeEnum.Menu ? true : false,
                     title: item.menuTitle,
                     authForbidView: false,
                     type: item.menuType == MenuTypeEnum.Menu ? "tab" : "iframe",
                     iframeUrl: item.link,
-                    categories: routeName,
+                    categories: categories,
                     menuId: item.id,
                     moduleId: item.moduleId,
                 },
@@ -125,7 +132,7 @@ const flatteningMenu = (menuList: GetLoginMenuInfoDto[], categories: string[] = 
 
         // 判断是否存在子节点
         if (item.children && item.children.length > 0) {
-            routeList = [...routeList, ...flatteningMenu(item.children, routeName)];
+            routeList = [...routeList, ...flatteningMenu(item.children, categories)];
         }
     });
 
@@ -149,7 +156,7 @@ export const handleDynamicRoute = () => {
                 path: item.menuType == MenuTypeEnum.Menu ? item.router : `/iframe${item.router}`,
                 // 这里由于 keep-alive 必须设置 name 的问题，所以根据组件的地址，生成固定的 name，需要在每个页面增加 name，不然 keep-alive 会失效
                 name: loadComponentName(item.menuName),
-                component: item.menuType == MenuTypeEnum.Menu ? loadComponent(item.component) : () => import("@/layouts/iframe/index.vue"),
+                component: loadComponent(item.component, item.menuType),
                 meta: {
                     keepAlive: item.menuType == MenuTypeEnum.Menu ? true : false,
                     title: item.menuTitle,

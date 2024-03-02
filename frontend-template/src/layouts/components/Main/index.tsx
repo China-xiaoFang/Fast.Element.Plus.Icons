@@ -20,7 +20,7 @@ export default defineComponent({
             componentKey: string;
             keepAliveComponentNameList: string[];
         } = reactive({
-            componentKey: route.meta.menuId.toString(),
+            componentKey: route.path,
             keepAliveComponentNameList: [],
         });
 
@@ -36,15 +36,15 @@ export default defineComponent({
 
         onBeforeMount(() => {
             proxy.eventBus.on("onTabViewRefresh", (menu: RouteLocationNormalized) => {
-                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.menuId.toString() !== name);
+                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.path !== name);
                 state.componentKey = "";
                 nextTick(() => {
                     state.componentKey = menu.path;
-                    addKeepAliveComponentName(menu.meta.menuId.toString() as string);
+                    addKeepAliveComponentName(menu.path);
                 });
             });
             proxy.eventBus.on("onTabViewClose", (menu: RouteLocationNormalized) => {
-                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.meta.menuId.toString() !== name);
+                state.keepAliveComponentNameList = state.keepAliveComponentNameList.filter((name: string) => menu.path !== name);
             });
         });
 
@@ -56,7 +56,7 @@ export default defineComponent({
         onMounted(() => {
             // 确保刷新页面时也能正确取得当前路由 keepalive 参数
             if (navTabsStore.state.activeTab.meta.keepAlive) {
-                addKeepAliveComponentName(navTabsStore.state.activeTab.meta.menuId.toString());
+                addKeepAliveComponentName(navTabsStore.state.activeTab.path);
             }
         });
 
@@ -65,7 +65,7 @@ export default defineComponent({
             () => {
                 state.componentKey = route.path;
                 if (navTabsStore.state.activeTab.meta.keepAlive) {
-                    addKeepAliveComponentName(navTabsStore.state.activeTab.meta.menuId.toString());
+                    addKeepAliveComponentName(navTabsStore.state.activeTab.path);
                 }
             }
         );
@@ -87,7 +87,7 @@ export default defineComponent({
                                     name={configStore.layout.mainAnimation}
                                 >
                                     <KeepAlive include={state.keepAliveComponentNameList}>
-                                        <Component key={state.componentKey} />
+                                        <Component key={state.componentKey} class="fast-layout-main-container" />
                                     </KeepAlive>
                                 </Transition>
                             )
