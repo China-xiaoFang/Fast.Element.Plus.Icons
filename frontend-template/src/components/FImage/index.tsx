@@ -3,7 +3,7 @@ import type { Props } from "./interface";
 import "./style/index.scss"
 import FIcon from "@/components/FIcon";
 
-export default defineComponent({
+const FImage = defineComponent({
     name: "FImage",
     props: {
         src: {
@@ -93,3 +93,5 @@ export default defineComponent({
         );
     },
 });
+
+export default FImage;

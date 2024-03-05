@@ -5,7 +5,7 @@ import "./style/index.scss"
 import { useI18n } from "vue-i18n";
 import FIcon from "@/components/FIcon";
 
-export default defineComponent({
+const FTree = defineComponent({
     name: "FTree",
     props: {
         data: {
@@ -263,3 +263,5 @@ export default defineComponent({
         )
     },
 });
+
+export default FTree

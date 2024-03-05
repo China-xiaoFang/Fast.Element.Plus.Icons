@@ -3,7 +3,7 @@ import type { Props } from "./interface";
 import FSvg from "./modules/FSvg";
 import { isExternal } from "@/utils/validate";
 
-export default defineComponent({
+const FIcon = defineComponent({
     name: "FIcon",
     props: {
         name: {
@@ -44,3 +44,5 @@ export default defineComponent({
         );
     },
 });
+
+export default FIcon;

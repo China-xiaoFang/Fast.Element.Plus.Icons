@@ -5,7 +5,7 @@ import { ElDialog, ElLoading, ElMessageBox } from "element-plus";
 import FIcon from "@/components/FIcon";
 import { useI18n } from "vue-i18n";
 
-export default defineComponent({
+const FDialog = defineComponent({
     name: "FDialog",
     props: {
         width: {
@@ -245,3 +245,5 @@ export default defineComponent({
         );
     },
 });
+
+export default FDialog;

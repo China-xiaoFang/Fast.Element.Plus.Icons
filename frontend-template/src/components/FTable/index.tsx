@@ -10,7 +10,7 @@ import Pagination from "./modules/Pagination"
 import { useI18n } from "vue-i18n";
 import notDataImage from "@/assets/images/notData.png";
 
-export default defineComponent({
+const FTable = defineComponent({
     name: "FTable",
     props: {
         data: {
@@ -734,3 +734,5 @@ export default defineComponent({
         )
     },
 });
+
+export default FTable;
