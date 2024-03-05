@@ -1,41 +1,41 @@
-import { HttpRequestActionEnum } from "./enums/http-request-action-enum";
-import { HttpRequestMethodEnum } from "./enums/http-request-method-enum";
+import { HttpRequestActionEnum } from "@/api/enums/http-request-action-enum";
+import { HttpRequestMethodEnum } from "@/api/enums/http-request-method-enum";
 import { QuerySysApiInfoButtonDto } from "./query-sys-api-info-button-dto";
 
 /**
- * Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoDetailOutput 系统接口信息详情输出
+ * Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedOutput 系统接口信息分页输出
  *
  * @export
- * @interface QuerySysApiInfoDetailOutput
+ * @interface QuerySysApiInfoPagedOutput
  */
-export interface QuerySysApiInfoDetailOutput {
+export interface QuerySysApiInfoPagedOutput {
     /**
      * @type {number}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     id?: number;
 
     /**
      * @type {string}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     createdUserName?: string | null;
 
     /**
      * @type {Date}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     createdTime?: Date | null;
 
     /**
      * @type {string}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     updatedUserName?: string | null;
 
     /**
      * @type {Date}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     updatedTime?: Date | null;
 
@@ -43,7 +43,7 @@ export interface QuerySysApiInfoDetailOutput {
      * 接口分组Id
      *
      * @type {number}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     apiGroupId?: number;
 
@@ -51,7 +51,7 @@ export interface QuerySysApiInfoDetailOutput {
      * 模块名称
      *
      * @type {string}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     moduleName?: string | null;
 
@@ -59,7 +59,7 @@ export interface QuerySysApiInfoDetailOutput {
      * 接口地址
      *
      * @type {string}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     url?: string | null;
 
@@ -67,19 +67,19 @@ export interface QuerySysApiInfoDetailOutput {
      * 接口名称
      *
      * @type {string}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     name?: string | null;
 
     /**
      * @type {HttpRequestMethodEnum}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     method?: HttpRequestMethodEnum;
 
     /**
      * @type {HttpRequestActionEnum}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     apiAction?: HttpRequestActionEnum;
 
@@ -87,7 +87,7 @@ export interface QuerySysApiInfoDetailOutput {
      * 按钮集合
      *
      * @type {Array<QuerySysApiInfoButtonDto>}
-     * @memberof QuerySysApiInfoDetailOutput
+     * @memberof QuerySysApiInfoPagedOutput
      */
     buttonList?: Array<QuerySysApiInfoButtonDto> | null;
 }

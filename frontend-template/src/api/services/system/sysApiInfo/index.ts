@@ -1,5 +1,5 @@
 import axios from "@/utils/axios";
-import { QuerySysApiInfoDetailOutput, QuerySysApiInfoPagedInput, QuerySysApiInfoPagedOutput } from "../modules";
+import { QuerySysApiInfoDetailOutput, QuerySysApiInfoPagedInput, QuerySysApiInfoPagedOutput } from "./models";
 
 /**
  * 接口信息分页

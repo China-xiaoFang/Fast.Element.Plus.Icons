@@ -1,5 +1,5 @@
-import { HttpRequestActionEnum } from "./enums/http-request-action-enum";
-import { HttpRequestMethodEnum } from "./enums/http-request-method-enum";
+import { HttpRequestActionEnum } from "@/api/enums/http-request-action-enum";
+import { HttpRequestMethodEnum } from "@/api/enums/http-request-method-enum";
 
 /**
  * Fast.Admin.Service.System.SysApiInfo.Dto.QuerySysApiInfoPagedInput 系统接口信息分页输入

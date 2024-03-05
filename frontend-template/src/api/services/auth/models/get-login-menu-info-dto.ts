@@ -1,5 +1,5 @@
-import { MenuTypeEnum } from "./enums/menu-type-enum";
-import { YesOrNotEnum } from "./enums/yes-or-not-enum";
+import { MenuTypeEnum } from "@/api/enums/menu-type-enum";
+import { YesOrNotEnum } from "@/api/enums/yes-or-not-enum";
 
 /**
  * Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginMenuInfoDto 获取登录菜单信息

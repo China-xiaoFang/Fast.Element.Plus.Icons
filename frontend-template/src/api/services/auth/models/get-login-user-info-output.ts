@@ -1,5 +1,5 @@
-import { AppEnvironmentEnum } from "./enums/app-environment-enum";
-import { GenderEnum } from "./enums/gender-enum";
+import { AppEnvironmentEnum } from "@/api/enums/app-environment-enum";
+import { GenderEnum } from "@/api/enums/gender-enum";
 import { GetLoginMenuInfoDto } from "./get-login-menu-info-dto";
 import { GetLoginModuleInfoDto } from "./get-login-module-info-dto";
 

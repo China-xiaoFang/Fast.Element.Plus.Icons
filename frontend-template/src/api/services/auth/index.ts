@@ -1,5 +1,16 @@
 import axios from "@/utils/axios";
-import { LoginInput, LoginOutput, TenantLoginInput } from "@/api/modules";
+import { GetLoginUserInfoOutput, LoginInput, LoginOutput, TenantLoginInput } from "./models";
+
+/**
+ * 获取登录用户信息
+ * @returns
+ */
+export const getLoginUserInfo = () => {
+    return axios<GetLoginUserInfoOutput>({
+        url: "/getLoginUserInfo",
+        method: "get",
+    });
+};
 
 /**
  * 登录

@@ -1,4 +1,4 @@
-import { YesOrNotEnum } from "./enums/yes-or-not-enum";
+import { YesOrNotEnum } from "@/api/enums/yes-or-not-enum";
 
 /**
  * Fast.Admin.Service.Authentication.Auth.Dto.GetLoginUserInfoOutput.GetLoginModuleInfoDto 获取登录模块信息

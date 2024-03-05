@@ -55,7 +55,7 @@ interface RequestDecryptInput {
  * Api 响应对象
  * @interface ApiResponse
  */
-interface ApiResponse<T = any> {
+interface ApiResponse<T = anyObj> {
     /**
      * 执行成功
      * @type {boolean}
@@ -91,13 +91,13 @@ interface ApiResponse<T = any> {
 /**
  * Api Promise
  */
-type ApiPromise<T = any> = Promise<ApiResponse<T>>;
+type ApiPromise<T = anyObj> = Promise<ApiResponse<T>>;
 
 /**
  * 分页返回结果
  * @interface PagedResult
  */
-interface PagedResult<T = any> {
+interface PagedResult<T = anyObj> {
     /**
      * 当前页
      * @type {number}

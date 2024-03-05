@@ -1,4 +1,4 @@
-import { AdminTypeEnum } from "./enums/admin-type-enum";
+import { AdminTypeEnum } from "@/api/enums/admin-type-enum";
 
 /**
  *

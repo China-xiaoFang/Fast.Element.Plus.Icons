@@ -3,15 +3,14 @@ import { STORE_USER_INFO } from "@/stores/constant";
 import { ElMessage } from "element-plus";
 import type { UserInfo } from "./interface";
 import { type AxiosResponse } from "axios";
-import * as loginApi from "@/api/login";
-import * as authApi from "@/api/auth";
+import * as authApi from "@/api/services/auth";
 import router from "@/router";
 import { fullUrl } from "@/utils";
-import { GenderEnum } from "@/api/modules/enums/gender-enum";
+import { GenderEnum } from "@/api/enums/gender-enum";
 import manAvatar from "@/assets/images/manAvatar.png";
 import womanAvatar from "@/assets/images/womanAvatar.png";
 import { reactive } from "vue";
-import { GetLoginUserInfoOutput } from "@/api/modules/get-login-user-info-output";
+import { GetLoginUserInfoOutput } from "@/api/services/auth/models/get-login-user-info-output";
 
 export const useUserInfo = defineStore(
     "userInfo",
@@ -151,7 +150,7 @@ export const useUserInfo = defineStore(
         const logout = (): void => {
             removeToken();
             // 调用退出登录的接口
-            loginApi.logout().finally(() => {
+            authApi.logout().finally(() => {
                 // next({ path: "/login", query: })
                 router.push({ path: "/login", query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } });
             });

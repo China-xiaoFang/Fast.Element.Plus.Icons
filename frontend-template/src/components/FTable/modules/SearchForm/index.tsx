@@ -88,20 +88,17 @@ export default defineComponent({
                                 ))}
                                 <GridItem suffix>
                                     <div class="operation">
-                                        <el-tooltip
-                                            content={t("components.FTable.modules.SearchForm.刷新")}
-                                            placement="top"
-                                            showAfter={1000}
-                                        >
-                                            <el-button loading={props.loading} type="primary" icon={Refresh} onClick={props.search}></el-button>
-                                        </el-tooltip>
-                                        <el-tooltip
-                                            content={t("components.FTable.modules.SearchForm.重置")}
-                                            placement="top"
-                                            showAfter={1000}
-                                        >
-                                            <el-button loading={props.loading} icon={Delete} onClick={props.reset}></el-button>
-                                        </el-tooltip>
+                                        <el-button
+                                            loading={props.loading}
+                                            title={t("components.FTable.modules.SearchForm.刷新")}
+                                            type="primary" icon={Refresh}
+                                            onClick={props.search}
+                                        />
+                                        <el-button
+                                            loading={props.loading}
+                                            title={t("components.FTable.modules.SearchForm.重置")}
+                                            icon={Delete} onClick={props.reset}
+                                        />
                                         {showCollapse && (
                                             <el-button type="primary" link class="search-isOpen" onClick={() => (state.collapsed = !state.collapsed)}>
                                                 {state.collapsed ? t("components.FTable.modules.SearchForm.展开") : t("components.FTable.modules.SearchForm.收起")}

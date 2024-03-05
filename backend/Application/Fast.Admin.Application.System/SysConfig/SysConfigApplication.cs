@@ -57,7 +57,7 @@ public class SysConfigApplication : IDynamicApplication
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpGet("/sysConfig/add", "SysConfig:Add"), ApiInfo("添加系统配置", HttpRequestActionEnum.Add)]
+    [HttpPost("/sysConfig/add", "SysConfig:Add"), ApiInfo("添加系统配置", HttpRequestActionEnum.Add)]
     public async Task Add(AddSysConfigInput input)
     {
         await _sysConfigService.Add(input);
@@ -68,7 +68,7 @@ public class SysConfigApplication : IDynamicApplication
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpGet("/sysConfig/update", "SysConfig:Update"), ApiInfo("更新系统配置", HttpRequestActionEnum.Update)]
+    [HttpPut("/sysConfig/update", "SysConfig:Update"), ApiInfo("更新系统配置", HttpRequestActionEnum.Update)]
     public async Task Update(UpdateSysConfigInput input)
     {
         await _sysConfigService.Update(input);

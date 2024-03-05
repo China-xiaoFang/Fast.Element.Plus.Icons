@@ -1,5 +1,6 @@
 import axios from "@/utils/axios";
-import { ElSelectorOutput, QuerySysApiGroupInfoDetailOutput, QuerySysApiGroupInfoPagedOutput } from "@/api/modules";
+import { QuerySysApiGroupInfoDetailOutput, QuerySysApiGroupInfoPagedOutput } from "./models";
+import { ElSelectorOutput } from "@/api/models/el-selector-output";
 
 /**
  * 接口分组分页选择器

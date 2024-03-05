@@ -1,8 +1,8 @@
 /**
  * Stores NavTabs 变量定义
  */
-import { GetLoginModuleInfoDto } from "@/api/modules/get-login-module-info-dto";
-import { GetLoginMenuInfoDto } from "@/api/modules/get-login-menu-info-dto";
+import { GetLoginMenuInfoDto } from "@/api/services/auth/models/get-login-menu-info-dto";
+import { GetLoginModuleInfoDto } from "@/api/services/auth/models/get-login-module-info-dto";
 import type { RouteLocationNormalized } from "vue-router";
 
 /**

@@ -77,12 +77,12 @@ import { useUserInfo } from "@/stores/userInfo";
 import { editDefaultLang } from "@/lang";
 import { Md5 } from "ts-md5";
 import { Local } from "@/utils/storage";
-import * as loginApi from "@/api/login";
-import { LoginMethodEnum } from "@/api/modules";
+import * as authApi from "@/api/services/auth";
 import AccountForm from "./modules/account.vue";
 import MobileForm from "./modules/mobile.vue";
 import EmailForm from "./modules/email.vue";
 import { FTableColumn } from "@/components/FTable/interface";
+import { LoginMethodEnum } from "@/api/enums/login-method-enum";
 
 const { t } = useI18n();
 
@@ -176,7 +176,7 @@ const loginHandle = (formData: any) => {
     } else {
         localPassword = state.password;
     }
-    loginApi
+    authApi
         .login({
             account: localAccount,
             password: localPassword,
@@ -228,7 +228,7 @@ const loginSuccess = (formData: any, data: any) => {
  * @param event
  */
 const handleRowDblclick = (row: any, column: any, event: MouseEvent) => {
-    loginApi
+    authApi
         .tenantLogin({
             accountId: state.accountId,
             tenantAccountId: row.id,

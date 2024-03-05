@@ -22,7 +22,7 @@ export type FTableResponsive = {
 /**
  * FTable 合计方法 Props
  */
-export interface SummaryMethodProps<T = any> {
+export interface SummaryMethodProps<T = anyObj> {
     columns: FTableColumn<T>[];
     data: T[];
 }
@@ -182,7 +182,7 @@ type FTableSearchColumn = {
     /**
      * 搜索项参数，根据 element plus 官方文档来传递，该属性所有值会透传到组件
      */
-    props?: any;
+    props?: anyObj;
     /**
      * 当搜索项 label 不为 col 属性时，可通过 key 指定
      */
@@ -214,7 +214,7 @@ type FTableSearchColumn = {
  * FTable列Props
  * @interface FTableColumn
  */
-export interface FTableColumn<T = any> extends Partial<Omit<TableColumnCtx<T>, "prop" | "children" | "renderHeader" | "renderCell" | "sortable">> {
+export interface FTableColumn<T = anyObj> extends Partial<Omit<TableColumnCtx<T>, "prop" | "children" | "renderHeader" | "renderCell" | "sortable">> {
     /**
      * 字段名称
      */
@@ -279,7 +279,7 @@ export interface FTableColumn<T = any> extends Partial<Omit<TableColumnCtx<T>, "
     /**
      * 枚举类型（渲染值的字典）
      */
-    enum?: FTableEnumColumn[] | ((params?: any) => Promise<any>);
+    enum?: FTableEnumColumn[] | ((params?: anyObj) => ApiPromise<Array<anyObj>>);
     /**
      * 当前单元格值是否根据 enum 格式化
      */
@@ -299,7 +299,7 @@ export interface FTableColumn<T = any> extends Partial<Omit<TableColumnCtx<T>, "
      * @param scope
      * @returns
      */
-    render?: (scope: { row: T; index?: number }) => any;
+    render?: (scope: { row: T; index?: number }) => anyObj;
     /**
      * 多级表头
      */
@@ -313,7 +313,7 @@ export interface FTableColumn<T = any> extends Partial<Omit<TableColumnCtx<T>, "
      * @param row
      * @returns
      */
-    click?: (row: any) => void;
+    click?: (row: anyObj) => void;
     /**
      * 合并行字段
      */
@@ -344,37 +344,37 @@ export interface FTableColumnProps {
  * FTableProps 属性
  * @interface FTableProps
  */
-export interface FTableProps<TInput = any, TOutput = any> {
+export interface FTableProps<TInput = anyObj, TOutput = anyObj> {
     /**
      * 表格数据
      */
     data?: TOutput[];
     /**
-     * 列配置项
-     */
-    columns?: FTableColumn[];
-    /**
      * 自动请求
      */
     requestAuto?: boolean;
     /**
+     * 初始化请求参数 ==> 非必传（默认为{}）
+     */
+    initParam?: PagedInput & TInput;
+    /**
      * 请求表格数据的api
      * @param params
      */
-    requestApi?: (params: PagedInput | TInput) => Promise<ApiPromise<PagedResult<TOutput>> | Promise<any>>;
+    requestApi?: (params: PagedInput & TInput) => ApiPromise<PagedResult<TOutput>> | ApiPromise<Array<TOutput>>;
     /**
      * 返回数据的回调函数，可以对数据进行处理 ==> 非必传
      * @param data
      */
     dataCallback?: (data: TOutput) => void;
     /**
+     * 列配置项
+     */
+    columns?: FTableColumn[];
+    /**
      * 是否需要分页组件 ==> 非必传（默认为true）
      */
     pagination?: boolean;
-    /**
-     * 初始化请求参数 ==> 非必传（默认为{}）
-     */
-    initParam?: PagedInput | TInput;
     /**
      * 搜索列配置
      */
@@ -428,7 +428,7 @@ export interface FTableProps<TInput = any, TOutput = any> {
 /**
  * FTable state 属性
  */
-export interface FTableState<TInput = any, TOutput = any> {
+export interface FTableState<TInput = anyObj, TOutput = anyObj> {
     /**
      * 表格加载
      */
@@ -456,7 +456,7 @@ export interface FTableState<TInput = any, TOutput = any> {
     /**
      * 搜索参数
      */
-    searchParam: PagedInput | TInput;
+    searchParam: PagedInput & TInput;
     /**
      * 显示搜索
      */
@@ -489,7 +489,7 @@ export interface FTableEmits {
      * @param selectedList
      * @returns
      */
-    selectionChange: (selectedList: any[]) => void;
+    selectionChange: (selectedList: anyObj[]) => void;
     /**
      * 排序更改
      * @param column
@@ -510,5 +510,5 @@ export interface FTableEmits {
      * @param size
      * @returns
      */
-    paginationChange: (index, size) => void;
+    paginationChange: (index: number, size: number) => void;
 }

@@ -1,4 +1,4 @@
-import { LoginMethodEnum } from "./enums/login-method-enum";
+import { LoginMethodEnum } from "@/api/enums/login-method-enum";
 
 /**
  * Fast.Admin.Service.Authentication.Login.Dto.LoginInput 登录输入

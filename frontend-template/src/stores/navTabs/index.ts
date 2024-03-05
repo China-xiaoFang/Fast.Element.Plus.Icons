@@ -5,8 +5,8 @@ import { STORE_NAV_TABS } from "@/stores/constant";
 import type { NavTabs } from "./interface";
 import type { RouteLocationNormalized } from "vue-router";
 import { isEmpty } from "lodash-es";
-import { GetLoginMenuInfoDto } from "@/api/modules/get-login-menu-info-dto";
-import { MenuTypeEnum } from "@/api/modules/enums/menu-type-enum";
+import { MenuTypeEnum } from "@/api/enums/menu-type-enum";
+import { GetLoginMenuInfoDto } from "@/api/services/auth/models/get-login-menu-info-dto";
 
 export const useNavTabs = defineStore(
     "navTabs",

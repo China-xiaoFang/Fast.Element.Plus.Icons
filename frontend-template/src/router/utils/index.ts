@@ -3,10 +3,10 @@ import { isNavigationFailure, NavigationFailureType } from "vue-router";
 import type { RouteLocationRaw, RouteRecordRaw } from "vue-router";
 import { ElNotification } from "element-plus";
 import { i18n } from "@/lang";
-import { GetLoginMenuInfoDto } from "@/api/modules/get-login-menu-info-dto";
-import { MenuTypeEnum } from "@/api/modules/enums/menu-type-enum";
+import { MenuTypeEnum } from "@/api/enums/menu-type-enum";
 import { useUserInfo } from "@/stores/userInfo";
 import { genNonceStr } from "@/utils";
+import { GetLoginMenuInfoDto } from "@/api/services/auth/models/get-login-menu-info-dto";
 
 /**
  * 路由跳转，带错误检查

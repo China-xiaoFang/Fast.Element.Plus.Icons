@@ -14,32 +14,32 @@ export default defineComponent({
     name: "FTable",
     props: {
         data: {
-            type: Array as PropType<any[]>,
-            default: []
-        },
-        columns: {
-            type: Array as PropType<FTableColumn[]>,
+            type: Array as PropType<anyObj[]>,
             default: []
         },
         requestAuto: {
             type: Boolean,
             default: true
         },
+        initParam: {
+            type: Object as PropType<PagedInput & anyObj>,
+            default: {},
+        },
         requestApi: {
-            type: Function as PropType<(params: PagedInput | any) => Promise<ApiPromise<PagedResult<any>> | Promise<any>>>,
+            type: Function as PropType<(params: PagedInput & anyObj) => ApiPromise<PagedResult<anyObj>> | ApiPromise<Array<anyObj>>>,
             require: false
         },
         dataCallback: {
-            type: Function as PropType<(data: any) => void>,
+            type: Function as PropType<(data: anyObj) => void>,
             require: false
+        },
+        columns: {
+            type: Array as PropType<FTableColumn[]>,
+            default: []
         },
         pagination: {
             type: Boolean,
             default: true,
-        },
-        initParam: {
-            type: Object as PropType<PagedInput | any>,
-            default: {},
         },
         searchFormColumns: {
             type: Object as PropType<number | Record<FTableBreakPoint, number>>,
@@ -155,17 +155,17 @@ export default defineComponent({
             // 处理查询参数，可以给查询参数加自定义前缀操作
             const newSearchParam: { [key: string]: any } = {};
             // 防止手动清空输入框携带参数（这里可以自定义查询参数前缀）
-            for (const key in state.searchParam.value) {
+            for (const key in state.searchParam) {
                 // * 某些情况下参数为 false/0 也应该携带参数
-                if (state.searchParam.value[key] || state.searchParam.value[key] === false || state.searchParam.value[key] === 0) {
-                    newSearchParam[key] = state.searchParam.value[key];
+                if (state.searchParam[key] || state.searchParam[key] === false || state.searchParam[key] === 0) {
+                    newSearchParam[key] = state.searchParam[key];
                 }
                 // 处理某些情况下如果为空字符串，其实是不需要传到后端的
-                else if (!state.searchParam.value[key]) {
-                    delete state.searchParam.value[key];
+                else if (!state.searchParam[key]) {
+                    delete state.searchParam[key];
                 }
             }
-            Object.assign(state.searchParam.value, newSearchParam);
+            Object.assign(state.searchParam, newSearchParam);
         };
 
         /**
@@ -185,10 +185,10 @@ export default defineComponent({
             // 重置到第一页
             state.tablePagination.pageIndex = 1;
             // 清除搜索条件
-            state.searchParam.value = {};
+            state.searchParam = {};
             // 重置搜索表单的时候，如果有默认搜索参数，则重置默认的搜索参数
             Object.keys(props.initParam).forEach(key => {
-                state.searchParam.value[key] = props.initParam[key];
+                state.searchParam[key] = props.initParam[key];
             });
             updatedTotalParam();
             emit("tableReset");
@@ -200,19 +200,20 @@ export default defineComponent({
          */
         const enumMap = ref(new Map<string, { [key: string]: any }[]>());
         provide("enumMap", enumMap);
-        const setEnumMap = async (column: FTableColumn) => {
+        const setEnumMap = (column: FTableColumn) => {
             if (!column.enum) return;
             // 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
             if (typeof column.enum !== "function") return enumMap.value.set(column.prop!, column.enum!);
-            const { data } = await column.enum();
-            enumMap.value.set(column.prop!, data);
+            column.enum().then(res => {
+                enumMap.value.set(column.prop!, res.data);
+            });
         };
 
         /**
          * 扁平化 columns
          */
         const flatColumnsFunc = (columns: FTableColumn[], flatArr: FTableColumn[] = []) => {
-            columns.forEach(async col => {
+            columns.forEach(col => {
                 if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
                 flatArr.push(col);
 
@@ -387,7 +388,7 @@ export default defineComponent({
         /**
          * 加载数据
          */
-        const loadData = async () => {
+        const loadData = () => {
             // 判断是否需要自动请求
             if (!props.requestAuto) return;
 
@@ -395,35 +396,32 @@ export default defineComponent({
                 throw new Error("如果需要加载FTable数据，那么参数 requestApi 是必须的！");
             }
 
-            state.tableData = [];
-
-            try {
-                state.loading = true;
-                const param = getRequestParam();
-                const apiResult = await props.requestApi(param);
-                if (apiResult.success) {
-                    props.dataCallback && props.dataCallback(apiResult.data);
-                    let pageData: never[];
+            state.loading = true;
+            const param = getRequestParam();
+            props.requestApi(param).then(res => {
+                if (res.success) {
+                    props.dataCallback && props.dataCallback(res.data);
+                    let pageData: anyObj[];
                     // 解析 API 接口返回的分页数据（如果有分页更新分页信息）
                     if (props.pagination) {
-                        let PagedResult = apiResult.data as PagedResult<never>;
-                        pageData = PagedResult.rows;
+                        let pagedResult = res.data as PagedResult<anyObj[]>;
+                        pageData = pagedResult.rows;
                         // 更新分页信息
                         Object.assign(state.tablePagination, {
-                            pageIndex: PagedResult.pageIndex,
-                            pageSize: PagedResult.pageSize,
-                            totalRows: PagedResult.totalRows
+                            pageIndex: pagedResult.pageIndex,
+                            pageSize: pagedResult.pageSize,
+                            totalRows: pagedResult.totalRows
                         });
                     } else {
-                        pageData = apiResult.data as never[];
+                        pageData = res.data as anyObj[];
                     }
                     state.tableData = handleTableData(pageData);
                 }
-            } catch (error) {
+            }).catch(() => {
                 state.tableData = [];
-            } finally {
+            }).finally(() => {
                 state.loading = false;
-            }
+            })
         };
 
         /**
@@ -477,8 +475,7 @@ export default defineComponent({
             () => {
                 state.tableData = handleTableData(props.data);
             },
-            // 深度监听
-            { deep: true }
+            { deep: true, immediate: true }
         );
 
         // 暴漏出去的方法
@@ -544,63 +541,50 @@ export default defineComponent({
                                                 {slots.toolButton && slots.toolButton(state)}
                                                 {
                                                     props.showRefreshBtn ? (
-                                                        <el-tooltip
-                                                            class="f-table-main-header-box-item"
-                                                            placement="top"
-                                                            content={t("components.FTable.刷新")}
-                                                        >
-                                                            <el-button
-                                                                loading={state.loading}
-                                                                circle
-                                                                icon={Refresh}
-                                                                onClick={refreshTable}
-                                                            ></el-button>
-                                                        </el-tooltip>
+                                                        <el-button
+                                                            loading={state.loading}
+                                                            title={t("components.FTable.刷新")}
+                                                            circle
+                                                            icon={Refresh}
+                                                            onClick={refreshTable}
+                                                        ></el-button>
                                                     ) : (null)
                                                 }
                                                 {
                                                     props.showSearchBtn && state.searchColumns.length ? (
-                                                        <el-tooltip
-                                                            class="f-table-main-header-box-item"
-                                                            placement="top"
-                                                            content={state.showSearch ? t("components.FTable.隐藏搜索栏") : t("components.FTable.显示搜索栏")}
-                                                            showAfter={1000}
-                                                        >
-                                                            <el-button
-                                                                loading={state.loading}
-                                                                circle
-                                                                icon={Search}
-                                                                onClick={() => state.showSearch = !state.showSearch}
-                                                            ></el-button>
-                                                        </el-tooltip>
+                                                        <el-button
+                                                            loading={state.loading}
+                                                            title={state.showSearch ? t("components.FTable.隐藏搜索栏") : t("components.FTable.显示搜索栏")}
+                                                            circle
+                                                            icon={Search}
+                                                            onClick={() => state.showSearch = !state.showSearch}
+                                                        ></el-button>
                                                     ) : (null)
                                                 }
                                                 {
                                                     slots.toolButtonAdv ? (
-                                                        <el-tooltip
-                                                            class="f-table-main-header-box-item"
-                                                            placement="top"
-                                                            content={t("components.FTable.高级操作")}
-                                                            showAfter={1000}
+                                                        <el-dropdown
+                                                            loading={state.loading}
+                                                            title={t("components.FTable.高级操作")}
+                                                            trigger="click"
+                                                            style="margin-left: 12px"
                                                         >
-                                                            <el-dropdown trigger="click" style="margin-left: 12px">
-                                                                {{
-                                                                    default: () => (
-                                                                        <el-button
-                                                                            loading={state.loading}
-                                                                            circle
-                                                                            icon={More}
-                                                                        ></el-button>
-                                                                    ),
-                                                                    dropdown: () =>
-                                                                    (
-                                                                        <el-dropdown-menu>
-                                                                            {slots.toolButtonAdv()}
-                                                                        </el-dropdown-menu>
-                                                                    )
-                                                                }}
-                                                            </el-dropdown>
-                                                        </el-tooltip>
+                                                            {{
+                                                                default: () => (
+                                                                    <el-button
+                                                                        loading={state.loading}
+                                                                        circle
+                                                                        icon={More}
+                                                                    ></el-button>
+                                                                ),
+                                                                dropdown: () =>
+                                                                (
+                                                                    <el-dropdown-menu>
+                                                                        {slots.toolButtonAdv()}
+                                                                    </el-dropdown-menu>
+                                                                )
+                                                            }}
+                                                        </el-dropdown>
                                                     ) : (null)
                                                 }
                                             </div>
@@ -746,7 +730,7 @@ export default defineComponent({
                     }
                     {slots.tableFooter && slots.tableFooter()}
                 </div>
-            </div>
+            </div >
         )
     },
 });

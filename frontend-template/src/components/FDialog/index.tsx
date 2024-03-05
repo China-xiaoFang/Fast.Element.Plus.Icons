@@ -164,12 +164,12 @@ export default defineComponent({
                 class={["f-dialog", state.fullscreen ? "f-dialog-fill-height" : ""]}
                 style={{ maxHeight: props.height ? props.height : "", maxWidth: props.width ? props.width : "" }}
                 v-model={state.visible}
-                appendToBody={props.appendToBody}
+                append-to-body={props.appendToBody}
                 fullscreen={state.fullscreen ? true : false}
-                beforeClose={handleBeforeClose}
+                before-close={handleBeforeClose}
                 draggable
                 destroy-on-close
-                showClose={false}
+                show-close={false}
             >
                 {{
                     header: () => (
@@ -180,28 +180,24 @@ export default defineComponent({
                             </div>
                             {
                                 props.showFullscreen ? (
-                                    <el-tooltip
-                                        content={state.fullscreen ? t("components.FDialog.关闭全屏显示") : t("components.FDialog.全屏显示")}
-                                        placement="bottom"
-                                        showAfter={1000}
+                                    <div
+                                        title={state.fullscreen ? t("components.FDialog.关闭全屏显示") : t("components.FDialog.全屏显示")}
+                                        class="f-dialog-header-icon"
+                                        onClick={() => state.fullscreen = !state.fullscreen}
                                     >
-                                        <div class="f-dialog-header-icon" onClick={() => state.fullscreen = !state.fullscreen}>
-                                            <FIcon name={state.fullscreen ? "local-fullscreen-exit" : "local-fullscreen"} />
-                                        </div>
-                                    </el-tooltip>
+                                        <FIcon name={state.fullscreen ? "local-fullscreen-exit" : "local-fullscreen"} />
+                                    </div>
                                 ) : (null)
                             }
                             {
                                 props.showClose ? (
-                                    <el-tooltip
-                                        content={t("components.FDialog.关闭")}
-                                        placement="bottom"
-                                        showAfter={1000}
+                                    <div
+                                        title={t("components.FDialog.关闭")}
+                                        class="f-dialog-header-icon"
+                                        onClick={close}
                                     >
-                                        <div class="f-dialog-header-icon" onClick={close}>
-                                            <FIcon name="el-icon-Close" />
-                                        </div>
-                                    </el-tooltip>
+                                        <FIcon name="el-icon-Close" />
+                                    </div>
                                 ) : (null)
                             }
                         </>
