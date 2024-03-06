@@ -1,12 +1,14 @@
+import { ElTreeOutput } from "@/api/models/el-tree-output";
+
 /**
  * FTreeProps 属性
  * @interface Props
  */
-export interface Props<TInput = anyObj, TOutput = anyObj> {
+export interface Props<TInput = anyObj, T = number> {
     /**
      * 树形数据
      */
-    data?: TOutput[];
+    data?: ElTreeOutput<T>[];
     /**
      * 自动请求
      */
@@ -19,12 +21,12 @@ export interface Props<TInput = anyObj, TOutput = anyObj> {
      * 请求树形数据的api
      * @param params
      */
-    requestApi?: (params: TInput) => ApiPromise<Array<TOutput>>;
+    requestApi?: (params?: TInput) => ApiPromise<Array<ElTreeOutput<T>>>;
     /**
      * 返回数据的回调函数，可以对数据进行处理 ==> 非必传
      * @param data
      */
-    dataCallback?: (data: TOutput) => void;
+    dataCallback?: (data: ElTreeOutput<T>[]) => void;
     /**
      * 标题 ==> 非必传
      */
@@ -62,7 +64,7 @@ export interface Props<TInput = anyObj, TOutput = anyObj> {
 /**
  * FTable state 属性
  */
-export interface State<TInput = anyObj, TOutput = anyObj> {
+export interface State<TInput = anyObj, T = number> {
     /**
      * 表格加载
      */
@@ -70,11 +72,11 @@ export interface State<TInput = anyObj, TOutput = anyObj> {
     /**
      * 源树形数据
      */
-    orgTreeData: TOutput[];
+    orgTreeData: ElTreeOutput<T>[];
     /**
      * 树形数据
      */
-    treeData: TOutput[];
+    treeData: ElTreeOutput<T>[];
     /**
      * 过滤值
      */

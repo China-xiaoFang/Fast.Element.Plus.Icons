@@ -4,12 +4,13 @@ import { ElTree } from "element-plus";
 import "./style/index.scss"
 import { useI18n } from "vue-i18n";
 import { FIcon } from "@/components";
+import { ElTreeOutput } from "@/api/models/el-tree-output";
 
 export const FTree = defineComponent({
     name: "FTree",
     props: {
         data: {
-            type: Array as PropType<anyObj[]>,
+            type: Array as PropType<ElTreeOutput<any>[]>,
             default: []
         },
         requestAuto: {
@@ -21,11 +22,11 @@ export const FTree = defineComponent({
             default: {},
         },
         requestApi: {
-            type: Function as PropType<(params: anyObj) => ApiPromise<Array<anyObj>>>,
+            type: Function as PropType<(params?: anyObj) => ApiPromise<Array<ElTreeOutput<any>>>>,
             require: false
         },
         dataCallback: {
-            type: Function as PropType<(data: anyObj) => void>,
+            type: Function as PropType<(data: ElTreeOutput<any>[]) => void>,
             require: false
         },
         title: {
@@ -42,7 +43,7 @@ export const FTree = defineComponent({
         },
         defaultValue: {
             type: Object as PropType<string | number | string[] | number[]>,
-            default: "",
+            default: {},
         },
         width: {
             type: Number,

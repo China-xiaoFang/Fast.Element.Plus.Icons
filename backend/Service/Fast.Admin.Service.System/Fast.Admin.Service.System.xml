@@ -90,6 +90,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Tree">
+            <summary>
+            接口分组树形
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.ISysApiGroupInfoService.Paged(Fast.SqlSugar.PagedInput)">
             <summary>
             接口分组分页
@@ -120,6 +126,12 @@
             接口分组分页选择器
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Tree">
+            <summary>
+            接口分组树形
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Fast.Admin.Service.System.SysApiGroupInfo.SysApiGroupInfoService.Paged(Fast.SqlSugar.PagedInput)">

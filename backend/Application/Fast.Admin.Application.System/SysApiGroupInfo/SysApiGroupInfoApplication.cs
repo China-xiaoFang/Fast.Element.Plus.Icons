@@ -1,6 +1,7 @@
 ﻿using Fast.Admin.Core.Outputs;
 using Fast.Admin.Service.System.SysApiGroupInfo;
 using Fast.Admin.Service.System.SysApiGroupInfo.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Fast.Admin.Application.System.SysApiGroupInfo;
 
@@ -22,10 +23,20 @@ public class SysApiGroupInfoApplication : IDynamicApplication
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost("/sysApiGroupInfo/selector", "SysApiInfo:Paged"), ApiInfo("接口分组分页选择器", HttpRequestActionEnum.Query)]
-    public async Task<PagedResult<ElSelectorOutput>> Selector(PagedInput input)
+    [HttpGet("/sysApiGroupInfo/selector", "SysApiInfo:Paged"), ApiInfo("接口分组分页选择器", HttpRequestActionEnum.Query)]
+    public async Task<PagedResult<ElSelectorOutput<long>>> Selector([FromQuery] PagedInput input)
     {
         return await _sysApiGroupInfoService.Selector(input);
+    }
+
+    /// <summary>
+    /// 接口分组树形
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("/sysApiGroupInfo/tree", "SysApiInfo:Paged"), ApiInfo("接口分组树形", HttpRequestActionEnum.Query)]
+    public async Task<List<ElTreeOutput<long>>> Tree()
+    {
+        return await _sysApiGroupInfoService.Tree();
     }
 
     /// <summary>

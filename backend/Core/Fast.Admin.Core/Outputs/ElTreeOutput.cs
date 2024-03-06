@@ -15,19 +15,19 @@
 namespace Fast.Admin.Core.Outputs;
 
 /// <summary>
-/// <see cref="ElSelectorOutput{T}"/> Element-Plus 下拉框通用输出
+/// <see cref="ElTreeOutput{T}"/> Element-Plus 树形通用输出
 /// </summary>
-public class ElSelectorOutput<T>
+public class ElTreeOutput<T>
 {
-    /// <summary>
-    /// 显示
-    /// </summary>
-    public string Label { get; set; }
-
     /// <summary>
     /// 值
     /// </summary>
     public T Value { get; set; }
+
+    /// <summary>
+    /// 显示
+    /// </summary>
+    public string Label { get; set; }
 
     /// <summary>
     /// 禁用
@@ -37,10 +37,20 @@ public class ElSelectorOutput<T>
     /// <summary>
     /// 子节点
     /// </summary>
-    public List<ElSelectorOutput<T>> Children { get; set; }
+    public List<ElTreeOutput<T>> Children { get; set; }
 
     /// <summary>
     /// 附加数据
     /// </summary>
     public object Data { get; set; }
+
+    /// <summary>
+    /// 显示数量
+    /// </summary>
+    public bool? ShowNum { get; set; }
+
+    /// <summary>
+    /// 数量
+    /// </summary>
+    public int? Quantity { get; set; }
 }

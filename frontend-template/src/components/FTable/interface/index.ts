@@ -361,7 +361,7 @@ export interface FTableProps<TInput = anyObj, TOutput = anyObj> {
      * 请求表格数据的api
      * @param params
      */
-    requestApi?: (params: PagedInput & TInput) => ApiPromise<PagedResult<TOutput>> | ApiPromise<Array<TOutput>>;
+    requestApi?: (params?: PagedInput & TInput) => ApiPromise<PagedResult<TOutput>> | ApiPromise<Array<TOutput>>;
     /**
      * 返回数据的回调函数，可以对数据进行处理 ==> 非必传
      * @param data

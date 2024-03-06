@@ -26,7 +26,13 @@ public interface ISysApiGroupInfoService
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<PagedResult<ElSelectorOutput>> Selector(PagedInput input);
+    Task<PagedResult<ElSelectorOutput<long>>> Selector(PagedInput input);
+
+    /// <summary>
+    /// 接口分组树形
+    /// </summary>
+    /// <returns></returns>
+    Task<List<ElTreeOutput<long>>> Tree();
 
     /// <summary>
     /// 接口分组分页

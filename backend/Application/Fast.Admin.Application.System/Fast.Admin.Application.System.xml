@@ -16,6 +16,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:Fast.Admin.Application.System.SysApiGroupInfo.SysApiGroupInfoApplication.Tree">
+            <summary>
+            接口分组树形
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Fast.Admin.Application.System.SysApiGroupInfo.SysApiGroupInfoApplication.Paged(Fast.SqlSugar.PagedInput)">
             <summary>
             接口分组分页

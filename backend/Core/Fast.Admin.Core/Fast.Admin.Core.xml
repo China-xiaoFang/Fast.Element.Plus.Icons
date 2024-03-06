@@ -825,29 +825,74 @@
             <summary>是否为管理员</summary>
             <returns></returns>
         </member>
-        <member name="T:Fast.Admin.Core.Outputs.ElSelectorOutput">
+        <member name="T:Fast.Admin.Core.Outputs.ElSelectorOutput`1">
             <summary>
-            <see cref="T:Fast.Admin.Core.Outputs.ElSelectorOutput"/> Element-Plus 下拉框通用输出
+            <see cref="T:Fast.Admin.Core.Outputs.ElSelectorOutput`1"/> Element-Plus 下拉框通用输出
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Label">
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput`1.Label">
             <summary>
             显示
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Value">
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput`1.Value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Data">
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput`1.Disabled">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput`1.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput`1.Data">
             <summary>
             附加数据
             </summary>
         </member>
-        <member name="P:Fast.Admin.Core.Outputs.ElSelectorOutput.Children">
+        <member name="T:Fast.Admin.Core.Outputs.ElTreeOutput`1">
+            <summary>
+            <see cref="T:Fast.Admin.Core.Outputs.ElTreeOutput`1"/> Element-Plus 树形通用输出
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Label">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Disabled">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Children">
             <summary>
             子节点
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Data">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.ShowNum">
+            <summary>
+            显示数量
+            </summary>
+        </member>
+        <member name="P:Fast.Admin.Core.Outputs.ElTreeOutput`1.Quantity">
+            <summary>
+            数量
             </summary>
         </member>
         <member name="T:Fast.Admin.Core.Providers.UnifyResponseProvider">

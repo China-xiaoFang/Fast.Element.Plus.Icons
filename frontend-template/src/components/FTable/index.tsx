@@ -536,7 +536,7 @@ export const FTable = defineComponent({
                                                     v-model={[state.searchParam.searchValue, ['trim']]}
                                                     clearable
                                                     style="margin-right: 12px; width: 235px; margin-bottom: 5px"
-                                                    onChange={refreshTable()}
+                                                    onChange={refreshTable}
                                                 />
                                                 {slots.toolButton && slots.toolButton(state)}
                                                 {

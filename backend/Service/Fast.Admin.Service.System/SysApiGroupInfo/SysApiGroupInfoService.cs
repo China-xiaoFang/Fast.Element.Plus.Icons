@@ -41,9 +41,18 @@ public class SysApiGroupInfoService : ISysApiGroupInfoService, ITransientDepende
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public async Task<PagedResult<ElSelectorOutput>> Selector(PagedInput input)
+    public async Task<PagedResult<ElSelectorOutput<long>>> Selector(PagedInput input)
     {
-        return await _repository.Entities.ToPagedListAsync(input, sl => new ElSelectorOutput {Label = sl.Name, Value = sl.Id});
+        return await _repository.Entities.ToPagedListAsync(input, sl => new ElSelectorOutput<long> {Label = sl.Name, Value = sl.Id});
+    }
+
+    /// <summary>
+    /// 接口分组树形
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<ElTreeOutput<long>>> Tree()
+    {
+        return await _repository.Entities.ToListAsync(sl => new ElTreeOutput<long> {Label = sl.Name, Value = sl.Id});
     }
 
     /// <summary>
