@@ -1,4 +1,8 @@
 .f-table {
+    /** 撑满剩余宽度 */
+    flex: 1;
+    /** 解决布局宽度发生改变时，不会自动缩小宽度。https://github.com/element-plus/element-plus/issues/6202#issuecomment-1047527166 */
+    width: 0;
     .f-table-search {
         padding: 16px 10px 0;
         margin-bottom: 10px;

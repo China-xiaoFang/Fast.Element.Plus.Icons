@@ -29,13 +29,11 @@ namespace Fast.Admin.Core.Services;
 public class SqlSugarEntityService : ISqlSugarEntityService, IScopedDependency
 {
     private readonly ICache _cache;
-    private readonly HttpContext _httpContext;
     private readonly ILogger<ISqlSugarEntityService> _logger;
 
-    public SqlSugarEntityService(ICache cache, IHttpContextAccessor httpContextAccessor, ILogger<ISqlSugarEntityService> logger)
+    public SqlSugarEntityService(ICache cache, ILogger<ISqlSugarEntityService> logger)
     {
         _cache = cache;
-        _httpContext = httpContextAccessor.HttpContext;
         _logger = logger;
     }
 
@@ -55,7 +53,7 @@ public class SqlSugarEntityService : ISqlSugarEntityService, IScopedDependency
 
         // 优先从 HttpContext.Items 中获取
         var connectionSettingsObj =
-            _httpContext.Items[nameof(Fast) + nameof(ConnectionSettingsOptions) + System.Enum.GetName(fastDbType)];
+            FastContext.HttpContext.Items[nameof(Fast) + nameof(ConnectionSettingsOptions) + System.Enum.GetName(fastDbType)];
 
         if (connectionSettingsObj is ConnectionSettingsOptions connectionSettings)
         {
@@ -88,7 +86,8 @@ public class SqlSugarEntityService : ISqlSugarEntityService, IScopedDependency
             result.SlaveConnectionList = sysTenantDatabaseSlaveList?.Adapt<List<SlaveConnectionInfo>>();
 
             // 放入 HttpContext.Items 中
-            _httpContext.Items[nameof(Fast) + nameof(ConnectionSettingsOptions) + System.Enum.GetName(fastDbType)] = result;
+            FastContext.HttpContext.Items[nameof(Fast) + nameof(ConnectionSettingsOptions) + System.Enum.GetName(fastDbType)] =
+                result;
 
             return result;
         });

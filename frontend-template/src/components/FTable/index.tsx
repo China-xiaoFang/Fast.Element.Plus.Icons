@@ -533,7 +533,7 @@ export const FTable = defineComponent({
                                                     loading={state.loading}
                                                     prefix-icon={Search}
                                                     placeholder={t("components.FTable.关键字搜索")}
-                                                    v-model={[state.searchParam.searchValue, ['trim']]}
+                                                    v-model_trim={state.searchParam.searchValue}
                                                     clearable
                                                     style="margin-right: 12px; width: 235px; margin-bottom: 5px"
                                                     onChange={refreshTable}

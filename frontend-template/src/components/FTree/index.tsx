@@ -205,17 +205,13 @@ export const FTree = defineComponent({
                 style={{ width: `${state.hamburger ? 130 : props.width}px` }}
                 v-loading={state.loading}
             >
-                {
-                    props.title && !state.hamburger ? (
-                        <div class="f-tree-title" onChange={handleHamburgerClick}>
-                            <h4>{props.title}</h4>
-                            <FIcon
-                                size="20"
-                                name={state.hamburger ? 'fa fa-indent' : 'fa fa-dedent'}
-                            />
-                        </div>
-                    ) : (null)
-                }
+                <div class="f-tree-title" onChange={handleHamburgerClick}>
+                    <h4>{props.title}</h4>
+                    <FIcon
+                        size="20"
+                        name={state.hamburger ? 'fa fa-indent' : 'fa fa-dedent'}
+                    />
+                </div>
                 {
                     props.hideFilter ? (null) : (
                         <el-input

@@ -1,6 +1,5 @@
 import { defineComponent, ref, reactive, onMounted, watch, onBeforeMount, onUnmounted, nextTick, provide, Transition, KeepAlive } from "vue";
 import { useRoute, type RouteLocationNormalized } from "vue-router";
-import { mainHeight as layoutMainScrollbarStyle } from "@/layouts/utils";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
 import { useConfig } from "@/stores/config";
 import { useNavTabs } from "@/stores/navTabs";
@@ -77,7 +76,6 @@ export default defineComponent({
                 <el-scrollbar
                     ref={mainScrollbarRef}
                     class="fast-layout-main-scrollbar"
-                    style={layoutMainScrollbarStyle()}
                 >
                     <router-view>
                         {{

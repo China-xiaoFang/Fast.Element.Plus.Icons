@@ -34,14 +34,11 @@ namespace Fast.Admin.Core.Handlers;
 /// </summary>
 public class SqlSugarEntityHandler : ISqlSugarEntityHandler
 {
-    private readonly HttpContext _httpContext;
     private readonly ISqlSugarEntityService _sqlSugarEntityService;
     private readonly IEventPublisher _eventPublisher;
 
-    public SqlSugarEntityHandler(IHttpContextAccessor httpContextAccessor, ISqlSugarEntityService sqlSugarEntityService,
-        IEventPublisher eventPublisher)
+    public SqlSugarEntityHandler(ISqlSugarEntityService sqlSugarEntityService, IEventPublisher eventPublisher)
     {
-        _httpContext = httpContextAccessor.HttpContext;
         _sqlSugarEntityService = sqlSugarEntityService;
         _eventPublisher = eventPublisher;
     }
@@ -143,7 +140,7 @@ public class SqlSugarEntityHandler : ISqlSugarEntityHandler
             ExecuteTime = dateTime,
             TenantId = _user?.TenantId
         };
-        sysLogSqlExecModel.RecordCreate(_httpContext);
+        sysLogSqlExecModel.RecordCreate(FastContext.HttpContext);
 
         // 事件总线执行日志
         await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddExecuteLog,
@@ -190,7 +187,7 @@ public class SqlSugarEntityHandler : ISqlSugarEntityHandler
             TimeoutTime = dateTime,
             TenantId = _user?.TenantId
         };
-        sysLogSqlTimeoutModel.RecordCreate(_httpContext);
+        sysLogSqlTimeoutModel.RecordCreate(FastContext.HttpContext);
 
         // 事件总线执行日志
         await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddTimeoutLog,
@@ -252,7 +249,7 @@ public class SqlSugarEntityHandler : ISqlSugarEntityHandler
             DiffTime = dateTime,
             TenantId = _user?.TenantId
         };
-        sysLogSqlDiffModel.RecordCreate(_httpContext);
+        sysLogSqlDiffModel.RecordCreate(FastContext.HttpContext);
 
         // 事件总线执行日志
         await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddDiffLog,
@@ -297,7 +294,7 @@ public class SqlSugarEntityHandler : ISqlSugarEntityHandler
             ExceptionTime = dateTime,
             TenantId = _user?.TenantId
         };
-        sysLogSqlExModel.RecordCreate(_httpContext);
+        sysLogSqlExModel.RecordCreate(FastContext.HttpContext);
 
         // 事件总线执行日志
         await _eventPublisher.PublishAsync(new SqlSugarChannelEventSource(SysLogSqlEventSubscriberEnum.AddErrorLog,

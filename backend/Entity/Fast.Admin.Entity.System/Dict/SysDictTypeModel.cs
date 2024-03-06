@@ -1,6 +1,6 @@
 ﻿using Fast.Admin.Core.Enum.Common;
 
-namespace Fast.Admin.Entity.System.Dic;
+namespace Fast.Admin.Entity.System.Dict;
 
 /// <summary>
 /// 系统字典类型表Model类

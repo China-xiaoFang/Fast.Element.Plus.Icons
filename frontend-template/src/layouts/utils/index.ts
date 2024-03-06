@@ -1,27 +1,3 @@
-import type { CSSProperties } from "vue";
-import { useNavTabs } from "@/stores/navTabs";
-import { useConfig } from "@/stores/config";
-
-/**
- * main高度
- * @param extra main高度额外减去的px数,可以实现隐藏原有的滚动条
- * @returns CSSProperties
- */
-export function mainHeight(extra = 0): CSSProperties {
-    let height = extra;
-    const adminLayoutMainExtraHeight: anyObj = {
-        Classic: 50,
-    };
-    const configStore = useConfig();
-    const navTabsStore = useNavTabs();
-    if (!navTabsStore.state.tabFullScreen) {
-        height += adminLayoutMainExtraHeight[configStore.layout.layoutMode];
-    }
-    return {
-        height: "calc(100vh - " + height.toString() + "px)",
-    };
-}
-
 /**
  * 设置导航栏宽度
  * @returns

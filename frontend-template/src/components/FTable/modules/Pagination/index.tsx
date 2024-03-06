@@ -28,8 +28,8 @@ export const Pagination = defineComponent({
     setup(props: FTablePaginationProps) {
         return () => (
             <el-pagination
-                v-model={[props.pageIndex, "currentPage"]}
-                page-size={props.pageSize}
+                v-model:currentPage={props.pageIndex}
+                v-model:pageSize={props.pageSize}
                 page-sizes={[10, 20, 30, 50, 100]}
                 background={true}
                 layout="jumper, prev, pager, next, sizes, total"

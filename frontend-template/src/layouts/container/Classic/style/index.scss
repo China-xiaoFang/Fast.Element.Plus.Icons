@@ -69,7 +69,9 @@
 }
 
 .fast-layout-content-wrapper {
+    display: flex;
     flex-direction: column;
+    height: 100%;
     width: 100%;
     height: 100%;
 }
@@ -344,15 +346,27 @@
 }
 
 .fast-layout-main {
+    flex: 1;
     padding: 0 !important;
     margin: var(--fast-main-space);
     overflow: hidden;
-    width: 100%;
-    height: 100%;
     .fast-layout-main-scrollbar {
         width: 100%;
-        position: relative;
-        overflow: hidden;
+        .el-scrollbar__view {
+            height: 100%;
+        }
+    }
+    .fast-layout-main-container {
+        height: 100%;
+        /** 左右布局 */
+        &.main-row {
+            display: flex;
+            flex-direction: row;
+            /** 撑满宽度 */
+            .fill-width {
+                flex: 1;
+            }
+        }
     }
 }
 

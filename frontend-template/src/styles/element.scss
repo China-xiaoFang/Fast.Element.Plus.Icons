@@ -26,7 +26,9 @@
 }
 
 .el-card {
-    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow-x: hidden;
 }
 .el-card__header {
     border-bottom: 1px solid var(--el-border-color-extra-light);

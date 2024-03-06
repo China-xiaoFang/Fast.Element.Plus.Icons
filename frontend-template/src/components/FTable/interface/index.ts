@@ -128,34 +128,26 @@ export interface FTableEnumColumn {
      * 选项框值
      */
     value: string | number | boolean;
-    /**
-     * 是否显示
-     */
-    isShow?: boolean;
-    /**
-     * 是否禁用此选项
-     */
-    disabled?: boolean;
-    /**
-     * 当 tag 为 true 时，此选择会指定 tag 显示类型
-     */
-    tagTape?: string;
-    /**
-     * 为树形选择是，可以通过 children 属性指定子选项
-     */
-    children?: FTableEnumColumn[];
-    /**
-     * 提示
-     */
-    tips?: string;
-    /**
-     * 字体颜色
-     */
-    textColor?: string;
-    /**
-     * 背景颜色
-     */
-    bgColor?: string;
+    // /**
+    //  * 显示
+    //  */
+    // show?: boolean;
+    // /**
+    //  * 是否禁用此选项
+    //  */
+    // disabled?: boolean;
+    // /**
+    //  * 当 tag 为 true 时，此选择会指定 tag 显示类型
+    //  */
+    // tagTape?: string;
+    // /**
+    //  * 为树形选择是，可以通过 children 属性指定子选项
+    //  */
+    // children?: FTableEnumColumn[];
+    // /**
+    //  * 提示
+    //  */
+    // tips?: string;
 }
 
 /**
