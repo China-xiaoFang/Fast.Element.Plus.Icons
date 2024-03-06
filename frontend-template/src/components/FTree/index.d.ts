@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import "./style/index.scss";
-declare const FTree: import("vue").DefineComponent<{
+export declare const FTree: import("vue").DefineComponent<{
     data: {
         type: PropType<anyObj[]>;
         default: any[];
@@ -119,4 +119,3 @@ declare const FTree: import("vue").DefineComponent<{
     hideFilter: boolean;
     allValue: string | number | boolean;
 }, {}>;
-export default FTree;

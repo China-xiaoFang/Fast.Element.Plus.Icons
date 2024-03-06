@@ -1,5 +1,5 @@
 import { PropType } from "vue";
-declare const Pagination: import("vue").DefineComponent<{
+export declare const Pagination: import("vue").DefineComponent<{
     handleSizeChange: {
         type: PropType<(size: number) => void>;
         require: boolean;
@@ -42,4 +42,3 @@ declare const Pagination: import("vue").DefineComponent<{
         require: boolean;
     };
 }>>, {}, {}>;
-export default Pagination;

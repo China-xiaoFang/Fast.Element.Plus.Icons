@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import type { FTableResponsive } from "../../interface";
-declare const GridItem: import("vue").DefineComponent<{
+export declare const GridItem: import("vue").DefineComponent<{
     offset: {
         type: NumberConstructor;
         default: number;
@@ -71,4 +71,3 @@ declare const GridItem: import("vue").DefineComponent<{
     span: number;
     suffix: boolean;
 }, {}>;
-export default GridItem;

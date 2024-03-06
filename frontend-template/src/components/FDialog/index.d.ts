@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import "./style/index.scss";
-declare const FDialog: import("vue").DefineComponent<{
+export declare const FDialog: import("vue").DefineComponent<{
     width: {
         type: StringConstructor;
         required: false;
@@ -143,4 +143,3 @@ declare const FDialog: import("vue").DefineComponent<{
     showFooterOperator: boolean;
     fillHeight: boolean;
 }, {}>;
-export default FDialog;

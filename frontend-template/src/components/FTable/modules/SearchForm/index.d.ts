@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import type { FTableColumn, FTableBreakPoint } from "../../interface";
-declare const SearchForm: import("vue").DefineComponent<{
+export declare const SearchForm: import("vue").DefineComponent<{
     loading: BooleanConstructor;
     columns: {
         type: PropType<FTableColumn<anyObj>[]>;
@@ -38,4 +38,3 @@ declare const SearchForm: import("vue").DefineComponent<{
     searchParam: anyObj;
     searchFormColumns: number | Record<FTableBreakPoint, number>;
 }, {}>;
-export default SearchForm;

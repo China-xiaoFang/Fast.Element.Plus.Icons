@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import type { FTableColumn } from '../../interface';
-declare const SearchFormItem: import("vue").DefineComponent<{
+export declare const SearchFormItem: import("vue").DefineComponent<{
     column: {
         type: PropType<FTableColumn<anyObj>>;
         require: boolean;
@@ -27,4 +27,3 @@ declare const SearchFormItem: import("vue").DefineComponent<{
         require: boolean;
     };
 }>>, {}, {}>;
-export default SearchFormItem;

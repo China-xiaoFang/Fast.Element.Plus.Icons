@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import type { FTableBreakPoint } from "../../interface";
-declare const Grid: import("vue").DefineComponent<{
+export declare const Grid: import("vue").DefineComponent<{
     cols: {
         type: PropType<number | Record<FTableBreakPoint, number>>;
         default: () => {
@@ -52,4 +52,3 @@ declare const Grid: import("vue").DefineComponent<{
     collapsed: boolean;
     collapsedRows: number;
 }, {}>;
-export default Grid;

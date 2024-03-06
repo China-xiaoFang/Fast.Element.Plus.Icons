@@ -1,5 +1,5 @@
 import "./style/index.scss";
-declare const FImage: import("vue").DefineComponent<{
+export declare const FImage: import("vue").DefineComponent<{
     src: {
         type: StringConstructor;
         default: string;
@@ -62,8 +62,7 @@ declare const FImage: import("vue").DefineComponent<{
     normal: boolean;
     lazy: boolean;
     src: string;
+    original: boolean;
     thumb: boolean;
     preview: boolean;
-    original: boolean;
 }, {}>;
-export default FImage;

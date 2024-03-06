@@ -1,5 +1,5 @@
 import "./style/index.scss";
-declare const FSvg: import("vue").DefineComponent<{
+export declare const FSvg: import("vue").DefineComponent<{
     name: {
         type: StringConstructor;
         required: true;
@@ -29,4 +29,3 @@ declare const FSvg: import("vue").DefineComponent<{
     color: string;
     size: string;
 }, {}>;
-export default FSvg;

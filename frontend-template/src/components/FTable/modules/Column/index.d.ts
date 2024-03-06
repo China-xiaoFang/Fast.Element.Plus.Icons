@@ -1,6 +1,6 @@
 import { PropType } from "vue";
 import type { FTableColumn } from "../../interface";
-declare const TableColumn: import("vue").DefineComponent<{
+export declare const TableColumn: import("vue").DefineComponent<{
     column: {
         type: PropType<FTableColumn<anyObj>>;
         require: boolean;
@@ -11,4 +11,3 @@ declare const TableColumn: import("vue").DefineComponent<{
         require: boolean;
     };
 }>>, {}, {}>;
-export default TableColumn;
