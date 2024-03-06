@@ -2,9 +2,8 @@ import { Transition, defineComponent, nextTick, onMounted, reactive, ref, withMo
 import { useRoute, useRouter, onBeforeRouteUpdate, type RouteLocationNormalized } from "vue-router";
 import { useNavTabs } from "@/stores/navTabs";
 import { useTemplateRefsList } from "@vueuse/core";
-import FContextMenu from "@/components/FContextMenu";
+import { FIcon, FContextMenu } from "@/components";
 import type { ContextMenuItem, ContextMenuItemClickEmitArg } from "@/components/FContextMenu/interface";
-import FIcon from "@/components/FIcon";
 import useCurrentInstance from "@/hooks/useCurrentInstance";
 import horizontalScroll from "@/utils/horizontalScroll";
 import { useI18n } from "vue-i18n";

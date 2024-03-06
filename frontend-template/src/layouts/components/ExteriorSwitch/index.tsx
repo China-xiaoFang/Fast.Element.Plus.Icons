@@ -1,5 +1,5 @@
 import { defineComponent } from "vue";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 
 export default defineComponent({
     name: "LayoutExteriorSwitch",

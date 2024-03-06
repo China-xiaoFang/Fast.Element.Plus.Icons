@@ -3,7 +3,7 @@ import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { useConfig } from "@/stores/config";
 import { useNavTabs } from "@/stores/navTabs";
 import { useUserInfo } from "@/stores/userInfo";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 import { GetLoginModuleInfoDto } from "@/api/services/auth/models/get-login-module-info-dto";
 
 export default defineComponent({

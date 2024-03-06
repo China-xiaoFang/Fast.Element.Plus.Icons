@@ -1,6 +1,6 @@
-export { default as FContextMenu } from "./FContextMenu";
-export { default as FDialog } from "./FDialog";
-export { default as FIcon } from "./FIcon";
-export { default as FImage } from "./FImage";
-export { default as FTable } from "./FTable";
-export { default as FTree } from "./FTree";
+export { FContextMenu } from "./FContextMenu";
+export { FDialog } from "./FDialog";
+export { FIcon } from "./FIcon";
+export { FImage } from "./FImage";
+export { FTable } from "./FTable";
+export { FTree } from "./FTree";

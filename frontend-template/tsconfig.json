@@ -36,6 +36,8 @@
             "element-plus/global",
             /** vue-i18n 的 Volar 插件支持 */
             "vue-i18n/dist/vue-i18n",
+            /** 自定义组件 的 Volar 插件支持 */
+            "./src/components/index",
         ],
         /** baseUrl 用来告诉编译器到哪里去查找模块，使用非相对模块时必须配置此项 */
         "baseUrl": "./",
@@ -49,5 +51,4 @@
     },
     /** 编译器默认排除的编译文件 */
     "exclude": ["node_modules", "dist"],
-    // "include": ["types/*.d.ts"],
 }

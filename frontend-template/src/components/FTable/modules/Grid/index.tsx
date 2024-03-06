@@ -1,7 +1,7 @@
 import { defineComponent, computed, ref, watch, SetupContext, provide, useSlots, VNodeArrayChildren, VNode, onBeforeMount, onMounted, onActivated, onUnmounted, onDeactivated, PropType } from "vue";
 import type { FTableGridProps, FTableBreakPoint } from "../../interface";
 
-export default defineComponent({
+export const Grid = defineComponent({
     name: "Grid",
     props: {
         cols: {

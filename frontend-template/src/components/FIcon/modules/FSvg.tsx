@@ -3,7 +3,7 @@ import type { Props } from "../interface";
 import "./style/index.scss"
 import { isExternal } from "@/utils/validate";
 
-export default defineComponent({
+export const FSvg = defineComponent({
     name: "FSvg",
     props: {
         name: {

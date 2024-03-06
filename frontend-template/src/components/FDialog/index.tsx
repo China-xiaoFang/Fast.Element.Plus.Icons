@@ -2,10 +2,10 @@ import { SetupContext, defineComponent, ref, reactive, PropType, watch, toRefs }
 import type { Props, Emits, State } from "./interface";
 import "./style/index.scss"
 import { ElDialog, ElLoading, ElMessageBox } from "element-plus";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 import { useI18n } from "vue-i18n";
 
-const FDialog = defineComponent({
+export const FDialog = defineComponent({
     name: "FDialog",
     props: {
         width: {
@@ -245,5 +245,3 @@ const FDialog = defineComponent({
         );
     },
 });
-
-export default FDialog;

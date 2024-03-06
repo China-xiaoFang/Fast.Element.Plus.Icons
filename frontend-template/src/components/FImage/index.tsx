@@ -1,9 +1,9 @@
 import { SetupContext, defineComponent, watch, reactive } from "vue";
 import type { Props } from "./interface";
 import "./style/index.scss"
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 
-const FImage = defineComponent({
+export const FImage = defineComponent({
     name: "FImage",
     props: {
         src: {
@@ -93,5 +93,3 @@ const FImage = defineComponent({
         );
     },
 });
-
-export default FImage;

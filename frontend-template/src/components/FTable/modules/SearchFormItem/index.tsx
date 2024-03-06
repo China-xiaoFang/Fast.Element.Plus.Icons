@@ -3,7 +3,7 @@ import { handleProp } from "../../utils";
 import type { FTableSearchFormItemProps, FTableColumn } from '../../interface';
 import { useI18n } from "vue-i18n";
 
-export default defineComponent({
+export const SearchFormItem = defineComponent({
     name: "SearchFormItem",
     props: {
         column: {

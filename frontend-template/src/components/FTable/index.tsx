@@ -4,13 +4,13 @@ import { ElTable } from "element-plus";
 import { Refresh, Search, More } from "@element-plus/icons-vue";
 import "./style/index.scss"
 import { arrayDynamicSort, getRowspanMethod } from "./utils";
-import SearchForm from "./modules/SearchForm"
-import TableColumn from "./modules/Column"
-import Pagination from "./modules/Pagination"
+import { SearchForm } from "./modules/SearchForm"
+import { TableColumn } from "./modules/Column"
+import { Pagination } from "./modules/Pagination"
 import { useI18n } from "vue-i18n";
 import notDataImage from "@/assets/images/notData.png";
 
-const FTable = defineComponent({
+export const FTable = defineComponent({
     name: "FTable",
     props: {
         data: {
@@ -734,5 +734,3 @@ const FTable = defineComponent({
         )
     },
 });
-
-export default FTable;

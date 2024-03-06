@@ -1,7 +1,7 @@
 import { defineComponent, PropType } from "vue";
 import type { FTablePaginationProps } from "../../interface";
 
-export default defineComponent({
+export const Pagination = defineComponent({
     name: "Pagination",
     props: {
         handleSizeChange: {

@@ -7,7 +7,7 @@ import { useConfig } from "@/stores/config";
 import { useUserInfo } from "@/stores/userInfo";
 import { CACHE_USER_INFO } from "@/stores/constant";
 import { Local, Session } from "@/utils/storage";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 
 export default defineComponent({
     name: "LayoutNavMenu",

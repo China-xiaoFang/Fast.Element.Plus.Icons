@@ -1,4 +1,5 @@
-declare const FIcon: import("vue").DefineComponent<{
+import "./style/index.scss";
+declare const FSvg: import("vue").DefineComponent<{
     name: {
         type: StringConstructor;
         required: true;
@@ -11,7 +12,7 @@ declare const FIcon: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, import("vue").EmitsOptions, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     name: {
         type: StringConstructor;
         required: true;
@@ -28,4 +29,4 @@ declare const FIcon: import("vue").DefineComponent<{
     color: string;
     size: string;
 }, {}>;
-export default FIcon;
+export default FSvg;

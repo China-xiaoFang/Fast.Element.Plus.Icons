@@ -2,10 +2,9 @@ import { defineComponent, ref, inject, PropType, SetupContext } from "vue";
 import type { FTableColumnProps, FTableColumn } from "../../interface";
 import { dateTimeFix, filterEnum, formatValue, handleRowAccordingToProp } from "../../utils";
 import dayjs from "dayjs";
-import FImage from "@/components/FImage/index"
-import TableColumn from "./index"
+import { FImage } from "@/components/FImage/index"
 
-export default defineComponent({
+export const TableColumn = defineComponent({
     name: "TableColumn",
     props: {
         column: {

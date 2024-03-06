@@ -1,5 +1,69 @@
-import { Component } from "vue";
-
-declare const FImage: Component;
-
+import "./style/index.scss";
+declare const FImage: import("vue").DefineComponent<{
+    src: {
+        type: StringConstructor;
+        default: string;
+    };
+    lazy: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    original: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    normal: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    small: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    thumb: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    preview: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+}, () => any, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, import("vue").EmitsOptions, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    src: {
+        type: StringConstructor;
+        default: string;
+    };
+    lazy: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    original: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    normal: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    small: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    thumb: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    preview: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+}>>, {
+    small: boolean;
+    normal: boolean;
+    lazy: boolean;
+    src: string;
+    thumb: boolean;
+    preview: boolean;
+    original: boolean;
+}, {}>;
 export default FImage;

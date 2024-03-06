@@ -1,6 +1,6 @@
 import { PropType, defineComponent } from "vue";
 import { useConfig } from "@/stores/config";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 import LayoutMenuItem from "./index"
 import { onClickMenu } from "@/router/utils";
 import { GetLoginMenuInfoDto } from "@/api/services/auth/models/get-login-menu-info-dto";

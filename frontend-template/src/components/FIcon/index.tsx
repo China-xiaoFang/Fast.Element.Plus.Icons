@@ -1,9 +1,9 @@
 import { createVNode, SetupContext, resolveComponent, defineComponent, computed, type CSSProperties } from "vue";
 import type { Props } from "./interface";
-import FSvg from "./modules/FSvg";
+import { FSvg } from "./modules/FSvg";
 import { isExternal } from "@/utils/validate";
 
-const FIcon = defineComponent({
+export const FIcon = defineComponent({
     name: "FIcon",
     props: {
         name: {
@@ -44,5 +44,3 @@ const FIcon = defineComponent({
         );
     },
 });
-
-export default FIcon;

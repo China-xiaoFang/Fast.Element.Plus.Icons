@@ -1,11 +1,11 @@
 import { defineComponent, SetupContext, onMounted, reactive, toRaw, Transition } from "vue";
 import { useEventListener } from "@vueuse/core";
 import "./style/index.scss"
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 import type { Axis, ContextMenuItem, ContextMenuItemClickEmitArg, Props, Emits } from "./interface";
 import { RouteLocationNormalized } from "vue-router";
 
-export default defineComponent({
+export const FContextMenu = defineComponent({
     name: "FContextMenu",
     props: {
         width: {

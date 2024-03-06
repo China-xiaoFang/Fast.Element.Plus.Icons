@@ -1,7 +1,7 @@
 import { defineComponent, onMounted, reactive, withModifiers } from "vue";
 import { useNavTabs } from "@/stores/navTabs";
 import { useI18n } from "vue-i18n";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 
 export default defineComponent({
     name: "LayoutCloseFullScreen",

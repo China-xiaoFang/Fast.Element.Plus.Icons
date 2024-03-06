@@ -3,9 +3,9 @@ import type { Props, State, Emits } from "./interface";
 import { ElTree } from "element-plus";
 import "./style/index.scss"
 import { useI18n } from "vue-i18n";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 
-const FTree = defineComponent({
+export const FTree = defineComponent({
     name: "FTree",
     props: {
         data: {
@@ -264,4 +264,3 @@ const FTree = defineComponent({
     },
 });
 
-export default FTree

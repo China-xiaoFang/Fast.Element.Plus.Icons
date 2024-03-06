@@ -1,5 +1,5 @@
 import { defineComponent } from "vue";
-import FIcon from "@/components/FIcon";
+import { FIcon } from "@/components";
 import { useConfig } from "@/stores/config";
 // import { showShade } from "@/hooks/pageShade";
 import { setNavTabsWidth } from "@/layouts/utils";

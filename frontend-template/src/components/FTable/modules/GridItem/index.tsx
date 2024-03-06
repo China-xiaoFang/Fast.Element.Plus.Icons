@@ -1,7 +1,7 @@
 import { defineComponent, computed, ref, watch, Ref, inject, useAttrs, PropType, SetupContext, reactive } from "vue";
 import type { FTableGridItemProps, FTableResponsive, FTableBreakPoint } from "../../interface";
 
-export default defineComponent({
+export const GridItem = defineComponent({
     name: "GridItem",
     props: {
         offset: { type: Number, default: 0 },

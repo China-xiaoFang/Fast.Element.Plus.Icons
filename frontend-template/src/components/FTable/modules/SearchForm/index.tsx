@@ -1,12 +1,12 @@
 import { defineComponent, computed, ref, reactive, PropType, SetupContext } from "vue";
 import type { FTableSearchFormProps, FTableColumn, FTableBreakPoint } from "../../interface";
 import { Refresh, Delete, ArrowDown, ArrowUp } from "@element-plus/icons-vue";
-import Grid from "../Grid";
-import GridItem from "../GridItem";
-import SearchFormItem from "../SearchFormItem";
+import { Grid } from "../Grid";
+import { GridItem } from "../GridItem";
+import { SearchFormItem } from "../SearchFormItem";
 import { useI18n } from "vue-i18n";
 
-export default defineComponent({
+export const SearchForm = defineComponent({
     name: "SearchForm",
     props: {
         loading: Boolean,
