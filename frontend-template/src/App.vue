@@ -1,11 +1,11 @@
 <template>
-    <el-config-provider :locale="lang">
+    <el-config-provider :locale="lang" :button="buttonConfig">
         <router-view></router-view>
     </el-config-provider>
 </template>
 
 <script setup lang="ts" name="App">
-import { computed, watch } from "vue";
+import { reactive, computed, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useConfig } from "@/stores/config";
 import { editDefaultLang } from "@/lang";
@@ -15,6 +15,12 @@ const configStore = useConfig();
 // 初始化 element 的语言包
 const { getLocaleMessage } = useI18n();
 const lang = getLocaleMessage(configStore.lang.defaultLang) as any;
+
+// 按钮配置
+const buttonConfig = reactive({
+    // 自动插入空格
+    autoInsertSpace: true,
+});
 
 // 浏览器语言
 const browserLang = computed(() => {

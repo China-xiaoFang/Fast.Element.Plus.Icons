@@ -1,7 +1,7 @@
 {
-    "name": "fast-net",
+    "name": "fast-admin",
     "version": "1.0.0",
-    "description": "Fast.NET 前端快速成型框架。基于 Vue3、TypeScript、Element Plus、Pinia 和 Vite 等主流技术。",
+    "description": "Fast.Admin 前端快速成型框架。基于 Vue3、TypeScript、Element Plus、Pinia 和 Vite 等主流技术。",
     "license": "Apache-2.0",
     "author": {
         "name": "小方",
@@ -18,10 +18,10 @@
     "homepage": "fast.18kboy.icu",
     "repository": {
         "type": "gitee",
-        "url": "https://gitee.com/Net-18K/fast.net"
+        "url": "https://gitee.com/Net-18K/fast.admin"
     },
     "bugs": {
-        "url": "https://gitee.com/Net-18K/fast.net/issues",
+        "url": "https://gitee.com/Net-18K/fast.admin/issues",
         "email": "2875616188@qq.com"
     },
     "scripts": {
@@ -70,6 +70,7 @@
         "typescript-plugin-css-modules": "^5.1.0",
         "vite": "^5.1.5",
         "vite-plugin-compression": "^0.5.1",
+        "vite-plugin-html": "^3.2.2",
         "vite-plugin-vue-setup-extend": "^0.4.0",
         "vue-eslint-parser": "^9.4.2",
         "vue-tsc": "^2.0.6"
@@ -81,7 +82,7 @@
         "../Fast.png"
     ],
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=20.0.0"
     },
     "browserslist": {
         "production": [
@@ -96,7 +97,8 @@
         ]
     },
     "keywords": [
-        "Fast.NET",
+        "Fast.Admin",
+        "小方",
         "1.8K仔",
         "Web Admin",
         "Vue3",

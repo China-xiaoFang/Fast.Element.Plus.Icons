@@ -3,6 +3,7 @@ import type { UserConfig, ConfigEnv, ProxyOptions } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import { createHtmlPlugin } from "vite-plugin-html";
 import { isProd } from "./src/utils/vite";
 // 加载本地svg图标
 import { svgBuilder } from "./src/utils/svg";
@@ -21,7 +22,7 @@ const pathResolve = (dir: string): any => {
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = ({ mode }: ConfigEnv): UserConfig => {
     const viteEnv = loadEnv(mode, process.cwd()) as ImportMetaEnv;
-    const { VITE_PORT, VITE_OPEN, VITE_BASE_PATH, VITE_OUT_DIR, VITE_AXIOS_PROXY_URL } = viteEnv;
+    const { VITE_PORT, VITE_OPEN, VITE_BASE_PATH, VITE_OUT_DIR, VITE_AXIOS_PROXY_URL, VITE_APP_TITLE } = viteEnv;
 
     // 配置别名
     const alias: Record<string, string> = {
@@ -138,6 +139,12 @@ const ViteConfig = ({ mode }: ConfigEnv): UserConfig => {
             VueSetupExtend(),
             /** 本地 SVG 图标 */
             svgBuilder("./src/assets/icons/"),
+            /** 注入变量到 html 文件 */
+            createHtmlPlugin({
+                inject: {
+                    data: { title: VITE_APP_TITLE },
+                },
+            }),
             /** 兼容旧版 Chrome 和 IE浏览器 */
             legacyPlugin({
                 /** 需要兼容的目标列表，可以设置多个 */
