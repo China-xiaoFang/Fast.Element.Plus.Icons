@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../../../../../packages/icons/dark/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport DarkTSX from \"./src/dark.tsx\";\n\nexport const Dark = withInstall(DarkTSX);\nexport default Dark;\n"],"names":[],"mappings":";;;AAGa,MAAA,OAAO,YAAY,OAAO;"}

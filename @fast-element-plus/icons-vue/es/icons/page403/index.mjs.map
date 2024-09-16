@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../../../../../packages/icons/page403/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport Page403TSX from \"./src/page403.tsx\";\n\nexport const Page403 = withInstall(Page403TSX);\nexport default Page403;\n"],"names":[],"mappings":";;;AAGa,MAAA,UAAU,YAAY,UAAU;"}

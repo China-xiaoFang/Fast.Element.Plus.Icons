@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../../../packages/icons/menu/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport MenuTSX from \"./src/menu.tsx\";\n\nexport const Menu = withInstall(MenuTSX);\nexport default Menu;\n"],"names":["Menu","MenuTSX","default"],"mappings":"6KAGaA,oDAAmBC,EAAOC"}
