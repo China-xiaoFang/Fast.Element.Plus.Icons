@@ -1,0 +1,4 @@
+{
+	"name": "@icons-vue/build",
+	"main": "make-installer.ts"
+}
