@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../../../../../packages/icons/notData/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport NotDataTSX from \"./src/notData.tsx\";\n\nexport const NotData = withInstall(NotDataTSX);\nexport default NotData;\n"],"names":[],"mappings":";;;AAGa,MAAA,UAAU,YAAY,UAAU;"}

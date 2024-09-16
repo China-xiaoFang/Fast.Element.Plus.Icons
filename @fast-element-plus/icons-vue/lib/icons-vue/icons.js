@@ -1,0 +1,2 @@
+"use strict";Object.defineProperties(exports,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}});const e=require("../icons/dark/index.js"),i=require("../icons/fullScreen/index.js"),r=require("../icons/fullScreenExit/index.js"),n=require("../icons/light/index.js"),s=require("../icons/menu/index.js"),u=require("../icons/notData/index.js"),o=require("../icons/page403/index.js"),t=require("../icons/page404/index.js"),c=[e.Dark,i.FullScreen,r.FullScreenExit,n.Light,s.Menu,u.NotData,o.Page403,t.Page404];exports.default=c;
+//# sourceMappingURL=icons.js.map

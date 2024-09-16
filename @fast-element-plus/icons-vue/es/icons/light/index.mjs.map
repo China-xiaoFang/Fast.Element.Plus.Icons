@@ -1,0 +1,1 @@
+{"version":3,"file":"index.mjs","sources":["../../../../../packages/icons/light/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport LightTSX from \"./src/light.tsx\";\n\nexport const Light = withInstall(LightTSX);\nexport default Light;\n"],"names":[],"mappings":";;;AAGa,MAAA,QAAQ,YAAY,QAAQ;"}
