@@ -1,8 +1,112 @@
 **中** | [En](https://github.com/China-xiaoFang/fast.element.plus.icons)
 
-# Fast.Element.Plus.Icons
+<h1 align="center">Fast.Element.Plus.Icons</h1>
 
-- xxx
+<p align="center">
+  <code>Fast</code> 平台下基于 <code>Vue3</code>，<code>Vite</code>，<code>TypeScript</code>，<code>Element Plus</code> 构建的图标组件库。
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/@fast-element-plus/icons-vue">
+    <img src="https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange&label=" alt="version" />
+  </a>
+  <a href="https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE">
+    <img src="https://img.shields.io/npm/l/@fast-element-plus/icons-vue" alt="license" />
+  </a>
+</p>
+
+## 安装
+
+#### 站在巨人肩膀上 <a href="https://github.com/element-plus/element-plus">`Element Plus`</a>
+
+```
+因框架依赖 Element Plus，所以需要同时安装 Element Plus 才可正常使用。
+```
+
+#### 使用包管理器
+
+```sh
+# 选择一个你喜欢的包管理器
+
+# NPM
+npm install element-plus
+npm install @fast-element-plus/icons-vue
+
+# Yarn
+yarn add element-plus
+yarn add @fast-element-plus/icons-vue
+
+# pnpm（推荐）
+pnpm install element-plus
+pnpm install @fast-element-plus/icons-vue
+```
+
+#### 浏览器直接引入
+
+##### unpkg
+
+```html
+<head>
+  <!-- 导入样式 -->
+  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <!-- 导入 Vue 3 -->
+  <script src="//unpkg.com/vue@3"></script>
+  <!-- 导入 Element Plus 组件库 -->
+  <script src="//unpkg.com/element-plus"></script>
+  <!-- 导入组件库 -->
+  <script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
+</head>
+```
+
+##### jsDelivr
+
+```html
+<head>
+  <!-- 导入样式 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
+  <!-- 导入 Vue 3 -->
+  <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+  <!-- 导入 Element Plus 组件库 -->
+  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
+  <!-- 导入组件库 -->
+  <script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
+</head>
+```
+
+## 使用
+
+在 `main.ts`
+
+```typescript
+import { createApp } from "vue";
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
+import FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
+import App from "./App.vue";
+
+const app = createApp(App);
+
+// 全局注册 Element Plus
+app.use(ElementPlus);
+
+// 全局注册
+app.use(FastElementPlusIconsVue);
+
+app.mount('#app');
+```
+
+#### Volar 支持
+
+如果您使用 Volar，请在 `tsconfig.json` 中通过 `compilerOptions.type` 指定全局组件类型。
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["@fast-element-plus/icons-vue/global"]
+  }
+}
+```
 
 ## 更新日志
 
@@ -10,7 +114,7 @@
 
 ## 协议
 
-[Fast.Vite.Plugins](https://gitee.com/China-xiaoFang/fast.element.plus.icons) 遵循 [Apache-2.0](https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
+[Fast.Element.Plus.Icons](https://gitee.com/China-xiaoFang/fast.element.plus.icons) 遵循 [Apache-2.0](https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
 
 ```
 Apache开源许可证
@@ -33,6 +137,14 @@ Apache开源许可证
 ```
 请勿用于违反我国法律的项目上
 ```
+
+## 贡献者
+
+感谢他们的所做的一切贡献！
+
+<a href="https://github.com/China-xiaoFang/Fast.Element.Plus.Icons/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=China-xiaoFang/Fast.Element.Plus.Icons" />
+</a>
 
 ## 补充说明
 

@@ -46,9 +46,7 @@
 		"paths": {
 			"@fast-element-plus/icons-vue": ["packages"],
 			"@icons-vue/*": ["packages/*"]
-		},
-		// TSX 使用 cssModule 模块化，避免样式冲突 https://www.jianshu.com/p/da90f6d9b627
-		"plugins": [{ "name": "typescript-plugin-css-modules" }]
+		}
 	},
 	"include": ["./packages", "./global.d.ts"],
 	/** 编译器默认排除的编译文件 */

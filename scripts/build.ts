@@ -163,16 +163,16 @@ console.log(`
 共找到 ${svgFiles.length} 个svg图标文件...
 `);
 
-let iconExportContent = "";
+let iconImportContent = "";
 let iconTypeContent = "";
 let exportContent = "";
-let typeContent = "";
+let typeDTSContent = "";
 
 svgFiles.forEach((svg, idx) => {
 	writeTSXIcon(svg.iconName, svg.componentName, path.join(iconsPath, svg.iconName), svg.iconContent);
 	console.log(`${svg.iconName} 图标组件构建成功...`);
 
-	iconExportContent += `import { ${svg.componentName} } from "@icons-vue/icons/${svg.iconName}";
+	iconImportContent += `import { ${svg.componentName} } from "@icons-vue/icons/${svg.iconName}";
 `;
 
 	iconTypeContent += `	${svg.componentName},`;
@@ -180,10 +180,10 @@ svgFiles.forEach((svg, idx) => {
 	exportContent += `export * from "./${svg.iconName}";
 `;
 
-	typeContent += `		Fa${svg.componentName}: (typeof import("@fast-element-plus/icons-vue"))["${svg.componentName}"];`;
+	typeDTSContent += `		Fa${svg.componentName}: (typeof import("@fast-element-plus/icons-vue"))["${svg.componentName}"];`;
 
 	if (idx + 1 < svgFiles.length) {
-		typeContent += "\n";
+		typeDTSContent += "\n";
 		iconTypeContent += "\n";
 	}
 });
@@ -191,7 +191,7 @@ svgFiles.forEach((svg, idx) => {
 fs.writeFileSync(
 	path.resolve(__dirname, "../packages/icons-vue/icons.ts"),
 	`import type { Plugin } from "vue";
-${iconExportContent}
+${iconImportContent}
 export default [
 ${iconTypeContent}
 ] as Plugin[];
@@ -210,7 +210,7 @@ import "@vue/runtime-core";
 // GlobalComponents for Volar
 declare module "@vue/runtime-core" {
 	export interface GlobalComponents {
-${typeContent}
+${typeDTSContent}
 	}
 
 	// interface ComponentCustomProperties {}
