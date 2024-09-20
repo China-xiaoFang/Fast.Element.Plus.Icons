@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../../../packages/icons/terminal/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport TerminalTSX from \"./src/terminal.tsx\";\n\nexport const Terminal = withInstall(TerminalTSX);\nexport default Terminal;\n"],"names":["Terminal","TerminalTSX","default"],"mappings":"iLAGaA,oDAAuBC,EAAWC"}
