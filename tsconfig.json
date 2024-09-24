@@ -44,7 +44,6 @@
 		"baseUrl": "./",
 		/** 非相对模块导入的路径映射配置，根据 baseUrl 配置进行路径计算 */
 		"paths": {
-			"@fast-element-plus/icons-vue": ["packages"],
 			"@icons-vue/*": ["packages/*"]
 		}
 	},
