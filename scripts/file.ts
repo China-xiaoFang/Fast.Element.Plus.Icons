@@ -36,9 +36,6 @@ export const copyFile = (sDir: string, dDir: string, fileSuffix?: string, oSDir?
 			const dPath = path.join(dDir, entry.name);
 
 			if (entry.isDirectory()) {
-				if (!fs.existsSync(dPath)) {
-					fs.mkdirSync(dPath);
-				}
 				copyFile(sPath, dDir, fileSuffix, oSDir ?? sDir);
 			} else {
 				const relativePath = path.relative(oSDir ?? sDir, sPath);
@@ -63,14 +60,17 @@ export const copyFile = (sDir: string, dDir: string, fileSuffix?: string, oSDir?
 	} else {
 		const fileName = path.basename(sDir);
 		const dFileName = path.join(dDir, fileName);
-		if (fs.existsSync(dFileName)) {
-			fs.unlinkSync(dFileName);
-		}
 		if (fileSuffix) {
 			if (path.extname(sDir) === fileSuffix) {
+				if (fs.existsSync(dFileName)) {
+					fs.unlinkSync(dFileName);
+				}
 				fs.copyFileSync(sDir, dFileName);
 			}
 		} else {
+			if (fs.existsSync(dFileName)) {
+				fs.unlinkSync(dFileName);
+			}
 			fs.copyFileSync(sDir, dFileName);
 		}
 	}
