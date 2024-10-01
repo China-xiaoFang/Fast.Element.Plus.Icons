@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { __dirname, __filename, copyFile, npmPackagePath } from "./file";
-import { externalDependencies } from "../vite.build.config";
+import { ignoredDevDependencies, peerDependencies, removedDevDependencies } from "../vite.build.config";
 
 const updatePackage = (): void => {
 	const packagePath = path.resolve(__dirname, "../package.json");
@@ -37,12 +37,20 @@ const updatePackage = (): void => {
 
 	packageJson.version = newVersion;
 
-	const newPackageJon = {
-		...packageJson,
+	const newPackageJson = {
+		name: packageJson.name,
+		author: packageJson.author,
+		version: packageJson.version,
+		description: packageJson.description,
+		keywords: packageJson.keywords,
+		license: packageJson.license,
+		publishConfig: packageJson.publishConfig,
+		homepage: packageJson.homepage,
+		repository: packageJson.repository,
+		bugs: packageJson.bugs,
 		main: "dist/index.js",
 		module: "es/index.mjs",
 		types: "es/index.d.ts",
-		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
 		exports: {
 			".": {
 				types: "./es/index.d.ts",
@@ -77,34 +85,43 @@ const updatePackage = (): void => {
 		},
 		unpkg: "dist/index.umd.js",
 		jsdelivr: "dist/index.umd.js",
+		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
 		peerDependencies: {},
+		dependencies: {},
+		devDependencies: {},
+		browserslist: packageJson.browserslist,
 	};
 
-	newPackageJon.dependencies = Object.keys(packageJson.dependencies).reduce((acc, key) => {
+	newPackageJson.devDependencies = Object.keys(packageJson.devDependencies ?? {}).reduce((acc, key) => {
 		if (!key.startsWith("@icons-vue/")) {
-			acc[key] = packageJson.dependencies[key];
+			if (!removedDevDependencies.includes(key)) {
+				acc[key] = packageJson.devDependencies[key];
+			}
 		}
 		return acc;
 	}, {});
 
-	newPackageJon.devDependencies = Object.keys(packageJson.devDependencies).reduce((acc, key) => {
-		if (!key.startsWith("@icons-vue/")) {
-			acc[key] = packageJson.devDependencies[key];
-		}
-		return acc;
-	}, {});
-
-	delete newPackageJon.scripts;
-
-	Object.keys(packageJson.dependencies).forEach((needKey) => {
-		if (externalDependencies.includes(needKey)) {
-			newPackageJon.peerDependencies[needKey] = packageJson.dependencies[needKey];
+	Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
+		if (peerDependencies.includes(needKey)) {
+			newPackageJson.peerDependencies[needKey] = packageJson.devDependencies[needKey];
 		}
 	});
 
+	if (Object.keys(newPackageJson.peerDependencies).length === 0) {
+		delete (newPackageJson as any).peerDependencies;
+	}
+
+	if (Object.keys(newPackageJson.dependencies).length === 0) {
+		delete (newPackageJson as any).dependencies;
+	}
+
+	if (Object.keys(newPackageJson.devDependencies).length === 0) {
+		delete (newPackageJson as any).devDependencies;
+	}
+
 	// 写入 package.json 文件
 	fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`, "utf-8");
-	fs.writeFileSync(packageProPath, `${JSON.stringify(newPackageJon, null, 2)}\n`, "utf-8");
+	fs.writeFileSync(packageProPath, `${JSON.stringify(newPackageJson, null, 2)}\n`, "utf-8");
 
 	console.log(`
   Update version to v${newVersion} ...

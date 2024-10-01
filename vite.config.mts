@@ -4,7 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import type { ConfigEnv, UserConfig } from "vite";
 // 打包优化插件
 import vitePluginDts from "vite-plugin-dts";
-import { buildGlobalDependencies, externalDependencies } from "./vite.build.config";
+import { globalDependenciesMapping, ignoredDevDependencies, peerDependencies } from "./vite.build.config";
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
@@ -47,7 +47,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 			/** 静态资源打包处理 */
 			rollupOptions: {
 				// 确保外部化处理那些你不想打包进库的依赖
-				external: externalDependencies,
+				external: [...peerDependencies, ...ignoredDevDependencies],
 				// 禁用 Tree-shaking
 				treeshake: false,
 				output: [
@@ -62,7 +62,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						assetFileNames: "[name].[ext]",
 						chunkFileNames: "[name].umd.js",
 						dir: "./@fast-element-plus/icons-vue/dist",
-						globals: buildGlobalDependencies,
+						globals: globalDependenciesMapping,
 					},
 					{
 						format: "iife",
@@ -75,7 +75,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						assetFileNames: "[name].[ext]",
 						chunkFileNames: "[name].iife.mjs",
 						dir: "./@fast-element-plus/icons-vue/dist",
-						globals: buildGlobalDependencies,
+						globals: globalDependenciesMapping,
 					},
 					{
 						format: "cjs",
@@ -90,7 +90,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						assetFileNames: "[name].[ext]",
 						chunkFileNames: "[name].js",
 						dir: "./@fast-element-plus/icons-vue/lib",
-						globals: buildGlobalDependencies,
+						globals: globalDependenciesMapping,
 					},
 					{
 						format: "es",
@@ -103,7 +103,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						assetFileNames: "[name].[ext]",
 						chunkFileNames: "[name].mjs",
 						dir: "./@fast-element-plus/icons-vue/es",
-						globals: buildGlobalDependencies,
+						globals: globalDependenciesMapping,
 					},
 				],
 			},

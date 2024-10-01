@@ -7,19 +7,18 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
+      '@icons-vue/build':
+        specifier: workspace:*
+        version: link:packages/icons-vue
       '@icons-vue/icons':
         specifier: workspace:*
         version: link:packages/icons
       '@icons-vue/utils':
         specifier: workspace:*
         version: link:packages/utils
-    devDependencies:
-      '@icons-vue/build':
-        specifier: workspace:*
-        version: link:packages/icons-vue
       '@types/node':
-        specifier: ^22.5.5
+        specifier: '*'
         version: 22.7.4
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.6.0
