@@ -1,2 +1,2 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});exports.withInstall=(e,t)=>{if(e.install=o=>{for(const n of[e,...Object.values(t??{})])o.component(`Fa${n.name}`,n),o.component(`fa-icon-${n.name}`,n)},t)for(const[o,n]of Object.entries(t))e[o]=n;return e};
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});exports.withInstall=(t,e)=>{if(t.install=o=>{for(const n of[t,...Object.values(e??{})])o.component(`fa-icon-${n.name}`,n)},e)for(const[o,n]of Object.entries(e))t[o]=n;return t};
 //# sourceMappingURL=install.js.map

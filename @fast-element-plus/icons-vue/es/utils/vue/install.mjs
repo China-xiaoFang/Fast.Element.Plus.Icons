@@ -1,7 +1,6 @@
 const withInstall = (main, extra) => {
   main.install = (app) => {
     for (const comp of [main, ...Object.values(extra ?? {})]) {
-      app.component(`Fa${comp.name}`, comp);
       app.component(`fa-icon-${comp.name}`, comp);
     }
   };
