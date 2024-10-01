@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fast Icons组件库.",
   "license": "Apache-2.0",
   "publishConfig": {
