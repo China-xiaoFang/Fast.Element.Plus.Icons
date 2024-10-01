@@ -3,7 +3,7 @@
 <h1 align="center">Fast.Element.Plus.Icons</h1>
 
 <p align="center">
-  <code>Fast</code> platform An icon component library built based on <code>Vue3</code>, <code>Vite</code>, <code>TypeScript</code>, and <code>Element Plus</code>.
+  <code>Fast</code> platform An icon component library built based on <code>Vue3</code>, <code>Vite</code>, <code>TypeScript</code>, and <code>Svg</code>.
 </p>
 
 <p align="center">
@@ -17,27 +17,18 @@
 
 ## Install
 
-#### Standing on the shoulders of giants <a href="https://github.com/element-plus/element-plus">`Element Plus`</a>
-
-```
-Because the framework depends on Element Plus, you need to install Element Plus at the same time to use it properly.
-```
-
 #### Using a Package Manager
 
 ```sh
 # Choose a package manager of your choice
 
 # NPM
-npm install element-plus
 npm install @fast-element-plus/icons-vue
 
 # Yarn
-yarn add element-plus
 yarn add @fast-element-plus/icons-vue
 
 # pnpm (recommend)
-pnpm install element-plus
 pnpm install @fast-element-plus/icons-vue
 ```
 
@@ -47,12 +38,8 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- Import style -->
-  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
   <!-- Import Vue 3 -->
   <script src="//unpkg.com/vue@3"></script>
-  <!-- Import Element Plus component library -->
-  <script src="//unpkg.com/element-plus"></script>
   <!-- Import component library -->
   <script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
 </head>
@@ -62,12 +49,8 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- Import style -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
   <!-- Import Vue 3 -->
   <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
-  <!-- Import Element Plus component library -->
-  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
   <!-- Import component library -->
   <script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
 </head>
@@ -79,15 +62,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```typescript
 import { createApp } from "vue";
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
 import FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
 import App from "./App.vue";
 
 const app = createApp(App);
-
-// Global Registration Element Plus
-app.use(ElementPlus);
 
 // Global Registration
 app.use(FastElementPlusIconsVue);

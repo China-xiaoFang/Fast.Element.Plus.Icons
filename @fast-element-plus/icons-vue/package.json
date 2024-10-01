@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fast Icons组件库.",
   "license": "Apache-2.0",
   "publishConfig": {
@@ -19,10 +19,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {
-    "element-plus": "^2.8.3",
-    "vue": "^3.5.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^22.5.5",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
@@ -41,6 +38,7 @@
     "typescript": "^5.6.2",
     "vite": "^5.4.7",
     "vite-plugin-dts": "^4.2.1",
+    "vue": "^3.2.47",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.6"
   },
@@ -63,17 +61,13 @@
     "./README.zh.md",
     "./dist",
     "./es",
-    "./lib",
-    "./global.d.ts"
+    "./lib"
   ],
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
       "import": "./es/index.mjs",
       "require": "./lib/index.js"
-    },
-    "./global": {
-      "types": "./global.d.ts"
     },
     "./es": {
       "types": "./es/index.d.ts",
@@ -109,8 +103,5 @@
   },
   "unpkg": "dist/index.umd.js",
   "jsdelivr": "dist/index.umd.js",
-  "peerDependencies": {
-    "element-plus": "^2.8.3",
-    "vue": "^3.5.6"
-  }
+  "peerDependencies": {}
 }
