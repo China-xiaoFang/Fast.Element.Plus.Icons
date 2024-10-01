@@ -1,13 +1,12 @@
 /**
  * 构建忽略包
  */
-const externalDependencies = ["element-plus", "vue"];
+const externalDependencies = ["vue"];
 
 /**
  * 构建全局包
  */
 const buildGlobalDependencies = {
-	"element-plus": "ElementPlus",
 	vue: "Vue",
 };
 

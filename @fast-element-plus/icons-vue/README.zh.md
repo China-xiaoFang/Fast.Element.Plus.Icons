@@ -3,7 +3,7 @@
 <h1 align="center">Fast.Element.Plus.Icons</h1>
 
 <p align="center">
-  <code>Fast</code> 平台下基于 <code>Vue3</code>，<code>Vite</code>，<code>TypeScript</code>，<code>Element Plus</code> 构建的图标组件库。
+  <code>Fast</code> 平台下基于 <code>Vue3</code>，<code>Vite</code>，<code>TypeScript</code>，<code>Svg</code> 构建的图标组件库。
 </p>
 
 <p align="center">
@@ -17,27 +17,18 @@
 
 ## 安装
 
-#### 站在巨人肩膀上 <a href="https://github.com/element-plus/element-plus">`Element Plus`</a>
-
-```
-因框架依赖 Element Plus，所以需要同时安装 Element Plus 才可正常使用。
-```
-
 #### 使用包管理器
 
 ```sh
 # 选择一个你喜欢的包管理器
 
 # NPM
-npm install element-plus
 npm install @fast-element-plus/icons-vue
 
 # Yarn
-yarn add element-plus
 yarn add @fast-element-plus/icons-vue
 
 # pnpm（推荐）
-pnpm install element-plus
 pnpm install @fast-element-plus/icons-vue
 ```
 
@@ -47,12 +38,8 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- 导入样式 -->
-  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
   <!-- 导入 Vue 3 -->
   <script src="//unpkg.com/vue@3"></script>
-  <!-- 导入 Element Plus 组件库 -->
-  <script src="//unpkg.com/element-plus"></script>
   <!-- 导入组件库 -->
   <script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
 </head>
@@ -62,12 +49,8 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- 导入样式 -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-plus/dist/index.css" />
   <!-- 导入 Vue 3 -->
   <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
-  <!-- 导入 Element Plus 组件库 -->
-  <script src="//cdn.jsdelivr.net/npm/element-plus"></script>
   <!-- 导入组件库 -->
   <script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
 </head>
@@ -79,15 +62,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```typescript
 import { createApp } from "vue";
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
 import FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
 import App from "./App.vue";
 
 const app = createApp(App);
-
-// 全局注册 Element Plus
-app.use(ElementPlus);
 
 // 全局注册
 app.use(FastElementPlusIconsVue);

@@ -42,15 +42,12 @@ const updatePackage = (): void => {
 		main: "dist/index.js",
 		module: "es/index.mjs",
 		types: "es/index.d.ts",
-		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib", "./global.d.ts"],
+		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
 		exports: {
 			".": {
 				types: "./es/index.d.ts",
 				import: "./es/index.mjs",
 				require: "./lib/index.js",
-			},
-			"./global": {
-				types: "./global.d.ts",
 			},
 			"./es": {
 				types: "./es/index.d.ts",

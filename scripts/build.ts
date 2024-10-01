@@ -72,29 +72,18 @@ const writeTSXIcon = (iconName: string, componentName: string, iconDir: string, 
 	fs.mkdirSync(srcDir, { recursive: true });
 
 	const iconContent = `import { defineComponent } from "vue";
-import { ElIcon } from "element-plus";
 
 /**
  * ${componentName} 图标组件
  */
 export default defineComponent({
 	name: "${componentName}",
-	components: {
-		ElIcon,
-	},
-	setup(_, { attrs }) {
-		return {
-			attrs,
-		};
-	},
 	render() {
 		return (
-			<ElIcon {...this.attrs} class="fa-icon fa-icon-${componentName} icon">
 ${svgContent
 	.split("\n")
-	.map((line) => `				${line}`)
+	.map((line) => `			${line}`)
 	.join("\n")}
-			</ElIcon>
 		);
 	},
 });
@@ -166,7 +155,6 @@ console.log(`
 let iconImportContent = "";
 let iconTypeContent = "";
 let exportContent = "";
-let typeDTSContent = "";
 
 svgFiles.forEach((svg, idx) => {
 	writeTSXIcon(svg.iconName, svg.componentName, path.join(iconsPath, svg.iconName), svg.iconContent);
@@ -180,10 +168,7 @@ svgFiles.forEach((svg, idx) => {
 	exportContent += `export * from "./${svg.iconName}";
 `;
 
-	typeDTSContent += `		Fa${svg.componentName}: (typeof import("@fast-element-plus/icons-vue"))["${svg.componentName}"];`;
-
 	if (idx + 1 < svgFiles.length) {
-		typeDTSContent += "\n";
 		iconTypeContent += "\n";
 	}
 });
@@ -199,28 +184,6 @@ ${iconTypeContent}
 );
 
 fs.writeFileSync(path.join(iconsPath, "index.ts"), exportContent);
-
-const globalDTSPath = path.resolve(__dirname, "../global.d.ts");
-
-fs.writeFileSync(
-	globalDTSPath,
-	`// For this project development
-import "@vue/runtime-core";
-
-// GlobalComponents for Volar
-declare module "@vue/runtime-core" {
-	export interface GlobalComponents {
-${typeDTSContent}
-	}
-
-	// interface ComponentCustomProperties {}
-}
-
-export {};
-`
-);
-
-fs.copyFileSync(globalDTSPath, path.join(npmPackagePath, "global.d.ts"));
 
 console.log(`
 构建 icons 图标库组件成功...
