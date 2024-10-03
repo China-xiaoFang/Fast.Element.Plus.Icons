@@ -20,7 +20,7 @@ const updatePackage = (): void => {
 	let vNum3 = Number(vArr[2]);
 	vNum3 += 1;
 
-	if (vNum3 > 99) {
+	if (vNum3 >= 99) {
 		// 第二位增加1
 		vNum2 += 1;
 		vNum3 = 0;
