@@ -7,7 +7,7 @@ const makeInstaller = () => {
     FastElementPlusIcons.forEach((i) => app.use(i));
   };
   return {
-    version: "1.0.0",
+    version: "1.0.6",
     install
   };
 };
