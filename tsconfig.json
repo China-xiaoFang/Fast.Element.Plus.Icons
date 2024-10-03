@@ -20,7 +20,6 @@
 		"composite": true,
 		"lib": ["ESNext", "dom"],
 		"skipLibCheck": true,
-		"allowImportingTsExtensions": true,
 		"noEmit": true,
 		/* 报告.js文件中的错误  Report errors in .js files. */
 		"checkJs": false,
