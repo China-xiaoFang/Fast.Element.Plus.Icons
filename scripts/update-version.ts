@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { __dirname, __filename, copyFile, npmPackagePath } from "./file";
-import { ignoredDevDependencies, peerDependencies, removedDevDependencies } from "../vite.build.config";
+import { peerDependencies, removedDevDependencies } from "../vite.build.config";
 
 const updatePackage = (): void => {
 	const packagePath = path.resolve(__dirname, "../package.json");
