@@ -92,7 +92,7 @@ ${svgContent
 	fs.writeFileSync(path.join(srcDir, `${iconName}.tsx`), iconContent);
 
 	const indexContent = `import { withInstall } from "@icons-vue/utils";
-import ${componentName}TSX from "./src/${iconName}.tsx";
+import ${componentName}TSX from "./src/${iconName}";
 
 export const ${componentName} = withInstall(${componentName}TSX);
 export default ${componentName};
