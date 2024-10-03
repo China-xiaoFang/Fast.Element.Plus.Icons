@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { __dirname, __filename, copyFile, npmPackagePath } from "./file";
-import { peerDependencies, removedDevDependencies } from "../vite.build.config";
+import { ignoredDevDependencies, peerDependencies, removedDevDependencies } from "../vite.build.config";
 
 const updatePackage = (): void => {
 	const packagePath = path.resolve(__dirname, "../package.json");
@@ -100,6 +100,12 @@ const updatePackage = (): void => {
 		}
 		return acc;
 	}, {});
+
+    Object.keys(packageJson.dependencies ?? {}).forEach((needKey) => {
+        if (ignoredDevDependencies.includes(needKey)) {
+            newPackageJson.dependencies[needKey] = packageJson.dependencies[needKey];
+        }
+    });
 
 	Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
 		if (peerDependencies.includes(needKey)) {
