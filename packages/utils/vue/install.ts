@@ -1,4 +1,6 @@
-import type { TSXWithInstall } from "./typescript";
+import type { Plugin } from "vue";
+
+export type TSXWithInstall<T> = T & Plugin;
 
 export const withInstall = <T, E extends Record<string, any>>(main: T, extra?: E): TSXWithInstall<T> & E => {
 	(main as TSXWithInstall<T>).install = (app): void => {
