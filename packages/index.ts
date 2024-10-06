@@ -1,9 +1,8 @@
-import { INSTALLED_KEY, makeInstaller } from "@icons-vue/build";
-import * as FastElementPlusIconsVue from "@icons-vue/icons";
+import { makeInstaller } from "@icons-vue/build";
+export { INSTALLED_KEY } from "@icons-vue/build";
+export * as FastElementPlusIconsVue from "@icons-vue/icons";
 
 export * from "@icons-vue/icons";
-
-export { INSTALLED_KEY, FastElementPlusIconsVue };
 
 const installer = makeInstaller();
 

@@ -1,5 +1,6 @@
 import type { App } from "vue";
 import FastElementPlusIcons from "./icons";
+import { version } from "./version";
 
 export const INSTALLED_KEY = Symbol("INSTALLED_KEY");
 
@@ -16,7 +17,7 @@ export const makeInstaller = (): {
 	};
 
 	return {
-		version: "1.0.7",
+		version,
 		install,
 	};
 };

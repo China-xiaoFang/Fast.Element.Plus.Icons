@@ -1,4 +1,5 @@
 import FastElementPlusIcons from "./icons.mjs";
+import { version } from "./version.mjs";
 const INSTALLED_KEY = Symbol("INSTALLED_KEY");
 const makeInstaller = () => {
   const install = (app) => {
@@ -7,7 +8,7 @@ const makeInstaller = () => {
     FastElementPlusIcons.forEach((i) => app.use(i));
   };
   return {
-    version: "1.0.7",
+    version,
     install
   };
 };
