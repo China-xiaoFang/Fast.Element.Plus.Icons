@@ -1,4 +1,4 @@
-export { INSTALLED_KEY } from './build';
+export { INSTALLED_KEY } from './make-installer';
 export * as FastElementPlusIconsVue from './icons';
 export * from './icons';
 declare const installer: {

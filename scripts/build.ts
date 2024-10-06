@@ -174,7 +174,7 @@ svgFiles.forEach((svg, idx) => {
 });
 
 fs.writeFileSync(
-	path.resolve(__dirname, "../packages/icons-vue/icon.ts"),
+	path.resolve(__dirname, "../packages/icon.ts"),
 	`import type { Plugin } from "vue";
 ${iconImportContent}
 export default [

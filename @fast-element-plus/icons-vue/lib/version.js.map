@@ -1,0 +1,1 @@
+{"version":3,"file":"version.js","sources":["../../../packages/version.ts"],"sourcesContent":["export const version = \"v1.0.10\";\n"],"names":[],"mappings":"gGAAuB"}
