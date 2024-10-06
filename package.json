@@ -52,7 +52,6 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
-    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "terser": "^5.33.0",
     "tsx": "^4.19.1",
@@ -77,8 +76,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-	"lint-staged": {
-		"*.{vue,js,ts,jsx,tsx,md,json,css,scss,less,html}": "eslint --fix"
-	}
+  }
 }
