@@ -1,5 +1,6 @@
 import { makeInstaller } from "./icons-vue/make-installer.mjs";
-import "./icons/index.mjs";
+import { INSTALLED_KEY } from "./icons-vue/make-installer.mjs";
+import * as index from "./icons/index.mjs";
 import { Dark } from "./icons/dark/index.mjs";
 import { Dashboard } from "./icons/dashboard/index.mjs";
 import { FullScreen } from "./icons/fullScreen/index.mjs";
@@ -17,8 +18,10 @@ const version = installer.version;
 export {
   Dark,
   Dashboard,
+  index as FastElementPlusIconsVue,
   FullScreen,
   FullScreenExit,
+  INSTALLED_KEY,
   Light,
   Menu,
   NotData,
