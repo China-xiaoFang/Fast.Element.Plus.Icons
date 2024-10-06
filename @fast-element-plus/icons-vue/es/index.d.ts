@@ -1,4 +1,4 @@
-export { INSTALLED_KEY } from './icons-vue';
+export { INSTALLED_KEY } from './build';
 export * as FastElementPlusIconsVue from './icons';
 export * from './icons';
 declare const installer: {

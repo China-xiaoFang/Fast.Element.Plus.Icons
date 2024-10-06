@@ -89,16 +89,14 @@ const updatePackage = (): void => {
 		jsdelivr: "dist/index.umd.js",
 		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
 		peerDependencies: {},
-		dependencies: {},
+		dependencies: packageJson.dependencies,
 		devDependencies: {},
 		browserslist: packageJson.browserslist,
 	};
 
-	Object.keys(packageJson.dependencies ?? {}).forEach((needKey) => {
+	Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
 		if (peerDependencies.includes(needKey)) {
-			newPackageJson.peerDependencies[needKey] = packageJson.dependencies[needKey];
-		} else {
-			newPackageJson.dependencies[needKey] = packageJson.dependencies[needKey];
+			newPackageJson.peerDependencies[needKey] = packageJson.devDependencies[needKey];
 		}
 	});
 
@@ -113,10 +111,6 @@ const updatePackage = (): void => {
 
 	if (Object.keys(newPackageJson.peerDependencies).length === 0) {
 		delete (newPackageJson as any).peerDependencies;
-	}
-
-	if (Object.keys(newPackageJson.dependencies).length === 0) {
-		delete (newPackageJson as any).dependencies;
 	}
 
 	if (Object.keys(newPackageJson.devDependencies).length === 0) {

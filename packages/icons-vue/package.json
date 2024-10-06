@@ -1,4 +1,8 @@
 {
 	"name": "@icons-vue/build",
-	"main": "make-installer.ts"
+	"main": "make-installer.ts",
+	"devDependencies": {
+		"@types/node": "*",
+		"vue": "^3.2.47"
+	}
 }
