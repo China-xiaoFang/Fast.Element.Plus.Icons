@@ -9,6 +9,8 @@ const updatePackage = (): void => {
 
 	const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf-8"));
 
+	const versionPath = path.resolve(__dirname, "../packages/icons-vue/version.ts");
+
 	const oldVersion = packageJson.version as string;
 
 	// 根据.分割
@@ -125,8 +127,15 @@ const updatePackage = (): void => {
 	fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`, "utf-8");
 	fs.writeFileSync(packageProPath, `${JSON.stringify(newPackageJson, null, 2)}\n`, "utf-8");
 
+	// 写入 version.ts 文件
+	fs.writeFileSync(
+		versionPath,
+		`export const version = "v${newVersion}";
+`
+	);
+
 	console.log(`
-  Update version to v${newVersion} ...
+  Update version to ${newVersion} ...
   `);
 };
 
