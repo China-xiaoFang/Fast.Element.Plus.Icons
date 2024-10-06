@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import FastElementPlusIcons from "./icons";
+import FastElementPlusIcons from "./icon";
 import { version } from "./version";
 
 export const INSTALLED_KEY = Symbol("INSTALLED_KEY");

@@ -25,4 +25,4 @@ const FastElementPlusIcons = [
 export {
   FastElementPlusIcons as default
 };
-//# sourceMappingURL=icons.mjs.map
+//# sourceMappingURL=icon.mjs.map

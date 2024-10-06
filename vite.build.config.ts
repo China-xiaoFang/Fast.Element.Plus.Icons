@@ -17,6 +17,7 @@ const removedDevDependencies = [
 	"eslint-plugin-import",
 	"eslint-plugin-prettier",
 	"eslint-plugin-vue",
+	"lint-staged",
 	"prettier",
 	"terser",
 	"tsx",

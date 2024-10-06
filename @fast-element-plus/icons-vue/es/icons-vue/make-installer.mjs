@@ -1,4 +1,4 @@
-import FastElementPlusIcons from "./icons.mjs";
+import FastElementPlusIcons from "./icon.mjs";
 import { version } from "./version.mjs";
 const INSTALLED_KEY = Symbol("INSTALLED_KEY");
 const makeInstaller = () => {

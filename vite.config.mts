@@ -9,12 +9,6 @@ import { globalDependenciesMapping } from "./vite.build.config";
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
 	return {
-		resolve: {
-			alias: {
-				"@icons-vue/build": resolve(__dirname, ".", "./packages/icons-vue"),
-				"@icons-vue": resolve(__dirname, ".", "./packages"),
-			},
-		},
 		build: {
 			/** 消除打包大小超过 500kb 警告，不建议使用 */
 			chunkSizeWarningLimit: 2000,

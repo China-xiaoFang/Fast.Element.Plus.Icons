@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Fast Icons组件库.",
   "keywords": [
     "@fast-element-plus",
@@ -37,9 +37,6 @@
     "lint:prettier": "prettier --write \"packages/**/*.{vue,js,ts,tsx,json,css,less,scss,html,md}\"",
     "lint": "pnpm lint:eslint && pnpm lint:prettier"
   },
-  "dependencies": {
-    "vue": "^3.2.47"
-  },
   "devDependencies": {
     "@icons-vue/build": "workspace:*",
     "@icons-vue/icons": "workspace:*",
@@ -55,12 +52,14 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.28.0",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "terser": "^5.33.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
     "vite": "^5.4.7",
     "vite-plugin-dts": "^4.2.1",
+    "vue": "^3.2.47",
     "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.6"
   },
@@ -78,5 +77,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+	"lint-staged": {
+		"*.{vue,js,ts,jsx,tsx,md,json,css,scss,less,html}": "eslint --fix"
+	}
 }
