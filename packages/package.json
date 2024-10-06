@@ -1,7 +1,0 @@
-{
-	"name": "@fast-element-plus/icons-vue",
-	"devDependencies": {
-		"@types/node": "*",
-		"vue": "^3.2.47"
-	}
-}
