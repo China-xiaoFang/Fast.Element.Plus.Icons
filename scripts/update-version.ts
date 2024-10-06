@@ -87,7 +87,7 @@ const updatePackage = (): void => {
 		},
 		unpkg: "dist/index.umd.js",
 		jsdelivr: "dist/index.umd.js",
-		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
+		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib", "global.d.ts"],
 		peerDependencies: {},
 		dependencies: packageJson.dependencies,
 		devDependencies: {},
