@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { __dirname, __filename, copyFile, npmPackagePath } from "./file";
-import { ignoredDevDependencies, peerDependencies, removedDevDependencies } from "../vite.build.config";
+import { peerDependencies, removedDevDependencies } from "../vite.build.config";
 
 const updatePackage = (): void => {
 	const packagePath = path.resolve(__dirname, "../package.json");
@@ -92,6 +92,14 @@ const updatePackage = (): void => {
 		browserslist: packageJson.browserslist,
 	};
 
+	Object.keys(packageJson.dependencies ?? {}).forEach((needKey) => {
+		if (peerDependencies.includes(needKey)) {
+			newPackageJson.peerDependencies[needKey] = packageJson.dependencies[needKey];
+		} else {
+			newPackageJson.dependencies[needKey] = packageJson.dependencies[needKey];
+		}
+	});
+
 	newPackageJson.devDependencies = Object.keys(packageJson.devDependencies ?? {}).reduce((acc, key) => {
 		if (!key.startsWith("@icons-vue/")) {
 			if (!removedDevDependencies.includes(key)) {
@@ -100,18 +108,6 @@ const updatePackage = (): void => {
 		}
 		return acc;
 	}, {});
-
-    Object.keys(packageJson.dependencies ?? {}).forEach((needKey) => {
-        if (ignoredDevDependencies.includes(needKey)) {
-            newPackageJson.dependencies[needKey] = packageJson.dependencies[needKey];
-        }
-    });
-
-	Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
-		if (peerDependencies.includes(needKey)) {
-			newPackageJson.peerDependencies[needKey] = packageJson.devDependencies[needKey];
-		}
-	});
 
 	if (Object.keys(newPackageJson.peerDependencies).length === 0) {
 		delete (newPackageJson as any).peerDependencies;

@@ -4,7 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import type { ConfigEnv, UserConfig } from "vite";
 // 打包优化插件
 import vitePluginDts from "vite-plugin-dts";
-import { globalDependenciesMapping, ignoredDevDependencies, peerDependencies } from "./vite.build.config";
+import { globalDependenciesMapping } from "./vite.build.config";
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
@@ -47,7 +47,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 			/** 静态资源打包处理 */
 			rollupOptions: {
 				// 确保外部化处理那些你不想打包进库的依赖
-				external: [...peerDependencies, ...ignoredDevDependencies],
+				external: Object.keys(globalDependenciesMapping),
 				// 禁用 Tree-shaking
 				treeshake: false,
 				output: [

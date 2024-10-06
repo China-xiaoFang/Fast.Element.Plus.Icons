@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Fast Icons组件库.",
   "keywords": [
     "@fast-element-plus",
@@ -80,8 +80,7 @@
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@types/node": "*",
-    "vue": "^3.2.47"
+    "@types/node": "*"
   },
   "browserslist": {
     "production": [

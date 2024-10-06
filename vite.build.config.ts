@@ -4,11 +4,6 @@
 const peerDependencies = ["vue"];
 
 /**
- * 构建忽略包
- */
-const ignoredDevDependencies = [];
-
-/**
  * 构建删除包
  */
 const removedDevDependencies = [
@@ -39,4 +34,4 @@ const globalDependenciesMapping = {
 	vue: "Vue",
 };
 
-export { peerDependencies, ignoredDevDependencies, removedDevDependencies, globalDependenciesMapping };
+export { peerDependencies, removedDevDependencies, globalDependenciesMapping };
