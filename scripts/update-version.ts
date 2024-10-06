@@ -9,7 +9,7 @@ const updatePackage = (): void => {
 
 	const packageJson = JSON.parse(fs.readFileSync(packagePath, "utf-8"));
 
-	const versionPath = path.resolve(__dirname, "../packages/icons-vue/version.ts");
+	const versionPath = path.resolve(__dirname, "../packages/version.ts");
 
 	const oldVersion = packageJson.version as string;
 

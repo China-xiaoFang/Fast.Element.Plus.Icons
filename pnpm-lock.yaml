@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      '@icons-vue/build':
-        specifier: workspace:*
-        version: link:packages/icons-vue
       '@icons-vue/icons':
         specifier: workspace:*
         version: link:packages/icons
@@ -79,15 +76,6 @@ importers:
         version: 2.1.6(typescript@5.6.2)
 
   packages/icons: {}
-
-  packages/icons-vue:
-    devDependencies:
-      '@types/node':
-        specifier: '*'
-        version: 22.7.4
-      vue:
-        specifier: ^3.2.47
-        version: 3.5.11(typescript@5.6.2)
 
   packages/utils: {}
 

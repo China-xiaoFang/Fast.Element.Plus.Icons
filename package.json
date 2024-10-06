@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Fast Icons组件库.",
   "keywords": [
     "@fast-element-plus",
@@ -38,7 +38,6 @@
     "lint": "pnpm lint:eslint && pnpm lint:prettier"
   },
   "devDependencies": {
-    "@icons-vue/build": "workspace:*",
     "@icons-vue/icons": "workspace:*",
     "@icons-vue/utils": "workspace:*",
     "@types/node": "*",
