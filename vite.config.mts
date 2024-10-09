@@ -117,7 +117,6 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 				entryRoot: "./packages",
 				outDir: ["./@fast-element-plus/icons-vue/es", "./@fast-element-plus/icons-vue/lib"],
 				insertTypesEntry: true,
-				// include: ["./packages/**/*", "./global.d.ts"],
 				include: ["./packages/**/*"],
 			}),
 		],

@@ -42,7 +42,7 @@
 			"@icons-vue/*": ["packages/*"]
 		}
 	},
-	"include": ["./packages", "./global.d.ts"],
+	"include": ["./packages"],
 	/** 编译器默认排除的编译文件 */
 	"exclude": ["node_modules", "@fast-element-plus"]
 }
