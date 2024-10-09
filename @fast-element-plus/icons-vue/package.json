@@ -74,8 +74,7 @@
     "./README.zh.md",
     "./dist",
     "./es",
-    "./lib",
-    "global.d.ts"
+    "./lib"
   ],
   "peerDependencies": {
     "vue": "^3.2.47"
