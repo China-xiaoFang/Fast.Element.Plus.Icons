@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Dashboard 图标组件
- */
 export default defineComponent({
 	name: "Dashboard",
 	render() {

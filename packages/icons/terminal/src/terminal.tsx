@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Terminal 图标组件
- */
 export default defineComponent({
 	name: "Terminal",
 	render() {

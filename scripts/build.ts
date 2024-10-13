@@ -73,9 +73,6 @@ const writeTSXIcon = (iconName: string, componentName: string, iconDir: string, 
 
 	const iconContent = `import { defineComponent } from "vue";
 
-/**
- * ${componentName} 图标组件
- */
 export default defineComponent({
 	name: "${componentName}",
 	render() {

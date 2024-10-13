@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Organization 图标组件
- */
 export default defineComponent({
 	name: "Organization",
 	render() {

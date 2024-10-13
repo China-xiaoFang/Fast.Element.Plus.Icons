@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Page404 图标组件
- */
 export default defineComponent({
 	name: "Page404",
 	render() {

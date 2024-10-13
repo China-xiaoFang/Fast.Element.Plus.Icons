@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * FullScreenExit 图标组件
- */
 export default defineComponent({
 	name: "FullScreenExit",
 	render() {

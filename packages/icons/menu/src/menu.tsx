@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Menu 图标组件
- */
 export default defineComponent({
 	name: "Menu",
 	render() {
