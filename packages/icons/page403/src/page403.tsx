@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Page403 图标组件
- */
 export default defineComponent({
 	name: "Page403",
 	render() {

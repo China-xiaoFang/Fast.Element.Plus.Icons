@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Light 图标组件
- */
 export default defineComponent({
 	name: "Light",
 	render() {

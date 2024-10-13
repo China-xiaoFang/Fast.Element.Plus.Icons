@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * Dark 图标组件
- */
 export default defineComponent({
 	name: "Dark",
 	render() {

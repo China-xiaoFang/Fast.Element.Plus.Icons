@@ -1,7 +1,7 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Fast Icons组件库.",
   "keywords": [
     "@fast-element-plus",
@@ -65,8 +65,8 @@
     },
     "./*": "./*"
   },
-  "unpkg": "dist/index.umd.js",
-  "jsdelivr": "dist/index.umd.js",
+  "unpkg": "dist/index.iife.js",
+  "jsdelivr": "dist/index.iife.js",
   "files": [
     "./Fast.png",
     "./LICENSE",

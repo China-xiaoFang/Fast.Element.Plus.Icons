@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * NotData 图标组件
- */
 export default defineComponent({
 	name: "NotData",
 	render() {

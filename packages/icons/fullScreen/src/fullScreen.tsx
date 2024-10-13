@@ -1,8 +1,5 @@
 import { defineComponent } from "vue";
 
-/**
- * FullScreen 图标组件
- */
 export default defineComponent({
 	name: "FullScreen",
 	render() {
