@@ -113,6 +113,10 @@ const updatePackage = (): void => {
 		delete (newPackageJson as any).peerDependencies;
 	}
 
+	if (Object.keys(newPackageJson.dependencies).length === 0) {
+		delete (newPackageJson as any).dependencies;
+	}
+
 	if (Object.keys(newPackageJson.devDependencies).length === 0) {
 		delete (newPackageJson as any).devDependencies;
 	}
@@ -124,7 +128,7 @@ const updatePackage = (): void => {
 	// 写入 version.ts 文件
 	fs.writeFileSync(
 		versionPath,
-		`export const version = "v${newVersion}";
+		`export const version = "${newVersion}";
 `
 	);
 
