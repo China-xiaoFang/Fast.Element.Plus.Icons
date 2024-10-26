@@ -73,7 +73,7 @@ const updatePackage = (): void => {
 		sideEffects: false,
 		unpkg: "dist/index.iife.min.js",
 		jsdelivr: "dist/index.iife.min.js",
-		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md"],
+		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist"],
 		peerDependencies: {},
 		dependencies: packageJson.dependencies,
 		devDependencies: {},
