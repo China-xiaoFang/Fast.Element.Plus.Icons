@@ -44,50 +44,36 @@ const updatePackage = (): void => {
 		author: packageJson.author,
 		version: packageJson.version,
 		description: packageJson.description,
+		type: packageJson.type,
 		keywords: packageJson.keywords,
 		license: packageJson.license,
 		publishConfig: packageJson.publishConfig,
 		homepage: packageJson.homepage,
 		repository: packageJson.repository,
 		bugs: packageJson.bugs,
-		main: "dist/index.js",
-		module: "es/index.mjs",
-		types: "es/index.d.ts",
+		main: "dist/index.cjs",
+		module: "dist/index.js",
+		types: "dist/types/index.d.ts",
 		exports: {
 			".": {
-				types: "./es/index.d.ts",
-				import: "./es/index.mjs",
-				require: "./lib/index.js",
+				types: "./dist/types/index.d.ts",
+				import: "./dist/index.cjs",
+				require: "./dist/index.js",
 			},
-			"./es": {
-				types: "./es/index.d.ts",
-				import: "./es/index.mjs",
-			},
-			"./lib": {
-				types: "./lib/index.d.ts",
-				require: "./lib/index.js",
-			},
-			"./es/*.mjs": {
-				types: "./es/*.d.ts",
-				import: "./es/*.mjs",
-			},
-			"./es/*": {
-				types: ["./es/*.d.ts", "./es/*/index.d.ts"],
-				import: "./es/*.mjs",
-			},
-			"./lib/*.js": {
-				types: "./lib/*.d.ts",
-				require: "./lib/*.js",
-			},
-			"./lib/*": {
-				types: ["./lib/*.d.ts", "./lib/*/index.d.ts"],
-				require: "./lib/*.js",
+			"./global": {
+				types: "./dist/types/global.d.ts",
 			},
 			"./*": "./*",
 		},
-		unpkg: "dist/index.iife.js",
-		jsdelivr: "dist/index.iife.js",
-		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist", "./es", "./lib"],
+		typesVersions: {
+			"*": {
+				"*": ["./*", "./dist/types/*"],
+			},
+		},
+		sideEffects: false,
+		unpkg: "dist/index.iife.min.js",
+		jsdelivr: "dist/index.iife.min.js",
+		files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md"],
 		peerDependencies: {},
 		dependencies: packageJson.dependencies,
 		devDependencies: {},
@@ -95,7 +81,7 @@ const updatePackage = (): void => {
 	};
 
 	Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
-		if (peerDependencies.includes(needKey)) {
+		if (Object.keys(peerDependencies).includes(needKey)) {
 			newPackageJson.peerDependencies[needKey] = packageJson.devDependencies[needKey];
 		}
 	});
@@ -111,10 +97,6 @@ const updatePackage = (): void => {
 
 	if (Object.keys(newPackageJson.peerDependencies).length === 0) {
 		delete (newPackageJson as any).peerDependencies;
-	}
-
-	if (Object.keys(newPackageJson.dependencies).length === 0) {
-		delete (newPackageJson as any).dependencies;
 	}
 
 	if (Object.keys(newPackageJson.devDependencies).length === 0) {

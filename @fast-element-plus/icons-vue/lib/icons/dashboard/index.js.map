@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sources":["../../../../../packages/icons/dashboard/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport DashboardTSX from \"./src/dashboard\";\n\nexport const Dashboard = withInstall(DashboardTSX);\nexport default Dashboard;\n"],"names":["Dashboard","DashboardTSX","default"],"mappings":"kLAGaA,oDAAwBC,EAAYC"}

@@ -66,54 +66,32 @@ const findSvgFile = (dir: string): { iconName: string; componentName: string; ic
 };
 
 const writeTSXIcon = (iconName: string, componentName: string, iconDir: string, svgContent: string): void => {
-	const srcDir = path.join(iconDir, "src");
-
 	fs.mkdirSync(iconDir, { recursive: true });
-	fs.mkdirSync(srcDir, { recursive: true });
 
 	const iconContent = `import { defineComponent } from "vue";
+import { withInstall } from "@icons-vue/utils";
 
-export default defineComponent({
-	name: "${componentName}",
-	render() {
-		return (
+export const ${componentName} = withInstall(
+	defineComponent({
+		name: "${componentName}",
+		render() {
+			return (
 ${svgContent
 	.split("\n")
-	.map((line) => `			${line}`)
+	.map((line) => `				${line}`)
 	.join("\n")}
-		);
-	},
-});
-`;
+			);
+		},
+	})
+);
 
-	fs.writeFileSync(path.join(srcDir, `${iconName}.tsx`), iconContent);
-
-	const indexContent = `import { withInstall } from "@icons-vue/utils";
-import ${componentName}TSX from "./src/${iconName}";
-
-export const ${componentName} = withInstall(${componentName}TSX);
 export default ${componentName};
 `;
 
-	fs.writeFileSync(path.join(iconDir, "index.ts"), indexContent);
-
-	const indexDTS = `import type { default as ${componentName}TSX } from "./src/${iconName}";
-import type { TSXWithInstall } from "../../utils";
-
-export declare const ${componentName}: TSXWithInstall<typeof ${componentName}TSX>;
-export default ${componentName};
-`;
-
-	fs.writeFileSync(path.join(iconDir, "index.d.ts"), indexDTS);
+	fs.writeFileSync(path.join(iconDir, "index.tsx"), iconContent);
 };
 
-const deleteFiles = [
-	"../tsconfig.tsbuildinfo",
-	"../packages/icons",
-	path.join(npmPackagePath, "dist"),
-	path.join(npmPackagePath, "es"),
-	path.join(npmPackagePath, "lib"),
-];
+const deleteFiles = ["../tsconfig.tsbuildinfo", "../packages/icons", "../packages/global.ts", path.join(npmPackagePath, "dist")];
 
 console.log(`
 清理文件中...
@@ -171,12 +149,14 @@ svgFiles.forEach((svg, idx) => {
 });
 
 fs.writeFileSync(
-	path.resolve(__dirname, "../packages/icon.ts"),
+	path.resolve(__dirname, "../packages/global.ts"),
 	`import type { Plugin } from "vue";
 ${iconImportContent}
 export default [
 ${iconTypeContent}
 ] as Plugin[];
+
+export * from "@icons-vue/icons";
 `
 );
 
