@@ -1,8 +1,9 @@
 {
   "name": "@fast-element-plus/icons-vue",
   "author": "小方",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Fast Icons组件库.",
+  "type": "module",
   "keywords": [
     "@fast-element-plus",
     "fast",
@@ -24,64 +25,44 @@
   "bugs": {
     "url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons/issues"
   },
-  "main": "dist/index.js",
-  "module": "es/index.mjs",
-  "types": "es/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
-      "require": "./lib/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.cjs",
+      "require": "./dist/index.js"
     },
-    "./es": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs"
-    },
-    "./lib": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js"
-    },
-    "./es/*.mjs": {
-      "types": "./es/*.d.ts",
-      "import": "./es/*.mjs"
-    },
-    "./es/*": {
-      "types": [
-        "./es/*.d.ts",
-        "./es/*/index.d.ts"
-      ],
-      "import": "./es/*.mjs"
-    },
-    "./lib/*.js": {
-      "types": "./lib/*.d.ts",
-      "require": "./lib/*.js"
-    },
-    "./lib/*": {
-      "types": [
-        "./lib/*.d.ts",
-        "./lib/*/index.d.ts"
-      ],
-      "require": "./lib/*.js"
+    "./global": {
+      "types": "./dist/types/global.d.ts"
     },
     "./*": "./*"
   },
-  "unpkg": "dist/index.iife.js",
-  "jsdelivr": "dist/index.iife.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./*",
+        "./dist/types/*"
+      ]
+    }
+  },
+  "sideEffects": false,
+  "unpkg": "dist/index.iife.min.js",
+  "jsdelivr": "dist/index.iife.min.js",
   "files": [
     "./Fast.png",
     "./LICENSE",
     "./README.md",
-    "./README.zh.md",
-    "./dist",
-    "./es",
-    "./lib"
+    "./README.zh.md"
   ],
   "peerDependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.4.27"
   },
   "devDependencies": {
     "@types/node": "*",
-    "vue": "^3.2.47"
+    "rollup-plugin-terser": "^7.0.2",
+    "vue": "^3.4.27"
   },
   "browserslist": {
     "production": [

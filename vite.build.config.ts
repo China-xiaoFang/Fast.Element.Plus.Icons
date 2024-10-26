@@ -1,7 +1,9 @@
 /**
  * 构建预依赖的包
  */
-const peerDependencies = ["vue"];
+const peerDependencies = {
+	vue: "Vue",
+};
 
 /**
  * 构建删除包
@@ -30,8 +32,6 @@ const removedDevDependencies = [
 /**
  * 构建全局包
  */
-const globalDependenciesMapping = {
-	vue: "Vue",
-};
+const globalDependenciesMapping = {};
 
 export { peerDependencies, removedDevDependencies, globalDependenciesMapping };

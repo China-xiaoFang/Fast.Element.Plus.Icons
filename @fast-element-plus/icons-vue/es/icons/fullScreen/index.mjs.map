@@ -1,1 +1,0 @@
-{"version":3,"file":"index.mjs","sources":["../../../../../packages/icons/fullScreen/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport FullScreenTSX from \"./src/fullScreen\";\n\nexport const FullScreen = withInstall(FullScreenTSX);\nexport default FullScreen;\n"],"names":[],"mappings":";;;AAGa,MAAA,aAAa,YAAY,aAAa;"}

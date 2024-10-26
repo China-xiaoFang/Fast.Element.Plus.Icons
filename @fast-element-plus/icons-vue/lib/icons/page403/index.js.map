@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sources":["../../../../../packages/icons/page403/index.ts"],"sourcesContent":["import { withInstall } from \"@icons-vue/utils\";\nimport Page403TSX from \"./src/page403\";\n\nexport const Page403 = withInstall(Page403TSX);\nexport default Page403;\n"],"names":["Page403","Page403TSX","default"],"mappings":"gLAGaA,oDAAsBC,EAAUC"}

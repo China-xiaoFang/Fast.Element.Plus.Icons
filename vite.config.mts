@@ -1,37 +1,22 @@
-import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import { terser } from "rollup-plugin-terser";
 import type { ConfigEnv, UserConfig } from "vite";
 // 打包优化插件
 import vitePluginDts from "vite-plugin-dts";
-import { globalDependenciesMapping } from "./vite.build.config";
+import { peerDependencies } from "./vite.build.config";
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
 	return {
 		build: {
-			/** 消除打包大小超过 500kb 警告，不建议使用 */
-			chunkSizeWarningLimit: 2000,
-			/** Vite 2.6.x 以上需要配置 minify: "terser", terserOptions 才能生效 */
-			minify: "terser",
-			/** 在打包代码时移除 console.log、debugger 和 注释 */
-			terserOptions: {
-				compress: {
-					drop_console: false,
-					drop_debugger: true,
-					pure_funcs: ["console.log"],
-				},
-				format: {
-					/** 删除注释 */
-					comments: false,
-				},
-			},
+			minify: false,
 			// 生成 source maps 文件
 			sourcemap: true,
 			lib: {
 				entry: "./packages/index.ts",
 				name: "@fast-element-plus/icons-vue",
-				formats: ["umd", "iife", "cjs", "es"],
+				formats: ["umd", "iife"],
 				fileName: (format) => `index.${format}.js`,
 			},
 			/** 打包清空目录 */
@@ -41,7 +26,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 			/** 静态资源打包处理 */
 			rollupOptions: {
 				// 确保外部化处理那些你不想打包进库的依赖
-				external: Object.keys(globalDependenciesMapping),
+				external: Object.keys(peerDependencies),
 				// 禁用 Tree-shaking
 				treeshake: false,
 				output: [
@@ -52,11 +37,25 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						// 解决同时使用默认导出和命名导出的警告
 						exports: "named",
 						// 保持文件名称不变
-						entryFileNames: "[name].umd.js",
+						entryFileNames: "[name].cjs",
 						assetFileNames: "[name].[ext]",
-						chunkFileNames: "[name].umd.js",
+						chunkFileNames: "[name].cjs",
 						dir: "./@fast-element-plus/icons-vue/dist",
-						globals: globalDependenciesMapping,
+						globals: peerDependencies,
+					},
+					{
+						format: "umd",
+						// 名称
+						name: "FastElementPlusIconsVue",
+						// 解决同时使用默认导出和命名导出的警告
+						exports: "named",
+						// 保持文件名称不变
+						entryFileNames: "[name].min.cjs",
+						assetFileNames: "[name].[ext]",
+						chunkFileNames: "[name].min.cjs",
+						dir: "./@fast-element-plus/icons-vue/dist",
+						globals: peerDependencies,
+						plugins: [terser()],
 					},
 					{
 						format: "iife",
@@ -67,37 +66,23 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 						// 保持文件名称不变
 						entryFileNames: "[name].iife.js",
 						assetFileNames: "[name].[ext]",
-						chunkFileNames: "[name].iife.mjs",
+						chunkFileNames: "[name].iife.js",
 						dir: "./@fast-element-plus/icons-vue/dist",
-						globals: globalDependenciesMapping,
+						globals: peerDependencies,
 					},
 					{
-						format: "cjs",
-						// 保持模块结构
-						preserveModules: true,
-						// 将packages文件夹作为根目录
-						preserveModulesRoot: "packages",
+						format: "iife",
+						// 名称
+						name: "FastElementPlusIconsVue",
 						// 解决同时使用默认导出和命名导出的警告
 						exports: "named",
 						// 保持文件名称不变
-						entryFileNames: "[name].js",
+						entryFileNames: "[name].iife.min.js",
 						assetFileNames: "[name].[ext]",
-						chunkFileNames: "[name].js",
-						dir: "./@fast-element-plus/icons-vue/lib",
-						globals: globalDependenciesMapping,
-					},
-					{
-						format: "es",
-						// 保持模块结构
-						preserveModules: true,
-						// 将packages文件夹作为根目录
-						preserveModulesRoot: "packages",
-						// 保持文件名称不变
-						entryFileNames: "[name].mjs",
-						assetFileNames: "[name].[ext]",
-						chunkFileNames: "[name].mjs",
-						dir: "./@fast-element-plus/icons-vue/es",
-						globals: globalDependenciesMapping,
+						chunkFileNames: "[name].iife.min.js",
+						dir: "./@fast-element-plus/icons-vue/dist",
+						globals: peerDependencies,
+						plugins: [terser()],
 					},
 				],
 			},
@@ -115,7 +100,7 @@ const ViteConfig = (_: ConfigEnv): UserConfig => {
 					declarationMap: false,
 				},
 				entryRoot: "./packages",
-				outDir: ["./@fast-element-plus/icons-vue/es", "./@fast-element-plus/icons-vue/lib"],
+				outDir: ["./@fast-element-plus/icons-vue/dist/types"],
 				insertTypesEntry: true,
 				include: ["./packages/**/*"],
 			}),

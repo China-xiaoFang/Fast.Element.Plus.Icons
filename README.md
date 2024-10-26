@@ -73,19 +73,6 @@ app.use(FastElementPlusIconsVue);
 app.mount('#app');
 ```
 
-#### Volar Support
-
-If you use Volar, specify the global component type via `compilerOptions.type` in your `tsconfig.json`.
-
-```json
-{
-  "compilerOptions": {
-    // ...
-    "types": ["@fast-element-plus/icons-vue/global"]
-  }
-}
-```
-
 ## Update log
 
 Update log [Click to view](https://gitee.com/China-xiaoFang/fast.element.plus.icons/commits/master)

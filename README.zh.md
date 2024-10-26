@@ -73,19 +73,6 @@ app.use(FastElementPlusIconsVue);
 app.mount('#app');
 ```
 
-#### Volar 支持
-
-如果您使用 Volar，请在 `tsconfig.json` 中通过 `compilerOptions.type` 指定全局组件类型。
-
-```json
-{
-  "compilerOptions": {
-    // ...
-    "types": ["@fast-element-plus/icons-vue/global"]
-  }
-}
-```
-
 ## 更新日志
 
 更新日志 [点击查看](https://gitee.com/China-xiaoFang/fast.element.plus.icons/commits/master)

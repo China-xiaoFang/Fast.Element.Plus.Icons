@@ -1,4 +1,6 @@
-var FastElementPlusIconsVue = function(exports, vue) {
+(function(global, factory) {
+  typeof exports === "object" && typeof module !== "undefined" ? factory(exports, require("vue")) : typeof define === "function" && define.amd ? define(["exports", "vue"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.FastElementPlusIconsVue = {}, global.Vue));
+})(this, function(exports2, vue) {
   "use strict";
   const withInstall = (main, extra) => {
     main.install = (app) => {
@@ -1041,25 +1043,24 @@ var FastElementPlusIconsVue = function(exports, vue) {
   const installer = makeInstaller();
   const install = installer.install;
   const version = installer.version;
-  exports.About = About;
-  exports.Backup = Backup;
-  exports.Dark = Dark;
-  exports.Dashboard = Dashboard;
-  exports.FastElementPlusIconsVue = index;
-  exports.FullScreen = FullScreen;
-  exports.FullScreenExit = FullScreenExit;
-  exports.INSTALLED_KEY = INSTALLED_KEY;
-  exports.Light = Light;
-  exports.Menu = Menu;
-  exports.NotData = NotData;
-  exports.Organization = Organization;
-  exports.Page403 = Page403;
-  exports.Page404 = Page404;
-  exports.Terminal = Terminal;
-  exports.default = installer;
-  exports.install = install;
-  exports.version = version;
-  Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
-  return exports;
-}({}, Vue);
-//# sourceMappingURL=index.iife.js.map
+  exports2.About = About;
+  exports2.Backup = Backup;
+  exports2.Dark = Dark;
+  exports2.Dashboard = Dashboard;
+  exports2.FastElementPlusIconsVue = index;
+  exports2.FullScreen = FullScreen;
+  exports2.FullScreenExit = FullScreenExit;
+  exports2.INSTALLED_KEY = INSTALLED_KEY;
+  exports2.Light = Light;
+  exports2.Menu = Menu;
+  exports2.NotData = NotData;
+  exports2.Organization = Organization;
+  exports2.Page403 = Page403;
+  exports2.Page404 = Page404;
+  exports2.Terminal = Terminal;
+  exports2.default = installer;
+  exports2.install = install;
+  exports2.version = version;
+  Object.defineProperties(exports2, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
+});
+//# sourceMappingURL=index.cjs.map
