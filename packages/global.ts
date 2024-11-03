@@ -1,6 +1,7 @@
 import type { Plugin } from "vue";
 import { About } from "@icons-vue/icons/about";
 import { Backup } from "@icons-vue/icons/backup";
+import { Brush } from "@icons-vue/icons/brush";
 import { Dark } from "@icons-vue/icons/dark";
 import { Dashboard } from "@icons-vue/icons/dashboard";
 import { FullScreen } from "@icons-vue/icons/fullScreen";
@@ -16,6 +17,7 @@ import { Terminal } from "@icons-vue/icons/terminal";
 export default [
 	About,
 	Backup,
+	Brush,
 	Dark,
 	Dashboard,
 	FullScreen,
