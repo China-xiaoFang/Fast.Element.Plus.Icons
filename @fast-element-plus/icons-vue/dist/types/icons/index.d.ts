@@ -1,5 +1,6 @@
 export * from './about';
 export * from './backup';
+export * from './brush';
 export * from './dark';
 export * from './dashboard';
 export * from './fullScreen';

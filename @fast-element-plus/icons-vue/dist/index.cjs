@@ -41,6 +41,17 @@
       }, null)]);
     }
   }));
+  const Brush = withInstall(/* @__PURE__ */ vue.defineComponent({
+    name: "Brush",
+    render() {
+      return vue.createVNode("svg", {
+        "xmlns": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 1024 1024"
+      }, [vue.createVNode("path", {
+        "d": "M771.2 419.2h-134.4V124.8C636.8 54.4 582.4 0 512 0s-124.8 54.4-124.8 124.8v294.4H256c-64 0-121.6 54.4-121.6 121.6v361.6c0 64 54.4 121.6 121.6 121.6h512c64 0 121.6-54.4 121.6-121.6V540.8c3.2-67.2-51.2-121.6-118.4-121.6zM259.2 480H416c19.2 0 35.2-16 35.2-35.2V128c0-32 25.6-60.8 57.6-64 35.2-3.2 64 22.4 67.2 57.6v323.2c0 19.2 16 35.2 35.2 35.2H768c32 0 57.6 25.6 57.6 57.6v57.6H198.4v-57.6c0-32 28.8-57.6 60.8-57.6z m512 483.2h-115.2v-140.8c0-16-12.8-28.8-28.8-28.8s-28.8 12.8-28.8 28.8v140.8h-172.8v-137.6c0-16-12.8-28.8-28.8-28.8s-28.8 12.8-28.8 28.8v137.6H259.2c-32 0-57.6-25.6-57.6-57.6v-246.4H832v246.4c0 28.8-28.8 57.6-60.8 57.6z"
+      }, null)]);
+    }
+  }));
   const Dark = withInstall(/* @__PURE__ */ vue.defineComponent({
     name: "Dark",
     render() {
@@ -1000,6 +1011,7 @@
     __proto__: null,
     About,
     Backup,
+    Brush,
     Dark,
     Dashboard,
     FullScreen,
@@ -1015,6 +1027,7 @@
   const FastElementPlusIcons = [
     About,
     Backup,
+    Brush,
     Dark,
     Dashboard,
     FullScreen,
@@ -1027,7 +1040,7 @@
     Page404,
     Terminal
   ];
-  const version$1 = "1.0.13";
+  const version$1 = "1.0.15";
   const INSTALLED_KEY = Symbol("INSTALLED_KEY");
   const makeInstaller = () => {
     const install2 = (app) => {
@@ -1045,6 +1058,7 @@
   const version = installer.version;
   exports2.About = About;
   exports2.Backup = Backup;
+  exports2.Brush = Brush;
   exports2.Dark = Dark;
   exports2.Dashboard = Dashboard;
   exports2.FastElementPlusIconsVue = index;
