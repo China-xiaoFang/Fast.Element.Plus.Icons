@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { __dirname, __filename, copyFile, npmPackagePath } from "./file";
-import { peerDependencies, removedDevDependencies } from "../vite.build.config";
+import { __dirname, copyFile, npmPackagePath } from "./file";
 
 const packagePath = path.resolve(__dirname, "../package.json");
 const packageProPath = path.join(npmPackagePath, "package.json");
@@ -40,24 +39,24 @@ packageJson.version = newVersion;
 
 const newPackageJson = {
 	name: packageJson.name,
-	author: packageJson.author,
 	version: packageJson.version,
 	description: packageJson.description,
 	type: packageJson.type,
 	keywords: packageJson.keywords,
 	license: packageJson.license,
-	publishConfig: packageJson.publishConfig,
 	homepage: packageJson.homepage,
-	repository: packageJson.repository,
 	bugs: packageJson.bugs,
+	repository: packageJson.repository,
+	author: packageJson.author,
+	files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist"],
 	main: "dist/index.cjs",
 	module: "dist/index.js",
 	types: "dist/types/index.d.ts",
 	exports: {
 		".": {
 			types: "./dist/types/index.d.ts",
-			import: "./dist/index.cjs",
 			require: "./dist/index.js",
+			import: "./dist/index.cjs",
 		},
 		"./global": {
 			types: "./dist/types/global.d.ts",
@@ -72,24 +71,17 @@ const newPackageJson = {
 	sideEffects: false,
 	unpkg: "dist/index.iife.min.js",
 	jsdelivr: "dist/index.iife.min.js",
-	files: ["./Fast.png", "./LICENSE", "./README.md", "./README.zh.md", "./dist"],
-	peerDependencies: {},
-	dependencies: packageJson.dependencies,
+	publishConfig: packageJson.publishConfig,
+	peerDependencies: {
+		vue: "^3",
+	},
 	devDependencies: {},
 	browserslist: packageJson.browserslist,
 };
 
-Object.keys(packageJson.devDependencies ?? {}).forEach((needKey) => {
-	if (Object.keys(peerDependencies).includes(needKey)) {
-		newPackageJson.peerDependencies[needKey] = packageJson.devDependencies[needKey];
-	}
-});
-
 newPackageJson.devDependencies = Object.keys(packageJson.devDependencies ?? {}).reduce((acc, key) => {
 	if (!key.startsWith("@icons-vue/")) {
-		if (!removedDevDependencies.includes(key)) {
-			acc[key] = packageJson.devDependencies[key];
-		}
+		acc[key] = packageJson.devDependencies[key];
 	}
 	return acc;
 }, {});
@@ -103,8 +95,8 @@ if (Object.keys(newPackageJson.devDependencies).length === 0) {
 }
 
 // 写入 package.json 文件
-fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`, "utf-8");
-fs.writeFileSync(packageProPath, `${JSON.stringify(newPackageJson, null, 2)}\n`, "utf-8");
+fs.writeFileSync(packagePath, `${JSON.stringify(packageJson, null, "\t")}\n`, "utf-8");
+fs.writeFileSync(packageProPath, `${JSON.stringify(newPackageJson, null, "\t")}\n`, "utf-8");
 
 // 写入 version.ts 文件
 fs.writeFileSync(

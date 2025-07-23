@@ -1,4 +1,3 @@
-import type { DefineComponent } from "vue";
 import { About } from "@icons-vue/icons/about";
 import { AccountSafe } from "@icons-vue/icons/accountSafe";
 import { Address } from "@icons-vue/icons/address";
@@ -32,8 +31,8 @@ import { Money } from "@icons-vue/icons/money";
 import { My } from "@icons-vue/icons/my";
 import { Navigation } from "@icons-vue/icons/navigation";
 import { NotData } from "@icons-vue/icons/notData";
-import { NotImage } from "@icons-vue/icons/notImage";
 import { Notice } from "@icons-vue/icons/notice";
+import { NotImage } from "@icons-vue/icons/notImage";
 import { Organization } from "@icons-vue/icons/organization";
 import { Page403 } from "@icons-vue/icons/page403";
 import { Page404 } from "@icons-vue/icons/page404";
@@ -46,6 +45,7 @@ import { Task } from "@icons-vue/icons/task";
 import { Terminal } from "@icons-vue/icons/terminal";
 import { Wifi } from "@icons-vue/icons/wifi";
 import { Workbench } from "@icons-vue/icons/workbench";
+import type { DefineComponent } from "vue";
 
 export default [
 	About,
@@ -81,8 +81,8 @@ export default [
 	My,
 	Navigation,
 	NotData,
-	NotImage,
 	Notice,
+	NotImage,
 	Organization,
 	Page403,
 	Page404,

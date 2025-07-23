@@ -1,68 +1,69 @@
 {
-  "name": "@fast-element-plus/icons-vue",
-  "author": "小方",
-  "version": "1.0.16",
-  "description": "Fast Icons组件库.",
-  "type": "module",
-  "keywords": [
-    "@fast-element-plus",
-    "fast",
-    "typescript",
-    "icons library",
-    "icons",
-    "vite",
-    "vue"
-  ],
-  "license": "Apache-2.0",
-  "publishConfig": {
-    "access": "public"
-  },
-  "homepage": "https://fastdotnet.com",
-  "repository": {
-    "type": "git",
-    "url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons"
-  },
-  "bugs": {
-    "url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons/issues"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "check": "vue-tsc",
-    "update:version": "tsx scripts/update-version.ts",
-    "build": "tsx scripts/build.ts && vue-tsc && vite build",
-    "publish": "cd @fast-element-plus/icons-vue && npm publish",
-    "lint:eslint": "eslint --max-warnings 0 \"packages/**/*.{vue,js,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write \"packages/**/*.{vue,js,ts,tsx,json,css,less,scss,html,md}\"",
-    "lint": "pnpm lint:eslint && pnpm lint:prettier"
-  },
-  "devDependencies": {
-    "@icons-vue/icons": "workspace:*",
-    "@rollup/plugin-terser": "^0.4",
-    "@types/node": "latest",
-    "@vitejs/plugin-vue": "^5",
-    "@vitejs/plugin-vue-jsx": "^4",
-    "terser": "^5",
-    "typescript": "^5",
-    "vite": "^6",
-    "vite-plugin-dts": "^4",
-    "vue": "^3",
-    "vue-tsc": "^2"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "browserslist": {
-    "production": [
-      "> 1%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "@fast-element-plus/icons-vue",
+	"version": "1.0.17",
+	"description": "Fast Icons组件库.",
+	"type": "module",
+	"keywords": [
+		"@fast-element-plus",
+		"fast",
+		"typescript",
+		"icons library",
+		"icons",
+		"vite",
+		"vue"
+	],
+	"license": "Apache-2.0",
+	"homepage": "https://fastdotnet.com",
+	"bugs": {
+		"url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons"
+	},
+	"author": "小方",
+	"publishConfig": {
+		"access": "public"
+	},
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"check": "vue-tsc",
+		"update:version": "tsx scripts/update-version.ts",
+		"build": "tsx scripts/build.ts && vue-tsc && vite build",
+		"publish": "cd @fast-element-plus/icons-vue && npm publish",
+		"lint:eslint": "eslint --max-warnings 0 \"packages/**/*.{vue,js,ts,tsx}\" --fix",
+		"lint:prettier": "prettier --write \"packages/**/*.{vue,js,ts,tsx,json,css,less,scss,html,md}\"",
+		"lint": "pnpm lint:eslint && pnpm lint:prettier"
+	},
+	"devDependencies": {
+		"@fast-china/eslint-config": "^1",
+		"@icons-vue/icons": "workspace:*",
+		"@rollup/plugin-terser": "^0.4",
+		"@types/node": "^24",
+		"@vitejs/plugin-vue": "^5",
+		"@vitejs/plugin-vue-jsx": "^4",
+		"prettier": "^3",
+		"typescript": "^5",
+		"vite": "^6",
+		"vite-plugin-dts": "^4",
+		"vue": "^3",
+		"vue-tsc": "^2"
+	},
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"browserslist": {
+		"production": [
+			"> 1%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
