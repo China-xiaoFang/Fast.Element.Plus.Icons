@@ -20,7 +20,7 @@ const findSvgFile = (dir: string): { iconName: string; componentName: string; ic
 				.readFileSync(path.join(dir, file.name), "utf-8")
 				.replace(/<\?xml.*?\?>/, "")
 				.replace(/<!DOCTYPE svg.*?>/, "")
-				// .replace(/(\r)|(\n)/g, "")
+				.replace(/(\r)|(\n)/g, "")
 				.trimStart()
 				.trimEnd()
 				// .replace(/(fill="[^>+].*?")/g, 'fill=""')
@@ -69,21 +69,21 @@ const writeTSXIcon = (iconName: string, componentName: string, iconDir: string, 
 	fs.mkdirSync(iconDir, { recursive: true });
 
 	const iconContent = `import { defineComponent } from "vue";
-import { withInstall } from "@icons-vue/utils";
 
-export const ${componentName} = withInstall(
-	defineComponent({
-		name: "${componentName}",
-		render() {
-			return (
+/**
+ * ${componentName} 图标组件
+ */
+export const ${componentName} = defineComponent({
+	name: "${componentName}",
+	render() {
+		return (
 ${svgContent
 	.split("\n")
-	.map((line) => `				${line}`)
+	.map((line) => `			${line}`)
 	.join("\n")}
-			);
-		},
-	})
-);
+		);
+	},
+});
 
 export default ${componentName};
 `;
@@ -91,7 +91,7 @@ export default ${componentName};
 	fs.writeFileSync(path.join(iconDir, "index.tsx"), iconContent);
 };
 
-const deleteFiles = ["../tsconfig.tsbuildinfo", "../packages/icons", "../packages/global.ts", path.join(npmPackagePath, "dist")];
+const deleteFiles = ["../packages/icons", "../packages/index.ts", path.join(npmPackagePath, "dist")];
 
 console.log(`
 清理文件中...
@@ -149,12 +149,12 @@ svgFiles.forEach((svg, idx) => {
 });
 
 fs.writeFileSync(
-	path.resolve(__dirname, "../packages/global.ts"),
-	`import type { Plugin } from "vue";
+	path.resolve(__dirname, "../packages/index.ts"),
+	`import type { DefineComponent } from "vue";
 ${iconImportContent}
 export default [
 ${iconTypeContent}
-] as Plugin[];
+] as unknown as DefineComponent[];
 
 export * from "@icons-vue/icons";
 `

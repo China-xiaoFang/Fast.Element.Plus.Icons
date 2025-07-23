@@ -33,7 +33,6 @@ export const copyFile = (sDir: string, dDir: string, fileSuffix?: string, oSDir?
 
 		entries.forEach((entry) => {
 			const sPath = path.join(sDir, entry.name);
-			const dPath = path.join(dDir, entry.name);
 
 			if (entry.isDirectory()) {
 				copyFile(sPath, dDir, fileSuffix, oSDir ?? sDir);
