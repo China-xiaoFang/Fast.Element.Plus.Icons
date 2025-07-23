@@ -38,10 +38,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- Import Vue 3 -->
-  <script src="//unpkg.com/vue@3"></script>
-  <!-- Import component library -->
-  <script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
+	<!-- Import Vue 3 -->
+	<script src="//unpkg.com/vue@3"></script>
+	<!-- Import component library -->
+	<script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
 </head>
 ```
 
@@ -49,10 +49,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- Import Vue 3 -->
-  <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
-  <!-- Import component library -->
-  <script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
+	<!-- Import Vue 3 -->
+	<script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+	<!-- Import component library -->
+	<script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
 </head>
 ```
 
@@ -62,15 +62,16 @@ pnpm install @fast-element-plus/icons-vue
 
 ```typescript
 import { createApp } from "vue";
-import FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
+import * as FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
 import App from "./App.vue";
 
 const app = createApp(App);
 
-// Global Registration
-app.use(FastElementPlusIconsVue);
+for (const [key, component] of Object.entries(FastElementPlusIconsVue)) {
+	app.component(key, component);
+}
 
-app.mount('#app');
+app.mount("#app");
 ```
 
 ## Update log

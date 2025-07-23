@@ -38,10 +38,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- 导入 Vue 3 -->
-  <script src="//unpkg.com/vue@3"></script>
-  <!-- 导入组件库 -->
-  <script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
+	<!-- 导入 Vue 3 -->
+	<script src="//unpkg.com/vue@3"></script>
+	<!-- 导入组件库 -->
+	<script src="//unpkg.com/@fast-element-plus/icons-vue"></script>
 </head>
 ```
 
@@ -49,10 +49,10 @@ pnpm install @fast-element-plus/icons-vue
 
 ```html
 <head>
-  <!-- 导入 Vue 3 -->
-  <script src="//cdn.jsdelivr.net/npm/vue@3"></script>
-  <!-- 导入组件库 -->
-  <script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
+	<!-- 导入 Vue 3 -->
+	<script src="//cdn.jsdelivr.net/npm/vue@3"></script>
+	<!-- 导入组件库 -->
+	<script src="//cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue"></script>
 </head>
 ```
 
@@ -62,15 +62,16 @@ pnpm install @fast-element-plus/icons-vue
 
 ```typescript
 import { createApp } from "vue";
-import FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
+import * as FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
 import App from "./App.vue";
 
 const app = createApp(App);
 
-// 全局注册
-app.use(FastElementPlusIconsVue);
+for (const [key, component] of Object.entries(FastElementPlusIconsVue)) {
+	app.component(key, component);
+}
 
-app.mount('#app');
+app.mount("#app");
 ```
 
 ## 更新日志

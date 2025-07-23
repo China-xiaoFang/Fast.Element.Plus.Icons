@@ -1,10 +1,10 @@
+import terser from "@rollup/plugin-terser";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { terser } from "rollup-plugin-terser";
-import type { ConfigEnv, UserConfig } from "vite";
 // 打包优化插件
 import vitePluginDts from "vite-plugin-dts";
 import { peerDependencies } from "./vite.build.config";
+import type { ConfigEnv, UserConfig } from "vite";
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
