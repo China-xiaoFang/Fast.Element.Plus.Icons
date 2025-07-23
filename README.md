@@ -90,9 +90,9 @@ Copyright © 2018-Now xiaoFang
 License:
 This Agreement grants any individual or organization that obtains a copy of this software and its related documentation (hereinafter referred to as the "Software").
 Subject to the terms of this Agreement, you have the right to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Software:
-1. All copies or major parts of the Software must retain this Copyright Notice and this License Agreement.
-2. The use, copying, modification, or distribution of the Software shall not violate applicable laws or infringe upon the legitimate rights and interests of others.
-3. Modified or derivative works must clearly indicate the original author and the source of the original Software.
+1.All copies or major parts of the Software must retain this Copyright Notice and this License Agreement.
+2.The use, copying, modification, or distribution of the Software shall not violate applicable laws or infringe upon the legitimate rights and interests of others.
+3.Modified or derivative works must clearly indicate the original author and the source of the original Software.
 
 Special Statement:
 - This Software is provided "as is" without any express or implied warranty of any kind, including but not limited to the warranty of merchantability, fitness for purpose, and non-infringement.
