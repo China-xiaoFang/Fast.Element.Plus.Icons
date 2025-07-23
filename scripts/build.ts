@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { __dirname, __filename, deleteFile, npmPackagePath } from "./file";
+import { __dirname, deleteFile, npmPackagePath } from "./file";
 
 const findSvgFile = (dir: string): { iconName: string; componentName: string; iconContent: string }[] => {
 	// svg 内容
@@ -9,6 +9,7 @@ const findSvgFile = (dir: string): { iconName: string; componentName: string; ic
 	const svgFiles = fs.readdirSync(dir, {
 		withFileTypes: true,
 	});
+	console.log(svgFiles);
 
 	svgFiles.forEach((file) => {
 		if (file.isDirectory()) {
@@ -18,11 +19,10 @@ const findSvgFile = (dir: string): { iconName: string; componentName: string; ic
 
 			const svgContent = fs
 				.readFileSync(path.join(dir, file.name), "utf-8")
+				.toString()
 				.replace(/<\?xml.*?\?>/, "")
 				.replace(/<!DOCTYPE svg.*?>/, "")
-				.replace(/(\r)|(\n)/g, "")
-				.trimStart()
-				.trimEnd()
+				// .replace(/(\r)|(\n)/g, "")
 				// .replace(/(fill="[^>+].*?")/g, 'fill=""')
 				.replace(/<svg([^>+].*?)>/, (match, attr) => {
 					const viewBoxMatch = attr.match(/viewBox="[^"]+"/);
@@ -54,15 +54,17 @@ const findSvgFile = (dir: string): { iconName: string; componentName: string; ic
 		}
 	});
 
-	return svgContents.sort((a, b) => {
-		if (a.iconName < b.iconName) {
-			return -1;
-		}
-		if (a.iconName > b.iconName) {
-			return 1;
-		}
-		return 0;
-	});
+	return svgContents;
+
+	// return svgContents.sort((a, b) => {
+	// 	if (a.iconName < b.iconName) {
+	// 		return -1;
+	// 	}
+	// 	if (a.iconName > b.iconName) {
+	// 		return 1;
+	// 	}
+	// 	return 0;
+	// });
 };
 
 const writeTSXIcon = (iconName: string, componentName: string, iconDir: string, svgContent: string): void => {
@@ -150,8 +152,9 @@ svgFiles.forEach((svg, idx) => {
 
 fs.writeFileSync(
 	path.resolve(__dirname, "../packages/index.ts"),
-	`import type { DefineComponent } from "vue";
-${iconImportContent}
+	`${iconImportContent.trimEnd()}
+import type { DefineComponent } from "vue";
+
 export default [
 ${iconTypeContent}
 ] as unknown as DefineComponent[];

@@ -3,8 +3,14 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 // 打包优化插件
 import vitePluginDts from "vite-plugin-dts";
-import { peerDependencies } from "./vite.build.config";
 import type { ConfigEnv, UserConfig } from "vite";
+
+/**
+ * 构建预依赖的包
+ */
+const peerDependencies = {
+	vue: "Vue",
+};
 
 /** 配置项文档：https://cn.vitejs.dev/config */
 const ViteConfig = (_: ConfigEnv): UserConfig => {
