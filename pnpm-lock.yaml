@@ -18,7 +18,7 @@ importers:
         specifier: ^0.4
         version: 0.4.4(rollup@4.45.1)
       '@types/node':
-        specifier: latest
+        specifier: ^24
         version: 24.1.0
       '@vitejs/plugin-vue':
         specifier: ^5
