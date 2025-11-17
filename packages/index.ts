@@ -52,6 +52,7 @@ import { TableConfig } from "@icons-vue/icons/tableConfig";
 import { Task } from "@icons-vue/icons/task";
 import { Tenant } from "@icons-vue/icons/tenant";
 import { Terminal } from "@icons-vue/icons/terminal";
+import { Test } from "@icons-vue/icons/test";
 import { Wifi } from "@icons-vue/icons/wifi";
 import { Workbench } from "@icons-vue/icons/workbench";
 import type { DefineComponent } from "vue";
@@ -111,6 +112,7 @@ export default [
 	Task,
 	Tenant,
 	Terminal,
+	Test,
 	Wifi,
 	Workbench,
 ] as unknown as DefineComponent[];
