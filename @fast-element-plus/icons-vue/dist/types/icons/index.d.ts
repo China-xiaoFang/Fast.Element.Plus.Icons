@@ -52,5 +52,6 @@ export * from './tableConfig';
 export * from './task';
 export * from './tenant';
 export * from './terminal';
+export * from './test';
 export * from './wifi';
 export * from './workbench';
