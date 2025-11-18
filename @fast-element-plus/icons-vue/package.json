@@ -1,6 +1,6 @@
 {
 	"name": "@fast-element-plus/icons-vue",
-	"version": "1.0.19",
+	"version": "1.0.20",
 	"description": "Fast Icons组件库.",
 	"type": "module",
 	"keywords": [
@@ -15,11 +15,11 @@
 	"license": "Apache-2.0",
 	"homepage": "https://fastdotnet.com",
 	"bugs": {
-		"url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons/issues"
+		"url": "https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://gitee.com/China-xiaoFang/fast.element.plus.icons"
+		"url": "https://gitee.com/FastDotnet/Fast.Element.Plus.Icons"
 	},
 	"author": "小方",
 	"files": [

@@ -1,4 +1,4 @@
-[中](https://gitee.com/China-xiaoFang/fast.element.plus.icons) | **En**
+[中](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons) | **En**
 
 <h1 align="center">Fast.Element.Plus.Icons</h1>
 
@@ -10,7 +10,7 @@
   <a href="https://www.npmjs.com/package/@fast-element-plus/icons-vue">
     <img src="https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange&label=" alt="version" />
   </a>
-  <a href="https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE">
+  <a href="https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/blob/master/LICENSE">
     <img src="https://img.shields.io/npm/l/@fast-element-plus/icons-vue" alt="license" />
   </a>
 </p>
@@ -76,11 +76,11 @@ app.mount("#app");
 
 ## Update log
 
-Update log [Click to view](https://gitee.com/China-xiaoFang/fast.element.plus.icons/commits/master)
+Update log [Click to view](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/commits/master)
 
 ## Protocol
 
-[Fast.Element.Plus.Icons](https://gitee.com/China-xiaoFang/fast.element.plus.icons) complies with the [Apache-2.0](https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE) open source agreement. Welcome to submit `PR` or `Issue`.
+[Fast.Element.Plus.Icons](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons) complies with the [Apache-2.0](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/blob/master/LICENSE) open source agreement. Welcome to submit `PR` or `Issue`.
 
 ```
 Apache Open Source License

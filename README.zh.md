@@ -1,4 +1,4 @@
-**中** | [En](https://github.com/China-xiaoFang/fast.element.plus.icons)
+**中** | [En](https://github.com/China-xiaoFang/Fast.Element.Plus.Icons)
 
 <h1 align="center">Fast.Element.Plus.Icons</h1>
 
@@ -10,7 +10,7 @@
   <a href="https://www.npmjs.com/package/@fast-element-plus/icons-vue">
     <img src="https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange&label=" alt="version" />
   </a>
-  <a href="https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE">
+  <a href="https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/blob/master/LICENSE">
     <img src="https://img.shields.io/npm/l/@fast-element-plus/icons-vue" alt="license" />
   </a>
 </p>
@@ -76,11 +76,11 @@ app.mount("#app");
 
 ## 更新日志
 
-更新日志 [点击查看](https://gitee.com/China-xiaoFang/fast.element.plus.icons/commits/master)
+更新日志 [点击查看](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/commits/master)
 
 ## 协议
 
-[Fast.Element.Plus.Icons](https://gitee.com/China-xiaoFang/fast.element.plus.icons) 遵循 [Apache-2.0](https://gitee.com/China-xiaoFang/fast.element.plus.icons/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
+[Fast.Element.Plus.Icons](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons) 遵循 [Apache-2.0](https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/blob/master/LICENSE) 开源协议，欢迎大家提交 `PR` 或 `Issue`。
 
 ```
 Apache开源许可证
