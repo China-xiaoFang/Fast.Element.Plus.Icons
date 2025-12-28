@@ -1,6 +1,6 @@
 {
 	"name": "@fast-element-plus/icons-vue",
-	"version": "1.0.21",
+	"version": "1.0.22",
 	"description": "Fast Icons组件库.",
 	"type": "module",
 	"keywords": [
@@ -25,9 +25,6 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"workspaces": [
-		"packages/*"
-	],
 	"scripts": {
 		"check": "vue-tsc",
 		"update:version": "tsx scripts/update-version.ts",
@@ -39,7 +36,6 @@
 	},
 	"devDependencies": {
 		"@fast-china/eslint-config": "^1",
-		"@icons-vue/icons": "workspace:*",
 		"@rollup/plugin-terser": "^0.4",
 		"@types/node": "^24",
 		"@vitejs/plugin-vue": "^6",

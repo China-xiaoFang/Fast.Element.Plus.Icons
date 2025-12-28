@@ -93,7 +93,7 @@ export default ${componentName};
 	fs.writeFileSync(path.join(iconDir, "index.tsx"), iconContent);
 };
 
-const deleteFiles = ["../packages/icons", path.join(npmPackagePath, "dist")];
+const deleteFiles = ["../packages/icons", "../packages/index.ts", path.join(npmPackagePath, "dist")];
 
 console.log(`
 清理文件中...
@@ -114,15 +114,6 @@ console.log(`
 const iconsPath = path.resolve(__dirname, "../packages/icons");
 fs.mkdirSync(iconsPath, { recursive: true });
 
-fs.writeFileSync(
-	path.join(iconsPath, "package.json"),
-	`{
-	"name": "@icons-vue/icons",
-	"main": "index.ts"
-}
-`
-);
-
 const svgFiles = findSvgFile(path.resolve(__dirname, "../icons"));
 
 console.log(`
@@ -135,11 +126,11 @@ svgFiles.forEach((svg, idx) => {
 	writeTSXIcon(svg.iconName, svg.componentName, path.join(iconsPath, svg.iconName), svg.iconContent);
 	console.log(`${svg.iconName} 图标组件构建成功...`);
 
-	exportContent += `export * from "./${svg.iconName}";
+	exportContent += `export * from "./icons/${svg.iconName}";
 `;
 });
 
-fs.writeFileSync(path.join(iconsPath, "index.ts"), exportContent);
+fs.writeFileSync(path.join(path.resolve(__dirname, "../packages"), "index.ts"), exportContent);
 
 console.log(`
 构建 icons 图标库组件成功...
