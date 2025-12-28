@@ -93,7 +93,7 @@ export default ${componentName};
 	fs.writeFileSync(path.join(iconDir, "index.tsx"), iconContent);
 };
 
-const deleteFiles = ["../packages/icons", "../packages/index.ts", path.join(npmPackagePath, "dist")];
+const deleteFiles = ["../packages/icons", path.join(npmPackagePath, "dist")];
 
 console.log(`
 清理文件中...
@@ -129,39 +129,15 @@ console.log(`
 共找到 ${svgFiles.length} 个svg图标文件...
 `);
 
-let iconImportContent = "";
-let iconTypeContent = "";
 let exportContent = "";
 
 svgFiles.forEach((svg, idx) => {
 	writeTSXIcon(svg.iconName, svg.componentName, path.join(iconsPath, svg.iconName), svg.iconContent);
 	console.log(`${svg.iconName} 图标组件构建成功...`);
 
-	iconImportContent += `import { ${svg.componentName} } from "@icons-vue/icons/${svg.iconName}";
-`;
-
-	iconTypeContent += `	${svg.componentName},`;
-
 	exportContent += `export * from "./${svg.iconName}";
 `;
-
-	if (idx + 1 < svgFiles.length) {
-		iconTypeContent += "\n";
-	}
 });
-
-fs.writeFileSync(
-	path.resolve(__dirname, "../packages/index.ts"),
-	`${iconImportContent.trimEnd()}
-import type { DefineComponent } from "vue";
-
-export default [
-${iconTypeContent}
-] as unknown as DefineComponent[];
-
-export * from "@icons-vue/icons";
-`
-);
 
 fs.writeFileSync(path.join(iconsPath, "index.ts"), exportContent);
 
