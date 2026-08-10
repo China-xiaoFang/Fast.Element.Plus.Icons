@@ -1,3 +1,5 @@
-# Prettier 会忽略的文件
-
-*.md
+# 构建产物、依赖和缓存由对应工具维护，不参与格式化。
+dist
+node_modules
+.pnpm-store
+pnpm-lock.yaml

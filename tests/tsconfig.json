@@ -1,0 +1,13 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		// 消费者类型测试不加载 Node.js 或测试框架全局类型。
+		"types": [],
+		// 测试项目只检查公开声明，不生成 JavaScript 或声明文件。
+		"noEmit": true,
+		// 连同 Vue 依赖一起严格验证实际构建生成的包声明。
+		"skipLibCheck": false
+	},
+	// 公开 API 测试通过包自引用解析 dist 声明，因此必须在构建后执行。
+	"include": ["public-api.test.ts"]
+}

@@ -3,10 +3,7 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
-	"eslint.validate": ["javascript", "typescript", "typescriptreact", "vue"],
-	"[vue]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+	"eslint.validate": ["javascript", "json", "jsonc", "markdown", "typescript", "typescriptreact"],
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
@@ -22,28 +19,18 @@
 	"[jsonc]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[css]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[scss]": {
+	"[markdown]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"testing.automaticallyOpenPeekView": "never",
 	"cSpell.words": [],
 	"editor.fontSize": 14,
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"prettier.endOfLine": "lf",
 
 	// Enable file nesting
 	"explorer.fileNesting.enabled": true,
 	"explorer.fileNesting.patterns": {
-		".env": ".env.*",
-		".prettierrc.cjs": ".prettierignore, .eslintignore, .eslintrc.cjs, eslint.config.mjs",
-		"package.json": ".npmrc, .nvmrc, pnpm-lock.yaml, pnpm-workspace.yaml",
-		"vite.config.*": "vite.*"
+		".prettierrc.cjs": ".prettierignore, eslint.config.mjs",
+		"package.json": ".nvmrc, pnpm-lock.yaml, pnpm-workspace.yaml"
 	}
 }
