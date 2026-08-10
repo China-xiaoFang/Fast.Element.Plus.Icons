@@ -1,65 +1,98 @@
 {
 	"name": "@fast-element-plus/icons-vue",
-	"version": "1.0.22",
-	"description": "Fast Icons组件库.",
+	"version": "2.0.0",
+	"description": "Tree-shakable SVG icon components for Vue 3 applications.",
 	"type": "module",
 	"keywords": [
 		"@fast-element-plus",
+		"element-plus",
 		"fast",
-		"typescript",
-		"icons library",
+		"fast-china",
 		"icons",
-		"vite",
-		"vue"
+		"svg",
+		"typescript",
+		"vue",
+		"vue3"
 	],
 	"license": "Apache-2.0",
 	"homepage": "https://fastdotnet.com",
 	"bugs": {
-		"url": "https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/issues"
+		"url": "https://gitee.com/FastDotnet/fast.element.plus.icons/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://gitee.com/FastDotnet/Fast.Element.Plus.Icons"
+		"url": "https://gitee.com/FastDotnet/fast.element.plus.icons.git"
 	},
 	"author": "小方",
+	"files": [
+		"CHANGELOG.md",
+		"CONTRIBUTING.md",
+		"Fast.png",
+		"LICENSE",
+		"README.md",
+		"README.zh.md",
+		"SECURITY.md",
+		"dist",
+		"docs"
+	],
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"import": "./dist/index.mjs",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"sideEffects": false,
+	"unpkg": "./dist/index.global.min.js",
+	"jsdelivr": "./dist/index.global.min.js",
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
-		"check": "vue-tsc",
-		"update:version": "tsx scripts/update-version.ts",
-		"build": "tsx scripts/build.ts && vue-tsc && vite build",
-		"publish": "cd @fast-element-plus/icons-vue && npm publish",
-		"lint:eslint": "eslint --max-warnings 0 \"packages/**/*.{vue,js,ts,tsx}\" --fix",
-		"lint:prettier": "prettier --write \"packages/**/*.{vue,js,ts,tsx,json,css,less,scss,html,md}\"",
-		"lint": "pnpm lint:eslint && pnpm lint:prettier"
+		"dev": "tsdown --watch",
+		"build": "pnpm run generate:check && tsdown",
+		"generate": "tsx scripts/generate-icons.ts",
+		"generate:check": "tsx scripts/generate-icons.ts --check",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint . --max-warnings 0",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"test": "pnpm run build && pnpm run test:types && pnpm run test:runtime && pnpm run test:package",
+		"test:types": "tsc --noEmit --project tests/tsconfig.json",
+		"test:runtime": "node --test tests/runtime.test.mjs",
+		"test:package": "node --test tests/package.test.mjs && publint --strict --pack npm",
+		"check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run format:check",
+		"prepack": "pnpm run check"
+	},
+	"peerDependencies": {
+		"vue": "^3.3.0"
 	},
 	"devDependencies": {
-		"@fast-china/eslint-config": "^1",
-		"@rollup/plugin-terser": "^0.4",
-		"@types/node": "^24",
-		"@vitejs/plugin-vue": "^6",
-		"@vitejs/plugin-vue-jsx": "^5",
-		"prettier": "^3",
-		"typescript": "^5",
-		"vite": "^7",
-		"vite-plugin-dts": "^4",
-		"vue": "^3",
-		"vue-tsc": "^3"
+		"@eslint/js": "^10.0.1",
+		"@eslint/markdown": "^8.0.3",
+		"@types/node": "^24.13.3",
+		"eslint": "^10.8.0",
+		"eslint-config-flat-gitignore": "^2.3.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-import-x": "^4.17.1",
+		"eslint-plugin-jsonc": "^3.3.0",
+		"eslint-plugin-regexp": "^3.1.1",
+		"globals": "^17.8.0",
+		"prettier": "^3.9.6",
+		"publint": "^0.3.22",
+		"tsdown": "^0.22.14",
+		"tsx": "^4.23.1",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.65.0",
+		"unplugin-vue-jsx": "^0.10.0",
+		"vue": "^3.5.40"
 	},
 	"engines": {
-		"node": ">=20.0.0"
-	},
-	"browserslist": {
-		"production": [
-			"> 1%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
+		"node": "^22.18.0 || ^24.18.0",
+		"pnpm": "^11.0.0"
 	}
 }

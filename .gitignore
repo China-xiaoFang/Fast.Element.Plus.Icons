@@ -1,15 +1,10 @@
-# Mac system files
-.DS_Store
-
 # Package Manager
 node_modules
+.pnpm-store
+*.tgz
 
-# Build output
-dist/
-build/
+# Build and test outputs
+/dist
 
-# Npm cache directory
-.npm
-
-# Eslint cache
-.eslintcache
+# System
+.DS_Store
