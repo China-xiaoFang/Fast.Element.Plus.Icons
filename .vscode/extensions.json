@@ -1,3 +1,19 @@
 {
-	"recommendations": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "streetsidesoftware.code-spell-checker", "Vue.volar"]
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"dotenv.dotenv-vscode",
+		"ecmel.vscode-html-css",
+		"esbenp.prettier-vscode",
+		"maggie.eslint-rules-zh-plugin",
+		"mrmlnc.vscode-less",
+		"mrmlnc.vscode-scss",
+		"PKief.material-icon-theme",
+		"pranaygp.vscode-css-peek",
+		"Syler.sass-indented",
+		"uni-helper.uni-helper-vscode",
+		"Vue.volar",
+		"Wiensss.region-highlighter",
+		"Zignd.html-css-class-completion"
+	],
+	"unwantedRecommendations": ["octref.vetur"]
 }
