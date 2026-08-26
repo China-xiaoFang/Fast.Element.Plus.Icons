@@ -2,6 +2,13 @@
 
 All notable changes to Fast.Element.Plus.Icons are documented in this file.
 
+## [2.0.1] - 2026-08-26
+
+### Changed
+
+- Synchronized the self-contained ESLint Flat Config with the applicable JavaScript, TypeScript, import, regular-expression, JSON, and Markdown rules from Fast.ESLint.Config, including the source rule comments and TSX-specific project scopes without introducing a cross-package configuration dependency.
+- Updated compatible Vue and development dependencies, the pnpm lockfile, package metadata, and documented VS Code recommendations while retaining the Node.js 22.18/24.18 compatibility contract.
+
 ## [2.0.0] - 2026-08-09
 
 ### Added
@@ -18,4 +25,5 @@ All notable changes to Fast.Element.Plus.Icons are documented in this file.
 - Added generator checks for script elements, foreign objects, inline event handlers and external or data URL references.
 - Kept Vue external to package and CDN builds so applications retain framework-version and supply-chain control.
 
+[2.0.1]: https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/compare/v2.0.0...v2.0.1
 [2.0.0]: https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/releases/tag/v2.0.0
