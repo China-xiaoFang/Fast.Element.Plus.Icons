@@ -1,13 +1,17 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
+		// 公开 API 类型测试直接解析源码入口，避免误用预先生成的 dist 声明。
+		"paths": {
+			"@fast-element-plus/icons-vue": ["../src/index.ts"]
+		},
 		// 消费者类型测试不加载 Node.js 或测试框架全局类型。
 		"types": [],
 		// 测试项目只检查公开声明，不生成 JavaScript 或声明文件。
 		"noEmit": true,
-		// 连同 Vue 依赖一起严格验证实际构建生成的包声明。
+		// 连同 Vue 依赖一起严格验证源码公开 API。
 		"skipLibCheck": false
 	},
-	// 公开 API 测试通过包自引用解析 dist 声明，因此必须在构建后执行。
+	// 公开 API 测试直接检查源码入口；发布产物继续由包测试和 publint 验证。
 	"include": ["public-api.test.ts"]
 }
