@@ -381,6 +381,7 @@ export default defineConfig(
 			ecmaVersion: "latest",
 			parserOptions: {
 				projectService: true,
+				extraFileExtensions: [".vue", ".nvue"],
 			},
 		},
 		/**
