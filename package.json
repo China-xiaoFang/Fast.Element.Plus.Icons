@@ -68,12 +68,12 @@
 		"prepack": "pnpm run check"
 	},
 	"peerDependencies": {
-		"vue": "^3.3.0"
+		"vue": "^3.5.11"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@eslint/markdown": "^8.0.3",
-		"@types/node": "^24.13.3",
+		"@types/node": "^24.13.4",
 		"eslint": "^10.10.0",
 		"eslint-config-flat-gitignore": "^2.4.0",
 		"eslint-config-prettier": "^10.1.8",
@@ -83,12 +83,12 @@
 		"globals": "^17.12.0",
 		"prettier": "^3.9.6",
 		"publint": "^0.3.24",
-		"tsdown": "^0.22.14",
-		"tsx": "^4.23.12",
+		"tsdown": "^0.23.0",
+		"tsx": "^4.23.13",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.70.0",
 		"unplugin-vue-jsx": "^0.10.0",
-		"vue": "^3.5.41"
+		"vue": "^3.5.11"
 	},
 	"engines": {
 		"node": "^22.18.0 || ^24.18.0",
