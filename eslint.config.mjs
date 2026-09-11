@@ -182,6 +182,16 @@ export default defineConfig(
 			"no-case-declarations": "error",
 			// 禁止动态执行字符串代码，避免代码注入和静态分析失效。
 			"no-eval": "error",
+			// 禁止通过字符串间接执行代码，避免绕过 no-eval 和静态分析。
+			"no-implied-eval": "error",
+			// 禁止使用 Function 构造器动态创建函数。
+			"no-new-func": "error",
+			// Promise executor 的返回值不会被 Promise 使用，通常表示遗漏了 resolve 或 reject。
+			"no-promise-executor-return": "error",
+			// 禁止使用 javascript: URL，避免执行字符串形式的脚本。
+			"no-script-url": "error",
+			// 普通字符串中的模板表达式不会插值，要求改用模板字符串或普通文本。
+			"no-template-curly-in-string": "error",
 			// 禁止反斜杠续行字符串，优先使用可读性更好的模板字符串。
 			"no-multi-str": "error",
 			// with 会让标识符解析不可预测，并且在严格模式和 ESM 中不可用。
@@ -440,6 +450,10 @@ export default defineConfig(
 					prefer: "type-imports",
 				},
 			],
+			// 类型导入必须直接使用 import type，避免 `import { type X }` 仍产生模块副作用。
+			"@typescript-eslint/no-import-type-side-effects": "error",
+			// Vue 和 TSX 属性事件由框架接管异步结果，其他 Promise 误用仍继续检查。
+			"@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: { attributes: false } }],
 
 			/** 仅在 Project Service 提供完整类型信息后应用的 TypeScript 类型感知规则覆写。 */
 			// 是否等待、返回或处理 Promise 由开发者根据业务顺序和异常语义决定。
