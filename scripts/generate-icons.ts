@@ -203,7 +203,7 @@ ${icons.map((icon) => `export * from "./icons/${icon.iconName}";`).join("\n")}\n
 };
 
 // 顶层统一设置退出码，让命令行和 CI 正确感知失败，同时保留简洁错误信息。
-void main().catch((error: unknown) => {
+main().catch((error: unknown) => {
 	console.error(error instanceof Error ? error.message : error);
 	process.exitCode = 1;
 });
