@@ -11,8 +11,6 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import vueEslintParser from "vue-eslint-parser";
 
-// 规则策略直接同步自 Fast.ESLint.Config 2.1.8；本文件仅保留技术栈、运行环境与路径适配。
-
 const STYLE_IMPORT_PATTERN = /\.(?:acss|css|less|pcss|postcss|sass|scss|sss|styl|stylus|ttss|wxss)(?:[?#].*)?$/i;
 
 const isStyleImport = (source) => typeof source === "string" && STYLE_IMPORT_PATTERN.test(source);
