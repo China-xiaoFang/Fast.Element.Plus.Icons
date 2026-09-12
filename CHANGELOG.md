@@ -2,6 +2,13 @@
 
 All notable changes to Fast.Element.Plus.Icons are documented in this file.
 
+## [2.0.2] - 2026-09-12
+
+### Changed
+
+- Expanded the applicable base and Vue JSX/TSX rules from Fast.ESLint.Config 2.1.8 directly in the repository's single `eslint.config.mjs`, adding only the required Vue parser and plugin dependencies.
+- Kept all 68 public named icon exports and matching Vue runtime component names; generated icon modules use a path-scoped rule override because source-derived names such as `Address`, `Filter`, `Link`, and `Menu` are intentional package contracts.
+
 ## [2.0.1] - 2026-08-26
 
 ### Changed
@@ -25,5 +32,6 @@ All notable changes to Fast.Element.Plus.Icons are documented in this file.
 - Added generator checks for script elements, foreign objects, inline event handlers and external or data URL references.
 - Kept Vue external to package and CDN builds so applications retain framework-version and supply-chain control.
 
+[2.0.2]: https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/compare/v2.0.1...v2.0.2
 [2.0.1]: https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/compare/v2.0.0...v2.0.1
 [2.0.0]: https://gitee.com/FastDotnet/Fast.Element.Plus.Icons/releases/tag/v2.0.0
