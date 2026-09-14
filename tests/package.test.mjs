@@ -45,7 +45,7 @@ test("build output is complete and does not expose unpublished source paths", as
 	assert.match(cdnBundle, /FastElementPlusIconsVue/u);
 });
 
-test("publish allowlist contains only package artifacts and project documentation", () => {
+test("publish allowlist contains only package artifacts and root documentation", () => {
 	assert.deepEqual(packageJson.files, [
 		"CHANGELOG.md",
 		"CONTRIBUTING.md",
@@ -55,6 +55,5 @@ test("publish allowlist contains only package artifacts and project documentatio
 		"README.zh.md",
 		"SECURITY.md",
 		"dist",
-		"docs",
 	]);
 });
