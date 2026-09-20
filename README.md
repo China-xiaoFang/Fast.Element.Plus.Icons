@@ -8,6 +8,8 @@
 
 # @fast-element-plus/icons-vue
 
+**[Documentation](http://docs.fastdotnet.cn/element-plus-icons/) · [Official website](http://fastdotnet.com)**
+
 Tree-shakable SVG icon components for Vue 3 applications.
 
 [![npm version](https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange)](https://www.npmjs.com/package/@fast-element-plus/icons-vue) [![node](https://img.shields.io/badge/node-%5E22.18%20%7C%7C%20%5E24.18-brightgreen)](https://nodejs.org/) [![vue](https://img.shields.io/badge/vue-%5E3.3-42b883)](https://vuejs.org/) [![license](https://img.shields.io/npm/l/@fast-element-plus/icons-vue)](./LICENSE)
@@ -61,35 +63,17 @@ Decorative icons should use `aria-hidden="true"`. Meaningful standalone icons sh
 
 ## Register every icon globally
 
-Applications that intentionally accept the larger initial module graph can register all exports:
-
-```ts
-import * as FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
-import { createApp } from "vue";
-import App from "./App.vue";
-
-const app = createApp(App);
-
-for (const [name, component] of Object.entries(FastElementPlusIconsVue)) {
-	app.component(name, component);
-}
-
-app.mount("#app");
-```
-
-Prefer individual named imports for application code so bundlers can remove unused icons.
+[Full configuration and examples](http://docs.fastdotnet.cn/element-plus-icons/guide.en)
 
 ## CDN
 
-The `unpkg` and `jsdelivr` fields select `dist/index.global.min.js`. Load Vue first; the icon bundle exposes `FastElementPlusIconsVue`.
-
-Pin exact package versions and configure CSP/SRI when the deployment requires supply-chain controls.
+[Full configuration and examples](http://docs.fastdotnet.cn/element-plus-icons/guide.en)
 
 ## Public API
 
 The package root exposes one named Vue component per SVG file. Component-name casing is part of the public API, including `Api`, `Gps`, `IdCard`, `FullScreen`, `Page403` and `Page404`. There is no default package export and no supported icon subpath API.
 
-See the [API reference](./docs/API.md) for the complete component catalog and behavioral contract.
+See the [API reference](http://docs.fastdotnet.cn/element-plus-icons/api.en) for the complete component catalog and behavioral contract.
 
 ## Generated sources
 
@@ -110,13 +94,13 @@ Edit the SVG source, run `pnpm generate`, and review both the SVG and generated 
 - The repository root is the only npm package; `pnpm build` writes only to the ignored root `dist/` directory.
 - The package does not publish CommonJS or public icon subpath exports.
 
-See the [runtime contract](./docs/RUNTIME_CONTRACT.md) for details.
+See the [runtime contract](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract) for details.
 
 ## Documentation
 
-- [API reference](./docs/API.md)
-- [API reference (Chinese)](./docs/API.zh-CN.md)
-- [Runtime contract](./docs/RUNTIME_CONTRACT.md)
+- [API reference](http://docs.fastdotnet.cn/element-plus-icons/api.en)
+- [API reference (Chinese)](http://docs.fastdotnet.cn/element-plus-icons/api)
+- [Runtime contract](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract)
 - [Development and release guide (Chinese)](./docs/DEVELOPMENT_RELEASE.zh-CN.md)
 - [Contributing guide](./CONTRIBUTING.md)
 - [Security policy](./SECURITY.md)

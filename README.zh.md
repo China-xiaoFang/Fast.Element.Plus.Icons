@@ -8,6 +8,8 @@
 
 # @fast-element-plus/icons-vue
 
+**[使用文档](http://docs.fastdotnet.cn/element-plus-icons/) · [官方网站](http://fastdotnet.com)**
+
 面向 Vue 3 应用、支持 Tree Shaking 的 SVG 图标组件库。
 
 [![npm 版本](https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange)](https://www.npmjs.com/package/@fast-element-plus/icons-vue) [![Node.js](https://img.shields.io/badge/node-%5E22.18%20%7C%7C%20%5E24.18-brightgreen)](https://nodejs.org/) [![Vue](https://img.shields.io/badge/vue-%5E3.3-42b883)](https://vuejs.org/) [![开源协议](https://img.shields.io/npm/l/@fast-element-plus/icons-vue)](./LICENSE)
@@ -61,35 +63,17 @@ import { About, Dashboard, Page404 } from "@fast-element-plus/icons-vue";
 
 ## 全量全局注册
 
-如果应用明确接受更大的初始模块图，可以注册全部导出：
-
-```ts
-import * as FastElementPlusIconsVue from "@fast-element-plus/icons-vue";
-import { createApp } from "vue";
-import App from "./App.vue";
-
-const app = createApp(App);
-
-for (const [name, component] of Object.entries(FastElementPlusIconsVue)) {
-	app.component(name, component);
-}
-
-app.mount("#app");
-```
-
-普通业务代码应优先使用具名按需导入，让打包器移除未使用图标。
+[完整配置与示例](http://docs.fastdotnet.cn/element-plus-icons/guide)
 
 ## CDN
 
-`unpkg` 和 `jsdelivr` 字段都指向 `dist/index.global.min.js`。先加载 Vue，再加载图标包；全局变量为 `FastElementPlusIconsVue`。
-
-生产部署应固定精确版本；存在供应链控制要求时，还需配置 CSP 与 SRI。
+[完整配置与示例](http://docs.fastdotnet.cn/element-plus-icons/guide)
 
 ## 公共 API
 
 包根入口为每个 SVG 暴露一个具名 Vue 组件。组件名大小写属于公共 API，包括 `Api`、`Gps`、`IdCard`、`FullScreen`、`Page403` 和 `Page404`。包不提供默认导出，也不提供受支持的图标子路径入口。
 
-完整组件清单和行为契约见 [API 参考](./docs/API.zh-CN.md)。
+完整组件清单和行为契约见 [API 参考](http://docs.fastdotnet.cn/element-plus-icons/api)。
 
 ## 生成源码
 
@@ -110,13 +94,13 @@ pnpm generate:check
 - 仓库根目录是唯一 npm 包；`pnpm build` 只写入被 Git 忽略的根 `dist/`。
 - 包不发布 CommonJS 和公开图标子路径导出。
 
-详细说明见 [运行时契约](./docs/RUNTIME_CONTRACT.md)。
+详细说明见 [运行时契约](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract)。
 
 ## 文档
 
-- [API 参考](./docs/API.zh-CN.md)
-- [API reference](./docs/API.md)
-- [运行时契约](./docs/RUNTIME_CONTRACT.md)
+- [API 参考](http://docs.fastdotnet.cn/element-plus-icons/api)
+- [API reference](http://docs.fastdotnet.cn/element-plus-icons/api.en)
+- [运行时契约](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract)
 - [开发与发布指南](./docs/DEVELOPMENT_RELEASE.zh-CN.md)
 - [贡献指南](./CONTRIBUTING.md)
 - [安全策略](./SECURITY.md)
