@@ -5,13 +5,13 @@
 		"paths": {
 			"@fast-element-plus/icons-vue": ["../src/index.ts"]
 		},
-		// 消费者类型测试不加载 Node.js 或测试框架全局类型。
-		"types": [],
+		// 生成器测试需要 Node.js 类型，公开包边界另由消费者测试验证。
+		"types": ["node"],
 		// 测试项目只检查公开声明，不生成 JavaScript 或声明文件。
 		"noEmit": true,
 		// 连同 Vue 依赖一起严格验证源码公开 API。
 		"skipLibCheck": false
 	},
 	// 公开 API 测试直接检查源码入口；发布产物继续由包测试和 publint 验证。
-	"include": ["public-api.test.ts"]
+	"include": ["**/*.ts"]
 }

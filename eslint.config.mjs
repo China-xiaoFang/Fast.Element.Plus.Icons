@@ -104,6 +104,7 @@ export default defineConfig(
 			"**/{dist,build,coverage,output,temp,tmp}/**",
 			"**/{.cache,.nuxt,.output,.vercel,.nitro}/**",
 			"**/{.vitepress/cache,.vite-inspect}/**",
+			"**/.agents/**",
 			"**/__snapshots__/**",
 			"**/*.min.*",
 			"**/auto-import?(s).d.ts",
@@ -114,6 +115,7 @@ export default defineConfig(
 			"**/bun.lock",
 			"**/bun.lockb",
 			"**/deno.lock",
+			"**/skills-lock.json",
 		],
 		"fast-element-plus-icons/ignores/global"
 	),
@@ -941,14 +943,6 @@ export default defineConfig(
 			"vue/one-component-per-file": "off",
 		},
 	},
-	// 生成图标的组件名必须与 SVG 文件名和公开导出保持一致，允许使用平台保留名称。
-	{
-		name: "fast-element-plus-icons/vue/generated-icons",
-		files: ["src/icons/**/index.tsx"],
-		rules: {
-			"vue/no-reserved-component-names": "off",
-		},
-	},
 	// 创建 Markdown 结构与语法检查配置。
 	{
 		name: "fast-element-plus-icons/markdown",
@@ -987,6 +981,14 @@ export default defineConfig(
 		rules: {
 			"@typescript-eslint/no-require-imports": "off",
 			"no-console": "off",
+		},
+	},
+	{
+		name: "fast-icons/runtime-name-compatibility",
+		files: ["src/icons/**/index.tsx"],
+		rules: {
+			// 保留已公开的 PascalCase 图标名称，小写 HTML/SVG 保留名仍然报错。
+			"vue/no-reserved-component-names": ["error", { htmlElementCaseSensitive: true }],
 		},
 	}
 );

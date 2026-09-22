@@ -1,25 +1,27 @@
-<p align="left">
-	<a href="./README.zh.md">简体中文</a> | <strong>English</strong>
-</p>
+[简体中文](./README.zh.md) | **English**
 
 <p align="center">
-	<img src="./Fast.png" alt="logo" width="160" />
+	<img src="./Fast.png" width="128" alt="Fast.Element.Plus.Icons Logo" />
 </p>
 
-# @fast-element-plus/icons-vue
+<h1 align="center">Fast.Element.Plus.Icons</h1>
 
-**[Documentation](http://docs.fastdotnet.cn/element-plus-icons/) · [Official website](http://fastdotnet.com)**
+<p align="center">
+	<a href="https://www.npmjs.com/package/@fast-element-plus/icons-vue"><img src="https://img.shields.io/npm/v/@fast-element-plus/icons-vue?logo=npm" alt="npm version" /></a>
+	<a href="https://www.npmjs.com/package/@fast-element-plus/icons-vue"><img src="https://img.shields.io/npm/dm/@fast-element-plus/icons-vue" alt="npm downloads" /></a>
+	<a href="./LICENSE"><img src="https://img.shields.io/npm/l/@fast-element-plus/icons-vue" alt="License" /></a>
+</p>
 
-Tree-shakable SVG icon components for Vue 3 applications.
+Tree-shakable Vue 3 SVG components with typed exports and SVG attribute fallthrough.
 
-[![npm version](https://img.shields.io/npm/v/@fast-element-plus/icons-vue?color=orange)](https://www.npmjs.com/package/@fast-element-plus/icons-vue) [![node](https://img.shields.io/badge/node-%5E22.18%20%7C%7C%20%5E24.18-brightgreen)](https://nodejs.org/) [![vue](https://img.shields.io/badge/vue-%5E3.3-42b883)](https://vuejs.org/) [![license](https://img.shields.io/npm/l/@fast-element-plus/icons-vue)](./LICENSE)
+**[Documentation](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/) · [Official website](http://fastdotnet.com)**
 
 ## Highlights
 
 - 68 typed Vue 3 components generated deterministically from repository-owned SVG files.
 - One ESM named-export entry with preserved icon module boundaries for Tree Shaking.
 - Vue fallthrough attributes reach each root `<svg>`, so size, class, style, ARIA attributes and event listeners remain under application control.
-- A separately minified IIFE build for unpkg and jsDelivr, with Vue supplied by the page.
+- A separately minified IIFE build for jsDelivr, with Vue supplied by the page.
 - TypeScript 6 strict checks, generated-source drift checks, ESLint, runtime tests, consumer type tests, package validation and Publint.
 
 ## Install
@@ -28,9 +30,38 @@ Tree-shakable SVG icon components for Vue 3 applications.
 pnpm add @fast-element-plus/icons-vue
 ```
 
-Vue `^3.3.0` is required as a peer dependency.
+Vue `^3.5.11` is required as a peer dependency.
 
-## Use individual icons
+## Minimal CDN example
+
+The jsDelivr entry uses `dist/index.global.min.js`. Load Vue first, then access the icon components through `globalThis.FastElementPlusIconsVue`. Element Plus and a separate stylesheet are not required.
+
+| Resource                                                | jsDelivr                                                                                       | unpkg                                                                            |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `vue@3.5.11/dist/vue.global.prod.js`                    | [jsDelivr](https://cdn.jsdelivr.net/npm/vue@3.5.11/dist/vue.global.prod.js)                    | [unpkg](https://unpkg.com/vue@3.5.11/dist/vue.global.prod.js)                    |
+| `@fast-element-plus/icons-vue/dist/index.global.min.js` | [jsDelivr](https://cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue/dist/index.global.min.js) | [unpkg](https://unpkg.com/@fast-element-plus/icons-vue/dist/index.global.min.js) |
+
+```html
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Fast Icons</title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.5.11/dist/vue.global.prod.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@fast-element-plus/icons-vue/dist/index.global.min.js"></script>
+		<script>
+			Vue.createApp({
+				render: () => Vue.h(FastElementPlusIconsVue.Address, { width: 32, height: 32, role: "img", "aria-label": "Address" }),
+			}).mount("#app");
+		</script>
+	</body>
+</html>
+```
+
+## Quick start
 
 ```vue
 <script setup lang="ts">
@@ -61,19 +92,15 @@ Most single-color icons can follow text color through `fill: currentColor`. Auth
 
 Decorative icons should use `aria-hidden="true"`. Meaningful standalone icons should receive an accessible name, normally through `aria-label` and `role="img"`.
 
-## Register every icon globally
-
-[Full configuration and examples](http://docs.fastdotnet.cn/element-plus-icons/guide.en)
-
-## CDN
-
-[Full configuration and examples](http://docs.fastdotnet.cn/element-plus-icons/guide.en)
-
 ## Public API
 
 The package root exposes one named Vue component per SVG file. Component-name casing is part of the public API, including `Api`, `Gps`, `IdCard`, `FullScreen`, `Page403` and `Page404`. There is no default package export and no supported icon subpath API.
 
-See the [API reference](http://docs.fastdotnet.cn/element-plus-icons/api.en) for the complete component catalog and behavioral contract.
+See the [API reference](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/) for the complete component catalog and behavioral contract.
+
+## Export names and runtime names
+
+Runtime `name` matches the public export, for example `Address.name === "Address"` and `Menu.name === "Menu"`. Bulk registration can use either the export key or `component.name`. Prefer prefixed registration names in browser DOM templates to avoid native HTML/SVG tag conflicts.
 
 ## Generated sources
 
@@ -94,13 +121,13 @@ Edit the SVG source, run `pnpm generate`, and review both the SVG and generated 
 - The repository root is the only npm package; `pnpm build` writes only to the ignored root `dist/` directory.
 - The package does not publish CommonJS or public icon subpath exports.
 
-See the [runtime contract](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract) for details.
+See the [runtime contract](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract) for details.
 
 ## Documentation
 
-- [API reference](http://docs.fastdotnet.cn/element-plus-icons/api.en)
-- [API reference (Chinese)](http://docs.fastdotnet.cn/element-plus-icons/api)
-- [Runtime contract](http://docs.fastdotnet.cn/element-plus-icons/runtime-contract)
+- [API reference](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
+- [API reference (Chinese)](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
+- [Runtime contract](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract)
 - [Development and release guide (Chinese)](./docs/DEVELOPMENT_RELEASE.zh-CN.md)
 - [Contributing guide](./CONTRIBUTING.md)
 - [Security policy](./SECURITY.md)
@@ -117,6 +144,12 @@ pnpm check
 
 Use `pnpm dev` for a long-running tsdown watch build. Run `pnpm generate` first whenever an SVG source changes.
 
-## License
+## Copyright, license and use
 
-[Apache-2.0](./LICENSE)
+Copyright © 2018-Now 小方. This project uses [Apache License 2.0](./LICENSE). Use, modification, distribution and commercial use are permitted subject to its terms.
+
+When redistributing, provide the license, mark modified files and preserve applicable copyright, attribution and supplied NOTICE information as required. This summary does not replace the license or impose additional UI attribution.
+
+Users are responsible for the legal compliance and authorization of their own modifications, deployment, data processing and operations. This reminder is not an additional license condition.
+
+Except as required by applicable law or agreed in writing, the software is provided on an "AS IS" basis. Sections 7 and 8 govern warranty disclaimers and liability limits. Providing the project does not endorse downstream activities or assume users' contractual commitments. This statement does not exclude liability that cannot lawfully be excluded.

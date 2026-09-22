@@ -16,7 +16,7 @@
 		"moduleResolution": "Bundler",
 		// 生成脚本和构建配置需要 Node.js 类型；发布声明不会暴露这些工程类型。
 		"types": ["node"],
-		// 启用全部严格类型检查。
+		// 启用 strict 选项族；额外检查及单项覆盖由下方选项决定。
 		"strict": true,
 		// 派生类覆盖成员时必须显式使用 override。
 		"noImplicitOverride": true,

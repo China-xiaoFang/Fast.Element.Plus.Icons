@@ -2,6 +2,8 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { format, resolveConfig } from "prettier";
+import { createComponentModule } from "./icon-component";
+import { prepareSvgSource } from "./svg-source";
 
 /** 描述单个 SVG 源及其生成组件所需的稳定元数据。 */
 interface IconSource {
@@ -40,72 +42,19 @@ const toComponentName = (iconName: string): string => {
 };
 
 /**
- * 在 SVG 嵌入 Vue TSX 前完成安全校验和格式归一化。
+ * 在 SVG 嵌入 Vue TSX 前检查受支持的静态子集，并保留文本语义。
  *
  * @remarks
  * 此处不优化或重着色 SVG；原始 `viewBox`、填充、描边和分组均属于图标视觉契约。
  *
  * @param filePath - 仓库内 SVG 文件的绝对路径。
- * @returns 使用 LF 换行且已移除 XML/DOCTYPE 声明的 SVG 标记。
- * @throws {TypeError} 输入不是安全、完整的单一 SVG 根节点时抛出。
+ * @returns 使用 LF 换行、移除 XML 声明并转义文本花括号的静态 SVG 标记。
+ * @throws {TypeError} 输入不是受支持的自包含 SVG 子集时抛出。
  */
 const readSvg = async (filePath: string): Promise<string> => {
 	const raw = await readFile(filePath, "utf8");
 
-	// 统一文本格式并移除 TSX 不需要的文档级声明，保留 SVG 元素本身的原始结构。
-	const svg = raw
-		.replace(/^\uFEFF/u, "")
-		.replace(/\r\n?/gu, "\n")
-		.replace(/<\?xml[\s\S]*?\?>/giu, "")
-		.replace(/<!DOCTYPE[\s\S]*?>/giu, "")
-		.trim();
-
-	const openingTag = /^<svg\b[^>]*>/u.exec(svg)?.[0];
-
-	// 每个图标必须是可独立渲染的单一 SVG，并通过 viewBox 保持缩放行为一致。
-	if (!/^<svg\b[\s\S]*<\/svg>$/u.test(svg) || !openingTag || !/\sviewBox\s*=/u.test(openingTag)) {
-		throw new TypeError(`Icon must contain one SVG root with a viewBox: ${filePath}`);
-	}
-
-	// 拒绝脚本、事件处理器和外部资源，避免生成组件携带可执行或非自包含内容。
-	if (/<(?:script|foreignObject)\b|\son[a-z]+\s*=|\s(?:href|xlink:href)\s*=\s*["'](?:data:|https?:)/iu.test(svg)) {
-		throw new TypeError(`Icon contains executable or external content: ${filePath}`);
-	}
-	return svg;
-};
-
-/**
- * 为一个 SVG 源文件创建需要提交到仓库的 Vue 组件模块源码。
- *
- * @param source - 已验证的图标名称、组件名称和 SVG 标记。
- * @returns 尚未经过 Prettier 格式化的 TSX 模块源码。
- */
-const createComponentModule = ({ componentName, svg }: IconSource): string => {
-	// 模板额外缩进三级，使嵌入的 SVG 在 render 返回值中保持稳定、可读的层级。
-	const indentedSvg = svg
-		.split("\n")
-		.map((line) => `\t\t\t${line}`)
-		.join("\n");
-
-	return `import { defineComponent } from "vue";
-
-/**
- * 渲染 \`${componentName}\` SVG 图标。
- *
- * @remarks
- * Vue 透传属性（如 \`class\`、\`style\`、\`role\`、\`aria-label\`、\`width\`、\`height\` 和 \`fill\`）会应用到根 \`<svg>\` 元素。
- */
-export const ${componentName} = defineComponent({
-\tname: "${componentName}",
-\trender() {
-\t\treturn (
-${indentedSvg}
-\t\t);
-\t},
-});
-
-export default ${componentName};
-`;
+	return prepareSvgSource(raw);
 };
 
 /**
@@ -157,6 +106,15 @@ const main = async (): Promise<void> => {
 	);
 
 	if (icons.length === 0) throw new Error("No SVG icons were found.");
+
+	// 运行时 name 与公开导出名一致，避免新的 SVG 文件遮蔽已有图标。
+	const componentNames = new Set<string>();
+	for (const icon of icons) {
+		if (componentNames.has(icon.componentName)) {
+			throw new Error(`Conflicting icon name: ${icon.iconName}.svg (${icon.componentName})`);
+		}
+		componentNames.add(icon.componentName);
+	}
 
 	// 不自动删除失效目录，避免文件重命名或输入错误导致已提交源码被静默移除。
 	const expectedDirectories = new Set(icons.map((icon) => icon.iconName));

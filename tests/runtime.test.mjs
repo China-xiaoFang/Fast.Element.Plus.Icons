@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readdir } from "node:fs/promises";
 import test from "node:test";
+import { createSSRApp } from "vue";
 import * as icons from "../dist/index.mjs";
 
 const toComponentName = (fileName) => {
@@ -22,4 +23,15 @@ test("the runtime exports one Vue component for every SVG source", async () => {
 		assert.equal(vnode.type, "svg");
 		assert.equal(typeof vnode.props?.viewBox, "string");
 	}
+});
+
+test("registration by public export key and runtime component name preserves compatibility", () => {
+	const app = createSSRApp({ render: () => null });
+	for (const [name, component] of Object.entries(icons)) {
+		app.component(name, component);
+		assert.equal(app.component(name), component, name);
+	}
+	assert.equal(app.component("Menu"), icons.Menu);
+	for (const component of Object.values(icons)) assert.equal(app.component(component.name), component);
+	assert.equal(icons.Menu.name, "Menu");
 });

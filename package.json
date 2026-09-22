@@ -1,6 +1,6 @@
 {
 	"name": "@fast-element-plus/icons-vue",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Tree-shakable SVG icon components for Vue 3 applications.",
 	"type": "module",
 	"keywords": [
@@ -61,7 +61,7 @@
 		"format:check": "prettier --check .",
 		"test": "pnpm run build && pnpm run test:types && pnpm run test:runtime && pnpm run test:package",
 		"test:types": "tsc --noEmit --project tests/tsconfig.json",
-		"test:runtime": "node --test tests/runtime.test.mjs",
+		"test:runtime": "node --loader ./tests/typescript-loader.mjs --test tests/svg-source.test.ts tests/icon-component.test.ts && node --test tests/runtime.test.mjs tests/tool-ignores.test.mjs",
 		"test:package": "node --test tests/package.test.mjs && publint --strict --pack npm",
 		"check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run format:check",
 		"prepack": "pnpm run check"
