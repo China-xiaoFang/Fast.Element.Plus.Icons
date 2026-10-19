@@ -14,7 +14,7 @@
 
 支持按需导入的 Vue 3 SVG 图标组件，保持独立组件、类型和属性透传。
 
-**[使用文档](http://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/) · [官方网站](http://fastdotnet.com)**
+**[使用文档](https://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/) · [官方网站](https://fastdotnet.com)**
 
 ## 特性
 
@@ -96,7 +96,7 @@ import { About, Dashboard, Page404 } from "@fast-element-plus/icons-vue";
 
 包根入口为每个 SVG 暴露一个具名 Vue 组件。组件名大小写属于公共 API，包括 `Api`、`Gps`、`IdCard`、`FullScreen`、`Page403` 和 `Page404`。包不提供默认导出，也不提供受支持的图标子路径入口。
 
-完整组件清单和行为契约见 [API 参考](http://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/api/)。
+完整组件清单和行为契约见 [API 参考](https://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/api/)。
 
 ## 导出名与运行时名称
 
@@ -121,13 +121,13 @@ pnpm generate:check
 - 仓库根目录是唯一 npm 包；`pnpm build` 只写入被 Git 忽略的根 `dist/`。
 - 包不发布 CommonJS 和公开图标子路径导出。
 
-详细说明见 [运行时契约](http://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/runtime-contract)。
+详细说明见 [运行时契约](https://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/runtime-contract)。
 
 ## 文档
 
-- [API 参考](http://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/api/)
-- [API reference](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
-- [运行时契约](http://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/runtime-contract)
+- [API 参考](https://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/api/)
+- [API reference](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
+- [运行时契约](https://docs.fastdotnet.cn/zh-CN/frontend/element-plus-icons/runtime-contract)
 - [开发与发布指南](./docs/DEVELOPMENT_RELEASE.zh-CN.md)
 - [贡献指南](./CONTRIBUTING.md)
 - [安全策略](./SECURITY.md)

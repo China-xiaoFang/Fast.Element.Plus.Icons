@@ -14,7 +14,7 @@
 
 Tree-shakable Vue 3 SVG components with typed exports and SVG attribute fallthrough.
 
-**[Documentation](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/) · [Official website](http://fastdotnet.com)**
+**[Documentation](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/) · [Official website](https://fastdotnet.com)**
 
 ## Highlights
 
@@ -96,7 +96,7 @@ Decorative icons should use `aria-hidden="true"`. Meaningful standalone icons sh
 
 The package root exposes one named Vue component per SVG file. Component-name casing is part of the public API, including `Api`, `Gps`, `IdCard`, `FullScreen`, `Page403` and `Page404`. There is no default package export and no supported icon subpath API.
 
-See the [API reference](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/) for the complete component catalog and behavioral contract.
+See the [API reference](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/) for the complete component catalog and behavioral contract.
 
 ## Export names and runtime names
 
@@ -121,13 +121,13 @@ Edit the SVG source, run `pnpm generate`, and review both the SVG and generated 
 - The repository root is the only npm package; `pnpm build` writes only to the ignored root `dist/` directory.
 - The package does not publish CommonJS or public icon subpath exports.
 
-See the [runtime contract](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract) for details.
+See the [runtime contract](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract) for details.
 
 ## Documentation
 
-- [API reference](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
-- [API reference (Chinese)](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
-- [Runtime contract](http://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract)
+- [API reference](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
+- [API reference (Chinese)](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/api/)
+- [Runtime contract](https://docs.fastdotnet.cn/en-US/frontend/element-plus-icons/runtime-contract)
 - [Development and release guide (Chinese)](./docs/DEVELOPMENT_RELEASE.zh-CN.md)
 - [Contributing guide](./CONTRIBUTING.md)
 - [Security policy](./SECURITY.md)
